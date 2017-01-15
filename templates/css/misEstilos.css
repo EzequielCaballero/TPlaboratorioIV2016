@@ -180,7 +180,7 @@ BOTONES
 *************************************************************************************/
 
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 16px 32px;
@@ -387,7 +387,7 @@ img {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+    font-size: 15px;
     margin: 4px 2px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -436,6 +436,12 @@ LOGIN & REGISTER PAGE
 }
 .loginForm input{
     color:black;
+}
+
+#limpiarLogin{
+    margin-top: 10px;
+    border-radius: 10px;
+    color: black;
 }
 
 /************REGISTRO************/
