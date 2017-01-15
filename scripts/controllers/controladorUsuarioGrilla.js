@@ -1,33 +1,49 @@
 angular.module('ABMangularAPI.controladorUsuarioGrilla', [])   
   app.controller('controlUsuarioGrilla', function($scope, $http, $state, i18nService, uiGridConstants, servicioRetornoUsuarios) {
 
-      $scope.tituloGrillaPersonas = "Grilla Personas";
-      // Objeto de configuracion de la grilla Personas.
-      $scope.gridOptionsPersonas = {};
-      $scope.gridOptionsPersonas.paginationPageSizes = [25, 50, 75];
+      $scope.tituloGrillaUsuarios = "Grilla Usuarios";
+      // Objeto de configuracion de la grilla Usuarios.
+      $scope.gridOptionsUsuarios = {};
+      $scope.gridOptionsUsuarios.paginationPageSizes = [25, 50, 75];
       // Configuracion de la paginacion
-      $scope.gridOptionsPersonas.paginationPageSize = 25;
-      $scope.gridOptionsPersonas.columnDefs = columnDefsPersonas();
-      $scope.gridOptionsPersonas.rowHeight = 70;
+      $scope.gridOptionsUsuarios.paginationPageSize = 25;
+      $scope.gridOptionsUsuarios.columnDefs = columnDefsUsuarios();
+      $scope.gridOptionsUsuarios.rowHeight = 70;
       // Activo la busqueda en todos los campos.
-      $scope.gridOptionsPersonas.enableFiltering = true;
+      $scope.gridOptionsUsuarios.enableFiltering = true;
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
       //UTILIZACIÓN DEL SERVICE
       servicioRetornoUsuarios.traerTodo().then(function(respuesta){
         // Cargo los datos en la grilla.
-        $scope.gridOptionsPersonas.data = respuesta.data;
+        $scope.gridOptionsUsuarios.data = respuesta.data;
         console.info(respuesta.data);
       });
 
-      function columnDefsPersonas () {
+      function columnDefsUsuarios () {
       return [
         { field: 'nombre', name: 'Nombre',
           enableFiltering: false,
           enableHiding: false
         },
-        { field: 'email', name: 'Correo',
+        { field: 'apellido', name: 'Apellido',
+          enableFiltering: false,
+          enableHiding: false
+        },
+        { field: 'edad', name: 'Edad',
+          enableFiltering: false,
+          enableHiding: false
+        },
+        { field: 'sexo', name: 'Sexo',
+          enableFiltering: false,
+          enableHiding: false
+        },
+        { field: 'correo', name: 'Correo',
+          enableFiltering: false,
+          enableHiding: false
+        },
+        { field: 'direccion', name: 'Direccion',
           enableFiltering: false,
           enableHiding: false
         },
@@ -48,6 +64,14 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           //filtro de los datos
           ,cellFilter: 'tipo'
         },
+        { field: 'estado', name: 'Estado',
+          enableFiltering: false,
+          enableHiding: false
+        },
+        { field: 'id_local', name: 'Local',
+          enableFiltering: false,
+          enableHiding: false
+        },
         { name: 'Borrar',
           cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
@@ -63,6 +87,10 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       ];
     }
 
+      $scope.NombreCompleto = function(usuario){
+        return usuario.nombre;
+      }
+
       $scope.Borrar = function(usuario){
 
         servicioRetornoUsuarios.ABM_Usuario(usuario.id, "Borrar").then(function(response){
@@ -70,35 +98,14 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
 
             // Vuelvo a cargar los datos en la grilla.
             servicioRetornoUsuarios.traerTodo().then(function(respuesta){
-            $scope.gridOptionsPersonas.data = respuesta.data;
+            $scope.gridOptionsUsuarios.data = respuesta.data;
             console.info(respuesta.data);
 
           },function errorCallback(response) {
-                $scope.gridOptionsPersonas.data = [];
+                $scope.gridOptionsUsuarios.data = [];
                 console.log("FALLO! ", response);
           });
         });
       }
-
-      // $scope.Borrar = function(usuario)
-      // {
-      //     console.log("borrar: " + usuario);
-
-      //     $http.delete('http://localhost/1A-TP_PIZZERIA/WEBService/usuarios/' + JSON.stringify(usuario.id))
-      //     .then(function(respuesta) {
-      //        //aca se ejecuta si retorno sin errores
-      //        console.log(respuesta.data);
-      //        $http.get('http://localhost/2-segundoParcial_API_SFD/WEBService/usuarios/')
-      //       .then(function(respuesta) {
-
-      //          $scope.gridOptionsPersonas.data = respuesta.data;
-      //          console.log("RETORNA", respuesta.data);
-
-      //       },function errorCallback(response) {
-      //            $scope.gridOptionsPersonas.data = [];
-      //           console.log("FALLO!", response);
-      //       });
-      //     });
-      // }
 
   });

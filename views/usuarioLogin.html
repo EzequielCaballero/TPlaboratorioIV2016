@@ -1,18 +1,21 @@
-<div class="Frm animated bounceInLeft">
+<!doctype html>
+<div class="container">
+	<div class="Frm animated bounceInLeft">
 
-  <form class="loginForm" name="myForm">
-    <label class="miEstilo">Login</label><br><br>
-    <input type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
-    <input type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
-    <input type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
-    <input type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br>
-    <button class="button-green" id="login" ng-click="Login()" ng-disabled="myForm.$invalid"><span>Login </span></button><br>
+	  <form class="loginForm" name="myForm">
+	    <label class="miEstilo">Login</label><br><br>
+	    <input type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
+	    <input type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
+	    <input type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
+	    <input type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br>
+	    <button class="button-green" id="login" ng-click="Login()" ng-disabled="myForm.$invalid"><span>Login </span></button><br>
 
-  </form>
+	  </form>
+	</div>
+	<h1>¿Listo para continuar? = {{myForm.$valid}}</h1>
+	<button class="button-orange" id="login" ng-click="Perfil('Administrador')"><span>Administrador </span></button>
+	<button class="button-red" id="login" ng-click="Perfil('Encargado')"><span>Encargado</span></button>
+	<button class="button-blue" id="login" ng-click="Perfil('Empleado')"><span>Empleado</span></button>
+	<button class="button-yellow" id="login" ng-click="Perfil('Cliente')"><span>Cliente</span></button><br>
+	<button class="glyphicon glyphicon-trash" id="login" ng-click="Perfil()"><span>Limpiar</span></button>
 </div>
-<h1>¿Listo para continuar? = {{myForm.$valid}}</h1>
-<button class="button-orange" id="login" ng-click="Perfil('Administrador')"><span>Administrador </span></button>
-<button class="button-red" id="login" ng-click="Perfil('Encargado')"><span>Encargado</span></button>
-<button class="button-blue" id="login" ng-click="Perfil('Empleado')"><span>Empleado</span></button>
-<button class="button-yellow" id="login" ng-click="Perfil('Cliente')"><span>Cliente</span></button><br>
-<button class="glyphicon glyphicon-trash" id="login" ng-click="Perfil()"><span>Limpiar</span></button>

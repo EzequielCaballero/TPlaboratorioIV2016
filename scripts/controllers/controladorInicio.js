@@ -42,6 +42,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	      	$state.go("entidad.menu");
 	      	break;
 
+	      case "Inicio":
 	      default:
 	        $state.go("inicio");
 	        break;

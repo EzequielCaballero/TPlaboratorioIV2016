@@ -1,17 +1,14 @@
 <div class=ui-base>
 <ul class="nav nav-tabs">
-	         <li  class="btn btn-info animated bounceInLeft" >
-	         	<a ui-sref="inicio()">
+	         <li  id="botonInicio" class="btn btn-info animated bounceInLeft" ui-sref="inicio()">
 	         		 <span class="glyphicon glyphicon-home">&nbsp;</span>
 	         		 Inicio
-	         	</a>
 	         <li>
-	         	<h1 class="perfil">PERFIL: {{perfilUsuario}}</h1>
+	         	<h2 class="perfil">&nbsp;PERFIL: {{perfilUsuario}}</h2>
 	         </li>
   </ul>
 
   <div ui-view name="contenido" animation="slide-left-right">
-
 
    </div>
 </div>

@@ -146,9 +146,9 @@ li a.miEstilo {
     font-family: "Verdana";
 }
 
-li a:hover:not(.active) {
+/*li a:hover:not(.active) {
     background-color: #C2DFF5;
-}
+}*/
 
 .active {
     background-color: #4CAF50;
@@ -372,6 +372,11 @@ img {
     background:url("https://www.creditmutuel.fr/cmne/fr/banques/webservices/nswr/images/loading.gif") no-repeat center center rgba(0,0,0,0.25)
 }
 
+.botonInicio{
+    margin-top: 30px;
+    padding: 10px;
+}
+
 /************************************************************************************
 INICIO PAGE
 *************************************************************************************/
@@ -391,6 +396,10 @@ INICIO PAGE
 BARRA DE OPCIONES PRINCIPAL
 *************************************************************************************/
 
+.nav_usuario{
+    position: fixed;
+}
+
 .navbar{
     background-color: #2D3258;
 }
@@ -400,6 +409,11 @@ LOGIN & REGISTER PAGE
 *************************************************************************************/
 
 /**************LOGIN**************/
+.Frm{
+    margin-top: 40px;
+    position: relative;
+}
+
 .loginForm{
     color: white;
 }
@@ -447,13 +461,13 @@ MENU ABM
 }
 
 .buttonMenuABM{
-    border-radius: 2px;
+    border-radius: 15px;
     line-height: 100%;
     background-color: #3170A1;
     border: none;
     color: #fff;
     display: block;
-    width: 750px;
+    width: 300px;
     padding: 14px 15px;
     text-align: center;
     text-decoration: none;
@@ -496,10 +510,18 @@ GRILLA
     color:black;
 }
 
-.myGrid {
+.gridUsuarios {
     color:black;
-    width: 700px;
+    border: 1px solid rgb(212,212,212);
+    position: static;
+    width: 1200px;
     height: 400px;
+}
+
+#userABMboton{
+    position: fixed;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .ui-grid, .ui-grid-viewport {

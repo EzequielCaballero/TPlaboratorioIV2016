@@ -4,7 +4,7 @@
 			<h3>{{tituloGrillaPersonas}}</h3>
 			<div class="CajaGrilla">
 			  <!--GRILLA UI-->
-			  <div ui-grid="gridOptionsPersonas" class="myGrid" ui-grid-auto-resize></div>
+			  <div ui-grid="gridOptionsUsuarios" class="gridUsuarios" ui-grid-auto-resize></div>
 			</div>
 		</div>
 	</div>
@@ -12,7 +12,7 @@
 
 <li  class="btn btn-info animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}">
 	<a ui-sref="usuario.menu()">
-	   <span class="glyphicon glyphicon-home">&nbsp;</span>
-	   Menu
+	   <span id="userABMboton" class="glyphicon glyphicon-home">&nbsp;</span>
+	   Volver
 	</a>
 <li>

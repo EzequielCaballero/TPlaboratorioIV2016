@@ -1,7 +1,7 @@
 angular.module('ABMangularAPI.filtrosUsuarioGrilla', []) 
   app.filter('tipo', function () {
     var perfil = {
-      'admininistrador': 'Administrador',
+      'administrador': 'Administrador',
       'encargado': 'Encargado',
       'empleado': 'Empleado',
       'cliente': 'Cliente'
