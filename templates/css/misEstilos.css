@@ -13,7 +13,8 @@ input.ng-valid {
 CONFIGURACION BASE
 *************************************************************************************/
 body{
-    background-color: #242222;
+    background-image: url("../../img/backgrounds/Fondo_1.png");
+    background-color: #231010;
 }
 
 div {
@@ -195,7 +196,7 @@ BOTONES
 }
 
 .button-red {
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #AA2424;
     border: none;
     color: white;
@@ -210,7 +211,7 @@ BOTONES
 }
 
 .button-blue {
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #1E3C97;
     border: none;
     color: white;
@@ -225,7 +226,7 @@ BOTONES
 }
 
 .button-orange {
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #CF6024;
     border: none;
     color: white;
@@ -240,7 +241,7 @@ BOTONES
 }
 
 .button-gray {
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #8E9BA1;
     border: none;
     color: white;
@@ -255,10 +256,8 @@ BOTONES
 }
 
 .button-yellow {
-    background-color: #B6AE26;
-    color: black;
-    border: 2px solid #4CAF50;
-    border-radius: 2px;
+    border-radius: 5px;
+    background-color: #BC9E28;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -403,10 +402,11 @@ INICIO PAGE
 
 #imagenBase{
     width: 600px;
-    padding-top: 100px;
-    padding-bottom: 20px;
+    height: 680px;
+    padding-top: 80px;
+    padding-bottom: 15px;
     border-color: black;
-    border-right: 20px;
+    border-right: 15px;
 }
 
 /************************************************************************************
@@ -418,7 +418,18 @@ BARRA DE OPCIONES PRINCIPAL
 }
 
 .navbar{
-    background-color: #2D3258;
+    /* gradient */
+    background: #6C2020;
+    background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
+    background: -moz-linear-gradient(top,  #732424,  #000000);
+    background: linear-gradient(-90deg, #732424, #0D0D0D);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+    /* transition */
+    -webkit-transition: width .7s;
+    -moz-transition: width .7s;
+    transition: width .7s;
 }
 
 /************************************************************************************
@@ -440,6 +451,7 @@ LOGIN & REGISTER PAGE
 
 #limpiarLogin{
     margin-top: 10px;
+    padding: 10px;
     border-radius: 10px;
     color: black;
 }
@@ -471,6 +483,7 @@ a.volverIcon{
 MENU ABM
 *************************************************************************************/
 .CajaMenuABM{
+  position: relative;
   width:750px;
   margin:0 auto;
   margin-top:8px;
@@ -480,33 +493,83 @@ MENU ABM
 }
 
 .CajaMenuABM h1{
-  background:rgb(14, 26, 112);;
+  background-color: #3B1212;
   padding:20px 0;
   font-size:200%;
-  font-weight:300;
+  font-weight:150;
+  margin-left: 180px;
+  width: 50%;
   text-align:center;
   color:#fff;
   border-radius: 20px;
 }
 
-.buttonMenuABM{
+.buttonMenuABM, .formMenuABM a{
     border-radius: 15px;
-    line-height: 100%;
-    background-color: #3170A1;
-    border: none;
+    background-color: #9E2B2B;
     color: #fff;
-    display: block;
     width: 300px;
     padding: 14px 15px;
     text-align: center;
     text-decoration: none;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
     display: inline-block;
     font-size: 20px;
     font-weight: bold;
     margin: 4px 2px;
     cursor: pointer;
-    transition-duration: 0.7s;
+/*    background: -webkit-gradient(linear, left top, left bottom, from(#243473), to(#1F1F1F));
+    background: -moz-linear-gradient(top,  #243473,  #1F1F1F);
+    background: linear-gradient(-90deg, #243473, #1F1F1F);*/
+    /* rounded corner */
+}
+.buttonMenuABM:hover{
+    background-color: #681A1A;
+}
+
+.buttonMenuABM:active {
+  background-color: #8E3E3E;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#buttonLogOFF {
+  border-radius: 15px;
+  position: static;
+  background-color: #4C1414;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+#buttonLogOFF span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#buttonLogOFF span:after {
+  content: "SALIR";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -25px;
+  transition: 0.5s;
+}
+
+#buttonLogOFF:hover span {
+  padding-right: 40px;
+}
+
+#buttonLogOFF:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 /************************************************************************************

@@ -2,7 +2,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
   
   app.controller('controlInicio', function($scope, $auth, $state, $http) {
 	  $scope.perfilActivo="**N/N**";
-	  $scope.titulo="Inicio y presentacion de la WEB";
+	  $scope.titulo="Pizzeria ARGenta S.R.L.";
 	  
 	  //Ocultar o mostrar botones
 	  $scope.ABMusuarios = "true";
