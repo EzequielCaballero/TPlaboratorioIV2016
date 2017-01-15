@@ -4,6 +4,9 @@ TP LaboratorioIV 2016
 
 **Trabajo práctico  de los alumnos de laboratorio IV.**
 
+ALUMNO: Caballero, Ezequiel A. // 
+ELECCIÓN: Pizzerías ARGenta SRL
+
 <h4>Las siguientes empresas nos solicitan la creación de aplicaciones para administrar sus negocios:</h4>
 
   - Pizzerías Argenta SRL
