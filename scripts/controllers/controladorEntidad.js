@@ -6,7 +6,7 @@ angular.module('ABMangularAPI.controladorEntidad', [])
 		if($auth.isAuthenticated())
 		{
 			$sesion = $auth.getPayload();
-			$scope.perfilUsuario = $sesion.usuario;
+			$scope.perfilUsuario = $sesion.perfil;
 			
 			switch($scope.perfilUsuario)
 			{

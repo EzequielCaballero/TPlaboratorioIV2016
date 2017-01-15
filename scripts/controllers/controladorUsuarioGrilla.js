@@ -23,7 +23,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
 
       function columnDefsPersonas () {
       return [
-        { field: 'nombre', name: 'Usuario',
+        { field: 'nombre', name: 'Nombre',
           enableFiltering: false,
           enableHiding: false
         },
@@ -31,7 +31,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableFiltering: false,
           enableHiding: false
         },
-        { field: 'tipo', name: 'Perfil',
+        { field: 'tipo_user', name: 'Perfil',
           enableHiding: false,
           enableFiltering: true
           // filtro de busqueda.
@@ -39,9 +39,10 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
             // term: '1',
             type: uiGridConstants.filter.SELECT,
             selectOptions: [
-              {value: 'admin', label: 'Administrador'},
-              {value: 'vend', label: 'Vendedor'},
-              {value: 'compr', label: 'Comprador'}
+              {value: 'administrador', label: 'Administrador'},
+              {value: 'encargado', label: 'Encargado'},
+              {value: 'empleado', label: 'Empleado'},
+              {value: 'cliente', label: 'Cliente'}
             ]
           }
           //filtro de los datos

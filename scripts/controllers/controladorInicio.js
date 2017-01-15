@@ -12,11 +12,11 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	  if($auth.isAuthenticated())
       {
       	$sesion = $auth.getPayload();    
-      	$scope.perfilActivo = $sesion.usuario;
+      	$scope.perfilActivo = $sesion.perfil;
       	$scope.login = "true";
       	$scope.logout = "false";
 
-      	if($sesion.perfil == "admin")
+      	if($sesion.perfil == "Administrador")
       		$scope.ABMusuarios = "false";  
       }
 

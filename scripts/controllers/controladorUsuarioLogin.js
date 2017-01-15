@@ -7,37 +7,38 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
       {
         case "Administrador":
             $scope.usuario= {};
-            $scope.usuario.nombre = "Tony";
-            $scope.usuario.email = "admin@admin.com";
-            $scope.usuario.password = "4321";
+            $scope.usuario.nombre = "Jonathan";
+            $scope.usuario.apellido = "Robertson";
+            $scope.usuario.correo = "jrobertson0@utexas.edu";
+            $scope.usuario.clave = "bHTPqvsyvH";
             break;
 
         case "Encargado":
             $scope.usuario= {};
-            $scope.usuario.nombre = "Charly";
-            $scope.usuario.email = "vend@vend.com";
-            $scope.usuario.password = "1111";
+            $scope.usuario.nombre = "Kevin";
+            $scope.usuario.apellido = "Reed";
+            $scope.usuario.correo = "kreed1@seattletimes.com";
+            $scope.usuario.clave = "QDIGnRxGis";
             break;
 
         case "Empleado":
             $scope.usuario= {};
-            $scope.usuario.nombre = "Braian";
-            $scope.usuario.email = "compr@compr.com";
-            $scope.usuario.password = "1234";
+            $scope.usuario.nombre = "Johnny";
+            $scope.usuario.apellido = "George";
+            $scope.usuario.correo = "jgeorge5@addtoany.com";
+            $scope.usuario.clave = "aNQND1";
             break;
 
         case "Cliente":
             $scope.usuario= {};
-            $scope.usuario.nombre = "Braian";
-            $scope.usuario.email = "compr@compr.com";
-            $scope.usuario.password = "1234";
+            $scope.usuario.nombre = "Katherine";
+            $scope.usuario.apellido = "Lane";
+            $scope.usuario.correo = "klaneh@yahoo.co.jp";
+            $scope.usuario.clave = "nJHNO1Fl4B9G";
             break;
 
         default:
           $scope.usuario= {};
-          $scope.usuario.email = "";
-          $scope.usuario.nombre = "";
-          $scope.usuario.password = "";
           if($auth.isAuthenticated())
           {
             $auth.logout();
@@ -74,7 +75,7 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
       .catch(function(response) {
           console.info("incorrecto", response);
         // Handle errors here, such as displaying a notification
-        // for invalid email and/or password.
+        // for invalid correo and/or clave.
       });
     }
   });

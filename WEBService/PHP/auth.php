@@ -12,44 +12,49 @@ $Array_usuarios = Usuario::TraerTodosLosUsuarios();
 //if ($usuario->email == 'admin@admin.com' && $usuario->password == '4321'){
 foreach($Array_usuarios as $usuarioReal)
 {
-		if ($usuario->email == $usuarioReal->email && $usuario->password == $usuarioReal->password)
+		if ($usuario->correo == $usuarioReal->correo && $usuario->clave == $usuarioReal->clave)
 		{
-			switch($usuarioReal->tipo)
+			switch($usuarioReal->tipo_user)
 			{
-				case "admin":
+				case "administrador":
 						$ClaveDeEncritacion = 'claveAdministrador';
-						$token["usuario"] = "Administrador";
-						$token["perfil"]="admin";
+						$token["usuario"] = "NovaMAS";
+						$token["perfil"]="Administrador";
+						$token["estado"]="activo";
 						break;
 
-				case "vend":
-					$ClaveDeEncritacion = 'claveVendedor';
-					$token["usuario"] = "Vendedor";
-					$token["perfil"]="vendedor";
+				case "encargado":
+					$ClaveDeEncritacion = 'claveEncargado';
+					$token["usuario"] = "NovaMAS";
+					$token["perfil"]="Encargado";
+					$token["estado"]="activo";
 					break;
 
-				case "compr":
-					$ClaveDeEncritacion = 'claveComprador';
-					$token["usuario"] = "Comprador";
-					$token["perfil"]="comprador";
+				case "empleado":
+					$ClaveDeEncritacion = 'claveEmpleado';
+					$token["usuario"] = "NovaMAS";
+					$token["perfil"]="Empleado";
+					$token["estado"]="activo";
 					break;
 
+				case "cliente":
 				default:
-						$ClaveDeEncritacion = 'claveUsuario';
-						$token["usuario"] = "Usuario";
-						$token["perfil"]="user";
-						break;
+					$ClaveDeEncritacion = 'claveCliente';
+					$token["usuario"] = "NovaMAS";
+					$token["perfil"]="Cliente";
+					$token["estado"]= $usuarioReal->estado;
+					break;
 			}
 
 			$token["iat"]=time();
 			$token["exp"]=time()+600; // segundos
 
 			$jwt = JWT::encode($token, $ClaveDeEncritacion); //genero el token con los datos que quiero
-			$ArrayConToken["ElNombreDelToken"]=$jwt;//Guardo el token en un array (el nombre del token tiene que ser el mismo que en el js)!!
+			$ArrayConToken["usuario_PizzeriaARGenta"]=$jwt;//Guardo el token en un array (el nombre del token tiene que ser el mismo que en el js)!!
 			break;
 		}
 		else {
-		 $ArrayConToken["ElNombreDelToken"]= false;
+		 $ArrayConToken["usuario_PizzeriaARGenta"]= false;
 		}
 }
 
