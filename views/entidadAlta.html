@@ -1,0 +1,34 @@
+<div class="container">
+	<form class="FormIngreso" name="FormIngreso" id="FormIngreso"  enctype="multipart/form-data" novalidate >
+		<div class="page-header">
+			<center> <h1>{{DatoTest}}</h1>   </center>   
+			<label  >¿Datos completados?: {{FormIngreso.$valid}}</label>  
+		</div>
+
+		<br><br>
+		<label>Marca:</label><br>
+		<input type="radio" ng-model="entidad.marca" value="Samsung"><label>Samsung</label>
+		<input type="radio" ng-model="entidad.marca" value="Nextel"> <label>Nextel</label>
+		<input type="radio" ng-model="entidad.marca" value="Motorola"> <label>Motorola</label>
+		<input type="radio" ng-model="entidad.marca" value="BLU"> <label>BLU</label><br>
+
+		<label>Numero:</label>
+		<input type="number" name="dni" ng-model="entidad.numero" ng-readonly="soloLectura" placeholder="ingrese serial" value="" min="100" max="999" required/><br> 
+
+		<label>Fecha pedido:</label>
+		<input type="date" id="fecha" name="fecha" ng-model="entidad.fecha" placeholder="" min="1983-30-10" max="2016-09-30" required><br>
+		
+		<label>Color producto:</label>
+		<select ng-model="entidad.color" ng-options="c.code as c.name for c in opciones" required>
+          <option value="">--Seleccione color--</option>
+          <option value="">Rojo</option>
+          <option value="">Azul</option>
+          <option value="">Negro</option>
+          <option value="">Amarillo</option>
+        </select><br> 
+
+        <br><br><a class="btn btn-info " ng-disable="FormIngreso.$invalid" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
+
+        <input type="hidden" value="" id="idParaModificar" name="agregar" ng-model="entidad.numero"/>
+
+</div>

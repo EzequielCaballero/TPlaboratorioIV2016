@@ -1,0 +1,12 @@
+<h3>{{tituloGrilla}}</h3>
+<div ng-repeat="user in listadoUsuarios">
+<user-grilla-abm usuario="user">
+</div>
+</user-grilla-abm>
+
+<li  class="btn btn-info animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}">
+	<a ui-sref="usuario.menu()">
+	   <span class="glyphicon glyphicon-home">&nbsp;</span>
+	   Menu
+	</a>
+<li>

@@ -1,0 +1,80 @@
+<!doctype html><!--IMPORTANTISIMO!! sino el size de los títulos de las columnas se encuentran desfazados en ui-grid -->
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ABM angular API Service + Factory + Directive </title>
+
+ <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-grid/ui-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="templates/css/misEstilos.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/estilos/animacion.css">
+ 		
+
+<!-- Custom Fonts -->
+ 	<link href="bower_components/components-font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+<!-- ANGULAR JS -->
+  <script SRC="bower_components/angular/angular.min.js" TYPE="text/javascript"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+  <script src="bower_components/satellizer/dist/satellizer.js"></script>
+  <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
+
+<!-- MY JAVASCRIPT -->
+ 	<script SRC="scripts/myApp.js" TYPE="text/javascript"></script>
+	
+    <!-- DIRECTIVES -->
+    <script src="scripts/directives/directivasUsuario.js"></script>
+
+    <!-- CONTROLLERS -->
+    <script src="scripts/controllers/controladorInicio.js"></script>
+    <script src="scripts/controllers/controladorUsuario.js"></script>
+    <script src="scripts/controllers/controladorUsuarioLogin.js"></script>
+    <script src="scripts/controllers/controladorUsuarioMenu.js"></script>
+    <script src="scripts/controllers/controladorUsuarioGrilla.js"></script>
+    <script src="scripts/controllers/controladorUsuarioRegistro.js"></script>
+    <script src="scripts/controllers/controladorUsuarioModificar.js"></script>
+    <script src="scripts/controllers/controladorDirectivaUsuario.js"></script>
+
+    <script src="scripts/controllers/controladorEntidad.js"></script>
+    <script src="scripts/controllers/controladorEntidadMenu.js"></script>
+    <script src="scripts/controllers/controladorEntidadAlta.js"></script>
+    <script src="scripts/controllers/controladorEntidadGrilla.js"></script>
+    <script src="scripts/controllers/controladorEntidadModificar.js"></script>
+
+    <!-- FACTORIES AND SERVICES-->
+    <script src="scripts/factories/factoryOrigenDatos_Usuarios.js"></script>
+    <script src="scripts/factories/factoryConServicios_Usuario.js"></script>
+    <script src="scripts/services/servicioRetornoDatos_Usuarios.js"></script>
+    <script src="scripts/services/filtrosUsuarioGrilla.js"></script>
+    
+    <!-- <script SRC="scripts/ngThumb.js" TYPE="text/javascript"></script> -->
+
+<!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body ng-app="ABMangularAPI">
+	 
+<!-- CARGA DE VISTAS DINÁMICAS -->
+     <div ui-view ></div>
+
+</body>
+</html>
