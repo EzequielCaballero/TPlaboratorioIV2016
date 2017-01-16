@@ -14,6 +14,7 @@ CONFIGURACION BASE
 *************************************************************************************/
 body{
     background-image: url("../../img/backgrounds/Fondo_1.png");
+    background-repeat: round !important;
     background-color: #231010;
 }
 

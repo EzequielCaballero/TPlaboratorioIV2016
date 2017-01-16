@@ -3,7 +3,11 @@ angular.module('ABMangularAPI.controladorInicio', [])
   app.controller('controlInicio', function($scope, $auth, $state, $http) {
 	  $scope.perfilActivo="**N/N**";
 	  $scope.titulo="Pizzeria ARGenta S.R.L.";
-	  
+	  $scope.imagenLogueado = "img/backgrounds/Logo_1.png";
+	  $scope.imagenPorDefecto = "img/backgrounds/Fondo_2.png";
+
+	  $("#imagenBase").attr("src",$scope.imagenPorDefecto);
+
 	  //Ocultar o mostrar botones
 	  $scope.ABMusuarios = "true";
 	  $scope.Login = "false";
@@ -11,6 +15,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
 
 	  if($auth.isAuthenticated())
       {
+      	$("#imagenBase").attr("src",$scope.imagenLogueado);
       	$sesion = $auth.getPayload();    
       	$scope.perfilActivo = $sesion.perfil;
       	$scope.login = "true";
@@ -48,4 +53,5 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	        break;
 	    }
 	  }
+
 });
