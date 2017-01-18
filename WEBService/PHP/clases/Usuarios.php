@@ -132,8 +132,24 @@ class Usuario
 
 	public static function TraerUsuariosPorParametro($tipoUser)
 	{
+		$consulta = "";
+		switch($tipoUser)
+		{
+			case "Empleado":
+				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente'";
+				break;
+
+			case "Encargado":
+				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente' OR tipo_user = 'empleado'";
+				break;
+
+			case "Administrador":
+				$consulta = "SELECT * from usuarios";
+				break;
+		}
+
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios WHERE tipo_user =:tipoUser");
+		$consulta =$objetoAccesoDato->RetornarConsulta($consulta);
 		$consulta->bindValue(':tipoUser', $tipoUser, PDO::PARAM_STR);
 		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
 		$consulta->execute();
