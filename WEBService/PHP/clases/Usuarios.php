@@ -130,10 +130,11 @@ class Usuario
 		return $arrPersonas;
 	}
 
-	public static function TraerTodosLosClientes()
+	public static function TraerUsuariosPorParametro($tipoUser)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios WHERE tipo_user = 'cliente'");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios WHERE tipo_user =:tipoUser");
+		$consulta->bindValue(':tipoUser', $tipoUser, PDO::PARAM_STR);
 		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
 		$consulta->execute();
 		$arrPersonas= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");

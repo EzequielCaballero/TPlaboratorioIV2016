@@ -1,5 +1,11 @@
 angular.module('ABMangularAPI.controladorUsuarioGrilla', [])   
-  app.controller('controlUsuarioGrilla', function($scope, $http, $state, i18nService, uiGridConstants, servicioRetornoUsuarios) {
+  app.controller('controlUsuarioGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoUsuarios) {
+
+      if($auth.isAuthenticated())
+      {
+        $sesion = $auth.getPayload();
+        $usuarioLogueado = $sesion.perfil;
+      }
 
       $scope.tituloGrillaUsuarios = "Grilla Usuarios";
       // Objeto de configuracion de la grilla Usuarios.
@@ -16,7 +22,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       i18nService.setCurrentLang('es');
 
       //UTILIZACIÓN DEL SERVICE
-      servicioRetornoUsuarios.traerTodo().then(function(respuesta){
+      servicioRetornoUsuarios.traerCiertosUsuarios($usuarioLogueado).then(function(respuesta){
         
         //Asignos funciones para cada row (control de permisos)
         angular.forEach(respuesta.data,function(row){
