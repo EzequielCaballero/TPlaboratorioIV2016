@@ -13,9 +13,10 @@ input.ng-valid {
 CONFIGURACION BASE
 *************************************************************************************/
 body{
-    background-image: url("../../img/backgrounds/Fondo_1.png");
+    background: #231010;
+/*    background-image: url("../../img/backgrounds/Fondo_1.png");
     background-repeat: round !important;
-    background-color: #231010;
+    background-color: #231010;*/
 }
 
 div {
@@ -140,10 +141,12 @@ ul.miEstilo {
 
 li.miEstilo {
     float: left;
+    list-style: none;
 }
 
 li a.miEstilo {
     display: block;
+    list-style: none;
     color: white;
     text-align: center;
     padding: 14px 16px;
@@ -386,6 +389,7 @@ img {
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
+    list-style: none;
     display: inline-block;
     font-size: 15px;
     margin: 4px 2px;
@@ -587,7 +591,7 @@ ALTA
 }
 
 /************************************************************************************
-GRILLA
+GRILLA PRODUCTOS
 *************************************************************************************/
 .CajaGrilla{
     width: 60%;
@@ -603,9 +607,14 @@ GRILLA
     color:black;
 }
 
+
+/************************************************************************************
+GRILLA USUARIOS
+*************************************************************************************/
+
 .gridUsuarios {
     color:black;
-    border: 1px solid rgb(212,212,212);
+    border: 2px solid #1D0505;
     position: static;
     width: 1200px;
     height: 400px;
@@ -613,6 +622,7 @@ GRILLA
 
 #userABMboton{
     position: fixed;
+    text-decoration: none;
     margin-left: 20px;
     margin-top: 20px;
 }
@@ -624,10 +634,3 @@ GRILLA
 /************************************************************************************
 EXTRA
 *************************************************************************************/
-.PiedraPapelTijera
-{
-  width: 100px;
-  height: 100px;
-  padding: 10px;
-
-}
