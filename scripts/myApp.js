@@ -46,6 +46,15 @@ var app = angular.module('ABMangularAPI', [
                     }
                 }
             })
+    .state('usuario.perfil', {
+      url : '/perfil',
+      views: {
+                'contenido': {
+                templateUrl : 'views/usuarioPerfil.html',
+                controller : 'controlUsuarioPerfil'
+                }
+              }
+            })
     .state('usuario.login', {
       url : '/login',
       views: {

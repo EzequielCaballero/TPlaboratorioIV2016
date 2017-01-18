@@ -28,6 +28,12 @@ $app->get('/usuarios[/]', function ($request, $response, $args) {
     return $response;
 });
 
+// $app->get('/usuarios/{objeto}', function ($request, $response, $args) {
+//     $datos = Usuario::TraerTodosLosClientes();
+//     $response->write(json_encode($datos));
+//     return $response;
+// });
+
 // POST: Para crear recursos = mover foto de la ubicación temporal hacia la carpeta de imagenes del proyecto.
 $app->post('/altaFoto[/]', function ($request, $response, $args) {
 

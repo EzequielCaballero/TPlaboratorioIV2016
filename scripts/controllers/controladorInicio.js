@@ -22,7 +22,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
       	$scope.login = "true";
       	$scope.logout = "false";
 
-      	if($sesion.perfil == "Administrador")
+      	if($sesion.perfil != "Cliente")
       		$scope.ABMusuarios = "false";  
       }
 
@@ -38,6 +38,10 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	      case "Logout":
 	      	$auth.logout();
 	      	location.reload(true);
+	      	break;
+
+	      case "Perfil":
+	      	$state.go("usuario.perfil");
 	      	break;
 
 	      case "MenuUsuarios":

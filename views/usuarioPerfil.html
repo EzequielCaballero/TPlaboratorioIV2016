@@ -1,0 +1,25 @@
+<div class="Frm animated bounceInLeft">
+    <form class="registerForm"  name="myForm" enctype="multipart/form-data">
+        <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
+        <input type="text" id="nombre" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese su nombre" value="" required><br>
+        <input type="email" id="email" name="email" ng-model="usuario.email" placeholder="Ingrese su email" value="" required><br>
+        <input type="password" id="password" minlength="4" ng-model="usuario.password" placeholder="Ingrese su clave" value="" value="" required><br>
+        <input type="password" id="password2" minlength="4" ng-model="usuario.password2" placeholder="Repita su clave" value="" required><br>
+          <span class="validacion" ng-show="myForm.usuario.password2.$invalid || usuario.password!=usuario.password2">Las contraseñas deben coincidir!!</span><br><br>
+        <select ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" required>
+          <option value="">--Seleccione tipo de user--</option>
+          <option value="">Administrador</option>
+          <option value="">Vendedor</option>
+          <option value="">Comprador</option>
+        </select><br>
+        <span class="validacion" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion!!</span><br><br>
+        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.password!=usuario.password2" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
+      </form>
+    </div>
+
+    <h1>¿Listo para continuar?:{{myForm.$valid}}</h1>
+
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}" ui-sref="usuario.menu()">
+     Volver
+     <span class="glyphicon glyphicon-home"></span>
+<a>

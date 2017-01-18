@@ -18,7 +18,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       //UTILIZACIÓN DEL SERVICE
       servicioRetornoUsuarios.traerTodo().then(function(respuesta){
         
-        //Asignos funciones para cada row
+        //Asignos funciones para cada row (control de permisos)
         angular.forEach(respuesta.data,function(row){
           row.Nombre = function(){
             return this.nombre;

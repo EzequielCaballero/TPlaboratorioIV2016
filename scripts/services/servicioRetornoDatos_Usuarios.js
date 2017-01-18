@@ -22,6 +22,20 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
         );
       }
 
+    this.traerData = function(tipo_usuario){ //FUNCIÓN PÚBLICA
+       return $http.get(traerUrl()).then(
+          //Funciones que son parámetros, con lo cual se separan por coma.
+          function(respuesta){
+            console.info("RESPUESTA (en service): ", respuesta);
+            return respuesta;
+          },
+          function(error){
+            console.info("ERROR!", error);
+            return error;
+          }
+        );
+      }
+
 
     function traerURL(Parametro){ //FUNCIÓN PRIVADA: tipo "get" atributo.
       if(!Parametro)

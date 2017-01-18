@@ -130,6 +130,16 @@ class Usuario
 		return $arrPersonas;
 	}
 
+	public static function TraerTodosLosClientes()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios WHERE tipo_user = 'cliente'");
+		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
+		$consulta->execute();
+		$arrPersonas= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");
+		return $arrPersonas;
+	}
+
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 	public static function InsertarUsuario($usuario)

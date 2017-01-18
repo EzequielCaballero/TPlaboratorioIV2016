@@ -18,31 +18,35 @@ foreach($Array_usuarios as $usuarioReal)
 			{
 				case "administrador":
 						$ClaveDeEncritacion = 'claveAdministrador';
-						$token["usuario"] = "NovaMAS";
+						$token["usuario"] = $usuarioReal->id_usuario;
 						$token["perfil"]="Administrador";
 						$token["estado"]="activo";
+						$token["direccion"]= $usuarioReal->direccion;
 						break;
 
 				case "encargado":
 					$ClaveDeEncritacion = 'claveEncargado';
-					$token["usuario"] = "NovaMAS";
+					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Encargado";
 					$token["estado"]="activo";
+					$token["direccion"]= $usuarioReal->direccion;
 					break;
 
 				case "empleado":
 					$ClaveDeEncritacion = 'claveEmpleado';
-					$token["usuario"] = "NovaMAS";
+					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Empleado";
 					$token["estado"]="activo";
+					$token["direccion"]= $usuarioReal->direccion;
 					break;
 
 				case "cliente":
 				default:
 					$ClaveDeEncritacion = 'claveCliente';
-					$token["usuario"] = "NovaMAS";
+					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Cliente";
 					$token["estado"]= $usuarioReal->estado;
+					$token["direccion"]= $usuarioReal->direccion;
 					break;
 			}
 
