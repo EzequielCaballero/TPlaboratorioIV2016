@@ -7,9 +7,11 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
         $usuarioLogueado = $sesion.perfil;
       }
       else
-      {
         $state.go("inicio");
-      }
+
+      $scope.marker = new google.maps.Marker({
+        title: 'default'
+      });
 
       $scope.tituloGrillaUsuarios = "Grilla Usuarios";
       // Objeto de configuracion de la grilla Usuarios.
@@ -121,20 +123,20 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
     var arrayUbicacion = rowEntity.coordenadas.split(/,/);
     var latitud = arrayUbicacion[0];
     var longitud = arrayUbicacion[1].replace(" ","");
-    alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
+    //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
 
     NgMap.getMap("miMapaModal").then(function(map) {
       /*console.log(map.getCenter());
       console.log(map);
       console.log('markers', map.markers);
       console.log('shapes', map.shapes);*/
-      var myLatLng = {lat: Number(latitud), lng: Number(longitud)};
+      var myLatLng = {lat: -34.660427, lng: -58.365360};
+      // var myLatLng = {lat: Number(latitud), lng: Number(longitud)};
       //elimino el marker anterior del mapa
       $scope.marker.setMap(null);
 
       $scope.marker = new google.maps.Marker({
         position: myLatLng,
-        icon: rowEntity.avatar,
         draggable: true,
         animation: google.maps.Animation.DROP,
         title: rowEntity.nombre,
