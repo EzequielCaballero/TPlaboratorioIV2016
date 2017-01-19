@@ -1,19 +1,21 @@
 angular.module('ABMangularAPI.controladorUsuarioGrilla', [])   
   app.controller('controlUsuarioGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoUsuarios, NgMap) {
 
-      if($auth.isAuthenticated())
-      {
-        $sesion = $auth.getPayload();
-        $usuarioLogueado = $sesion.perfil;
-      }
-      else
+      if(!$auth.isAuthenticated())
         $state.go("inicio");
+      else
+      {
+          $sesion = $auth.getPayload();
+          $usuarioLogueado = $sesion.perfil;
+      }
 
       $scope.marker = new google.maps.Marker({
         title: 'default'
       });
+      $scope.marker.latitud = '-35.643983';
+      $scope.marker.longitud = '-57.567297';
 
-      $scope.tituloGrillaUsuarios = "Grilla Usuarios";
+      $scope.tituloGrillaUsuarios = "GRILLA USUARIOS";
       // Objeto de configuracion de la grilla Usuarios.
       $scope.gridOptionsUsuarios = {};
       $scope.gridOptionsUsuarios.paginationPageSizes = [25, 50, 75];
@@ -97,7 +99,10 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableHiding: false
         },
         { name: 'Ubicacion',
-        cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapaModal(row.entity)">Mapa</button>'
+          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapaModal(row.entity)">Mapa</button>',
+          enableFiltering: false,
+          enableSorting: false,
+          enableHiding: false
         },
         { name: 'Borrar',
           cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
@@ -118,20 +123,20 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
 
     $scope.mostrarMapaModal = function(rowEntity){
     $scope.ModalHeader = "Ubicación usuario";
-    console.info("Amigo", rowEntity);
+    console.info("Usuario", rowEntity);
 
     var arrayUbicacion = rowEntity.coordenadas.split(/,/);
     var latitud = arrayUbicacion[0];
     var longitud = arrayUbicacion[1].replace(" ","");
     //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
 
-    NgMap.getMap("miMapaModal").then(function(map) {
+      NgMap.getMap("miMapaModal").then(function(map) {
       /*console.log(map.getCenter());
       console.log(map);
       console.log('markers', map.markers);
       console.log('shapes', map.shapes);*/
-      var myLatLng = {lat: -34.660427, lng: -58.365360};
-      // var myLatLng = {lat: Number(latitud), lng: Number(longitud)};
+      var myLatLng = {lat: Number(latitud), lng: Number(longitud != undefined ? longitud : logitud)};
+      // var myLatLng = {lat: Number(-34.595960), lng: Number(-58.393046)};
       //elimino el marker anterior del mapa
       $scope.marker.setMap(null);
 
@@ -150,9 +155,8 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
          map.setCenter(myLatLng);// Set here center map coordinates
          map.setZoom(6);
         });
-
+    
       });
-
     }
 
       $scope.Borrar = function(usuario){
