@@ -1,7 +1,7 @@
 <!doctype html>
 <div class="container">
 		<div class="animated bounceInRight">		
-			<h3>{{tituloGrillaPersonas}}</h3>
+			<h3>{{tituloGrillaUsuarios}}</h3>
 			<div class="CajaGrilla">
 			  <!--GRILLA UI-->
 			  <div ui-grid="gridOptionsUsuarios" class="gridUsuarios" ui-grid-auto-resize></div>
@@ -20,3 +20,32 @@
 	   Volver
 	</a>
 <li>
+
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{{ModalHeader}}</h4>
+          </div>
+          <div class="modal-body">    
+            <ng-map center="" ng-model="miMapa" id="miMapaModal">
+          <custom-marker ng-repeat="marker in mapa.markers" position="{{marker.latitud}},{{marker.longitud}}">
+                <div>
+                  <img width="25" src="{{marker.avatar}}" />
+                </div>
+          </custom-marker>
+        </ng-map>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

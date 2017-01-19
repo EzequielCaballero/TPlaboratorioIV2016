@@ -5,6 +5,11 @@ angular.module('ABMangularAPI.controladorUsuarioMenu', [])
     $sesion = $auth.getPayload();
     console.info("SESION ACTIVA: ", $sesion);
 
+    if(!$auth.isAuthenticated())
+    {
+       $state.go("inicio");
+    }
+
     $scope.redirigir = function(accion){
       switch(accion)
       {
