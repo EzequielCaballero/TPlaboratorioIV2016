@@ -158,15 +158,15 @@
           <span class="validacion" ng-show="myForm.usuario.clave2.$invalid || usuario.clave!=usuario.clave2">Las contraseñas deben coincidir!!</span><br><br>
 
         <!--SELECT AUTOPOPULADOS-->
-        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-change="EleccionUser()" ng-hide="{{tipoUser}}" required>
+        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-change="EleccionUser()" ng-hide="tipoUser" required>
           <option value="">--Seleccione tipo de user--</option>
         </select><br>
-        <span id="alertaOpcionUser" class="validacion" ng-hide="{{tipoUser}}" ng-show="myForm.usuario.tipo_user.$invalid || usuario.tipo_user == '' ">Debe seleccionar una opcion</span><br>
+        <span id="alertaOpcionUser" class="validacion" ng-hide="tipoUser" ng-show="myForm.usuario.tipo_user.$invalid || usuario.tipo_user == '' ">Debe seleccionar una opcion</span><br>
 
-        <select id="opcionLocal" ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" ng-required="requiredLocal" ng-hide="{{tipoLocal}}">
+        <select id="opcionLocal" ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" ng-required="requiredLocal" ng-hide="tipoLocal">
           <option value="">--Seleccione local del user--</option>
         </select><br>
-        <span id="alertaOpcionLocal" class="validacion"  ng-hide="{{tipoLocal}}" ng-show="myForm.usuario.id_local.$invalid || usuario.tipo_user != cliente && usuario.id_local ==''">Debe seleccionar un local</span><br><br>
+        <span id="alertaOpcionLocal" class="validacion"  ng-hide="tipoLocal" ng-show="myForm.usuario.id_local.$invalid || usuario.tipo_user != cliente && usuario.id_local ==''">Debe seleccionar un local</span><br><br>
 
         <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.clave!=usuario.clave2 || localidad == '--Seleccione localidad--'" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
       </form>

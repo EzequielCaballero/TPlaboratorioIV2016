@@ -80,19 +80,16 @@
       switch($scope.usuario.tipo_user)
       {
         case "Encargado":
-          $("#opcionLocal").show();
+          $scope.tipoLocal = false;
           $scope.requiredLocal = true;
-          $("#alertaOpcionLocal").show();
         break;
         case "Empleado":
-          $("#opcionLocal").show();
+          $scope.tipoLocal = false;
           $scope.requiredLocal = true;
-          $("#alertaOpcionLocal").show();
         break;
         case "Cliente":
-          $("#opcionLocal").hide();
+          $scope.tipoLocal = true;
           $scope.requiredLocal = false;
-          $("#alertaOpcionLocal").hide();
         break;
       }
     }
