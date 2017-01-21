@@ -5,6 +5,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	  $scope.titulo="Pizzeria ARGENTA S.R.L.";
 	  $scope.imagenLogueado = "img/backgrounds/Logo_1.png";
 	  $scope.imagenPorDefecto = "img/backgrounds/Fondo_2.png";
+	  $("#intro").attr("class","fraseInicio");
 	  $scope.perfilActivo = "Por favor, inicie sesión";
 
 	  $("#imagenBase").attr("src",$scope.imagenPorDefecto);
@@ -17,8 +18,9 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	  if($auth.isAuthenticated())
       {
       	$("#imagenBase").attr("src",$scope.imagenLogueado);
+      	$("#intro").attr("class","fraseLogueado");
       	$sesion = $auth.getPayload();    
-      	$scope.perfilActivo = "PERFIL LOGUEADO: "+$sesion.perfil;
+      	$scope.perfilActivo = "BIENVENIDO: "+$sesion.nombre;
       	$scope.login = "true";
       	$scope.logout = "false";
 

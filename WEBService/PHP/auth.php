@@ -21,6 +21,7 @@ foreach($Array_usuarios as $usuarioReal)
 						$token["usuario"] = $usuarioReal->id_usuario;
 						$token["perfil"]="Administrador";
 						$token["estado"]="activo";
+						$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 						$token["direccion"]= $usuarioReal->direccion;
 						break;
 
@@ -29,6 +30,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Encargado";
 					$token["estado"]="activo";
+					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
 					break;
 
@@ -37,6 +39,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Empleado";
 					$token["estado"]="activo";
+					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
 					break;
 
@@ -46,6 +49,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["usuario"] = $usuarioReal->id_usuario;
 					$token["perfil"]="Cliente";
 					$token["estado"]= $usuarioReal->estado;
+					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
 					break;
 			}

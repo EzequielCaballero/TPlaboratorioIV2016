@@ -413,6 +413,22 @@ INICIO PAGE
     border-right: 15px;
 }
 
+.fraseInicio{
+    text-align: center;
+    text-decoration: none;
+    font-size: 35px;
+    font-family: "Helvetica";
+    color:#EA2525;
+}
+
+.fraseLogueado{
+    text-align: center;
+    text-decoration: none;
+    font-size: 35px;
+    font-family: "Helvetica";
+    color:#FFFFFF;
+}
+
 /************************************************************************************
 BARRA DE OPCIONES PRINCIPAL
 *************************************************************************************/
