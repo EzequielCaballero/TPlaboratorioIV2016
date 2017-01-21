@@ -636,7 +636,12 @@ MAPA
 .mapaUsuario{
     position: fixed;
     margin-top: 50px;
-    margin-left: 50px;
-    width: 450px;
-    height: 350px;
+    margin-left: 30px;
+    width: 550px;
+    height: 450px;
+}
+
+.MarkerGM{
+    width: 35px;
+    height: 35px;
 }

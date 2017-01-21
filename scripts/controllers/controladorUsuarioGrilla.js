@@ -12,8 +12,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       $scope.marker = new google.maps.Marker({
         title: 'default'
       });
-      $scope.marker.latitud = '-35.643983';
-      $scope.marker.longitud = '-57.567297';
+      $scope.markersArray = [];
 
       $scope.tituloGrillaUsuarios = "GRILLA USUARIOS";
       // Objeto de configuracion de la grilla Usuarios.
@@ -131,31 +130,33 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
     //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
 
       NgMap.getMap("miMapaModal").then(function(map) {
-      alert("HOLA: " + map)
-      console.log(map.getCenter());
-      console.log(map);
-      console.log('markers', map.markers);
-      console.log('shapes', map.shapes);
+      // console.log(map.getCenter());
+      // console.log(map);
+      // console.log('markers', map.markers);
+      // console.log('shapes', map.shapes);
+      $scope.marker.setMap(null);
       var myLatLng = rowEntity.coordenadas;
+      console.log('ubicacion', myLatLng);
+      $scope.ubicacion = rowEntity.coordenadas;
       // var myLatLng = {lat: Number(-34.595960), lng: Number(-58.393046)};
       //elimino el marker anterior del mapa
-      $scope.marker.setMap(null);
-
-      $scope.marker = new google.maps.Marker({
-        position: myLatLng,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        title: rowEntity.nombre,
-        label: rowEntity.nombre
-      });
+      
+      // $scope.marker = new google.maps.Marker({
+      //   position: myLatLng,
+      //   draggable: true,
+      //   icon: rowEntity.nombre,
+      //   animation: google.maps.Animation.DROP,
+      //   title: rowEntity.nombre,
+      //   label: rowEntity.nombre
+      // });
 
       $scope.marker.setMap(map);
 
-        $("#myModal").on("shown.bs.modal", function(e) {
-        google.maps.event.trigger(map, "resize");
-         map.setCenter(myLatLng);// Set here center map coordinates
-         map.setZoom(6);
-        });
+        // $("#myModal").on("shown.bs.modal", function(e) {
+        // google.maps.event.trigger(map, "resize");
+        //  map.setCenter(myLatLng);// Set here center map coordinates
+        //  map.setZoom(6);
+        // });
     
       });
     }
