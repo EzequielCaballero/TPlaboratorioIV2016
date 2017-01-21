@@ -23,6 +23,7 @@ foreach($Array_usuarios as $usuarioReal)
 						$token["estado"]="activo";
 						$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 						$token["direccion"]= $usuarioReal->direccion;
+						$token["local"]= $usuarioReal->id_local;
 						break;
 
 				case "encargado":
@@ -32,6 +33,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["estado"]="activo";
 					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
+					$token["local"]= $usuarioReal->id_local;
 					break;
 
 				case "empleado":
@@ -41,6 +43,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["estado"]="activo";
 					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
+					$token["local"]= $usuarioReal->id_local;
 					break;
 
 				case "cliente":
@@ -51,6 +54,7 @@ foreach($Array_usuarios as $usuarioReal)
 					$token["estado"]= $usuarioReal->estado;
 					$token["nombre"]= $usuarioReal->apellido.", ".$usuarioReal->nombre;
 					$token["direccion"]= $usuarioReal->direccion;
+					$token["local"]= $usuarioReal->id_local;
 					break;
 			}
 

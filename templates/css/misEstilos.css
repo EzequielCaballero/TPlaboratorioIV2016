@@ -493,6 +493,10 @@ LOGIN & REGISTER PAGE
     color:white;
 }
 
+.registerForm #calle, #altura{
+    width: 235px;
+}
+
 a.volverIcon{
     width: 40px;
     height: 40px;

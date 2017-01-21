@@ -1,21 +1,39 @@
  angular.module('ABMangularAPI.controladorUsuarioRegistro', []) 
   app.controller('controlUsuarioRegistro', function($scope, $http, $state, $auth, servicioRetornoUsuarios) {
-
+    
     if(!$auth.isAuthenticated())
         $state.go("inicio");
     else
     {
         $sesion = $auth.getPayload();
         $usuarioLogueado = $sesion.perfil;
-      }
+    }
+
+    $scope.tipoUser = true;
+    $scope.tipoLocal = true;
+
+    if($sesion.perfil != "Cliente" && $sesion.perfil !="Empleado")
+    {
+      $scope.tipoUser = false;
+
+      if($sesion.perfil == "Administrador")
+        $scope.tipoLocal = false;
+    }
 
     $scope.DatoRegistro="***REGISTRO USUARIO***";
     $scope.DatoSubmit = "Registrarse";
+
     //OPCIONES DEL ELEMENTO SELECT (creación de Options)
     $scope.opciones = [
       {code:"admin", name: "Encargado"},
       {code:"vend", name:"Empleado" },
       {code:"compr", name:"Cliente" }
+    ];
+
+    $scope.locales = [
+      {code:"1", name: "Local 1"},
+      {code:"2", name:"Local 2" },
+      {code:"3", name:"Local 3" }
     ];
 
     $scope.tipoUsers = false;

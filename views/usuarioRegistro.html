@@ -149,23 +149,29 @@
             <option value="Villarino">  Villarino </option>
             <option value="Zárate">  Zárate  </option>
         </select><br>
-        <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br><br>
+        <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
 
+        <label>Ingrese su contraseña:</label><br>
         <input type="password" id="password" minlength="4" ng-model="usuario.password" placeholder="Ingrese su clave" value="" value="" required><br>
         <input type="password" id="password2" minlength="4" ng-model="usuario.password2" placeholder="Repita su clave" value="" required><br>
           <span class="validacion" ng-show="myForm.usuario.password2.$invalid || usuario.password!=usuario.password2">Las contraseñas deben coincidir!!</span><br><br>
-        <select ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" required ng-hide="{{tipoUsers}}">
+
+        <!--SELECT AUTOPOPULADOS-->
+        <select ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" required ng-hide="{{tipoUser}}">
           <option value="">--Seleccione tipo de user--</option>
-          <option value="">Encargado</option>
-          <option value="">Empleado</option>
-          <option value="">Cliente</option>
         </select><br>
-        <span class="validacion" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion</span><br><br>
-        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.password!=usuario.password2" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
+        <span class="validacion" ng-hide="{{tipoUser}}" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion</span><br>
+
+        <select ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" required ng-hide="{{tipoLocal}}">
+          <option value="">--Seleccione local del user--</option>
+        </select><br>
+        <span class="validacion"  ng-hide="{{tipoLocal}}" ng-show="myForm.usuario.id_local.$invalid || usuario.tipo != cliente && usuario.id_local ==''">Debe seleccionar un local</span><br><br>
+
+        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.password!=usuario.password2 || localidad == '--Seleccione localidad--'" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
       </form>
     </div>
 
-    <h1>¿Listo para continuar?:{{myForm.$valid}}</h1>
+    <h3>¿Listo para continuar?:{{myForm.$valid}}</h3>
 
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}" ui-sref="usuario.menu()">
      Volver
