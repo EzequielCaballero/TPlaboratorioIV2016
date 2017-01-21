@@ -157,15 +157,15 @@
           <span class="validacion" ng-show="myForm.usuario.password2.$invalid || usuario.password!=usuario.password2">Las contraseñas deben coincidir!!</span><br><br>
 
         <!--SELECT AUTOPOPULADOS-->
-        <select ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" required ng-hide="{{tipoUser}}">
+        <select id="opcionUser" ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" ng-change="EleccionUser()" ng-hide="{{tipoUser}}" required>
           <option value="">--Seleccione tipo de user--</option>
         </select><br>
-        <span class="validacion" ng-hide="{{tipoUser}}" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion</span><br>
+        <span id="alertaOpcionUser" class="validacion" ng-hide="{{tipoUser}}" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion</span><br>
 
-        <select ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" required ng-hide="{{tipoLocal}}">
+        <select id="opcionLocal" ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" required ng-hide="{{tipoLocal}}">
           <option value="">--Seleccione local del user--</option>
         </select><br>
-        <span class="validacion"  ng-hide="{{tipoLocal}}" ng-show="myForm.usuario.id_local.$invalid || usuario.tipo != cliente && usuario.id_local ==''">Debe seleccionar un local</span><br><br>
+        <span id="alertaOpcionLocal" class="validacion"  ng-hide="{{tipoLocal}}" ng-show="myForm.usuario.id_local.$invalid || usuario.tipo != cliente && usuario.id_local ==''">Debe seleccionar un local</span><br><br>
 
         <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.password!=usuario.password2 || localidad == '--Seleccione localidad--'" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
       </form>

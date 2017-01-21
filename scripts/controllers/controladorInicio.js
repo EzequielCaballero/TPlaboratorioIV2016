@@ -33,6 +33,10 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	    //VALIDACION DE SESION DE USUARIO (por defecto)
 	    switch($direccion)
 	    {
+	      case "Registrarse":
+	      	$state.go("usuario.registro");
+	      	break;
+
 	      case "Login":
 	      	$state.go("usuario.login");
 	      	break;
