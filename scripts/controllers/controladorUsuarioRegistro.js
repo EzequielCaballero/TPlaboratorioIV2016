@@ -3,6 +3,7 @@
     
     $scope.tipoUser = true;
     $scope.tipoLocal = true;
+    $scope.requiredLocal = true;
     $scope.DatoRegistro="***REGISTRO USUARIO***";
 
     if(!$auth.isAuthenticated())
@@ -54,50 +55,56 @@
     $scope.usuario={};
     //Datos generales
     $scope.usuario.nombre = "natalia";
-    $scope.usuario.email = "natalia@natalia.com";
+    $scope.usuario.apellido = "gonzalez";
     $scope.usuario.edad = 25;
     $scope.usuario.sexo = "Masculino";
+    $scope.usuario.correo = "natalia@gonzalez.com";
+
 
     //Dirección
     $scope.calle = "Av. Calchaqui";
     $scope.altura = 2200;
     $scope.localidad = "Quilmes";
-    $scope.coordenadas = "0, 0";
+    $scope.usuario.coordenadas = "0, 0";
 
     //Contraseña
-    $scope.usuario.password = "1234";
-    $scope.usuario.password2 = "1234"
+    $scope.usuario.clave = "1234";
+    $scope.usuario.clave2 = "1234"
 
     //Estado del user
-    $scope.usuario.tipo = "";
+    $scope.usuario.tipo_user = "";
     $scope.usuario.estado = "activo";
     $scope.usuario.id_local = "";
 
     $scope.EleccionUser=function(){
-      switch($scope.usuario.tipo)
+      switch($scope.usuario.tipo_user)
       {
         case "Encargado":
           $("#opcionLocal").show();
+          $scope.requiredLocal = true;
           $("#alertaOpcionLocal").show();
         break;
         case "Empleado":
           $("#opcionLocal").show();
+          $scope.requiredLocal = true;
           $("#alertaOpcionLocal").show();
         break;
         case "Cliente":
           $("#opcionLocal").hide();
+          $scope.requiredLocal = false;
           $("#alertaOpcionLocal").hide();
         break;
       }
     }
 
     $scope.Guardar=function(){
-      
+      //Validar dirección seleccionada
       if($scope.localidad != "CABA")
         $scope.usuario.direccion = $scope.calle+" "+$scope.altura+", "+$scope.localidad+", "+"Buenos Aires";
       else
         $scope.usuario.direccion = $scope.calle+" "+$scope.altura+", "+$scope.localidad;
 
+      //Ejecutar consulta SQL
       servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Agregar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);
           if($scope.nuevoUser)
@@ -110,16 +117,4 @@
             console.log("FALLO! ", response);
       });
     }
-
-      // $scope.Guardar = function(){
-      //   $http.post('http://localhost/1A-TP_PIZZERIA/WEBService/usuarios/' + JSON.stringify($scope.usuario))
-      //   .then(function(respuesta) {
-      //      //aca se ejetuca si retorno sin errores
-      //    console.log("RETORNO: ", respuesta.data);
-      //    $state.go("usuario.grilla");
-
-      //   },function errorCallback(response) {
-      //     console.log("FALLO! ", response);
-      //   });
-      // }
 });

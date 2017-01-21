@@ -163,11 +163,21 @@ class Usuario
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarPersona (:nombre,:sexo,:fecha,:partido,:foto)");
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuarios (nombre,correo,clave,tipo_user)values(:nombre,:correo,:clave,:tipo_user)");
+		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuarios 
+			(nombre,apellido,edad,sexo,correo,direccion,coordenadas,clave,tipo_user,estado,id_local)
+			values(:nombre,:apellido,:edad,:sexo,:correo,:direccion,:coordenadas,:clave,:tipo_user,:estado,:id_local)");
+		
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
+		$consulta->bindValue(':apellido',$usuario->apellido, PDO::PARAM_STR);
+		$consulta->bindValue(':edad',$usuario->edad, PDO::PARAM_INT);
+		$consulta->bindValue(':sexo',$usuario->sexo, PDO::PARAM_STR);
 		$consulta->bindValue(':correo',$usuario->correo, PDO::PARAM_STR);
+		$consulta->bindValue(':direccion',$usuario->direccion, PDO::PARAM_STR);
+		$consulta->bindValue(':coordenadas',$usuario->coordenadas, PDO::PARAM_STR);
 		$consulta->bindValue(':clave',$usuario->clave, PDO::PARAM_STR);
 		$consulta->bindValue(':tipo_user', $usuario->tipo_user, PDO::PARAM_STR);
+		$consulta->bindValue(':estado',$usuario->estado, PDO::PARAM_STR);
+		$consulta->bindValue(':id_local',$usuario->id_local, PDO::PARAM_STR);
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 
