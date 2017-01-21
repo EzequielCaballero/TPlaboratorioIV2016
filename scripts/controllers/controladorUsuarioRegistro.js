@@ -25,8 +25,8 @@
           case "Encargado":
             $scope.tipoUser = false;
             $scope.opciones = [
-            {code:"emp", name:"Empleado" },
-            {code:"clt", name:"Cliente" }
+            {code:"Empleado", name:"Empleado" },
+            {code:"Cliente", name:"Cliente" }
             ];
             break;
 
@@ -44,10 +44,10 @@
 
     //OPCIONES DEL ELEMENTO SELECT (creación de Options)
     $scope.locales = [
-      {code:"1", name: "Local 1"},
-      {code:"2", name: "Local 2" },
-      {code:"3", name: "Local 3" },
-      {code:"3", name: "Local 4" }
+      {code:"2001", name: "Local 1"},
+      {code:"2002", name: "Local 2" },
+      {code:"2003", name: "Local 3" },
+      {code:"2004", name: "Local 4" }
     ];
 
     $scope.tipoUsers = false;
@@ -74,7 +74,7 @@
     //Estado del user
     $scope.usuario.tipo_user = "";
     $scope.usuario.estado = "activo";
-    $scope.usuario.id_local = "";
+    $scope.usuario.id_local = null;
 
     $scope.EleccionUser=function(){
       switch($scope.usuario.tipo_user)

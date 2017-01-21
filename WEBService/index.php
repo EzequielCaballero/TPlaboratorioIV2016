@@ -13,7 +13,7 @@ $app->get('/', function ($request, $response, $args) {
     return $response;
 });
 
-//GET: lectura de recursos = TRAER LISTA DE OBJETOS
+
 $app->get('/entidades[/]', function ($request, $response, $args) {
     $datos = entidad::TraerTodasLasEntidades();
     $response->write(json_encode($datos));
@@ -22,20 +22,7 @@ $app->get('/entidades[/]', function ($request, $response, $args) {
     return $response;
 });
 
-$app->get('/usuarios[/]', function ($request, $response, $args) {
-    $datos = Usuario::TraerTodosLosUsuarios();
-    $response->write(json_encode($datos));
-    return $response;
-});
 
-$app->get('/usuarios/{objeto}', function ($request, $response, $args) {
-    $perfil = json_decode($args['objeto']);
-    $datos = Usuario::TraerUsuariosPorParametro($perfil);
-    $response->write(json_encode($datos));
-    return $response;
-});
-
-// POST: Para crear recursos = mover foto de la ubicación temporal hacia la carpeta de imagenes del proyecto.
 $app->post('/altaFoto[/]', function ($request, $response, $args) {
 
     if ( !empty( $_FILES ) )
@@ -47,7 +34,7 @@ $app->post('/altaFoto[/]', function ($request, $response, $args) {
     }
 });
 
-// POST: Para crear recursos = insertar objeto a la base de datos (actualizando nombre de la foto ya alojada en proyecto)
+
 $app->post('/entidades/{objeto}', function ($request, $response, $args) {
     
     $entidad = json_decode($args['objeto']);
@@ -58,17 +45,6 @@ $app->post('/entidades/{objeto}', function ($request, $response, $args) {
     return $response;
 });
 
-$app->post('/usuarios/{objeto}', function ($request, $response, $args) {
-    
-    $usuario = json_decode($args['objeto']);
-    echo "<br>DATOS!: " . $args['objeto'];
-    
-    $datos = Usuario::InsertarUsuario($usuario);
-    $response->write($datos);
-    return $response;
-});
-
-// PUT: Para editar recursos = modificar objeto en base de datos (incluyendo imagen)
 $app->put('/entidades/{objeto}', function ($request, $response, $args) {
     
     $entidad = json_decode($args['objeto']);
@@ -87,20 +63,46 @@ $app->put('/entidades/{objeto}', function ($request, $response, $args) {
     return $response;
 });
 
-$app->put('/usuarios/{objeto}', function ($request, $response, $args) {
-    $usuario = json_decode($args['objeto']);
-    echo "<br>DATOS!: " . $args['objeto'];
-    $datos = Usuario::ModificarUsuario($usuario);
-    //$response->write($datos);
-    return $response;
-});
 
-// DELETE: Para eliminar recursos = Borrar objeto de la base de datos (incluyendo foto en carpeta img)
 $app->delete('/entidades/{numero}', function ($request, $response, $args) {
     
     $datos = entidad::BorrarEntidad($args['numero']);
     $response->write("borrar !: ");
     //var_dump($args);
+    return $response;
+});
+
+
+//**************************************************************USUARIOS**************************************************************//
+
+$app->get('/usuarios[/]', function ($request, $response, $args) {
+    $datos = Usuario::TraerTodosLosUsuarios();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/usuarios/{objeto}', function ($request, $response, $args) {
+    $perfil = json_decode($args['objeto']);
+    $datos = Usuario::TraerUsuariosPorParametro($perfil);
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->post('/usuarios/{objeto}', function ($request, $response, $args) {
+    
+    $usuario = json_decode($args['objeto']);
+    echo "<br>DATOS!: " . $args['objeto'];
+    
+    $datos = Usuario::InsertarUsuario($usuario);
+    $response->write($datos);
+    return $response;
+});
+
+$app->put('/usuarios/{objeto}', function ($request, $response, $args) {
+    $usuario = json_decode($args['objeto']);
+    echo "<br>DATOS!: " . $args['objeto'];
+    $datos = Usuario::ModificarUsuario($usuario);
+    //$response->write($datos);
     return $response;
 });
 
@@ -114,3 +116,8 @@ $app->delete('/usuarios/{id}', function ($request, $response, $args) {
 });
 
 $app->run();
+
+// GET: lectura de recursos = TRAER LISTA DE OBJETOS
+// POST: Para crear recursos = insertar objeto a la base de datos (actualizando nombre de la foto ya alojada en proyecto)
+// PUT: Para editar recursos = modificar objeto en base de datos (incluyendo imagen)
+// DELETE: Para eliminar recursos = Borrar objeto de la base de datos (incluyendo foto en carpeta img)

@@ -145,21 +145,21 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       });
     }
 
-      $scope.Borrar = function(usuario){
+    $scope.Borrar = function(usuario){
 
-        servicioRetornoUsuarios.ABM_Usuario(usuario.id, "Borrar").then(function(response){
-          console.log("RETORNO: ", response.data);
+      servicioRetornoUsuarios.ABM_Usuario(usuario.id_usuario, "Borrar").then(function(response){
+        console.log("RETORNO: ", response.data);
 
-            // Vuelvo a cargar los datos en la grilla.
-            servicioRetornoUsuarios.traerTodo().then(function(respuesta){
-            $scope.gridOptionsUsuarios.data = respuesta.data;
-            console.info(respuesta.data);
+          // Vuelvo a cargar los datos en la grilla.
+          servicioRetornoUsuarios.traerCiertosUsuarios($usuarioLogueado).then(function(respuesta){
+          $scope.gridOptionsUsuarios.data = respuesta.data;
+          console.info(respuesta.data);
 
-          },function errorCallback(response) {
-                $scope.gridOptionsUsuarios.data = [];
-                console.log("FALLO! ", response);
-          });
+        },function errorCallback(response) {
+              $scope.gridOptionsUsuarios.data = [];
+              console.log("FALLO! ", response);
         });
-      }
+      });
+    }
 
   });
