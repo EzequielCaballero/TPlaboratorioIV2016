@@ -1,10 +1,10 @@
 
-/************************************************************************************LOS PARA ERROR NG-ANGULAR
+/************************************************************************************PARA ERROR NG-ANGULAR
 *************************************************************************************/
-input.ng-invalid {
+input.ng-invalid, select.ng-invalid {
     background-color: #832424;
 }
-input.ng-valid {
+input.ng-valid, select.ng-valid {
     background-color: #DAF7D8;
 }
 

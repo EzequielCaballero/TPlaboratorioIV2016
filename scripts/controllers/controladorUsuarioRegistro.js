@@ -1,7 +1,7 @@
  angular.module('ABMangularAPI.controladorUsuarioRegistro', []) 
   app.controller('controlUsuarioRegistro', function($scope, $http, $state, $auth, servicioRetornoUsuarios) {
     
-    $scope.tipoUser = true;
+    $scope.tiposUsers = true;
     $scope.tipoLocal = true;
     $scope.requiredLocal = true;
     $scope.DatoRegistro="***REGISTRO USUARIO***";
@@ -23,20 +23,20 @@
             break;
 
           case "Encargado":
-            $scope.tipoUser = false;
+            $scope.tiposUsers = false;
             $scope.opciones = [
-            {code:"Empleado", name:"Empleado" },
-            {code:"Cliente", name:"Cliente" }
+            {code:"empleado", name:"Empleado" },
+            {code:"cliente", name:"Cliente" }
             ];
             break;
 
           case "Administrador":
-            $scope.tipoUser = false;
-            $scope.tipoLocal = false;
+            $scope.tiposUsers = false;
+            $scope.adminLogueado = true;
             $scope.opciones = [
-            {code:"Encargado", name: "Encargado"},
-            {code:"Empleado", name:"Empleado" },
-            {code:"Cliente", name:"Cliente" }
+            {code:"encargado", name: "Encargado"},
+            {code:"empleado", name:"Empleado" },
+            {code:"cliente", name:"Cliente" }
             ];
             break;
         }
@@ -72,22 +72,22 @@
     $scope.usuario.clave2 = "1234"
 
     //Estado del user
-    $scope.usuario.tipo_user = "";
+    $scope.usuario.tipo_user = null;
     $scope.usuario.estado = "activo";
     $scope.usuario.id_local = null;
 
     $scope.EleccionUser=function(){
       switch($scope.usuario.tipo_user)
       {
-        case "Encargado":
-          $scope.tipoLocal = false;
-          $scope.requiredLocal = true;
+        case "encargado":
+        case "empleado":
+          if($scope.adminLogueado)
+          {
+            $scope.tipoLocal = false;
+            $scope.requiredLocal = true;
+          }
         break;
-        case "Empleado":
-          $scope.tipoLocal = false;
-          $scope.requiredLocal = true;
-        break;
-        case "Cliente":
+        case "cliente":
           $scope.tipoLocal = true;
           $scope.requiredLocal = false;
         break;

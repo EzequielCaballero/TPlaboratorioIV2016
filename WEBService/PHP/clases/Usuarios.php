@@ -163,10 +163,11 @@ class Usuario
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarPersona (:nombre,:sexo,:fecha,:partido,:foto)");
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuarios 
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			INSERT into usuarios 
 			(nombre,apellido,edad,sexo,correo,direccion,coordenadas,clave,tipo_user,estado,id_local)
 			values(:nombre,:apellido,:edad,:sexo,:correo,:direccion,:coordenadas,:clave,:tipo_user,:estado,:id_local)");
-		
+
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':apellido',$usuario->apellido, PDO::PARAM_STR);
 		$consulta->bindValue(':edad',$usuario->edad, PDO::PARAM_INT);
