@@ -634,6 +634,9 @@ GRILLA USUARIOS
 MAPA
 *************************************************************************************/
 .mapaUsuario{
-
-
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 450px;
+    height: 350px;
 }

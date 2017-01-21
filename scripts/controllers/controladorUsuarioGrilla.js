@@ -131,11 +131,12 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
     //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
 
       NgMap.getMap("miMapaModal").then(function(map) {
-      /*console.log(map.getCenter());
+      alert("HOLA: " + map)
+      console.log(map.getCenter());
       console.log(map);
       console.log('markers', map.markers);
-      console.log('shapes', map.shapes);*/
-      var myLatLng = {lat: Number(latitud), lng: Number(longitud != undefined ? longitud : logitud)};
+      console.log('shapes', map.shapes);
+      var myLatLng = rowEntity.coordenadas;
       // var myLatLng = {lat: Number(-34.595960), lng: Number(-58.393046)};
       //elimino el marker anterior del mapa
       $scope.marker.setMap(null);
