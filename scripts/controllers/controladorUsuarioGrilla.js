@@ -98,7 +98,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableHiding: false
         },
         { name: 'Ubicacion',
-          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapaModal(row.entity)">Mapa</button>',
+          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapa(row.entity)">Mapa</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false
@@ -120,7 +120,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       ];
     }
 
-    $scope.mostrarMapaModal = function(rowEntity){
+    $scope.mostrarMapa = function(rowEntity){
     $scope.ModalHeader = "Ubicación usuario";
     console.info("Usuario", rowEntity);
 
@@ -130,25 +130,9 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
     //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
 
       NgMap.getMap("miMapaModal").then(function(map) {
-      // console.log(map.getCenter());
-      // console.log(map);
-      // console.log('markers', map.markers);
-      // console.log('shapes', map.shapes);
       $scope.marker.setMap(null);
-      var myLatLng = rowEntity.coordenadas;
-      console.log('ubicacion', myLatLng);
-      $scope.ubicacion = rowEntity.coordenadas;
-      // var myLatLng = {lat: Number(-34.595960), lng: Number(-58.393046)};
-      //elimino el marker anterior del mapa
-      
-      // $scope.marker = new google.maps.Marker({
-      //   position: myLatLng,
-      //   draggable: true,
-      //   icon: rowEntity.nombre,
-      //   animation: google.maps.Animation.DROP,
-      //   title: rowEntity.nombre,
-      //   label: rowEntity.nombre
-      // });
+      $scope.ubicacion = rowEntity.direccion;
+      console.log('ubicacion', $scope.ubicacion);
 
       $scope.marker.setMap(map);
 

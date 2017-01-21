@@ -1,24 +1,49 @@
  angular.module('ABMangularAPI.controladorUsuarioRegistro', []) 
-  app.controller('controlUsuarioRegistro', function($scope, $http, $state, servicioRetornoUsuarios) {
+  app.controller('controlUsuarioRegistro', function($scope, $http, $state, $auth, servicioRetornoUsuarios) {
+
+    if(!$auth.isAuthenticated())
+        $state.go("inicio");
+    else
+    {
+        $sesion = $auth.getPayload();
+        $usuarioLogueado = $sesion.perfil;
+      }
 
     $scope.DatoRegistro="***REGISTRO USUARIO***";
     $scope.DatoSubmit = "Registrarse";
     //OPCIONES DEL ELEMENTO SELECT (creación de Options)
     $scope.opciones = [
-      {code:"admin", name: "Administrador"},
-      {code:"vend", name:"Vendedor" },
-      {code:"compr", name:"Comprador" }
+      {code:"admin", name: "Encargado"},
+      {code:"vend", name:"Empleado" },
+      {code:"compr", name:"Cliente" }
     ];
+
+    $scope.tipoUsers = false;
 
     $scope.usuario={};
     $scope.usuario.nombre = "natalia";
     $scope.usuario.email = "natalia@natalia.com";
+    $scope.usuario.edad = 25;
+    $scope.usuario.sexo = "Masculino";
+
+    $scope.calle = "Av. Calchaqui";
+    $scope.altura = 2200;
+    $scope.localidad = "Quilmes";
+
+    $scope.coordenadas = "0, 0";
     $scope.usuario.password = "1234";
     $scope.usuario.password2 = "1234"
     $scope.usuario.tipo = "";
+    $scope.usuario.estado = "activo";
+    $scope.usuario.id_local = "";
 
     $scope.Guardar=function(){
       
+      if($scope.localidad != "CABA")
+        $scope.usuario.direccion = $scope.calle+" "+$scope.altura+", "+$scope.localidad+", "+"Buenos Aires";
+      else
+        $scope.usuario.direccion = $scope.calle+" "+$scope.altura+", "+$scope.localidad;
+
       servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Agregar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);
           $state.go("usuario.grilla");
