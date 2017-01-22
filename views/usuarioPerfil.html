@@ -1,22 +1,27 @@
 <!doctype html>
 <br><br>
-<div class="table-responsive">
+
     <table id="tablaPerfil" class="table animated flipInX">
+        
         <tbody>
-              <tr><td><strong>ID</strong></td><td>{{usuarioElegido.id_usuario}}</td></tr>
-              <tr><td><strong>NOMBRE</strong></td><td>{{usuarioElegido.nombre}}</td></tr>
-              <tr><td><strong>APELLIDO</strong></td><td>{{usuarioElegido.apellido}}</td></tr>
-              <tr><td><strong>EDAD</strong></td><td>{{usuarioElegido.edad}}</td></tr>
-              <tr><td><strong>SEXO</strong></td><td>{{usuarioElegido.sexo}}</td></tr>
-              <tr><td><strong>CORREOL</strong></td><td>{{usuarioElegido.correo}}</td></tr>
-              <tr><td><strong>DIRECCION</strong></td><td>{{usuarioElegido.direccion}}</td></tr>
-              <tr><td><strong>CLAVE</strong></td><td>{{usuarioElegido.clave}}</td></tr>
-              <tr><td><strong>TIPO</strong></td><td>{{usuarioElegido.tipo_user}}</td></tr>
-              <tr><td><strong>ESTADO</strong></td><td>{{usuarioElegido.estado}}</td></tr>
+
+              <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
+              <tr><th><strong>NOMBRE</strong></th><td>{{usuarioElegido.nombre}}</td></tr>
+              <tr><th><strong>APELLIDO</strong></th><td>{{usuarioElegido.apellido}}</td></tr>
+              <tr><th><strong>EDAD</strong></th><td>{{usuarioElegido.edad}}</td></tr>
+              <tr><th><strong>SEXO</strong></th><td>{{usuarioElegido.sexo}}</td></tr>
+              <tr><th><strong>CORREO</strong></th><td>{{usuarioElegido.correo}}</td></tr>
+              <tr><th><strong>DIRECCION</strong></th><td>{{usuarioElegido.direccion}}</td></tr>
+              <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
+              <tr><th><strong>TIPO</strong></th><td>{{usuarioElegido.tipo_user}}</td></tr>
+              <tr><th><strong>ESTADO</strong></th><td>{{usuarioElegido.estado}}</td></tr>
+
         </tbody>
+
+        <button  class="button-green" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button>
     </table>
-<button  class="button-green" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button>
-</div>
+
+
       
 
 
