@@ -235,6 +235,21 @@ class Usuario
 			return $consulta->execute();
 	}
 
+	public static function CambiarEstadoUsuario($usuario)
+	{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			//$consulta =$objetoAccesoDato->RetornarConsulta("CALL ModificarPersona(:sexo,:fecha,:partido,:foto)");
+			$consulta =$objetoAccesoDato->RetornarConsulta("
+				UPDATE usuarios 
+				SET 
+				estado=:estado,
+				WHERE id_usuario=:id");
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
+			$consulta->bindValue(':estado',$usuario->estado, PDO::PARAM_STR);
+			return $consulta->execute();
+	}
+
 //--------------------------------------------------------------------------------//
 
 }

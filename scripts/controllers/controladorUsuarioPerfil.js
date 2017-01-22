@@ -19,7 +19,7 @@
       $scope.DatoSubmit = "Cambiar estado";
     }
 
-    //DEFINIR VISTA PERFIL PERSONAL O TERCERO
+    //DEFINIR VISTA PERFIL (PERSONAL O DE TERCERO)
     if($stateParams.id != "")
     {
       $scope.traer = $stateParams.id;
@@ -39,15 +39,26 @@
 
     servicioRetornoUsuarios.traerCiertosUsuarios($scope.traer).then(function(respuesta){
       $scope.usuarioElegido = respuesta.data;
-      console.info($scope.usuarioElegido);
+      console.info("Usuario traido: ", $scope.usuarioElegido);
     });
+
+    //DATOS A ENVIAR
+    $scope.usuarioEnviar = {};
+    $scope.usuarioEnviar.id = $scope.traer;
 
     //CAMBIAR ESTADO DE USUARIO
     $scope.Actualizar=function(){
       
-      servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Modificar").then(function(respuesta){
+      if($scope.usuarioElegido.estado == "activo")
+        $scope.usuarioEnviar.estado = "inactivo";
+      else
+        $scope.usuarioEnviar.estado = "activo";
+
+      console.info("Usuario a enviar: ",  $scope.usuarioEnviar);
+
+      servicioRetornoUsuarios.ABM_Usuario($scope.usuarioEnviar, "Modificar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);
-          $state.go("usuario.grilla");
+          $state.go($scope.dondeVolver);
           console.info(respuesta.data);
 
       },function errorCallback(response) {
