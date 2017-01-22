@@ -104,7 +104,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableHiding: false
         },
         { name: 'Perfil',
-          cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="usuario.perfil({id:row.entity.id_usuario, nombre:row.entity.nombre})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
+          cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="usuario.perfil({id:row.entity.id_usuario})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,

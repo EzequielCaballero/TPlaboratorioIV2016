@@ -9,30 +9,38 @@
         $usuarioLogueado = $sesion.perfil;
     }
 
-    console.info($stateParams);
+    $scope.botonActualizar = true;
+    console.info("Parametro: ", $stateParams);
 
     $scope.DatoRegistro="***PERFIL USUARIO***";
+    if($sesion.perfil == "Administrador" || $sesion.perfil == "Encargado")
+    {
+      $scope.botonActualizar = false;
+      $scope.DatoSubmit = "Cambiar estado";
+    }
 
-    $scope.usuarioElegido = {};
-
+    //DEFINIR VISTA PERFIL PERSONAL O TERCERO
     if($stateParams.id != "")
     {
       $scope.traer = $stateParams.id;
       $scope.dondeVolver = "usuario.grilla";
+      if($stateParams.id == $sesion.usuario)
+        $scope.botonActualizar = true;
     }
     else
     {
-      $scope.traer = $sesion.usuario;
-      $scope.dondeVolver = "usuario.menu";
+        $scope.traer = $sesion.usuario;
+        $scope.botonActualizar = true;
+        $scope.dondeVolver = "usuario.menu";
     }
     
     //TRAER USUARIO
+    $scope.usuarioElegido = {};
+
     servicioRetornoUsuarios.traerCiertosUsuarios($scope.traer).then(function(respuesta){
       $scope.usuarioElegido = respuesta.data;
       console.info($scope.usuarioElegido);
     });
-
-    $scope.DatoSubmit = "Cambiar estado";
 
     //CARGAR TABLA 
       $scope.usuario = {};
