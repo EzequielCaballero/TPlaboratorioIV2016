@@ -1,25 +1,26 @@
-<div class="Frm animated bounceInLeft">
-    <form class="registerForm"  name="myForm" enctype="multipart/form-data">
-        <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
-        <input type="text" id="nombre" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese su nombre" value="" required><br>
-        <input type="email" id="email" name="email" ng-model="usuario.email" placeholder="Ingrese su email" value="" required><br>
-        <input type="password" id="password" minlength="4" ng-model="usuario.password" placeholder="Ingrese su clave" value="" value="" required><br>
-        <input type="password" id="password2" minlength="4" ng-model="usuario.password2" placeholder="Repita su clave" value="" required><br>
-          <span class="validacion" ng-show="myForm.usuario.password2.$invalid || usuario.password!=usuario.password2">Las contraseñas deben coincidir!!</span><br><br>
-        <select ng-model="usuario.tipo" ng-options="c.code as c.name for c in opciones" required>
-          <option value="">--Seleccione tipo de user--</option>
-          <option value="">Administrador</option>
-          <option value="">Vendedor</option>
-          <option value="">Comprador</option>
-        </select><br>
-        <span class="validacion" ng-show="myForm.usuario.tipo.$invalid || usuario.tipo == '' ">Debe seleccionar una opcion!!</span><br><br>
-        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || usuario.password!=usuario.password2" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
-      </form>
-    </div>
+<!doctype html>
+<br><br>
+<div class="table-responsive">
+    <table id="tablaPerfil" class="table animated flipInX">
+        <tbody>
+              <tr><td><strong>ID</strong></td><td>{{usuarioElegido.id_usuario}}</td></tr>
+              <tr><td><strong>NOMBRE</strong></td><td>{{usuarioElegido.nombre}}</td></tr>
+              <tr><td><strong>APELLIDO</strong></td><td>{{usuarioElegido.apellido}}</td></tr>
+              <tr><td><strong>EDAD</strong></td><td>{{usuarioElegido.edad}}</td></tr>
+              <tr><td><strong>SEXO</strong></td><td>{{usuarioElegido.sexo}}</td></tr>
+              <tr><td><strong>CORREOL</strong></td><td>{{usuarioElegido.correo}}</td></tr>
+              <tr><td><strong>DIRECCION</strong></td><td>{{usuarioElegido.direccion}}</td></tr>
+              <tr><td><strong>CLAVE</strong></td><td>{{usuarioElegido.clave}}</td></tr>
+              <tr><td><strong>TIPO</strong></td><td>{{usuarioElegido.tipo_user}}</td></tr>
+              <tr><td><strong>ESTADO</strong></td><td>{{usuarioElegido.estado}}</td></tr>
+        </tbody>
+    </table>
+<button  class="button-green" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button>
+</div>
+      
 
-    <h1>¿Listo para continuar?:{{myForm.$valid}}</h1>
 
-<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}" ui-sref="usuario.menu()">
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="{{dondeVolver}}">
      Volver
      <span class="glyphicon glyphicon-home"></span>
 <a>

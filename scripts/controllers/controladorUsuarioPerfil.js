@@ -1,25 +1,58 @@
  angular.module('ABMangularAPI.controladorUsuarioPerfil', []) 
-  app.controller('controlUsuarioPerfil', function($scope, $http, $state, servicioRetornoUsuarios) {
+  app.controller('controlUsuarioPerfil', function($scope, $http, $state, $auth, $stateParams, servicioRetornoUsuarios) {
 
-    $scope.DatoRegistro="***REGISTRO USUARIO***";
-    $scope.DatoSubmit = "Registrarse";
-    //OPCIONES DEL ELEMENTO SELECT (creación de Options)
-    $scope.opciones = [
-      {code:"admin", name: "Administrador"},
-      {code:"vend", name:"Vendedor" },
-      {code:"compr", name:"Comprador" }
-    ];
+    if(!$auth.isAuthenticated())
+        $state.go("inicio");
+    else
+    {
+        $sesion = $auth.getPayload();
+        $usuarioLogueado = $sesion.perfil;
+    }
 
-    $scope.usuario={};
-    $scope.usuario.nombre = "natalia";
-    $scope.usuario.email = "natalia@natalia.com";
-    $scope.usuario.password = "1234";
-    $scope.usuario.password2 = "1234"
-    $scope.usuario.tipo = "";
+    console.info($stateParams);
 
+    $scope.DatoRegistro="***PERFIL USUARIO***";
+
+    $scope.usuarioElegido = {};
+
+    if($stateParams.id != "")
+    {
+      $scope.traer = $stateParams.id;
+      $scope.dondeVolver = "usuario.grilla";
+    }
+    else
+    {
+      $scope.traer = $sesion.usuario;
+      $scope.dondeVolver = "usuario.menu";
+    }
+    
+    //TRAER USUARIO
+    servicioRetornoUsuarios.traerCiertosUsuarios($scope.traer).then(function(respuesta){
+      $scope.usuarioElegido = respuesta.data;
+      console.info($scope.usuarioElegido);
+    });
+
+    $scope.DatoSubmit = "Cambiar estado";
+
+    //CARGAR TABLA 
+      $scope.usuario = {};
+      $scope.usuario.id_usuario = $scope.usuarioElegido.id_usuario;
+      $scope.usuario.nombre = $scope.usuarioElegido.nombre;
+      $scope.usuario.apellido = $scope.usuarioElegido.apellido;
+      $scope.usuario.email = $scope.usuarioElegido.email;
+      $scope.usuario.edad = $scope.usuarioElegido.edad;
+      $scope.usuario.correo = $scope.usuarioElegido.correo;
+      $scope.usuario.direccion = $scope.usuarioElegido.direccion;
+      $scope.usuario.clave = $scope.usuarioElegido.clave;
+      $scope.usuario.tipo_user = $scope.usuarioElegido.tipo_user;
+      $scope.usuario.estado = $scope.usuarioElegido.estado;
+
+      console.info($scope.usuario);
+
+    //CAMBIAR ESTADO DE USUARIO
     $scope.Guardar=function(){
       
-      servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Agregar").then(function(respuesta){
+      servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Modificar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);
           $state.go("usuario.grilla");
           console.info(respuesta.data);
@@ -28,16 +61,4 @@
             console.log("FALLO! ", response);
       });
     }
-
-      // $scope.Guardar = function(){
-      //   $http.post('http://localhost/1A-TP_PIZZERIA/WEBService/usuarios/' + JSON.stringify($scope.usuario))
-      //   .then(function(respuesta) {
-      //      //aca se ejetuca si retorno sin errores
-      //    console.log("RETORNO: ", respuesta.data);
-      //    $state.go("usuario.grilla");
-
-      //   },function errorCallback(response) {
-      //     console.log("FALLO! ", response);
-      //   });
-      // }
 });

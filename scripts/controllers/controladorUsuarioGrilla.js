@@ -71,7 +71,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableSorting: false,
           enableHiding: false
         },
-        { field: 'tipo_user', name: 'Perfil',
+        { field: 'tipo_user', name: 'Tipo',
           enableHiding: false,
           enableFiltering: true
           // filtro de busqueda.
@@ -103,6 +103,13 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableSorting: false,
           enableHiding: false
         },
+        { name: 'Perfil',
+          cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="usuario.perfil({id:row.entity.id_usuario, nombre:row.entity.nombre})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
+          enableFiltering: false,
+          enableSorting: false,
+          enableHiding: false,
+          visible: true
+        },
         { name: 'Borrar',
           cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
@@ -110,13 +117,6 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableHiding: false,
           visible: true
         },
-        { name: 'Modificar',
-          cellTemplate:'<button class="btn btn-warning" name="Modificar" ui-sref="usuario.modificar({id:row.entity.id, nombre:row.entity.nombre, email:row.entity.email, tipo:row.entity.tipo, pass:row.entity.password})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Modificar</button>',
-          enableFiltering: false,
-          enableSorting: false,
-          enableHiding: false,
-          visible: true
-        }
       ];
     }
 

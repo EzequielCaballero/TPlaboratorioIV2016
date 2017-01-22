@@ -161,11 +161,6 @@ li a.miEstilo {
     background-color: #4CAF50;
 }
 
-table {
-    border-collapse: collapse;
-    width: 40%;
-}
-
 th, td {
       border: 1px solid #ddd;
     text-align: left;
@@ -501,6 +496,12 @@ a.volverIcon{
     width: 40px;
     height: 40px;
     position: relative;
+}
+
+/************PERFIL************/
+#tablaPerfil{
+    margin: 0 auto;
+    width: 500px;
 }
 
 /************************************************************************************

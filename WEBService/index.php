@@ -81,9 +81,13 @@ $app->get('/usuarios[/]', function ($request, $response, $args) {
     return $response;
 });
 
-$app->get('/usuarios/{objeto}', function ($request, $response, $args) {
-    $perfil = json_decode($args['objeto']);
-    $datos = Usuario::TraerUsuariosPorParametro($perfil);
+$app->get('/usuarios/{perfil}', function ($request, $response, $args) {
+    $perfil = json_decode($args['perfil']);
+    if($perfil == "Empleado" || $perfil == "Encargado" || $perfil == "Administrador")
+        $datos = Usuario::TraerUsuariosPorParametro($perfil);
+    else
+        $datos = Usuario::TraerUnUsuario($perfil);
+        
     $response->write(json_encode($datos));
     return $response;
 });

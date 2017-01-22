@@ -47,7 +47,7 @@ var app = angular.module('ABMangularAPI', [
                 }
             })
     .state('usuario.perfil', {
-      url : '/perfil',
+      url : '/perfil/{id}?:nombre',
       views: {
                 'contenido': {
                 templateUrl : 'views/usuarioPerfil.html',
@@ -80,15 +80,6 @@ var app = angular.module('ABMangularAPI', [
                 'contenido': {
                 templateUrl : 'views/usuarioGrilla.html',
                 controller : 'controlUsuarioGrilla'
-                }
-              }
-            })
-    .state('usuario.modificar', {
-      url : '/modificar/{id}?:nombre:email:tipo:pass',
-      views: {
-                'contenido': {
-                templateUrl : 'views/usuarioRegistro.html',
-                controller : 'controlUsuarioModificar'
                 }
               }
             })
