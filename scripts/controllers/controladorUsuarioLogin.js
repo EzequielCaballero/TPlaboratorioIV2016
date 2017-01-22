@@ -69,13 +69,13 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
             $state.go("inicio");
           }
           else
+          {
             console.info("no token", $auth.getPayload());
-        // Redirect user here after a successful log in.
+            alert("Error. Usuario inexistente o inactivo. Por favor, intentelo nuevamente");
+          }
       })
       .catch(function(response) {
           console.info("incorrecto", response);
-        // Handle errors here, such as displaying a notification
-        // for invalid correo and/or clave.
       });
     }
   });

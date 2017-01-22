@@ -16,11 +16,9 @@ angular.module('ABMangularAPI.controladorUsuarioMenu', [])
         case "Registrarse":
           $state.go("usuario.registro");
           break;
-        case "Baja":
-            $state.go("usuario.grilla");
-        case "Modificar":
-            $state.go("usuario.grilla");
-          break;
+        case "Perfil":
+            $state.go("usuario.perfil");
+          break;  
         case "Grilla":
             $state.go("usuario.grilla");
           break;

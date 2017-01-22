@@ -12,7 +12,7 @@ $Array_usuarios = Usuario::TraerTodosLosUsuarios();
 //if ($usuario->email == 'admin@admin.com' && $usuario->password == '4321'){
 foreach($Array_usuarios as $usuarioReal)
 {
-		if ($usuario->correo == $usuarioReal->correo && $usuario->clave == $usuarioReal->clave)
+		if ($usuario->correo == $usuarioReal->correo && $usuario->clave == $usuarioReal->clave && $usuarioReal->estado == "activo")
 		{
 			switch($usuarioReal->tipo_user)
 			{

@@ -12,21 +12,18 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">                 
+                <ul class="nav navbar-nav navbar-right">
                     <li class="page-scroll">
-                        <a class="btn" ng-hide="{{logout}}" ng-click="direccionar('MenuEntidades')" >ABM Productos</a>
-                    </li>
+                        <a class="btn" ng-hide="{{ABMusuarios}}" ng-click="direccionar('Perfil')" >Mi Perfil</a>
+                    </li>             
                     <li class="page-scroll">
-                        <a class="btn" ng-hide="{{ABMusuarios}}" ng-click="direccionar('MenuUsuarios')" >Menu Usuarios</a>
+                        <a class="btn" ng-hide="{{ABMusuarios}}" ng-click="direccionar('MenuUsuarios')" >Administración</a>
                     </li>
                     <li class="page-scroll">
                         <a class="btn" ng-hide="{{login}}" ng-click="direccionar('Registrarse')">Registrarse</a>
                     </li>
                     <li class="page-scroll">
                         <a class="btn" ng-hide="{{login}}" ng-click="direccionar('Login')">Ingresar</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a class="btn" ng-hide="{{logout}}" ng-click="direccionar('Perfil')">Mi Perfil</a>
                     </li>
                     <li class="page-scroll">
                         <a class="btn" ng-hide="{{logout}}" ng-click="direccionar('Logout')">Cerrar Sesión</a>

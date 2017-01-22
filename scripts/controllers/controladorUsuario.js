@@ -1,7 +1,7 @@
 angular.module('ABMangularAPI.controladorUsuario', [])
 	app.controller('controlUsuario', function($scope, $http, $state, $auth) {
 
-		$scope.perfilUsuario = "undefined";
+		$scope.perfilUsuario = "indefinido";
 
 		if($auth.isAuthenticated())
 		{
