@@ -403,7 +403,15 @@ INICIO PAGE
     color: white;
 }
 
+#Titulo{
+    margin: 0;
+    color: #B9A0A0;
+    font-style: italic;
+    font-family: "Georgia", Times, serif;
+}
+
 #imagenBase{
+    margin: 0 auto;
     width: 600px;
     height: 680px;
     padding-top: 80px;
@@ -416,7 +424,7 @@ INICIO PAGE
     text-align: center;
     text-decoration: none;
     font-size: 35px;
-    font-family: "Helvetica";
+    font-family: "Georgia", Times, serif;
     color:#EA2525;
 }
 
@@ -424,8 +432,8 @@ INICIO PAGE
     text-align: center;
     text-decoration: none;
     font-size: 35px;
-    font-family: "Helvetica";
-    color:#FFFFFF;
+    font-family: "Georgia", Times, serif;
+    color:#DBA78A;
 }
 
 /************************************************************************************

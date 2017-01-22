@@ -3,8 +3,8 @@ angular.module('ABMangularAPI.controladorInicio', [])
   app.controller('controlInicio', function($scope, $auth, $state, $http) {
 	  $scope.perfilActivo="**N/N**";
 	  $scope.titulo="Pizzeria ARGENTA S.R.L.";
-	  $scope.imagenLogueado = "img/backgrounds/Logo_1.png";
-	  $scope.imagenPorDefecto = "img/backgrounds/Fondo_2.png";
+	  $scope.imagenLogueado = "img/backgrounds/Logo_4.png";
+	  $scope.imagenPorDefecto = "img/backgrounds/Logo_4.png";
 	  $("#intro").attr("class","fraseInicio");
 	  $scope.perfilActivo = "Por favor, inicie sesión";
 
