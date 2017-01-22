@@ -12,10 +12,9 @@
               <tr><th><strong>CORREO</strong></th><td>{{usuarioElegido.correo}}</td></tr>
               <tr><th><strong>DIRECCION</strong></th><td>{{usuarioElegido.direccion}}</td></tr>
               <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
-              <tr><th><strong>TIPO</strong></th><td>{{usuarioElegido.tipo_user}}</td></tr>
-              <tr><th><strong>ESTADO</strong></th><td>{{usuarioElegido.estado}}</td></tr>
-              <tr><button class="btn btn-danger" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button></tr>
-
+              <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
+              <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
+              <td colspan="2" class="btn btn-danger" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()">{{DatoSubmit}}</td>
         </tbody>
     </table>      
 

@@ -39,12 +39,14 @@
 
     servicioRetornoUsuarios.traerCiertosUsuarios($scope.traer).then(function(respuesta){
       $scope.usuarioElegido = respuesta.data;
+
+      //DATOS A ENVIAR
+      $scope.usuarioEnviar = {};
+      $scope.usuarioEnviar.id = Number($scope.traer);
+      $scope.usuarioEnviar.estado = $scope.usuarioElegido.estado;
+      $scope.refrescarEstado();
       console.info("Usuario traido: ", $scope.usuarioElegido);
     });
-
-    //DATOS A ENVIAR
-    $scope.usuarioEnviar = {};
-    $scope.usuarioEnviar.id = Number($scope.traer);
 
     //CAMBIAR ESTADO DE USUARIO
     $scope.Actualizar=function(){
@@ -67,6 +69,11 @@
     }
 
     $scope.refrescarEstado=function(){
+
       $scope.usuarioElegido.estado = $scope.usuarioEnviar.estado;
+      if($scope.usuarioEnviar.estado == "activo")
+        $("#estadoUserTabla").attr("style","color:green");
+      else
+        $("#estadoUserTabla").attr("style","color:red");
     }
 });

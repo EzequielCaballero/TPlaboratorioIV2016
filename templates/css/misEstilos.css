@@ -420,12 +420,12 @@ INICIO PAGE
     border-right: 15px;
 }
 
-.fraseInicio{
+#intro{
     text-align: center;
     text-decoration: none;
     font-size: 35px;
     font-family: "Georgia", Times, serif;
-    color:#EA2525;
+    color:#F6E8E8;
 }
 
 .fraseLogueado{

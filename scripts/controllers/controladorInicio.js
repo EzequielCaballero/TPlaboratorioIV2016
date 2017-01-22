@@ -5,7 +5,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	  $scope.titulo="Pizzeria ARGENTA S.R.L.";
 	  $scope.imagenLogueado = "img/backgrounds/Logo_4.png";
 	  $scope.imagenPorDefecto = "img/backgrounds/Logo_4.png";
-	  $("#intro").attr("class","fraseInicio");
+	  $("#intro").attr("class","btn btn-danger animated flash");
 	  $scope.perfilActivo = "Por favor, inicie sesión";
 
 	  $("#imagenBase").attr("src",$scope.imagenPorDefecto);
@@ -20,6 +20,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
       	$("#imagenBase").attr("src",$scope.imagenLogueado);
       	$("#intro").attr("class","fraseLogueado");
       	$sesion = $auth.getPayload();    
+
       	$scope.perfilActivo = "BIENVENIDO: "+$sesion.nombre;
       	$scope.login = "true";
       	$scope.logout = "false";
@@ -65,4 +66,8 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	    }
 	  }
 
+	  $scope.ingreso=function($direccion){
+	  	if(!$auth.isAuthenticated())
+	  		$state.go("usuario.login");
+	  }
 });
