@@ -44,7 +44,7 @@
 
     //DATOS A ENVIAR
     $scope.usuarioEnviar = {};
-    $scope.usuarioEnviar.id = $scope.traer;
+    $scope.usuarioEnviar.id = Number($scope.traer);
 
     //CAMBIAR ESTADO DE USUARIO
     $scope.Actualizar=function(){
@@ -57,12 +57,16 @@
       console.info("Usuario a enviar: ",  $scope.usuarioEnviar);
 
       servicioRetornoUsuarios.ABM_Usuario($scope.usuarioEnviar, "Modificar").then(function(respuesta){
-          console.log("RETORNO: ", respuesta.data);
-          $state.go($scope.dondeVolver);
-          console.info(respuesta.data);
+          $scope.refrescarEstado();
+          $state.go("usuario.perfil");
+          console.info("RETORNO: ",respuesta.data);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
       });
+    }
+
+    $scope.refrescarEstado=function(){
+      $scope.usuarioElegido.estado = $scope.usuarioEnviar.estado;
     }
 });

@@ -73,7 +73,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
                 return respuesta;
               },
               function(error){
-                console.info("ERROR!", error);
+                console.info("ERROR! (en service)", error);
                 return error;
               }
             );

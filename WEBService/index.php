@@ -104,14 +104,19 @@ $app->post('/usuarios/{objeto}', function ($request, $response, $args) {
 
 $app->put('/usuarios/{objeto}', function ($request, $response, $args) {
     $usuario = json_decode($args['objeto']);
-    //echo "<br>DATOS!: " . $args['objeto'];
     
     if(!isset($usuario->nombre))
+    {
+        //echo "CAMBIAR ESTADO: " . $args['objeto'];
         $datos = Usuario::CambiarEstadoUsuario($usuario);
+    }
     else
+    {
+        //echo "MODIFICAR USUARIO: " . $args['objeto'];
         $datos = Usuario::ModificarUsuario($usuario);
+    }
     
-    //$response->write($datos);
+    $response->write(json_encode($datos));
     return $response;
 });
 

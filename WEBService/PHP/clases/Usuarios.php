@@ -113,7 +113,6 @@ class Usuario
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios where id_usuario =:id");
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerUnaPersona(:id)");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
 		$consulta->execute();
 		$personaBuscada= $consulta->fetchObject('usuario');
@@ -124,7 +123,6 @@ class Usuario
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios");
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
 		$consulta->execute();
 		$arrPersonas= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");
 		return $arrPersonas;
@@ -151,7 +149,6 @@ class Usuario
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta($consulta);
 		$consulta->bindValue(':tipoUser', $tipoUser, PDO::PARAM_STR);
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerTodasLasPersonas() ");
 		$consulta->execute();
 		$arrPersonas= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");
 		return $arrPersonas;
@@ -162,7 +159,6 @@ class Usuario
 	public static function InsertarUsuario($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL InsertarPersona (:nombre,:sexo,:fecha,:partido,:foto)");
 		$consulta =$objetoAccesoDato->RetornarConsulta("
 			INSERT into usuarios 
 			(nombre,apellido,edad,sexo,correo,direccion,coordenadas,clave,tipo_user,estado,id_local)
@@ -191,7 +187,6 @@ class Usuario
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE from usuarios WHERE id_usuario=:id");
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL BorrarPersona(:id)");
 		$consulta->bindValue(':id',$idParametro, PDO::PARAM_INT);
 		$consulta->execute();
 		return $consulta->rowCount();
@@ -203,7 +198,6 @@ class Usuario
 	public static function ModificarUsuario($usuario)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			//$consulta =$objetoAccesoDato->RetornarConsulta("CALL ModificarPersona(:sexo,:fecha,:partido,:foto)");
 			$consulta =$objetoAccesoDato->RetornarConsulta("
 				UPDATE usuarios 
 				SET 
@@ -215,9 +209,9 @@ class Usuario
 				direccion=:direccion,
 				coordenadas=:coordenadas,
 				clave=:clave,
-				tipo_user=:tipo_user
+				tipo_user=:tipo_user,
 				estado=:estado,
-				id_local=:id_local,
+				id_local=:id_local
 				WHERE id_usuario=:id");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
@@ -238,15 +232,10 @@ class Usuario
 	public static function CambiarEstadoUsuario($usuario)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			//$consulta =$objetoAccesoDato->RetornarConsulta("CALL ModificarPersona(:sexo,:fecha,:partido,:foto)");
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				UPDATE usuarios 
-				SET 
-				estado=:estado,
-				WHERE id_usuario=:id");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET estado=:estado WHERE id_usuario=:id_usuario");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta->bindValue(':id',$usuario->id, PDO::PARAM_INT);
 			$consulta->bindValue(':estado',$usuario->estado, PDO::PARAM_STR);
+			$consulta->bindValue(':id_usuario',$usuario->id, PDO::PARAM_INT);
 			return $consulta->execute();
 	}
 
