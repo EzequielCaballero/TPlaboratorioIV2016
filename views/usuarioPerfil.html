@@ -14,7 +14,7 @@
               <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
               <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
               <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
-              <td colspan="2" class="btn btn-danger" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()">{{DatoSubmit}}</td>
+              <td colspan="2" ng-hide="botonActualizar"><button class="btn btn-danger" name="updateButton" id="updateButton" ng-click="Actualizar()">{{DatoSubmit}}</button></td>
         </tbody>
     </table>      
 
