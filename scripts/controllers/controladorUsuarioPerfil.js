@@ -42,23 +42,8 @@
       console.info($scope.usuarioElegido);
     });
 
-    //CARGAR TABLA 
-      $scope.usuario = {};
-      $scope.usuario.id_usuario = $scope.usuarioElegido.id_usuario;
-      $scope.usuario.nombre = $scope.usuarioElegido.nombre;
-      $scope.usuario.apellido = $scope.usuarioElegido.apellido;
-      $scope.usuario.email = $scope.usuarioElegido.email;
-      $scope.usuario.edad = $scope.usuarioElegido.edad;
-      $scope.usuario.correo = $scope.usuarioElegido.correo;
-      $scope.usuario.direccion = $scope.usuarioElegido.direccion;
-      $scope.usuario.clave = $scope.usuarioElegido.clave;
-      $scope.usuario.tipo_user = $scope.usuarioElegido.tipo_user;
-      $scope.usuario.estado = $scope.usuarioElegido.estado;
-
-      console.info($scope.usuario);
-
     //CAMBIAR ESTADO DE USUARIO
-    $scope.Guardar=function(){
+    $scope.Actualizar=function(){
       
       servicioRetornoUsuarios.ABM_Usuario($scope.usuario, "Modificar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);

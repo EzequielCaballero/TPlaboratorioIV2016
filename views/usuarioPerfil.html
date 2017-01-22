@@ -1,8 +1,7 @@
 <!doctype html>
 <br><br>
-
-    <table id="tablaPerfil" class="table animated flipInX">
-        
+    <h2>{{DatoRegistro}}</h2>
+    <table id="tablaPerfil" class="table table-hover animated flipInX">
         <tbody>
 
               <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
@@ -15,14 +14,10 @@
               <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
               <tr><th><strong>TIPO</strong></th><td>{{usuarioElegido.tipo_user}}</td></tr>
               <tr><th><strong>ESTADO</strong></th><td>{{usuarioElegido.estado}}</td></tr>
+              <tr><td><button class="btn btn-danger" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button></td></tr>
 
         </tbody>
-
-        <button  class="button-green" name="updateButton" id="updateButton" ng-hide="botonActualizar" ng-click="Actualizar()"><span>{{DatoSubmit}}</span></button>
-    </table>
-
-
-      
+    </table>      
 
 
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="{{dondeVolver}}">
