@@ -4,11 +4,14 @@
     $scope.tiposUsers = true;
     $scope.tipoLocal = true;
     $scope.requiredLocal = true;
+    $scope.requiredTipoUser = true;
     $scope.DatoRegistro="***REGISTRO USUARIO***";
 
     if(!$auth.isAuthenticated())
     {
         $scope.nuevoUser = true;
+        $scope.requiredLocal = false;
+        $scope.requiredTipoUser = false;
         $scope.DatoSubmit = "Registrarse";
     }
     else
@@ -72,7 +75,11 @@
     $scope.usuario.clave2 = "1234"
 
     //Estado del user
-    $scope.usuario.tipo_user = null;
+    if($scope.nuevoUser)
+      $scope.usuario.tipo_user = "cliente";
+    else
+       $scope.usuario.tipo_user = null;
+     
     $scope.usuario.estado = "activo";
     $scope.usuario.id_local = null;
 

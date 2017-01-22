@@ -158,7 +158,7 @@
           <span class="validacion" ng-show="myForm.usuario.clave2.$invalid || usuario.clave!=usuario.clave2">¡Las contraseñas deben coincidir!</span><br><br>
 
         <!--SELECT AUTOPOPULADOS-->
-        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-change="EleccionUser()" ng-hide="tiposUsers" required>
+        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-required="requiredTipoUser" ng-change="EleccionUser()" ng-hide="tiposUsers">
           <option value="">--Seleccione tipo de user--</option>
         </select><br>
 
