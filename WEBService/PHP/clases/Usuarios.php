@@ -115,8 +115,8 @@ class Usuario
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from usuarios where id_usuario =:id");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
 		$consulta->execute();
-		$personaBuscada= $consulta->fetchObject('usuario');
-		return $personaBuscada;
+		$usuarioBuscado= $consulta->fetchObject('usuario');
+		return $usuarioBuscado;
 	}
 
 	public static function TraerTodosLosUsuarios()
@@ -240,5 +240,7 @@ class Usuario
 	}
 
 //--------------------------------------------------------------------------------//
-
+//--FIN DE LA CLASE "USUARIO"
 }
+
+?>
