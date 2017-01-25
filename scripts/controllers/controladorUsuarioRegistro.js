@@ -45,26 +45,31 @@
         }
     }
 
-    var tablas;
-    //OPCIONES DEL ELEMENTO SELECT (creación de Options)
+    /***OPCIONES DEL ELEMENTO SELECT LOCAL (creación de Options)***/
+
+    //1- Declaración de variable "locales"  
+    var locales = Array();
     servicioRetornoLocales.traerTodo().then(function(respuesta){
       console.info("Locales", respuesta.data);
-      tablas = respuesta.data;
-      console.info(tablas[0]);
-      // var tablas = JSON.stringify(respuesta.data[0]);
-      // console.info("Local 1: ", tablas);
+
+      //2- Rellenado de "locales" (array de objetos)
+      var cantidadDatos = respuesta.data.length;
+      for (var i = 0; i < cantidadDatos; i++) {
+        locales[i] = {code: respuesta.data[i].id_local, name: "Local "+(i+1) };
+      }
+      console.info("Opciones de locales:", locales);
+
+      //3- Pasaje de Array a JSON (OPCIONAL)
+      locales = JSON.stringify(locales);
+      console.info("Local 1: ", locales);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
 
     });
 
-    $scope.locales = [
-      {code:"2001", name: "Local 1"},
-      {code:"2002", name: "Local 2" },
-      {code:"2003", name: "Local 3" },
-      {code:"2004", name: "Local 4" }
-    ];
+    //4- Asignación de opciones al Select locales.
+    $scope.locales = locales;
 
     $scope.tipoUsers = false;
 
