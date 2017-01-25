@@ -19,10 +19,13 @@ angular.module('ABMangularAPI.controladorUsuarioMenu', [])
         case "Perfil":
             $state.go("usuario.perfil");
           break;  
-        case "Grilla":
+        case "Grilla_Usuarios":
             $state.go("usuario.grilla");
           break;
-        case "GrillaDirectiva":
+        case "Grilla_Locales":
+            $state.go("local.grilla");
+          break;
+        case "Grilla_Usuarios_Directiva":
             $state.go("usuario.directivaGrilla");
           break;
           

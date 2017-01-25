@@ -34,14 +34,14 @@ var app = angular.module('ABMangularAPI', [
     .state('usuario', {
                     url : '/usuario',
                     abstract:true,
-                    templateUrl : 'views/abstractoUsuario.html',
+                    templateUrl : 'views/Usuario/abstractoUsuario.html',
                     controller : 'controlUsuario'
                 })
     .state('usuario.menu', {
                 url: '/menu',
                 views: {
                         'contenido': {
-                        templateUrl: 'views/usuarioMenu.html',
+                        templateUrl: 'views/Usuario/usuarioMenu.html',
                         controller : 'controlUsuarioMenu'
                     }
                 }
@@ -50,7 +50,7 @@ var app = angular.module('ABMangularAPI', [
       url : '/perfil/{id}?',
       views: {
                 'contenido': {
-                templateUrl : 'views/usuarioPerfil.html',
+                templateUrl : 'views/Usuario/usuarioPerfil.html',
                 controller : 'controlUsuarioPerfil'
                 }
               }
@@ -59,7 +59,7 @@ var app = angular.module('ABMangularAPI', [
       url : '/login',
       views: {
                 'contenido': {
-                templateUrl : 'views/usuarioLogin.html',
+                templateUrl : 'views/Usuario/usuarioLogin.html',
                 controller : 'controlUsuarioLogin'
                 }
               }
@@ -69,7 +69,7 @@ var app = angular.module('ABMangularAPI', [
       url : '/registro',
       views: {
                 'contenido': {
-                templateUrl : 'views/usuarioRegistro.html',
+                templateUrl : 'views/Usuario/usuarioRegistro.html',
                 controller : 'controlUsuarioRegistro'
                 }
               }
@@ -78,7 +78,7 @@ var app = angular.module('ABMangularAPI', [
       url : '/grillaUsuarios',
       views: {
                 'contenido': {
-                templateUrl : 'views/usuarioGrilla.html',
+                templateUrl : 'views/Usuario/usuarioGrilla.html',
                 controller : 'controlUsuarioGrilla'
                 }
               }
@@ -88,43 +88,43 @@ var app = angular.module('ABMangularAPI', [
       url : '/directivaGrilla',
       views: {
                 'contenido': {
-                templateUrl : 'views/usuarioGrillaDirectiva.html',
+                templateUrl : 'views/Usuario/usuarioGrillaDirectiva.html',
                 controller : 'controlDirectivaGrillaUser'
                 }
               }
             })
 
     //*************************************VISTA ENTIDADES*************************************//
-    .state('entidad', {
-                url : '/entidad',
+    .state('local', {
+                url : '/local',
                 abstract:true,
-                templateUrl : 'views/abstractoEntidad.html',
-                controller : 'controlEntidad'
+                templateUrl : 'views/Local/abstractoLocal.html',
+                controller : 'controlLocal'
             })
-    .state('entidad.menu', {
+    .state('local.menu', {
                 url: '/menu',
                 views: {
                         'contenido': {
-                        templateUrl: 'views/entidadMenu.html',
-                        controller : 'controlEntidadMenu'
+                        templateUrl: 'views/Local/localMenu.html',
+                        controller : 'controlLocalMenu'
                     }
                 }
             })
-    .state('entidad.grilla', {
-                url: '/grilla',
+    .state('local.grilla', {
+                url: '/grillaLocales',
                 views: {
                         'contenido': {
-                        templateUrl: 'views/entidadGrilla.html',
-                        controller : 'controlEntidadGrilla'
+                        templateUrl: 'views/Local/localGrilla.html',
+                        controller : 'controlLocalGrilla'
                     }
                 }
             })
-    .state('entidad.alta', {
+    .state('local.alta', {
                 url: '/alta',
                 views: {
                         'contenido': {
-                        templateUrl: 'views/entidadAlta.html',
-                        controller : 'controlEntidadAlta'
+                        templateUrl: 'views/Local/localAlta.html',
+                        controller : 'controlLocalAlta'
                     }
                 }
             })

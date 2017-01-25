@@ -1,0 +1,26 @@
+<div class="mapaLocal" map-lazy-load="https://maps.google.com/maps/api/js"  map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1yfspgHALVbgR-ws1QhQnRjTReRfrDJU">
+  <ng-map center="[{{ubicacion}}]" ng-model="miMapa" id="miMapaModal">
+  		  <custom-marker position="[{{ubicacion}}]">
+  		  	<div>
+  		  		<img class="MarkerGM" src="img/GoogleMaps/marker_1.png">
+  		  	</div>
+          </custom-marker>
+  </ng-map>
+  <span class="etiquetaMapa">{{direccionEnMapa}}</span>
+</div>
+
+<div class="container">
+		<div class="animated bounceInRight">		
+			<h3>{{tituloGrillaLocales}}</h3>
+			<div class="CajaGrilla">
+			  <!--GRILLA UI-->
+			  <div ui-grid="gridOptionsLocales" class="gridUsuarios" ui-grid-auto-resize></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<li  id="botonVolver" class="btn" style="float:right" ui-sref="usuario.menu()">
+	Volver
+</li>
