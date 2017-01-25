@@ -1,10 +1,10 @@
 angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
-  app.service('servicioRetornoUsuarios', function ($http, factoryRutaDatos) {
-    this.Nombre="service para Usuarios";
+  app.service('servicioRetornoLocales', function ($http, factoryRutaDatos) {
+    this.Nombre="service para Locales";
 
     //****************************ORIGEN DE DATOS****************************//
     // Uso dinámico de valor url (por Factory)
-    var Url = factoryRutaDatos.Usuarios;
+    var Url = factoryRutaDatos.Locales;
 
     //****************************FUNCIONES****************************//
 
@@ -22,9 +22,9 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
         );
       }
 
-    this.traerCiertosUsuarios = function(tipo_usuario){ //FUNCIÓN PÚBLICA
+    this.traerCiertosLocales = function(parametro){ //FUNCIÓN PÚBLICA
 
-        return $http.get(traerURL(tipo_usuario)).then(
+        return $http.get(traerURL(parametro)).then(
           //Funciones que son parámetros, con lo cual se separan por coma.
           function(respuesta){
             console.info("RESPUESTA (en service): ", respuesta);
@@ -47,12 +47,12 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
 
     //************************** ALTA - BAJA - MODIFICACION **************************//
 
-    this.ABM_Usuario = function(usuario, accion){ //FUNCIÓN PÚBLICA
+    this.ABM_Locales = function(local, accion){ //FUNCIÓN PÚBLICA
       
       switch(accion)
       { 
         case "Agregar": //POST
-          return $http.post(traerURL(usuario)).then(
+          return $http.post(traerURL(local)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);
@@ -66,7 +66,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
 
         case "Modificar": //PUT
 
-           return $http.put(traerURL(usuario)).then(
+           return $http.put(traerURL(local)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);
@@ -80,7 +80,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
 
         case "Borrar": // DELETE
 
-          return $http.delete(traerURL(usuario)).then(
+          return $http.delete(traerURL(local)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);
