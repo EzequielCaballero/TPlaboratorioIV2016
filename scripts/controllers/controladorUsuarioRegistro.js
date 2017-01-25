@@ -45,10 +45,14 @@
         }
     }
 
+    var tablas;
     //OPCIONES DEL ELEMENTO SELECT (creación de Options)
     servicioRetornoLocales.traerTodo().then(function(respuesta){
       console.info("Locales", respuesta.data);
-      
+      tablas = respuesta.data;
+      console.info(tablas[0]);
+      // var tablas = JSON.stringify(respuesta.data[0]);
+      // console.info("Local 1: ", tablas);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
