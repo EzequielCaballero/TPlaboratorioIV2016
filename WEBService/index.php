@@ -4,7 +4,7 @@
 
 require 'vendor/autoload.php';
 require 'PHP/clases/Usuarios.php';
-require 'PHP/clases/Entidades.php';
+require 'PHP/clases/Locales.php';
 
 $app = new Slim\App();
 
@@ -129,6 +129,47 @@ $app->delete('/usuarios/{id}', function ($request, $response, $args) {
     return $response;
 });
 
+//**************************************************************LOCALES**************************************************************//
+
+$app->get('/locales[/]', function ($request, $response, $args) {
+    $datos = Local::TraerTodosLosLocales();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/locales/{parametro}', function ($request, $response, $args) {
+    // $parametro = json_decode($args['parametro']);
+    // $response->write(json_encode($datos));
+    // return $response;
+});
+
+$app->post('/locales/{objeto}', function ($request, $response, $args) {
+    
+    $local = json_decode($args['objeto']);
+    echo "<br>DATOS!: " . $args['objeto'];
+    $datos = Local::NuevoLocal($local);
+    $response->write($datos);
+    return $response;
+});
+
+$app->put('/locales/{objeto}', function ($request, $response, $args) {
+    
+    $local = json_decode($args['objeto']);
+    $datos = Local::ModificarLocal($local); 
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->delete('/locales/{id}', function ($request, $response, $args) {
+    
+    $datos = Local::BorrarLocal($args['id']);
+    $response->write("borrar !: ");
+    //var_dump($args);
+    return $response;
+});
+
+//****************************************************************************************************************************//
+//****************************************************************************************************************************//
 $app->run();
 
 // GET: lectura de recursos = TRAER LISTA DE OBJETOS

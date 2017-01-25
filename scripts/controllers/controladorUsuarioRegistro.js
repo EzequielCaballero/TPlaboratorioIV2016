@@ -1,5 +1,5 @@
  angular.module('ABMangularAPI.controladorUsuarioRegistro', []) 
-  app.controller('controlUsuarioRegistro', function($scope, $http, $state, $auth, servicioRetornoUsuarios) {
+  app.controller('controlUsuarioRegistro', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales) {
     
     $scope.tiposUsers = true;
     $scope.tipoLocal = true;
@@ -46,6 +46,15 @@
     }
 
     //OPCIONES DEL ELEMENTO SELECT (creación de Options)
+    servicioRetornoLocales.traerTodo().then(function(respuesta){
+      console.info("Locales", respuesta.data);
+      
+
+      },function errorCallback(response) {
+            console.log("FALLO! ", response);
+
+    });
+
     $scope.locales = [
       {code:"2001", name: "Local 1"},
       {code:"2002", name: "Local 2" },
