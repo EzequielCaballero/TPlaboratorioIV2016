@@ -25,6 +25,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       // Activo la busqueda en todos los campos.
       $scope.gridOptionsUsuarios.enableFiltering = true;
       $scope.gridOptionsUsuarios.enableHiding = true;
+      $scope.gridOptionsUsuarios.enableGridMenu = false;
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
@@ -33,8 +34,11 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
         
         //Asignos funciones para cada row (control de permisos)
         angular.forEach(respuesta.data,function(row){
-          row.Nombre = function(){
-            return this.nombre;
+          row.permisoBorrar = function(){
+            if(this.tipo_user == "administrador")
+              return true;
+            else
+              return false;
         }
         });
 
@@ -45,7 +49,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
 
       function columnDefsUsuarios () {
       return [
-        { field: 'Nombre()', displayName: 'Nombre',
+        { field: 'nombre', displayName: 'Nombre',
           enableFiltering: false,
           enableHiding: false,
         },
@@ -115,7 +119,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
-          visible: true
+          visible: 'permisoBorrar()'
         },
       ];
     }
