@@ -47,7 +47,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
 
     //************************** ALTA - BAJA - MODIFICACION **************************//
 
-    this.ABM_Locales = function(local, accion){ //FUNCIÓN PÚBLICA
+    this.ABM_Local = function(local, accion){ //FUNCIÓN PÚBLICA
       
       switch(accion)
       { 

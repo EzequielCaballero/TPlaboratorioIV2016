@@ -135,7 +135,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       console.log('ubicacion', $scope.ubicacion);
 
       $scope.marker.setMap(map);
-
+      $scope.direccionEnMapa = "DIRECCIÓN: " + rowEntity.direccion;
         // $("#myModal").on("shown.bs.modal", function(e) {
         // google.maps.event.trigger(map, "resize");
         //  map.setCenter(myLatLng);// Set here center map coordinates

@@ -6,7 +6,7 @@
   		  	</div>
           </custom-marker>
   </ng-map>
-  <span class="etiquetaMapa">{{direccionEnMapa}}</span>
+  <span class="etiquetaMapa">{{direccionEnMapa}}<br>{{encargadoLocal}}</span>
 </div>
 
 <div class="container">
@@ -20,6 +20,30 @@
 	</div>
 </div>
 
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="galeriaFotos" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{{tituloGaleria}}</h4>
+          </div>
+          <!-- Body -->
+	          <div class="modal-body">    
+	            <img class="img-responsive" src="{{fotoLocal}}"></img>
+	          </div>
+	      <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 
 <li  id="botonVolver" class="btn" style="float:right" ui-sref="usuario.menu()">
 	Volver

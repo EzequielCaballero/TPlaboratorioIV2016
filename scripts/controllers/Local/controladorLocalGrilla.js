@@ -28,8 +28,18 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
+      var contador = 0;
       //UTILIZACIÓN DEL SERVICE
       servicioRetornoLocales.traerTodo().then(function(respuesta){        
+        //Asignos funciones para cada row (control de permisos)
+        angular.forEach(respuesta.data,function(row){
+          contador++;
+          var local = "Local N°" + contador;
+          row.LocalName = function(){
+            return local;
+        }
+        });
+
         // Cargo los datos en la grilla.
         $scope.gridOptionsLocales.data = respuesta.data;
         console.info(respuesta.data);
@@ -37,7 +47,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
 
       function columnDefsLocales () {
       return [
-        { field: 'id_local', displayName: 'Local',
+        { field: 'LocalName()', displayName: 'Local',
           enableFiltering: false,
           enableHiding: false
         },
@@ -49,32 +59,24 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           enableFiltering: false,
           enableHiding: false
         },
-        { field: 'id_encargado', name: 'Encargado',
+        { field: 'encargado', name: 'Encargado',
           enableFiltering: false,
           enableHiding: false
         },
-        { field: 'foto1', name: 'foto1',
-          enableFiltering: false,
-          enableSorting: false,
-          enableHiding: false
-        },
-        { field: 'foto2', name: 'foto2',
+        { field: 'foto1', name: 'Fotos',
+          cellTemplate:'<button class="btn btn-block" data-toggle="modal" data-target="#galeriaFotos" ng-click="grid.appScope.imagenLocales(row.entity)"><img class="img-rounded"ng-src="img/Locales/{{grid.getCellValue(row, col)}}" height=60 width=70</img></button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false
-        },
-        { field: 'foto3', name: 'foto3',
-          enableHiding: false,
-          enableFiltering: false
         },
         { name: 'Ubicacion',
-          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapa(row.entity)">Mapa</button>',
+          cellTemplate:'<button class="btn btn-info" ng-click="grid.appScope.mostrarMapa(row.entity)">Mapa</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false
         },
         { name: 'Modificar',
-          cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="local.perfil({id:row.entity.id_usuario})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
+          cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="local.perfil({id:row.entity.id_local})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
@@ -94,11 +96,6 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
     $scope.ModalHeader = "Ubicación local";
     console.info("local", rowEntity);
 
-    var arrayUbicacion = rowEntity.coordenadas.split(/,/);
-    var latitud = arrayUbicacion[0];
-    var longitud = arrayUbicacion[1].replace(" ","");
-    //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
-
       NgMap.getMap("miMapaModal").then(function(map) {
       $scope.marker.setMap(null);
       $scope.ubicacion = rowEntity.direccion;
@@ -106,18 +103,15 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
 
       $scope.marker.setMap(map);
       $scope.direccionEnMapa = "DIRECCIÓN: " + rowEntity.direccion;
-        // $("#myModal").on("shown.bs.modal", function(e) {
-        // google.maps.event.trigger(map, "resize");
-        //  map.setCenter(myLatLng);// Set here center map coordinates
-        //  map.setZoom(6);
-        // });
+      $scope.encargadoLocal = "Encargado: " + rowEntity.encargado;
+
     
       });
     }
 
     $scope.Borrar = function(local){
 
-      servicioRetornoUsuarios.ABM_Usuario(local.id_local, "Borrar").then(function(response){
+      servicioRetornoLocales.ABM_local(local.id_local, "Borrar").then(function(response){
         console.log("RETORNO: ", response.data);
 
           // Vuelvo a cargar los datos en la grilla.
@@ -130,6 +124,12 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
               console.log("FALLO! ", response);
         });
       });
+    }
+
+    $scope.imagenLocales = function(local){
+      
+      $scope.fotoLocal = "img/Locales/" + local.foto1;
+      console.info("Local info: ", local);
     }
 
   });
