@@ -135,6 +135,14 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       showDivs(slideIndex);
       carousel();
 
+      $scope.plusDivs = function(n) {
+        showDivs(slideIndex += n);
+      }
+
+      $scope.currentDiv = function(n) {
+        showDivs(slideIndex = n);
+      }
+
       function showDivs(n) {
         var i;
         var x = document.getElementsByClassName("mySlides");
@@ -154,21 +162,19 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       function carousel() {
         var i;
         var x = document.getElementsByClassName("mySlides");
+
+        $scope.currentDiv = function(n) {
+          showDivs(slideIndex = n);
+        }
+
         for (i = 0; i < x.length; i++) {
            x[i].style.display = "none";  
         }
         slideIndex++;
+        $scope.currentDiv(slideIndex);
         if (slideIndex > x.length) {slideIndex = 1}    
         x[slideIndex-1].style.display = "block";  
         setTimeout(carousel, 5000); // Change image every 2 seconds
-      }
-
-      $scope.plusDivs = function(n) {
-        showDivs(slideIndex += n);
-      }
-
-      $scope.currentDiv = function(n) {
-        showDivs(slideIndex = n);
       }
 
       $scope.tituloGaleria = local.LocalName() + "- Galeria";
