@@ -128,20 +128,8 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
 
     $scope.imagenLocales = function(local){
       
-      // var slideIndex = 1;
-      //showDivs(slideIndex);
-
-      var slideIndex = 0;
-      showDivs(slideIndex);
-      carousel();
-
-      $scope.plusDivs = function(n) {
-        showDivs(slideIndex += n);
-      }
-
-      $scope.currentDiv = function(n) {
-        showDivs(slideIndex = n);
-      }
+      var slideIndex = 1;
+      var tiempo; 
 
       function showDivs(n) {
         var i;
@@ -157,25 +145,34 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         }
         x[slideIndex-1].style.display = "block";  
         dots[slideIndex-1].className += " w3-white";
+        tiempo = setTimeout(carousel, 5000); // Change image every 5 seconds
       }
 
       function carousel() {
         var i;
         var x = document.getElementsByClassName("mySlides");
 
-        $scope.currentDiv = function(n) {
-          showDivs(slideIndex = n);
-        }
 
         for (i = 0; i < x.length; i++) {
            x[i].style.display = "none";  
         }
         slideIndex++;
-        $scope.currentDiv(slideIndex);
         if (slideIndex > x.length) {slideIndex = 1}    
-        x[slideIndex-1].style.display = "block";  
-        setTimeout(carousel, 5000); // Change image every 2 seconds
+        x[slideIndex-1].style.display = "block";
+
+        $scope.currentDiv(slideIndex);
       }
+
+      $scope.plusDivs = function(n) {
+        showDivs(slideIndex += n);
+      }
+
+      $scope.currentDiv = function(n) {
+        showDivs(slideIndex = n);
+      }
+
+      showDivs(slideIndex);
+      clearTimeout(tiempo);
 
       $scope.tituloGaleria = local.LocalName() + "- Galeria";
       console.info("Titulo", $scope.tituloGaleria);
