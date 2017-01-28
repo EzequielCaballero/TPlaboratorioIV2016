@@ -1,12 +1,16 @@
 angular.module('ABMangularAPI.controladorLocalGrilla', [])   
   app.controller('controlLocalGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoLocales, servicioRetornoUsuarios, NgMap) {
 
+      $scope.ABMLocal = false;
+
       if(!$auth.isAuthenticated())
         $state.go("inicio");
       else
       {
           $sesion = $auth.getPayload();
           $usuarioLogueado = $sesion.perfil;
+          if($usuarioLogueado = "Administrador")
+            $scope.AMBLocal = true;
       }
 
       $scope.marker = new google.maps.Marker({
@@ -171,8 +175,8 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         showDivs(slideIndex = n);
       }
 
-      showDivs(slideIndex);
       clearTimeout(tiempo);
+      showDivs(slideIndex);
 
       $scope.tituloGaleria = local.LocalName() + "- Galeria";
       console.info("Titulo", $scope.tituloGaleria);

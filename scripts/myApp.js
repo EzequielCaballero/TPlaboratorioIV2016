@@ -94,7 +94,7 @@ var app = angular.module('ABMangularAPI', [
               }
             })
 
-    //*************************************VISTA ENTIDADES*************************************//
+    //*************************************VISTA LOCALES*************************************//
     .state('local', {
                 url : '/local',
                 abstract:true,

@@ -1,34 +1,161 @@
-<div class="container">
-	<form class="FormIngreso" name="FormIngreso" id="FormIngreso"  enctype="multipart/form-data" novalidate >
-		<div class="page-header">
-			<center> <h1>{{DatoTest}}</h1>   </center>   
-			<label  >¿Datos completados?: {{FormIngreso.$valid}}</label>  
-		</div>
+<div class="Frm animated bounceInLeft">
+    <form class="registerForm"  name="myForm" enctype="multipart/form-data">
+        <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
 
-		<br><br>
-		<label>Marca:</label><br>
-		<input type="radio" ng-model="entidad.marca" value="Samsung"><label>Samsung</label>
-		<input type="radio" ng-model="entidad.marca" value="Nextel"> <label>Nextel</label>
-		<input type="radio" ng-model="entidad.marca" value="Motorola"> <label>Motorola</label>
-		<input type="radio" ng-model="entidad.marca" value="BLU"> <label>BLU</label><br>
+        <label>Domicilio:</label><br>
+        <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese su calle" value="" required>
+        <input type="number" id="altura" name="altura" ng-model="altura" placeholder="altura" value="" min="01" max="9999" required><br>
+        <select ng-model="localidad" required>
+            <option value="--Seleccione localidad--">--Seleccione localidad--</option>
+            <option value="CABA">CABA</option>
+            <option value="25 de Mayo">25 de Mayo</option>
+            <option value="9 de Julio">9 de Julio</option>
+            <option value="Adolfo Alsina">Adolfo Alsina</option>
+            <option value="Adolfo Gonzales Chaves">Adolfo Gonzales Chaves</option>
+            <option value="Alberti">Alberti</option>
+            <option value="Almirante Brown">Almirante Brown</option>
+            <option value="Arrecifes">Arrecifes</option>
+            <option value="Avellaneda">Avellaneda</option>
+            <option value="Ayacucho">Ayacucho</option>
+            <option value="Azul">Azul</option>
+            <option value="Bahía Blanca">Bahía Blanca</option>
+            <option value="Balcarce">Balcarce</option>
+            <option value="Baradero">Baradero</option>
+            <option value="Benito Juárez">Benito Juárez</option>
+            <option value="Berazategui">Berazategui</option>
+            <option value="Berisso">Berisso</option>
+            <option value="Bolívar">Bolívar</option>
+            <option value="Bragado">Bragado</option>
+            <option value="Brandsen">Brandsen</option>
+            <option value="Cañuelas">Cañuelas</option>
+            <option value="Campana">Campana</option>
+            <option value="Capitán Sarmiento">Capitán Sarmiento</option>
+            <option value="Carlos Casares">Carlos Casares</option>
+            <option value="Carlos Tejedor">Carlos Tejedor</option>
+            <option value="Carmen de Areco">Carmen de Areco</option>
+            <option value="Castelli">Castelli</option>
+            <option value="Chacabuco">Chacabuco</option>
+            <option value="Chascomús">Chascomús</option>
+            <option value="Chivilcoy">Chivilcoy</option>
+            <option value="Colón">Colón</option>
+            <option value="Coronel de Marina L. Rosales">Coronel de Marina L. Rosales</option>
+            <option value="Coronel Dorrego">Coronel Dorrego</option>
+            <option value="Coronel Pringles">Coronel Pringles</option>
+            <option value="Coronel Suárez">Coronel Suárez</option>
+            <option value="Daireaux">Daireaux</option>
+            <option value="Dolores">Dolores</option>
+            <option value="Ensenada">Ensenada</option>
+            <option value="Escobar">Escobar</option>
+            <option value="Esteban Echeverría">Esteban Echeverría</option>
+            <option value="Exaltación de la Cruz">Exaltación de la Cruz</option>
+            <option value="Ezeiza">Ezeiza</option>
+            <option value="Florencio Varela">Florencio Varela</option>
+            <option value="Florentino Ameghino">Florentino Ameghino</option>
+            <option value="General Alvarado">General Alvarado</option>
+            <option value="General Alvear">General Alvear</option>
+            <option value="General Arenales">General Arenales</option>
+            <option value="General Belgrano">General Belgrano</option>
+            <option value="General Guido">General Guido</option>
+            <option value="General Juan Madariaga">General Juan Madariaga</option>
+            <option value="General La Madrid">General La Madrid</option>
+            <option value="General Las Heras">General Las Heras</option>
+            <option value="General Lavalle">General Lavalle</option>
+            <option value="General Paz">General Paz</option>
+            <option value="General Pinto">General Pinto</option>
+            <option value="General Pueyrredón">General Pueyrredón</option>
+            <option value="General Rodríguez">General Rodríguez</option>
+            <option value="General San Martín">General San Martín</option>
+            <option value="General Viamonte">General Viamonte</option>
+            <option value="General Villegas">General Villegas</option>
+            <option value="Guaminí">Guaminí</option>
+            <option value="Hipólito Yrigoyen">Hipólito Yrigoyen</option>
+            <option value="Hurlingham">Hurlingham</option>
+            <option value="Ituzaingó">Ituzaingó</option>
+            <option value="José C. Paz">José C. Paz</option>
+            <option value="Junín">Junín</option>
+            <option value="La Costa">  La Costa  </option>
+            <option value="La Matanza">  La Matanza  </option>
+            <option value="La Plata">  La Plata  </option>
+            <option value="Lanús">  Lanús </option>
+            <option value="Laprida">  Laprida </option>
+            <option value="Las Flores">  Las Flores  </option>
+            <option value="Leandro N. Alem">  Leandro N. Alem </option>
+            <option value="Lincoln">Lincoln </option>
+            <option value="Lobería">  Lobería </option>
+            <option value="Lobos">  Lobos </option>
+            <option value="Lomas de Zamora ">  Lomas de Zamora </option>
+            <option value="Luján">  Luján </option>
+            <option value="Magdalena">  Magdalena </option>
+            <option value="Maipú">  Maipú </option>
+            <option value="Malvinas Argentinas">  Malvinas Argentinas </option>
+            <option value="Mar Chiquita">  Mar Chiquita  </option>
+            <option value="Marcos Paz">  Marcos Paz  </option>
+            <option value="Mercedes">  Mercedes  </option>
+            <option value="Merlo">  Merlo </option>
+            <option value="Monte">  Monte </option>
+            <option value="Monte Hermoso">  Monte Hermoso </option>
+            <option value="Morón">  Morón </option>
+            <option value="Moreno">  Moreno  </option>
+            <option value="Navarro">  Navarro </option>
+            <option value="Necochea">  Necochea  </option>
+            <option value="Olavarría">  Olavarría </option>
+            <option value="Patagones">  Patagones </option>
+            <option value="Pehuajó">  Pehuajó </option>
+            <option value="Pellegrini">  Pellegrini  </option>
+            <option value="Pergamino">  Pergamino </option>
+            <option value="Pila">  Pila  </option>
+            <option value="Pilar">  Pilar </option>
+            <option value="Pinamar">  Pinamar </option>
+            <option value="Presidente Perón">  Presidente Perón  </option>
+            <option value="Puán">  Puán  </option>
+            <option value="Punta Indio">  Punta Indio </option>
+            <option value="Quilmes">  Quilmes </option>
+            <option value="Ramallo">  Ramallo </option>
+            <option value="Rauch">  Rauch </option>
+            <option value="Rivadavia">  Rivadavia </option>
+            <option value="Rojas">  Rojas </option>
+            <option value="Roque Pérez">  Roque Pérez </option>
+            <option value="Saavedra">  Saavedra  </option>
+            <option value="Saladillo">  Saladillo </option>
+            <option value="Salliqueló">  Salliqueló  </option>
+            <option value="Salto">  Salto </option>
+            <option value="San Andrés de Giles">  San Andrés de Giles </option>
+            <option value="San Antonio de Areco">  San Antonio de Areco  </option>
+            <option value="San Cayetano">  San Cayetano  </option>
+            <option value="San Fernando">  San Fernando  </option>
+            <option value="San Isidro">  San Isidro  </option>
+            <option value="San Miguel">  San Miguel  </option>
+            <option value="San Nicolás">  San Nicolás </option>
+            <option value="San Pedro">  San Pedro </option>
+            <option value="San Vicente">  San Vicente </option>
+            <option value="Suipacha">  Suipacha  </option>
+            <option value="Tandil">  Tandil  </option>
+            <option value="Tapalqué">  Tapalqué  </option>
+            <option value="Tigre">  Tigre </option>
+            <option value="Tordillo">  Tordillo  </option>
+            <option value="Tornquist">  Tornquist </option>
+            <option value="Trenque Lauquen">  Trenque Lauquen </option>
+            <option value="Tres Arroyos">  Tres Arroyos  </option>
+            <option value="Tres de Febrero">  Tres de Febrero </option>
+            <option value="Tres Lomas">  Tres Lomas  </option>
+            <option value="Vicente López">  Vicente López </option>
+            <option value="Villa Gesell">  Villa Gesell  </option>
+            <option value="Villarino">  Villarino </option>
+            <option value="Zárate">  Zárate  </option>
+        </select><br>
+        <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
 
-		<label>Numero:</label>
-		<input type="number" name="dni" ng-model="entidad.numero" ng-readonly="soloLectura" placeholder="ingrese serial" value="" min="100" max="999" required/><br> 
+        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" required>
+          <option value="">--Seleccione empleado como Encargado--</option>
+        </select><br>
 
-		<label>Fecha pedido:</label>
-		<input type="date" id="fecha" name="fecha" ng-model="entidad.fecha" placeholder="" min="1983-30-10" max="2016-09-30" required><br>
-		
-		<label>Color producto:</label>
-		<select ng-model="entidad.color" ng-options="c.code as c.name for c in opciones" required>
-          <option value="">--Seleccione color--</option>
-          <option value="">Rojo</option>
-          <option value="">Azul</option>
-          <option value="">Negro</option>
-          <option value="">Amarillo</option>
-        </select><br> 
-
-        <br><br><a class="btn btn-info " ng-disable="FormIngreso.$invalid" ng-click="Guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Guardar</a>
-
-        <input type="hidden" value="" id="idParaModificar" name="agregar" ng-model="entidad.numero"/>
-
+        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--'" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
+    </form>
 </div>
+
+<h3>¿Listo para continuar?:{{myForm.$valid}}</h3>
+
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="local.grilla()">
+     Volver
+     <span class="glyphicon glyphicon-home"></span>
+<a>

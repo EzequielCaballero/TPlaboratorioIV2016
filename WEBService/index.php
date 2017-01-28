@@ -83,7 +83,7 @@ $app->get('/usuarios[/]', function ($request, $response, $args) {
 
 $app->get('/usuarios/{perfil}', function ($request, $response, $args) {
     $perfil = json_decode($args['perfil']);
-    if($perfil == "Empleado" || $perfil == "Encargado" || $perfil == "Administrador")
+    if($perfil == "Empleado" || $perfil == "solo_Empleados" || $perfil == "Encargado" || $perfil == "Administrador")
         $datos = Usuario::TraerUsuariosPorParametro($perfil);
     else
         $datos = Usuario::TraerUnUsuario($perfil);
