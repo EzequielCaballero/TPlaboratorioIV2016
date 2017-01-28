@@ -35,7 +35,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
         //Asignos funciones para cada row (control de permisos)
         angular.forEach(respuesta.data,function(row){
           row.permisoBorrar = function(){
-            if(this.tipo_user == "administrador")
+            if($usuarioLogueado == "Administrador")
               return true;
             else
               return false;

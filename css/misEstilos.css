@@ -669,6 +669,23 @@ GRILLA USUARIOS
 GRILLA LOCALES
 *************************************************************************************/
 
+#tituloVentanaModal{
+    color: black;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.mySlides {
+    display:none
+}
+.w3-left, .w3-right, .w3-badge {
+    cursor:pointer
+}
+.w3-badge {
+    height:13px;width:13px;padding:0
+}
+
 /************************************************************************************
 MAPA
 *************************************************************************************/

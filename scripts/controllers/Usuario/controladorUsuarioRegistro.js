@@ -78,7 +78,7 @@
     $scope.usuario.nombre = "natalia";
     $scope.usuario.apellido = "gonzalez";
     $scope.usuario.edad = 25;
-    $scope.usuario.sexo = "Masculino";
+    $scope.usuario.sexo = "M";
     $scope.usuario.correo = "natalia@gonzalez.com";
 
 
