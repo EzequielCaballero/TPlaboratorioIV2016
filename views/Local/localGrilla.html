@@ -1,3 +1,4 @@
+<!-- MAPA INTERACTIVO -->
 <div class="mapaLocal" map-lazy-load="https://maps.google.com/maps/api/js"  map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1yfspgHALVbgR-ws1QhQnRjTReRfrDJU">
   <ng-map center="[{{ubicacion}}]" ng-model="miMapa" id="miMapaModal">
   		  <custom-marker position="[{{ubicacion}}]">
@@ -9,6 +10,8 @@
   <span class="etiquetaMapa">{{direccionEnMapa}}<br>{{encargadoLocal}}</span>
 </div>
 
+<!-- MENU NAVEGACIÓN -->
+<button  class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</button>
 <button class="btn btn-success" style="float:right" ui-sref="local.alta" ng-hide="ABMLocal">Nuevo Local</button>
 
 <!-- PRESENTACION GRILLA -->
