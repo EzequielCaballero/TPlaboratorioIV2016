@@ -1,7 +1,7 @@
 angular.module('ABMangularAPI.controladorLocalGrilla', [])   
   app.controller('controlLocalGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoLocales, servicioRetornoUsuarios, NgMap) {
 
-      $scope.ABMLocal = true;
+      $scope.permisoAdministrador = false;
 
       if(!$auth.isAuthenticated())
         $state.go("inicio");
@@ -10,7 +10,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           $sesion = $auth.getPayload();
           $usuarioLogueado = $sesion.perfil;
           if($usuarioLogueado == "Administrador")
-            $scope.ABMLocal = false;
+            $scope.permisoAdministrador = true;
       }
 
       $scope.marker = new google.maps.Marker({
@@ -87,7 +87,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           visible: true
         },
         { name: 'Borrar',
-          cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
+          cellTemplate:'<button class="btn btn-danger" ng-show="{{permisoAdministrador}}" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,

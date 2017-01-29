@@ -182,6 +182,7 @@ class Local
 			return $consulta->execute();
 	}
 
+	//CONSULTAS ESPECIALES
 	public static function CambiarEncargadoLocal($usuario)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

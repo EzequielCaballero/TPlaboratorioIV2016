@@ -1,12 +1,16 @@
 angular.module('ABMangularAPI.controladorUsuarioGrilla', [])   
   app.controller('controlUsuarioGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoUsuarios, NgMap) {
 
+      $scope.permisoAdministrador = false;
+
       if(!$auth.isAuthenticated())
         $state.go("inicio");
       else
       {
           $sesion = $auth.getPayload();
           $usuarioLogueado = $sesion.perfil;
+          if($usuarioLogueado == "Administrador")
+            $scope.permisoAdministrador = true;
       }
 
       $scope.marker = new google.maps.Marker({
@@ -33,14 +37,14 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       servicioRetornoUsuarios.traerCiertosUsuarios($usuarioLogueado).then(function(respuesta){
         
         //Asignos funciones para cada row (control de permisos)
-        angular.forEach(respuesta.data,function(row){
-          row.permisoBorrar = function(){
-            if($usuarioLogueado == "Administrador")
-              return true;
-            else
-              return false;
-        }
-        });
+        // angular.forEach(respuesta.data,function(row){
+        //   row.permisoBorrar = function(){
+        //     if($usuarioLogueado == "Administrador")
+        //       return true;
+        //     else
+        //       return false;
+        // }
+        // });
 
         // Cargo los datos en la grilla.
         $scope.gridOptionsUsuarios.data = respuesta.data;
@@ -115,11 +119,11 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           visible: true
         },
         { name: 'Borrar',
-          cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
+          cellTemplate:'<button class="btn btn-danger" ng-show="{{permisoAdministrador}}" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
-          visible: 'permisoBorrar()'
+          visible: true
         },
       ];
     }
