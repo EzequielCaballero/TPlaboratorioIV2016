@@ -22,19 +22,6 @@ $app->get('/entidades[/]', function ($request, $response, $args) {
     return $response;
 });
 
-
-$app->post('/altaFoto[/]', function ($request, $response, $args) {
-
-    if ( !empty( $_FILES ) )
-    {
-        $temporal = $_FILES[ 'file' ][ 'tmp_name' ];
-        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
-        move_uploaded_file( $temporal, $ruta );
-        echo "correcto";
-    }
-});
-
-
 $app->post('/entidades/{objeto}', function ($request, $response, $args) {
     
     $entidad = json_decode($args['objeto']);
@@ -141,6 +128,17 @@ $app->get('/locales/{parametro}', function ($request, $response, $args) {
     // $parametro = json_decode($args['parametro']);
     // $response->write(json_encode($datos));
     // return $response;
+});
+
+$app->post('/altaFoto[/]', function ($request, $response, $args) {
+
+    if ( !empty( $_FILES ) )
+    {
+        $temporal = $_FILES[ 'file' ][ 'tmp_name' ];
+        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+        move_uploaded_file( $temporal, $ruta );
+        echo "correcto";
+    }
 });
 
 $app->post('/locales/{objeto}', function ($request, $response, $args) {

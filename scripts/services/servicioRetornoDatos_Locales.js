@@ -7,6 +7,10 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
     var Url = factoryRutaDatos.Locales;
 
     //****************************FUNCIONES****************************//
+    this.retornarOrigenDatos = function(){
+      return Url;
+    }
+
 
     this.traerTodo = function(){ //FUNCIÓN PÚBLICA
        return $http.get(Url).then(
@@ -20,7 +24,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Usuario', [])
             return error;
           }
         );
-      }
+    }
 
     this.traerCiertosLocales = function(parametro){ //FUNCIÓN PÚBLICA
 

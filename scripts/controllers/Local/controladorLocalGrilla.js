@@ -42,7 +42,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           row.LocalName = function(){
             return local;
         }
-        });
+      });
 
         // Cargo los datos en la grilla.
         $scope.gridOptionsLocales.data = respuesta.data;

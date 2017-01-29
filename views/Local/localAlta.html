@@ -5,7 +5,7 @@
         <label>Domicilio:</label><br>
         <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese su calle" value="" required>
         <input type="number" id="altura" name="altura" ng-model="altura" placeholder="altura" value="" min="01" max="9999" required><br>
-        <select ng-model="localidad" required>
+        <select ng-model="localidad" name="localidad" required>
             <option value="--Seleccione localidad--">--Seleccione localidad--</option>
             <option value="CABA">CABA</option>
             <option value="25 de Mayo">25 de Mayo</option>
@@ -149,7 +149,32 @@
           <option value="">--Seleccione empleado como Encargado--</option>
         </select><br>
 
-        <button  class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--'" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
+        <input id="fileUpload" type="file" nv-file-select uploader="subidorDeArchivos" multiple required/>
+				<li ng-repeat="item in subidorDeArchivos.queue">
+					<!-- nombre del archivo -->
+					Archivo: <span ng-bind="item.file.name"></span><br/>
+					<!-- imagen del archivo -->
+					<div ng-show="subidorDeArchivos.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+					<!-- boton upload. Lo puedo usar para cargar las fotos o crear
+						mi propia funcion y llamar a uploader.uploadAll() -->
+					<!-- <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+						<span class="glyphicon glyphicon-upload"></span> Upload
+					</button> -->
+
+					<!-- boton cancel -->            
+					<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+						<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+					</button>
+
+					<!-- boton remove -->
+					<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+						<span class="glyphicon glyphicon-trash"></span> Remove
+					</button>
+				</li><br>
+				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Remove all</button><br><br>
+
+
+        <button class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
     </form>
 </div>
 
