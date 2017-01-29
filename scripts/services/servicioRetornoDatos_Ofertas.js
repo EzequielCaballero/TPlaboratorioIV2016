@@ -1,10 +1,10 @@
-angular.module('ABMangularAPI.servicioRetornoDatos_Local', [])
-  app.service('servicioRetornoLocales', function ($http, factoryRutaDatos) {
-    this.Nombre="service para Locales";
+angular.module('ABMangularAPI.servicioRetornoDatos_Oferta', [])
+  app.service('servicioRetornoOfertas', function ($http, factoryRutaDatos) {
+    this.Nombre="service para Ofertas";
 
     //****************************ORIGEN DE DATOS****************************//
     // Uso dinámico de valor url (por Factory)
-    var Url = factoryRutaDatos.Locales;
+    var Url = factoryRutaDatos.Ofertas;
 
     //****************************FUNCIONES****************************//
     this.retornarOrigenDatos = function(){
@@ -26,7 +26,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Local', [])
         );
     }
 
-    this.traerCiertosLocales = function(parametro){ //FUNCIÓN PÚBLICA
+    this.traerCiertasOfertas = function(parametro){ //FUNCIÓN PÚBLICA
 
         return $http.get(traerURL(parametro)).then(
           //Funciones que son parámetros, con lo cual se separan por coma.
@@ -51,7 +51,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Local', [])
 
     //************************** ALTA - BAJA - MODIFICACION **************************//
 
-    this.ABM_Local = function(local, accion){ //FUNCIÓN PÚBLICA
+    this.ABM_Oferta = function(local, accion){ //FUNCIÓN PÚBLICA
       
       switch(accion)
       { 

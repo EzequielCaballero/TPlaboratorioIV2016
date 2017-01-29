@@ -5,6 +5,7 @@
 require 'vendor/autoload.php';
 require 'PHP/clases/Usuarios.php';
 require 'PHP/clases/Locales.php';
+require 'PHP/clases/Ofertas.php';
 
 $app = new Slim\App();
 
@@ -12,53 +13,6 @@ $app->get('/', function ($request, $response, $args) {
     $response->write("Welcome to Slim!");
     return $response;
 });
-
-
-$app->get('/entidades[/]', function ($request, $response, $args) {
-    $datos = entidad::TraerTodasLasEntidades();
-    $response->write(json_encode($datos));
-    //INTERNAL SERVER ERROR 500 -> Porque le estaba devolviendo una referencia a memoria del servidor (hay que pasar un "string" del objeto transformado a json!!)
-    
-    return $response;
-});
-
-$app->post('/entidades/{objeto}', function ($request, $response, $args) {
-    
-    $entidad = json_decode($args['objeto']);
-    echo "<br>DATOS!: " . $args['objeto'];
-    
-    $datos = entidad::InsertarEntidad($entidad);
-    $response->write($datos);
-    return $response;
-});
-
-$app->put('/entidades/{objeto}', function ($request, $response, $args) {
-    
-    $entidad = json_decode($args['objeto']);
-    echo "<br>DATOS!: " . $args['objeto'];
-    
-    if($entidad->foto!="pordefecto.png")
-    {
-        $rutaVieja="../img/".$entidad->foto;
-        $rutaNueva=$entidad->numero.".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
-        copy($rutaVieja, "../img/".$rutaNueva);
-        unlink($rutaVieja);
-        $entidad->foto=$rutaNueva;
-    }
-    $datos = entidad::ModificarEntidades($entidad);
-    $response->write($datos);
-    return $response;
-});
-
-
-$app->delete('/entidades/{numero}', function ($request, $response, $args) {
-    
-    $datos = entidad::BorrarEntidad($args['numero']);
-    $response->write("borrar !: ");
-    //var_dump($args);
-    return $response;
-});
-
 
 //**************************************************************USUARIOS**************************************************************//
 
@@ -223,6 +177,13 @@ $app->delete('/locales/{id}', function ($request, $response, $args) {
     $empleadosLibres = Usuario::LiberarUsuariosDeLocal($id_local);
     $response->write("borrar !: ");
     //var_dump($args);
+    return $response;
+});
+
+//**************************************************************OFERTAS**************************************************************//
+$app->get('/ofertas[/]', function ($request, $response, $args) {
+    $datos = Oferta::TraerTodosLasOfertas();
+    $response->write(json_encode($datos));
     return $response;
 });
 

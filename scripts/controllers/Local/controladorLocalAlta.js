@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorLocalAlta', [])
-  app.controller('controlLocalAlta', function($scope, $http, $state, $auth, FileUploader, servicioRetornoUsuarios, servicioRetornoLocales) {
+  app.controller('controlLocalAlta', function($scope, $http, $state, $auth, FileUploader, servicioRetornoUsuarios, servicioRetornoLocales, servicioRetornoOfertas) {
 
     if(!$auth.isAuthenticated())
         $state.go("inicio");
