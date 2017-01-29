@@ -38,6 +38,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     /************DATOS HARD-CODEADOS**************/
     $scope.local = {};
     //Dirección
+    $scope.local.id_local = 0;
     $scope.calle = "Av. Calchaqui";
     $scope.altura = 2200;
     $scope.localidad = "Quilmes";
@@ -48,7 +49,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     
     $scope.crearLocal=function(){
       
-      console.log($scope.subidorDeArchivos.queue);
+      console.info($scope.subidorDeArchivos.queue);
       if($scope.subidorDeArchivos.queue[0]!=undefined && $scope.subidorDeArchivos.queue.length == 3)
       {
         var foto_1 = $scope.subidorDeArchivos.queue[0]._file.name;
@@ -59,13 +60,13 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
         $scope.local.foto3 = foto_3;
 
         console.info("Local a guardar: ", $scope.local);
-        $scope.subidorDeArchivos.uploadAll();
+        //$scope.subidorDeArchivos.uploadAll();
 
-        $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
-        {
-            console.info("Fotos: ", $scope.subidorDeArchivos);
-            console.info("Ya guardé el archivo.", item, response, status, headers);
-        };
+        // $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
+        // {
+        //     console.info("Fotos: ", $scope.subidorDeArchivos);
+        //     console.info("Ya guardé el archivo.", item, response, status, headers);
+        // };
 
         //Validar dirección seleccionada
         if($scope.localidad != "CABA")
@@ -75,6 +76,9 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
         //Ejecutar consulta SQL
         servicioRetornoLocales.ABM_Local($scope.local, "Agregar").then(function(respuesta){
+          var contador = 0;
+          contador++;
+          console.info("Contador", contador);
           console.log("RETORNO: ", respuesta.data);
           $state.go("local.grilla");
           console.info(respuesta.data);

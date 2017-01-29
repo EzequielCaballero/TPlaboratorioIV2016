@@ -145,14 +145,33 @@ $app->post('/altaFoto[/]', function ($request, $response, $args) {
 $app->post('/locales/{objeto}', function ($request, $response, $args) {
     
     $local = json_decode($args['objeto']);
-    echo "<br>DATOS!: " . $args['objeto'];
+    //echo "<br>DATOS!: " . $args['objeto'];
 
-    $rutaVieja_1="../img/Locales/".$local->foto1;
-    $rutaNueva_1="LOCAL_x".".".PATHINFO($rutaVieja_1, PATHINFO_EXTENSION);
-    
-    copy($rutaVieja_1, "../img/Locales/".$rutaNueva_1);
-    unlink($rutaVieja_1);
-    $local->foto1=$rutaNueva_1;
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Local::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $local->id_local = $nuevaFila;
+    echo "Nueva fila: " . $nuevaFila;
+
+    //RENOMBRE DE FOTOS
+
+        $rutaVieja="../img/Locales/".$local->foto1;
+        $rutaNueva="LOCAL_".$nuevaFila."-1".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        copy($rutaVieja, "../img/Locales/".$rutaNueva);
+        unlink($rutaVieja);
+        $local->foto1=$rutaNueva;
+
+        $rutaVieja="../img/Locales/".$local->foto2;
+        $rutaNueva="LOCAL_".$nuevaFila."-2".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        copy($rutaVieja, "../img/Locales/".$rutaNueva);
+        unlink($rutaVieja);
+        $local->foto2=$rutaNueva;
+
+        $rutaVieja="../img/Locales/".$local->foto3;
+        $rutaNueva="LOCAL_".$nuevaFila."-3".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        copy($rutaVieja, "../img/Locales/".$rutaNueva);
+        unlink($rutaVieja);
+        $local->foto3=$rutaNueva;
 
     $datos = Local::NuevoLocal($local);
     $response->write($datos);

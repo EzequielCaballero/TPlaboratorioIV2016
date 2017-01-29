@@ -1,7 +1,7 @@
 angular.module('ABMangularAPI.controladorLocalGrilla', [])   
   app.controller('controlLocalGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoLocales, servicioRetornoUsuarios, NgMap) {
 
-      $scope.ABMLocal = false;
+      $scope.ABMLocal = true;
 
       if(!$auth.isAuthenticated())
         $state.go("inicio");
@@ -9,8 +9,8 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       {
           $sesion = $auth.getPayload();
           $usuarioLogueado = $sesion.perfil;
-          if($usuarioLogueado = "Administrador")
-            $scope.AMBLocal = true;
+          if($usuarioLogueado == "Administrador")
+            $scope.ABMLocal = false;
       }
 
       $scope.marker = new google.maps.Marker({
@@ -38,9 +38,9 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         //Asignos funciones para cada row (control de permisos)
         angular.forEach(respuesta.data,function(row){
           contador++;
-          var local = "Local N°" + contador;
+          var nombreLocal = "Local N°" + contador;
           row.LocalName = function(){
-            return local;
+            return nombreLocal;
         }
       });
 
@@ -158,23 +158,23 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         }
         x[slideIndex-1].style.display = "block";  
         dots[slideIndex-1].className += " w3-white";
-        tiempo = setTimeout(carousel, 5000); // Change image every 5 seconds
+        //tiempo = setTimeout(carousel, 5000); // Change image every 5 seconds
       }
 
-      function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
+      // function carousel() {
+      //   var i;
+      //   var x = document.getElementsByClassName("mySlides");
 
 
-        for (i = 0; i < x.length; i++) {
-           x[i].style.display = "none";  
-        }
-        slideIndex++;
-        if (slideIndex > x.length) {slideIndex = 1}    
-        x[slideIndex-1].style.display = "block";
+      //   for (i = 0; i < x.length; i++) {
+      //      x[i].style.display = "none";  
+      //   }
+      //   slideIndex++;
+      //   if (slideIndex > x.length) {slideIndex = 1}    
+      //   x[slideIndex-1].style.display = "block";
 
-        $scope.currentDiv(slideIndex);
-      }
+      //   $scope.currentDiv(slideIndex);
+      // }
 
       $scope.plusDivs = function(n) {
         showDivs(slideIndex += n);
@@ -184,7 +184,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         showDivs(slideIndex = n);
       }
 
-      clearTimeout(tiempo);
+      //clearTimeout(tiempo);
       showDivs(slideIndex);
 
       $scope.tituloGaleria = local.LocalName() + "- Galeria";

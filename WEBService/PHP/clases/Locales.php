@@ -89,6 +89,16 @@ class Local
 	  	return $this->id_local."-".$this->direccion."-".$this->coordenadas."-".$this->id_encargado."-".$this->foto1."-".$this->foto2."-".$this->foto3;
 	}
 
+	public static function traerUltimaFila()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT MAX(id_local) as ID from locales");
+		$consulta->execute();
+		$resultado = $consulta->fetchAll();
+
+		return $resultado[0]["ID"];
+	}
+
 	public static function TraerUnLocal($idParametro)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

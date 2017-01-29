@@ -162,15 +162,17 @@
 					</button> -->
 
 					<!-- boton cancel -->            
-					<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+<!-- 					<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
 						<span class="glyphicon glyphicon-ban-circle"></span> Cancel
-					</button>
+					</button> -->
 
 					<!-- boton remove -->
 					<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
 						<span class="glyphicon glyphicon-trash"></span> Remove
 					</button>
 				</li><br>
+				<button type="button" class="btn btn-success btn-s" ng-click="subidorDeArchivos.uploadAll()" ng-show="subidorDeArchivos.queue.length" ng-disabled="!subidorDeArchivos.getNotUploadedItems().length" class="glyphicon glyphicon-upload"></span> Upload all
+				</button>
 				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Remove all</button><br><br>
 
 
