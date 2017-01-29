@@ -277,7 +277,7 @@ class Usuario
 	public static function LiberarUsuariosDeLocal($id_local)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=NULL WHERE id_local=:id_local");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=NULL, estado='inactivo' WHERE id_local=:id_local");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
 			return $consulta->execute();

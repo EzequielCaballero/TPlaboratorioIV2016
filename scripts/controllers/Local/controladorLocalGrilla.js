@@ -1,16 +1,12 @@
 angular.module('ABMangularAPI.controladorLocalGrilla', [])   
   app.controller('controlLocalGrilla', function($scope, $http, $state, $auth, i18nService, uiGridConstants, servicioRetornoLocales, servicioRetornoUsuarios, NgMap) {
 
-      $scope.permisoAdministrador = false;
-
-      if(!$auth.isAuthenticated())
+     if(!$auth.isAuthenticated())
         $state.go("inicio");
       else
       {
           $sesion = $auth.getPayload();
           $usuarioLogueado = $sesion.perfil;
-          if($usuarioLogueado == "Administrador")
-            $scope.permisoAdministrador = true;
       }
 
       $scope.marker = new google.maps.Marker({
@@ -32,6 +28,11 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
+      if($usuarioLogueado != "Administrador")
+      {
+        $scope.gridOptionsLocales.columnDefs.splice($scope.gridOptionsLocales.columnDefs.length-1, 1);
+      }
+
       var contador = 0;
       //UTILIZACIÓN DEL SERVICE
       servicioRetornoLocales.traerTodo().then(function(respuesta){        
@@ -41,7 +42,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           var nombreLocal = "Local N°" + contador;
           row.LocalName = function(){
             return nombreLocal;
-        }
+          }
       });
 
         // Cargo los datos en la grilla.
@@ -79,15 +80,15 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           enableSorting: false,
           enableHiding: false
         },
-        { name: 'Modificar',
+        { name: 'Detalle',
           cellTemplate:'<button class="btn btn-warning" name="Perfil" ui-sref="local.perfil({id:row.entity.id_local})"><span class="glyphicon glyphicon-edit">&nbsp;</span>Ver</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
           visible: true
         },
-        { name: 'Borrar',
-          cellTemplate:'<button class="btn btn-danger" ng-show="{{permisoAdministrador}}" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
+        { field:'borrar', name: '',
+          cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
