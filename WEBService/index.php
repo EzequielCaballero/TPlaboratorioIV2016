@@ -134,8 +134,9 @@ $app->post('/altaFoto[/]', function ($request, $response, $args) {
 
     if ( !empty( $_FILES ) )
     {
+        //var_dump($_FILES);
         $temporal = $_FILES[ 'file' ][ 'tmp_name' ];
-        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'Locales' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
         move_uploaded_file( $temporal, $ruta );
         echo "correcto";
     }
@@ -145,14 +146,14 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
     
     $local = json_decode($args['objeto']);
     echo "<br>DATOS!: " . $args['objeto'];
-    if($local->foto!="pordefecto.png")
-    {
-        $rutaVieja="../img/".$local->foto;
-        $rutaNueva=$local->id_local.".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
-        copy($rutaVieja, "../img/".$rutaNueva);
-        unlink($rutaVieja);
-        $local->foto1=$rutaNueva;
-    }
+    // if($local->foto!="pordefecto.png")
+    // {
+    //     $rutaVieja="../img/Locales/".$local->foto;
+    //     $rutaNueva=$local->id_local.".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+    //     copy($rutaVieja, "../img/".$rutaNueva);
+    //     unlink($rutaVieja);
+    //     $local->foto1=$rutaNueva;
+    // }
     $datos = Local::NuevoLocal($local);
     $response->write($datos);
     return $response;
@@ -168,6 +169,12 @@ $app->put('/locales/{objeto}', function ($request, $response, $args) {
 
 $app->delete('/locales/{id}', function ($request, $response, $args) {
     
+    $local = Local::TraerUnLocal($args['id']);
+
+    unlink("../img/Locales/".$local->foto1);
+    unlink("../img/Locales/".$local->foto2);
+    unlink("../img/Locales/".$local->foto3);
+
     $datos = Local::BorrarLocal($args['id']);
     $response->write("borrar !: ");
     //var_dump($args);

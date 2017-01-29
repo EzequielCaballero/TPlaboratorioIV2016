@@ -27,7 +27,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
       //3- Pasaje de Array a JSON (OPCIONAL)
       empleados = JSON.stringify(empleados);
-      console.info("Local 1: ", empleados);
+      console.info("Empleados: ", empleados);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
@@ -45,8 +45,28 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.local.coordenadas = "0, 0";
     $scope.local.id_encargado = null;
     /********************************************/
-    $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
-    {
+    
+    $scope.crearLocal=function(){
+      
+      console.log($scope.subidorDeArchivos.queue);
+      if($scope.subidorDeArchivos.queue[0]!=undefined && $scope.subidorDeArchivos.queue.length == 3)
+      {
+        var foto_1 = $scope.subidorDeArchivos.queue[0]._file.name;
+        var foto_2 = $scope.subidorDeArchivos.queue[1]._file.name;
+        var foto_3 = $scope.subidorDeArchivos.queue[2]._file.name;
+        $scope.local.foto1 = foto_1;
+        $scope.local.foto2 = foto_2;
+        $scope.local.foto3 = foto_3;
+
+        console.info("Local a guardar: ", $scope.local);
+        $scope.subidorDeArchivos.uploadAll();
+
+        $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
+        {
+            console.info("Fotos: ", $scope.subidorDeArchivos);
+            console.info("Ya guardé el archivo.", item, response, status, headers);
+        };
+
         //Validar dirección seleccionada
         if($scope.localidad != "CABA")
         $scope.local.direccion = $scope.calle+" "+$scope.altura+", "+$scope.localidad+", "+"Buenos Aires";
@@ -62,23 +82,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
           },function errorCallback(response) {
             console.log("FALLO! ", response);
         });
-        console.info("Ya guardé el archivo.", item, response, status, headers);
-    };
 
-    $scope.crearLocal=function(){
-      
-      console.log($scope.subidorDeArchivos.queue);
-      if($scope.subidorDeArchivos.queue[0]!=undefined && $scope.subidorDeArchivos.queue.length == 3)
-      {
-        var foto_1 = $scope.subidorDeArchivos.queue[0]._file.name;
-        var foto_2 = $scope.subidorDeArchivos.queue[0]._file.name;
-        var foto_3 = $scope.subidorDeArchivos.queue[0]._file.name;
-        $scope.local.foto1 = foto_1;
-        $scope.local.foto2 = foto_2;
-        $scope.local.foto3 = foto_3;
-
-        console.info("Local a guardar: ", $scope.local);
-        $scope.subidorDeArchivos.uploadAll();
       }
       else
       {

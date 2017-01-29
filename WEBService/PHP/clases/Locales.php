@@ -92,7 +92,7 @@ class Local
 	public static function TraerUnLocal($idParametro)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from locales where id_usuario =:id");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from locales where id_local =:id");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
 		$consulta->execute();
 		$localBuscado= $consulta->fetchObject('local');
@@ -151,7 +151,7 @@ class Local
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
-				UPDATE usuarios 
+				UPDATE locales
 				SET 
 				direccion=:direccion,
 				coordenadas=:coordenadas,
