@@ -47,6 +47,12 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.local.id_encargado = null;
     /********************************************/
     
+    $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
+    {
+        console.info("Fotos: ", $scope.subidorDeArchivos);
+        console.info("Se ha movido con éxito los archivos", item, response, status, headers);
+    };
+
     $scope.crearLocal=function(){
       
       console.info($scope.subidorDeArchivos.queue);
@@ -60,13 +66,6 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
         $scope.local.foto3 = foto_3;
 
         console.info("Local a guardar: ", $scope.local);
-        //$scope.subidorDeArchivos.uploadAll();
-
-        // $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
-        // {
-        //     console.info("Fotos: ", $scope.subidorDeArchivos);
-        //     console.info("Ya guardé el archivo.", item, response, status, headers);
-        // };
 
         //Validar dirección seleccionada
         if($scope.localidad != "CABA")
@@ -90,7 +89,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
       }
       else
       {
-        alert("Debe subir 3 imágenes para continuar");
+        confirm("Debe subir 3 imágenes para continuar");
       }
     }
 

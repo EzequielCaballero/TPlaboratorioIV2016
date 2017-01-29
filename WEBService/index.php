@@ -125,9 +125,10 @@ $app->get('/locales[/]', function ($request, $response, $args) {
 });
 
 $app->get('/locales/{parametro}', function ($request, $response, $args) {
-    // $parametro = json_decode($args['parametro']);
-    // $response->write(json_encode($datos));
-    // return $response;
+    $parametro = json_decode($args['parametro']);
+    $datos = Local::TraerUnLocal($parametro);
+    $response->write(json_encode($datos));
+    return $response;
 });
 
 $app->post('/altaFoto[/]', function ($request, $response, $args) {
@@ -136,7 +137,7 @@ $app->post('/altaFoto[/]', function ($request, $response, $args) {
     {
         //var_dump($_FILES);
         $temporal = $_FILES[ 'file' ][ 'tmp_name' ];
-        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'Locales' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
+        $ruta = "..". DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'temp' . DIRECTORY_SEPARATOR . $_FILES[ 'file' ][ 'name' ];
         move_uploaded_file( $temporal, $ruta );
         echo "correcto";
     }
@@ -155,19 +156,19 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
 
     //RENOMBRE DE FOTOS
 
-        $rutaVieja="../img/Locales/".$local->foto1;
+        $rutaVieja="../img/temp/".$local->foto1;
         $rutaNueva="LOCAL_".$nuevaFila."-1".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
         $local->foto1=$rutaNueva;
 
-        $rutaVieja="../img/Locales/".$local->foto2;
+        $rutaVieja="../img/temp/".$local->foto2;
         $rutaNueva="LOCAL_".$nuevaFila."-2".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
         $local->foto2=$rutaNueva;
 
-        $rutaVieja="../img/Locales/".$local->foto3;
+        $rutaVieja="../img/temp/".$local->foto3;
         $rutaNueva="LOCAL_".$nuevaFila."-3".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
