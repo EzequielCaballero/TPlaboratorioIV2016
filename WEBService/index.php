@@ -145,6 +145,14 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
     
     $local = json_decode($args['objeto']);
     echo "<br>DATOS!: " . $args['objeto'];
+    if($local->foto!="pordefecto.png")
+    {
+        $rutaVieja="../img/".$local->foto;
+        $rutaNueva=$local->id_local.".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        copy($rutaVieja, "../img/".$rutaNueva);
+        unlink($rutaVieja);
+        $local->foto1=$rutaNueva;
+    }
     $datos = Local::NuevoLocal($local);
     $response->write($datos);
     return $response;

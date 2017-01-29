@@ -149,7 +149,7 @@
           <option value="">--Seleccione empleado como Encargado--</option>
         </select><br>
 
-        <input id="fileUpload" type="file" nv-file-select uploader="subidorDeArchivos" multiple required/>
+        <input id="fileUpload" type="file" nv-file-select uploader="subidorDeArchivos" multiple/>
 				<li ng-repeat="item in subidorDeArchivos.queue">
 					<!-- nombre del archivo -->
 					Archivo: <span ng-bind="item.file.name"></span><br/>
@@ -174,7 +174,7 @@
 				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Remove all</button><br><br>
 
 
-        <button class="button-green" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
+        <button class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
     </form>
 </div>
 

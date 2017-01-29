@@ -78,7 +78,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
         $scope.local.foto3 = foto_3;
 
         console.info("Local a guardar: ", $scope.local);
-        //$scope.subidorDeArchivos.uploadAll();
+        $scope.subidorDeArchivos.uploadAll();
       }
       else
       {

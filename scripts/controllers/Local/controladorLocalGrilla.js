@@ -114,12 +114,21 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
     }
 
     $scope.Borrar = function(local){
-
-      servicioRetornoLocales.ABM_local(local.id_local, "Borrar").then(function(response){
+      console.info("Local: ", local);
+      servicioRetornoLocales.ABM_Local(local.id_local, "Borrar").then(function(response){
         console.log("RETORNO: ", response.data);
 
           // Vuelvo a cargar los datos en la grilla.
-          servicioRetornoLocales.traerTodo().then(function(respuesta){
+          servicioRetornoLocales.traerTodo().then(function(respuesta){        
+            //Asignos funciones para cada row (control de permisos)
+            angular.forEach(respuesta.data,function(row){
+              contador++;
+              var local = "Local N°" + contador;
+              row.LocalName = function(){
+                return local;
+            }
+          });
+          // Cargo los datos en la grilla.
           $scope.gridOptionsLocales.data = respuesta.data;
           console.info(respuesta.data);
 
