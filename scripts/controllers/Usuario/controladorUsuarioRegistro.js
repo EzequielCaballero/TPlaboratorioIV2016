@@ -61,7 +61,7 @@
 
       //3- Pasaje de Array a JSON (OPCIONAL)
       locales = JSON.stringify(locales);
-      console.info("Local 1: ", locales);
+      console.info("Locales: ", locales);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);

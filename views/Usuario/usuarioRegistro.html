@@ -1,3 +1,6 @@
+<!-- MENU NAVEGACIÓN -->
+<a class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</a><span class="glyphicon glyphicon-home"></span>
+
 <div class="Frm animated bounceInLeft">
     <form class="registerForm"  name="myForm" enctype="multipart/form-data">
         <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
@@ -172,7 +175,7 @@
 
     <h3>¿Listo para continuar?:{{myForm.$valid}}</h3>
 
-<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ng-hide="{{ABMusuarios}}" ui-sref="usuario.menu()">
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="usuario.menu()">
      Volver
      <span class="glyphicon glyphicon-home"></span>
 <a>
