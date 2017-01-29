@@ -138,12 +138,12 @@ class Usuario
 		return $arrPersonas;
 	}
 
-	public static function TraerUsuariosPorParametro($criterio)
+	public static function TraerUsuariosPorParametro($criterio, $datoExtra)
 	{
 		$consulta = "";
 		switch($criterio)
 		{
-			case "Empleado":
+			case "empleado":
 				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente'";
 				break;
 
@@ -151,17 +151,18 @@ class Usuario
 				$consulta = "SELECT * from usuarios WHERE tipo_user = 'empleado'";
 				break;
 
-			case "Encargado":
-				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente' OR tipo_user = 'empleado'";
+			case "encargado":
+				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente' OR tipo_user = 'empleado' AND id_local =:id_local";
 				break;
 
-			case "Administrador":
+			case "administrador":
 				$consulta = "SELECT * from usuarios";
 				break;
 		}
 
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta($consulta);
+		$consulta->bindValue(':id_local', $datoExtra, PDO::PARAM_INT);
 		$consulta->execute();
 		$arrPersonas= $consulta->fetchAll(PDO::FETCH_CLASS, "usuario");
 		return $arrPersonas;

@@ -33,9 +33,9 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       {
         $scope.gridOptionsUsuarios.columnDefs.splice($scope.gridOptionsUsuarios.columnDefs.length-1, 1);
       }
-      
+
       //UTILIZACIÓN DEL SERVICE
-      servicioRetornoUsuarios.traerCiertosUsuarios($usuarioLogueado).then(function(respuesta){
+      servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
         // Cargo los datos en la grilla.
         $scope.gridOptionsUsuarios.data = respuesta.data;
         console.info(respuesta.data);

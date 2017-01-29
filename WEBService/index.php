@@ -68,12 +68,26 @@ $app->get('/usuarios[/]', function ($request, $response, $args) {
     return $response;
 });
 
-$app->get('/usuarios/{perfil}', function ($request, $response, $args) {
-    $perfil = json_decode($args['perfil']);
-    if($perfil == "Empleado" || $perfil == "solo_Empleados" || $perfil == "Encargado" || $perfil == "Administrador")
-        $datos = Usuario::TraerUsuariosPorParametro($perfil);
-    else
-        $datos = Usuario::TraerUnUsuario($perfil);
+$app->get('/usuarios/{dato}', function ($request, $response, $args) {
+    $parametro = json_decode($args['dato']);
+    
+    if(isset($parametro->exp))
+    {  
+        //TRAIGO CIERTOS USUARIOS
+        $unUsuario = Usuario::TraerUnUsuario($parametro->usuario);
+        $perfil = $unUsuario->tipo_user;
+        $datos = Usuario::TraerUsuariosPorParametro($perfil, $unUsuario->id_local);
+    }
+    else{
+        //TRAIGO SOLO EMPLEADOS
+        if($parametro == "solo_Empleados"){
+            $datos = Usuario::TraerUsuariosPorParametro($parametro, "nada");
+        }
+        else{
+        //TRAIGO UN UNICO USUARIO 
+        $datos = Usuario::TraerUnUsuario($parametro);
+        }
+    }
         
     $response->write(json_encode($datos));
     return $response;
