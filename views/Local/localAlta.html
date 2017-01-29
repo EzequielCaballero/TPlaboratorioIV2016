@@ -145,7 +145,7 @@
         </select><br>
         <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
 
-        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" required>
+        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" ng-change="EleccionUser()" required>
           <option value="">--Seleccione empleado como Encargado--</option>
         </select><br>
 

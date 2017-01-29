@@ -84,6 +84,14 @@ $app->post('/usuarios/{objeto}', function ($request, $response, $args) {
     $usuario = json_decode($args['objeto']);
     echo "<br>DATOS!: " . $args['objeto'];
     
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Usuario::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $usuario->id_usuario = $nuevaFila;
+    echo "Nueva fila: " . $nuevaFila;
+
+    $cambioAnteriorEncargado = Usuario::CambioCategoriaPorLocal($usuario->id_local, "encargado", "empleado");
+    $cambioJefeEnLocal = Local::CambiarEncargadoLocal($usuario);
     $datos = Usuario::InsertarUsuario($usuario);
     $response->write($datos);
     return $response;
@@ -157,24 +165,25 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
     //RENOMBRE DE FOTOS
 
         $rutaVieja="../img/temp/".$local->foto1;
-        $rutaNueva="LOCAL_".$nuevaFila."-1".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        $rutaNueva="Local_".$nuevaFila."-1".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
         $local->foto1=$rutaNueva;
 
         $rutaVieja="../img/temp/".$local->foto2;
-        $rutaNueva="LOCAL_".$nuevaFila."-2".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        $rutaNueva="Local".$nuevaFila."-2".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
         $local->foto2=$rutaNueva;
 
         $rutaVieja="../img/temp/".$local->foto3;
-        $rutaNueva="LOCAL_".$nuevaFila."-3".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
+        $rutaNueva="Local".$nuevaFila."-3".".".PATHINFO($rutaVieja, PATHINFO_EXTENSION);
         copy($rutaVieja, "../img/Locales/".$rutaNueva);
         unlink($rutaVieja);
         $local->foto3=$rutaNueva;
 
     $datos = Local::NuevoLocal($local);
+    $cambioUsuario = Usuario::CambioCategoriaPorId($local->id_encargado, $local->id_local, "encargado");
     $response->write($datos);
     return $response;
 });
@@ -189,13 +198,15 @@ $app->put('/locales/{objeto}', function ($request, $response, $args) {
 
 $app->delete('/locales/{id}', function ($request, $response, $args) {
     
-    $local = Local::TraerUnLocal($args['id']);
+    $id_local = $args['id'];
+    $local = Local::TraerUnLocal($id_local);
 
     unlink("../img/Locales/".$local->foto1);
     unlink("../img/Locales/".$local->foto2);
     unlink("../img/Locales/".$local->foto3);
 
     $datos = Local::BorrarLocal($args['id']);
+    $empleadosLibres = Usuario::LiberarUsuariosDeLocal($id_local);
     $response->write("borrar !: ");
     //var_dump($args);
     return $response;

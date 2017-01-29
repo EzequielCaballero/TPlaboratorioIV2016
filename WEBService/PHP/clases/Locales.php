@@ -182,7 +182,15 @@ class Local
 			return $consulta->execute();
 	}
 
-
+	public static function CambiarEncargadoLocal($usuario)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE locales SET id_encargado=:nuevoEncargado WHERE id_local=:id_local");
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta->bindValue(':nuevoEncargado', $usuario->id_usuario, PDO::PARAM_INT);
+		$consulta->bindValue(':id_local', $usuario->id_local, PDO::PARAM_INT);
+		return $consulta->execute();
+	}
 //--------------------------------------------------------------------------------//
 //--FIN DE LA CLASE "LOCAL"
 }	

@@ -100,6 +100,7 @@
      
     $scope.usuario.estado = "activo";
     $scope.usuario.id_local = null;
+    $scope.usuario.id_usuario = null;
 
     $scope.EleccionUser=function(){
       switch($scope.usuario.tipo_user)

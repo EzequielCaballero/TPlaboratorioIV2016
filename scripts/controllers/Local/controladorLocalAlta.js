@@ -50,7 +50,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
     {
         console.info("Fotos: ", $scope.subidorDeArchivos);
-        console.info("Se ha movido con éxito los archivos", item, response, status, headers);
+        console.info("Se han movido con éxito los archivos", item, response, status, headers);
     };
 
     $scope.crearLocal=function(){
@@ -75,9 +75,6 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
         //Ejecutar consulta SQL
         servicioRetornoLocales.ABM_Local($scope.local, "Agregar").then(function(respuesta){
-          var contador = 0;
-          contador++;
-          console.info("Contador", contador);
           console.log("RETORNO: ", respuesta.data);
           $state.go("local.grilla");
           console.info(respuesta.data);

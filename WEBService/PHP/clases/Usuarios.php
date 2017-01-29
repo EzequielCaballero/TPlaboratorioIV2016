@@ -109,6 +109,16 @@ class Usuario
 	  	return $this->nombre."-".$this->apellido."-".$this->edad."-".$this->apellido."-".$this->correo."-".$this->direccion."-".$this->coordenadas."-".$this->clave."-".$this->tipo_user;
 	}
 
+	public static function traerUltimaFila()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT MAX(id_usuario) as ID from usuarios");
+		$consulta->execute();
+		$resultado = $consulta->fetchAll();
+
+		return $resultado[0]["ID"];
+	}
+
 	public static function TraerUnUsuario($idParametro)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -164,9 +174,10 @@ class Usuario
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("
 			INSERT into usuarios 
-			(nombre,apellido,edad,sexo,correo,direccion,coordenadas,clave,tipo_user,estado,id_local)
-			values(:nombre,:apellido,:edad,:sexo,:correo,:direccion,:coordenadas,:clave,:tipo_user,:estado,:id_local)");
+			(id_usuario,nombre,apellido,edad,sexo,correo,direccion,coordenadas,clave,tipo_user,estado,id_local)
+			values(:id_usuario,:nombre,:apellido,:edad,:sexo,:correo,:direccion,:coordenadas,:clave,:tipo_user,:estado,:id_local)");
 
+		$consulta->bindValue(':id_usuario',$usuario->id_usuario, PDO::PARAM_INT);
 		$consulta->bindValue(':nombre',$usuario->nombre, PDO::PARAM_STR);
 		$consulta->bindValue(':apellido',$usuario->apellido, PDO::PARAM_STR);
 		$consulta->bindValue(':edad',$usuario->edad, PDO::PARAM_INT);
@@ -180,8 +191,6 @@ class Usuario
 		$consulta->bindValue(':id_local',$usuario->id_local, PDO::PARAM_STR);
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
-
-
 	}
 
 //--------------------------------------------------------------------------------//
@@ -232,6 +241,7 @@ class Usuario
 			return $consulta->execute();
 	}
 
+	//CONSULTAS ESPECIALES
 	public static function CambiarEstadoUsuario($usuario)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -239,6 +249,37 @@ class Usuario
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta->bindValue(':estado',$usuario->estado, PDO::PARAM_STR);
 			$consulta->bindValue(':id_usuario',$usuario->id, PDO::PARAM_INT);
+			return $consulta->execute();
+	}
+
+	public static function CambioCategoriaPorId($id, $id_local, $tipo)
+	{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET tipo_user=:tipo_user, id_local=:id_local WHERE id_usuario=:id_usuario");
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta->bindValue(':tipo_user', $tipo, PDO::PARAM_STR);
+			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
+			$consulta->bindValue(':id_usuario',$id, PDO::PARAM_INT);
+			return $consulta->execute();
+	}
+
+	public static function CambioCategoriaPorLocal($id_local, $categoriaActual, $categoriaNueva)
+	{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET tipo_user=:categoriaNueva WHERE id_local=:id_local AND tipo_user=:categoriaActual");
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta->bindValue(':categoriaNueva', $categoriaNueva, PDO::PARAM_STR);
+			$consulta->bindValue(':categoriaActual', $categoriaActual, PDO::PARAM_STR);
+			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
+			return $consulta->execute();
+	}
+
+	public static function LiberarUsuariosDeLocal($id_local)
+	{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=NULL WHERE id_local=:id_local");
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
 			return $consulta->execute();
 	}
 
