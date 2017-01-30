@@ -1,6 +1,7 @@
 angular.module('ABMangularAPI.controladorUsuarioLogin', [])
   app.controller('controlUsuarioLogin', function($scope, $http, $state, $auth) {
 
+    $scope.usuarioCorrecto = true;
     $scope.Perfil = function(usuario){
 
       switch(usuario)
@@ -71,7 +72,7 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
           else
           {
             console.info("no token", $auth.getPayload());
-            alert("Error. Usuario inexistente o inactivo. Por favor, intentelo nuevamente");
+            $scope.usuarioCorrecto = false;
           }
       })
       .catch(function(response) {

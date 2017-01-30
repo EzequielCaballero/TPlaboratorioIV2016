@@ -326,7 +326,8 @@ BOTONES
 }
 
 .mensajeAlerta{
-    font-size: 30px;
+    margin: 0 auto;
+    font-size: 20px;
     color: #EF1919;
 }
 
