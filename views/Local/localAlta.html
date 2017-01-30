@@ -163,7 +163,7 @@
                   </tr>
                 </thead>
                 <tr ng-repeat="oferta in lista_ofertas">
-                    <td style="width:10%"><input type="checkbox" value="{{oferta.id_oferta}}"/></td>
+                    <td id="opcionOferta" style="width:10%"><input type="checkbox" ng-model="itemOferta" value="{{oferta.id_oferta}}" ng-change="EleccionOferta()"/></td>
                     <td style="width:90%">{{oferta.titulo}}</td>
                 </tr>
             </table>

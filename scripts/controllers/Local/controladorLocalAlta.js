@@ -46,7 +46,6 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
             console.log("FALLO! ", response);
     });
     
-
     /************DATOS HARD-CODEADOS**************/
     $scope.local = {};
     //Dirección
@@ -57,6 +56,12 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
     $scope.local.coordenadas = "0, 0";
     $scope.local.id_encargado = null;
+    $scope.local.ofertas = {};
+
+    $scope.EleccionOferta = function(){
+      alert("Seleccionado: " + $scope.itemOferta);
+    }
+
     /********************************************/
     
     $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)

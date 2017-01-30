@@ -623,9 +623,15 @@ NUEVO LOCAL
     color:#DBA78A;
 }
 
+#tablaOfertasAlta td#opcionOferta:hover{
+    cursor: pointer;
+    background-color: #E0CFCF;
+}
+
 #tablaOfertasAlta input[type=checkbox]
 {
   /* Double-sized Checkboxes */
+  cursor: pointer;
   -ms-transform: scale(3); /* IE */
   -moz-transform: scale(3); /* FF */
   -webkit-transform: scale(3); /* Safari and Chrome */
