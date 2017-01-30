@@ -51,12 +51,12 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Oferta', [])
 
     //************************** ALTA - BAJA - MODIFICACION **************************//
 
-    this.ABM_Oferta = function(local, accion){ //FUNCIÓN PÚBLICA
+    this.ABM_Oferta = function(oferta, accion){ //FUNCIÓN PÚBLICA
       
       switch(accion)
       { 
         case "Agregar": //POST
-          return $http.post(traerURL(local)).then(
+          return $http.post(traerURL(oferta)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);
@@ -70,7 +70,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Oferta', [])
 
         case "Modificar": //PUT
 
-           return $http.put(traerURL(local)).then(
+           return $http.put(traerURL(oferta)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);
@@ -84,7 +84,7 @@ angular.module('ABMangularAPI.servicioRetornoDatos_Oferta', [])
 
         case "Borrar": // DELETE
 
-          return $http.delete(traerURL(local)).then(
+          return $http.delete(traerURL(oferta)).then(
               //Funciones que son parámetros, con lo cual se separan por coma.
               function(respuesta){
                 console.info("RESPUESTA (en service): ", respuesta);

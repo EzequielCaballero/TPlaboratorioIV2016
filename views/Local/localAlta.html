@@ -149,8 +149,13 @@
         <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
 
         <label>Selección de encargado</label><br>
-        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" ng-change="EleccionUser()" required>
+        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" required>
           <option value="">--Seleccione empleado como Encargado--</option>
+        </select><br>
+
+        <br><label>Selección de ofertas</label><br>
+        <select id="opcionOferta" ng-model="local.ofertas" ng-options="c.code as c.name for c in lista_ofertas" required>
+          <option value="">--Seleccione oferta--</option>
         </select><br>
 
         <br><label>Seleccione 3 imágenes</label><br>
