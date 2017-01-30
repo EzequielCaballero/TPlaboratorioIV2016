@@ -154,9 +154,20 @@
         </select><br>
 
         <br><label>Selección de ofertas</label><br>
-        <select id="opcionOferta" ng-model="local.ofertas" ng-options="c.code as c.name for c in lista_ofertas" required>
-          <option value="">--Seleccione oferta--</option>
-        </select><br>
+        <div class="tablaOfertas table-responsive">
+            <table id="tablaOfertasAlta" class='table table-hover'>
+                <thead>
+                  <tr>
+                    <th>SELECCIONAR</th>
+                    <th>OFERTAS</th>
+                  </tr>
+                </thead>
+                <tr ng-repeat="oferta in lista_ofertas">
+                    <td style="width:10%"><input type="checkbox" value="{{oferta.id_oferta}}"/></td>
+                    <td style="width:90%">{{oferta.titulo}}</td>
+                </tr>
+            </table>
+        </div>
 
         <br><label>Seleccione 3 imágenes</label><br>
         <input id="botonFoto" type="file" nv-file-select uploader="subidorDeArchivos" name="foto" style="display:none;" multiple/>

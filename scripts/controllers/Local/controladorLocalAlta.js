@@ -12,12 +12,12 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.DatoSubmit = "Crear";
     $scope.subidorDeArchivos = new FileUploader({url:'http://localhost/1A-TP_PIZZERIA/WEBService/altaFoto/'});
 
-    //CARGA DE OPCIONES -> LISTA EMPLEADOS
+    //*********************CARGA DE OPCIONES -> LISTA EMPLEADOS**********************************//
     var empleados = Array();
     servicioRetornoUsuarios.traerCiertosUsuarios("solo_Empleados").then(function(respuesta){
       console.info("empleados", respuesta.data);
 
-      //2- Rellenado de "empleados" (array de objetos)
+      //1- Rellenado de "empleados" (array de objetos)
       var cantidadDatos = respuesta.data.length;
       for (var i = 0; i < cantidadDatos; i++) {
         var nombreEmpleado = respuesta.data[i].apellido + ", " + respuesta.data[i].nombre;
@@ -25,37 +25,27 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
       }
       console.info("Opciones de empleados:", empleados);
 
-      //3- Pasaje de Array a JSON (OPCIONAL)
+      //2- Pasaje de Array a JSON (OPCIONAL)
       empleados = JSON.stringify(empleados);
       console.info("Empleados: ", empleados);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
     });
-    //4- Asignación de opciones al Select usuarios.
+    //3- Asignación de opciones al Select empleados.
     $scope.usuarios = empleados;
 
-    //CARGA DE OPCIONES -> OFERTAS A ELEGIR
+    //*********************CARGA DE OPCIONES -> OFERTAS A ELEGIR**********************************//
     var ofertas = Array();
     servicioRetornoOfertas.traerTodo().then(function(respuesta){
-      console.info("ofertas", respuesta.data);
-
-      //2- Rellenado de "ofertas" (array de objetos)
-      var cantidadDatos = respuesta.data.length;
-      for (var i = 0; i < cantidadDatos; i++) {
-        ofertas[i] = {code: respuesta.data[i].id_oferta, name: respuesta.data[i].titulo };
-      }
-      console.info("Opciones de ofertas:", ofertas);
-
-      //3- Pasaje de Array a JSON (OPCIONAL)
-      ofertas = JSON.stringify(ofertas);
-      console.info("Ofertas: ", ofertas);
+      //Armado de lista "ofertas" (array de objetos)
+      $scope.lista_ofertas = respuesta.data;
+      console.info("Opciones de ofertas:", $scope.lista_ofertas);
 
       },function errorCallback(response) {
             console.log("FALLO! ", response);
     });
-    //4- Asignación de opciones al Select usuarios.
-    $scope.lista_ofertas = ofertas;
+    
 
     /************DATOS HARD-CODEADOS**************/
     $scope.local = {};

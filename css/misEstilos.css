@@ -606,6 +606,33 @@ NUEVO LOCAL
     border-radius: 40px;
 }
 
+#tablaOfertasAlta{
+    margin: 0 auto;
+    border: 5px solid #5A4848;
+    color: white;
+    border-radius: 10px;
+    width: 20%;
+}
+
+#tablaOfertasAlta td{
+    background-color: #461515;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25px;
+    font-family: "Arial", Helvetica, sans-serif;
+    color:#DBA78A;
+}
+
+#tablaOfertasAlta input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  padding: 2px;
+}
+
 /************************************************************************************
 GRILLA PRODUCTOS
 *************************************************************************************/
