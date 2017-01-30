@@ -13,7 +13,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.subidorDeArchivos = new FileUploader({url:'http://localhost/1A-TP_PIZZERIA/WEBService/altaFoto/'});
 
     //*********************CARGA DE OPCIONES -> LISTA EMPLEADOS**********************************//
-    var empleados = Array();
+    var empleados = [];
     servicioRetornoUsuarios.traerCiertosUsuarios("solo_Empleados").then(function(respuesta){
       console.info("empleados", respuesta.data);
 
@@ -36,7 +36,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.usuarios = empleados;
 
     //*********************CARGA DE OPCIONES -> OFERTAS A ELEGIR**********************************//
-    var ofertas = Array();
+    var ofertas = [];
     servicioRetornoOfertas.traerTodo().then(function(respuesta){
       //Armado de lista "ofertas" (array de objetos)
       $scope.lista_ofertas = respuesta.data;
@@ -56,12 +56,22 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
     $scope.local.coordenadas = "0, 0";
     $scope.local.id_encargado = null;
-    $scope.local.ofertas = {};
+    $scope.local.ofertas = [];
 
-    $scope.EleccionOferta = function(){
-      alert("Seleccionado: " + $scope.itemOferta);
+    $scope.EleccionOferta = function(ofertaElegida){
+
+      console.info("Oferta seleccionada: ", ofertaElegida);
+      var id = '#' + ofertaElegida;
+        if($(id).prop('checked')){
+          $scope.local.ofertas.push(ofertaElegida);  
+        }
+        else
+        {
+          $scope.local.ofertas.splice($scope.local.ofertas.indexOf(ofertaElegida),1);
+        }
+      console.info("Ofertas: ", $scope.local.ofertas);
     }
-
+    //NOTA: utilización de .splice -> Parametros (1)añadir/borrar (2)elementos a añadir/borrar (3)posición afectada
     /********************************************/
     
     $scope.subidorDeArchivos.onSuccessItem=function(item, response, status, headers)
