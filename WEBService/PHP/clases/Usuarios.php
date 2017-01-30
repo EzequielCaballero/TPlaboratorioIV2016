@@ -242,7 +242,7 @@ class Usuario
 			return $consulta->execute();
 	}
 
-	//CONSULTAS ESPECIALES
+	//----------------CONSULTAS ESPECIALES----------------//
 	public static function CambiarEstadoUsuario($usuario)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -253,10 +253,10 @@ class Usuario
 			return $consulta->execute();
 	}
 
-	public static function CambioCategoriaPorId($id, $id_local, $tipo)
+	public static function CambioCategoriaEmpleado($id, $id_local, $tipo)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET tipo_user=:tipo_user, id_local=:id_local WHERE id_usuario=:id_usuario");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET estado='activo', tipo_user=:tipo_user, id_local=:id_local WHERE id_usuario=:id_usuario");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta->bindValue(':tipo_user', $tipo, PDO::PARAM_STR);
 			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
@@ -278,7 +278,7 @@ class Usuario
 	public static function LiberarUsuariosDeLocal($id_local)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=NULL, estado='inactivo' WHERE id_local=:id_local");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=NULL, estado='inactivo', tipo_user='empleado' WHERE id_local=:id_local");
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 			$consulta->bindValue(':id_local', $id_local, PDO::PARAM_INT);
 			return $consulta->execute();

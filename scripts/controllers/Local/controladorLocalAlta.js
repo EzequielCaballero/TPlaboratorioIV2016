@@ -11,7 +11,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
     $scope.DatoSubmit = "Crear";
     $scope.subidorDeArchivos = new FileUploader({url:'http://localhost/1A-TP_PIZZERIA/WEBService/altaFoto/'});
-
+    $scope.alertaCargaFotos = true;
     //*********************CARGA DE OPCIONES -> LISTA EMPLEADOS**********************************//
     var empleados = [];
     servicioRetornoUsuarios.traerCiertosUsuarios("solo_Empleados").then(function(respuesta){
@@ -62,13 +62,11 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
       console.info("Oferta seleccionada: ", ofertaElegida);
       var id = '#' + ofertaElegida;
-        if($(id).prop('checked')){
+        if($(id).prop('checked'))
           $scope.local.ofertas.push(ofertaElegida);  
-        }
         else
-        {
           $scope.local.ofertas.splice($scope.local.ofertas.indexOf(ofertaElegida),1);
-        }
+
       console.info("Ofertas: ", $scope.local.ofertas);
     }
     //NOTA: utilización de .splice -> Parametros (1)añadir/borrar (2)elementos a añadir/borrar (3)posición afectada
@@ -113,7 +111,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
       }
       else
       {
-        confirm("Debe subir 3 imágenes para continuar");
+        $scope.alertaCargaFotos = false;
       }
     }
 

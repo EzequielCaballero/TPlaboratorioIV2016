@@ -187,10 +187,11 @@
 				<!-- BOTONES GENERALES DE CARGA -->
 				<button type="button" class="btn btn-success btn-s" ng-click="subidorDeArchivos.uploadAll()" ng-show="subidorDeArchivos.queue.length" ng-disabled="!subidorDeArchivos.getNotUploadedItems().length" class="glyphicon glyphicon-upload"></span> Subir fotos
 				</button>
-				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Limpiar </button><br><br>
+				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Limpiar </button>
+        <span class="mensajeAlerta" ng-hide="{{alertaCargaFotos}}"></span>
 
 
-        <button class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length || subidorDeArchivos.getNotUploadedItems().length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
+        <br><br><button class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length || subidorDeArchivos.getNotUploadedItems().length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
     </form>
 </div>
 

@@ -150,8 +150,11 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
         unlink($rutaVieja);
         $local->foto3=$rutaNueva;
 
+    //CARGA OFERTAS
+        $cargarOfertas = Oferta::asociarOfertasALocal($local->id_local, $local->ofertas);
+
     $datos = Local::NuevoLocal($local);
-    $cambioUsuario = Usuario::CambioCategoriaPorId($local->id_encargado, $local->id_local, "encargado");
+    $cambioUsuario = Usuario::CambioCategoriaEmpleado($local->id_encargado, $local->id_local, "encargado");
     $response->write($datos);
     return $response;
 });
@@ -175,6 +178,7 @@ $app->delete('/locales/{id}', function ($request, $response, $args) {
 
     $datos = Local::BorrarLocal($args['id']);
     $empleadosLibres = Usuario::LiberarUsuariosDeLocal($id_local);
+    $ofertasLocal = Oferta::desvincularOfertasALocal($id_local);
     $response->write("borrar !: ");
     //var_dump($args);
     return $response;

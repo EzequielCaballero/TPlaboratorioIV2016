@@ -33,6 +33,33 @@ class Oferta
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 
+	//----------------CONSULTAS ESPECIALES----------------//
+
+	public static function asociarOfertasALocal($local, $ofertas)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		foreach($ofertas as $oferta)
+		{
+			$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into locales_ofertas (id_local, id_oferta) values(:id_local,:id_oferta)");
+			$consulta->bindValue(':id_local', $local, PDO::PARAM_INT);
+			$consulta->bindValue(':id_oferta', $oferta, PDO::PARAM_INT);
+			$consulta->execute();
+			$ultimoID = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		}
+		return $ultimoID;
+	}
+
+	public static function desvincularOfertasALocal($local)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("DELETE from locales_ofertas where id_local=:id_local");
+		$consulta->bindValue(':id_local', $local, PDO::PARAM_INT);
+		$consulta->execute();
+		$filasTotales = $consulta->rowCount();
+
+		return $filasTotales;
+	}
+
 //--------------------------------------------------------------------------------//
 //--FIN DE LA CLASE "USUARIO"
 }
