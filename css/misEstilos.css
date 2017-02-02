@@ -698,6 +698,7 @@ VISTA CLIENTE
 .clienteEtiqueta{
     margin: 0 auto;
     position: relative;
+    padding-top: 10px;
     float: left;
 }
 

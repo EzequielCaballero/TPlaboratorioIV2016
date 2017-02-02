@@ -1,13 +1,13 @@
 angular.module('ABMangularAPI.controladorUsuario', [])
 	app.controller('controlCliente', function($scope, $http, $state, $auth) {
 
-		$scope.perfilUsuario = "indefinido";
-
 		if($auth.isAuthenticated())
 		{
 			$sesion = $auth.getPayload();
 			$scope.perfilUsuario = $sesion.nombre;
 		}
+		else
+			$state.go("inicio");
 
 	$scope.direccionar=function($direccion){
 
@@ -21,7 +21,7 @@ angular.module('ABMangularAPI.controladorUsuario', [])
 	      	break;
 
 	      case "Perfil":
-	      	$state.go("usuario.perfil");
+	      	$state.go("cliente.perfil");
 	      	break;
 	    }
 	}

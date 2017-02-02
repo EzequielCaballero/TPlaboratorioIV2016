@@ -35,8 +35,7 @@
           $scope.botonActualizar = true;
           $scope.dondeVolver = "usuario.menu";
       }
-      else
-        $scope.dondeVolver = "cliente.inicio";
+
     }
     
     //TRAER USUARIO

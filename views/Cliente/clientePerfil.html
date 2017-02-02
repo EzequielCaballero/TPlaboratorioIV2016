@@ -1,0 +1,23 @@
+<!doctype html>
+<br><br>
+    <h2>{{DatoRegistro}}</h2>
+    <table id="tablaPerfil" class="table table-hover animated flipInX">
+        <tbody>
+              <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
+              <tr><th><strong>NOMBRE</strong></th><td>{{usuarioElegido.nombre}}</td></tr>
+              <tr><th><strong>APELLIDO</strong></th><td>{{usuarioElegido.apellido}}</td></tr>
+              <tr><th><strong>EDAD</strong></th><td>{{usuarioElegido.edad}}</td></tr>
+              <tr><th><strong>SEXO</strong></th><td>{{usuarioElegido.sexo}}</td></tr>
+              <tr><th><strong>CORREO</strong></th><td>{{usuarioElegido.correo}}</td></tr>
+              <tr><th><strong>DIRECCION</strong></th><td>{{usuarioElegido.direccion}}</td></tr>
+              <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
+              <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
+              <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
+        </tbody>
+    </table>      
+
+
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="cliente.inicio">
+     Volver
+     <span class="glyphicon glyphicon-home"></span>
+<a>
