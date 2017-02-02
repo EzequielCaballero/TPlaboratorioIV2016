@@ -67,7 +67,11 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
           if($auth.isAuthenticated())
           {
             console.info("token", $auth.getPayload());
-            $state.go("inicio");
+            $sesion = $auth.getPayload();
+              if($sesion.perfil != "Cliente")  
+                $state.go("inicio");
+              else
+                $state.go("cliente.inicio");
           }
           else
           {

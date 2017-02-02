@@ -30,6 +30,23 @@ var app = angular.module('ABMangularAPI', [
                 controller : 'controlInicio'
             })
 
+    //*************************************VISTA CLIENTE*************************************//
+    .state('cliente', {
+                url : '/cliente',
+                abstract:true,
+                templateUrl : 'views/Cliente/abstractoCliente.html',
+                controller : 'controlCliente'
+            })
+    .state('cliente.inicio', {
+                url : '/inicio',
+                views: {
+                'contenido_cliente':{
+                    templateUrl : 'views/Cliente/clienteInicio.html',
+                    controller : 'controlClienteInicio'
+                    }
+                }
+            })
+
     //*************************************VISTA USUARIO*************************************//
     .state('usuario', {
                     url : '/usuario',

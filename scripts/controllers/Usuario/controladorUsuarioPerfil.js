@@ -29,9 +29,14 @@
     }
     else
     {
-        $scope.traer = $sesion.usuario;
-        $scope.botonActualizar = true;
-        $scope.dondeVolver = "usuario.menu";
+      if($usuarioLogueado != "Cliente")
+      {
+          $scope.traer = $sesion.usuario;
+          $scope.botonActualizar = true;
+          $scope.dondeVolver = "usuario.menu";
+      }
+      else
+        $scope.dondeVolver = "cliente.inicio";
     }
     
     //TRAER USUARIO
