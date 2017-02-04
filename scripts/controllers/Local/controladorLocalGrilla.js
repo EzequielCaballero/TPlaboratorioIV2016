@@ -159,23 +159,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         }
         x[slideIndex-1].style.display = "block";  
         dots[slideIndex-1].className += " w3-white";
-        //tiempo = setTimeout(carousel, 5000); // Change image every 5 seconds
       }
-
-      // function carousel() {
-      //   var i;
-      //   var x = document.getElementsByClassName("mySlides");
-
-
-      //   for (i = 0; i < x.length; i++) {
-      //      x[i].style.display = "none";  
-      //   }
-      //   slideIndex++;
-      //   if (slideIndex > x.length) {slideIndex = 1}    
-      //   x[slideIndex-1].style.display = "block";
-
-      //   $scope.currentDiv(slideIndex);
-      // }
 
       $scope.plusDivs = function(n) {
         showDivs(slideIndex += n);
@@ -185,7 +169,6 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
         showDivs(slideIndex = n);
       }
 
-      //clearTimeout(tiempo);
       showDivs(slideIndex);
 
       $scope.tituloGaleria = local.LocalName() + "- Galeria";

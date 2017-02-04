@@ -19,16 +19,28 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	  });
 
 
-	//PRIMER LLAMADA A SLIDER (WAIT 1 sec)
+/********************************************CARGA IMAGENES LOCALES********************************************/
 	var slideIndex = 1;
+	var timer;
+
+	$scope.localELegido;
+	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
 	   showDivs(slideIndex);
-	}, 1000);
+	   //carousel(0);
+	   /***SELECCION LOCAL********************************************/
+	   $scope.seleccionLocal = function(local, numero){
+			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
+		}
+
+	}, 500);
 
 	//FUNCIONES DE SLIDER
-  	$scope.plusDivs = function(n) {
-	  showDivs(slideIndex += n);
+  	$scope.currentDiv = function(n) {
+  	  showDivs(slideIndex = n);
+  	  console.info("indice: ", n);
+  	  clearTimeout(timer);
 	}
 
 	function showDivs(n) {
@@ -40,10 +52,17 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	  for (i = 0; i < x.length; i++) {
 	     x[i].style.display = "none";  
 	  }
-	  x[slideIndex-1].style.display = "block";  
+	  x[slideIndex-1].style.display = "block"; 
 	}
 
+	// function carousel(n) {
+	// 	showDivs(n += 1);
+	//     timer = setTimeout(carousel(slideIndex), 4000); // Change image every 4 seconds
+	// }
+
 });
+
+/****************************************************************************************/
 
 /* ALTERNATIVAS PARA MANEJAR CARGA */
 // 1) Manejador de eventos y contador

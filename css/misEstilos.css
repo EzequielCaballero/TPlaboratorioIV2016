@@ -702,5 +702,8 @@ VISTA CLIENTE
     float: left;
 }
 
+#eleccionLocal{
+    cursor: pointer;
+}
 /*************************************************************************************/
 /*FIN DE ESTILOS*/
