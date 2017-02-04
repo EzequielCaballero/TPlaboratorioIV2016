@@ -20,15 +20,14 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 
 
 /********************************************CARGA IMAGENES LOCALES********************************************/
-	var slideIndex = 1;
+	var slideIndex = 0;
 	var timer;
 
 	$scope.localELegido;
 	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
-	   showDivs(slideIndex);
-	   //carousel(0);
+	   carousel();
 	   /***SELECCION LOCAL********************************************/
 	   $scope.seleccionLocal = function(local, numero){
 			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
@@ -41,24 +40,30 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
   	  showDivs(slideIndex = n);
   	  console.info("indice: ", n);
   	  clearTimeout(timer);
+  	  setTimeout(carousel, 4000);
 	}
 
 	function showDivs(n) {
-	  var i;
-	  var x = document.getElementsByClassName("mySlides");
-	  console.info("CLASES: ", x);
-	  if (n > x.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  x[slideIndex-1].style.display = "block"; 
+		var j;
+	    var k = document.getElementsByClassName("mySlides");
+		for (j = 0; j < k.length; j++) {
+	       k[j].style.display = "none";  
+	    }
+	   k[n].style.display = "block";
 	}
 
-	// function carousel(n) {
-	// 	showDivs(n += 1);
-	//     timer = setTimeout(carousel(slideIndex), 4000); // Change image every 4 seconds
-	// }
+	function carousel() {
+	    var i;
+	    var x = document.getElementsByClassName("mySlides");
+	    console.info("CLASES: ", x);
+	    for (i = 0; i < x.length; i++) {
+	       x[i].style.display = "none";  
+	    }
+	    slideIndex++;
+	    if (slideIndex > x.length) {slideIndex = 1}    
+	    x[slideIndex-1].style.display = "block";  
+	    timer = setTimeout(carousel, 3000); // Change image every 4 seconds
+	}
 
 });
 
