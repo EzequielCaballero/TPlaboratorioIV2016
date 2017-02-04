@@ -1,18 +1,16 @@
+<br><br>
+<div id="localesParaElegir" class="w3-content w3-display-container">
+  <div ng-repeat="local in lista_locales">	
+	  <img class="mySlides" ng-src="img/Locales/{{local.foto1}}" style="width:100%"></img>
+  </div>
+<!--   <img class="mySlides" ng-src="img/Locales/Local_A1.jpg" style="width:100%">
+  <img class="mySlides" ng-src="img/Locales/Local_A2.jpg" style="width:100%">
+  <img class="mySlides" ng-src="img/Locales/Local_A3.jpg" style="width:100%"> -->
+  <a class="w3-btn-floating w3-display-left" ng-click="plusDivs(-1)">&#10094;</a>
+  <a class="w3-btn-floating w3-display-right" ng-click="plusDivs(1)">&#10095;</a>
+</div>
 
-        <div class="w3-content w3-display-container">
-        	<div ng-repeat="local in lista_locales">
-	            <img class="mySlides img-responsive" ng-src="img/Locales/{{local.foto1}}" style="width:100%">
-	        </div>
-	        <!--<div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-	              <div class="w3-left w3-padding-left w3-hover-text-khaki" ng-click="plusDivs(-1)">&#10094;</div>
-	              <div class="w3-right w3-padding-right w3-hover-text-khaki" ng-click="plusDivs(1)">&#10095;</div>
-	              <span class="w3-badge demo w3-border w3-transparent w3-hover-white" ng-click="currentDiv(1)"></span>
-	              <span class="w3-badge demo w3-border w3-transparent w3-hover-white" ng-click="currentDiv(2)"></span>
-	              <span class="w3-badge demo w3-border w3-transparent w3-hover-white" ng-click="currentDiv(3)"></span>
-	            </div> -->
-        </div>
-
-        <div "cajaIntro">
-            <span id="intro" class="">{{nombrePerfil}}</span>
-        </div>
+<div "cajaIntro">
+    <span id="intro" class="">{{nombrePerfil}}</span>
+</div>
 

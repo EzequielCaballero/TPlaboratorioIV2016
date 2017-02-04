@@ -14,58 +14,38 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
       servicioRetornoLocales.traerTodo().then(function(respuesta){        
 
       	$scope.lista_locales = respuesta.data;
+      	total = respuesta.data.length;
       	console.info("LOCALES: ", $scope.lista_locales);
-
-      },function errorCallback(response) {
-            console.log("FALLO! ", response);
-      });
-      
-      //MUESTRA DE FOTOS
-      // showDivs(slideIndex);
-      // var slideIndex = 1;
-      // var tiempo; 
-
-      // //FUNCIONES DE SLIDER
-      // function showDivs(n) {
-      //   var i;
-      //   var x = document.getElementsByClassName("mySlides");
-      //   var dots = document.getElementsByClassName("demo");
-      //   if (n > x.length) {slideIndex = 1}    
-      //   if (n < 1) {slideIndex = x.length}
-      //   for (i = 0; i < x.length; i++) {
-      //      x[i].style.display = "none";  
-      //   }
-      //   for (i = 0; i < dots.length; i++) {
-      //      dots[i].className = dots[i].className.replace(" w3-white", "");
-      //   }
-      //   x[slideIndex-1].style.display = "block";  
-      //   dots[slideIndex-1].className += " w3-white";
-      //   tiempo = setTimeout(carousel, 5000); // Change image every 5 seconds
-      // }
-
-      // function carousel() {
-      //   var i;
-      //   var x = document.getElementsByClassName("mySlides");
+	  });
 
 
-      //   for (i = 0; i < x.length; i++) {
-      //      x[i].style.display = "none";  
-      //   }
-      //   slideIndex++;
-      //   if (slideIndex > x.length) {slideIndex = 1}    
-      //   x[slideIndex-1].style.display = "block";
+	//PRIMER LLAMADA A SLIDER (WAIT 1 sec)
+	var slideIndex = 1;
+	setTimeout(function() 
+	{
+	   showDivs(slideIndex);
+	}, 1000);
 
-      //   $scope.currentDiv(slideIndex);
-      // }
+	//FUNCIONES DE SLIDER
+  	$scope.plusDivs = function(n) {
+	  showDivs(slideIndex += n);
+	}
 
-      // $scope.plusDivs = function(n) {
-      //   showDivs(slideIndex += n);
-      // }
+	function showDivs(n) {
+	  var i;
+	  var x = document.getElementsByClassName("mySlides");
+	  console.info("CLASES: ", x);
+	  if (n > x.length) {slideIndex = 1}    
+	  if (n < 1) {slideIndex = x.length}
+	  for (i = 0; i < x.length; i++) {
+	     x[i].style.display = "none";  
+	  }
+	  x[slideIndex-1].style.display = "block";  
+	}
 
-      // $scope.currentDiv = function(n) {
-      //   showDivs(slideIndex = n);
-      // }
-
-      // clearTimeout(tiempo);
- 
 });
+
+/* ALTERNATIVAS PARA MANEJAR CARGA */
+// 1) Manejador de eventos y contador
+// 2) Utilización de un wait genérico mediante setTime() o timeOut()
+// 3) Utilización de librerías para angular como Angular Busy.
