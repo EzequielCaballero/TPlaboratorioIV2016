@@ -30,12 +30,13 @@
             <h4 id="tituloVentanaModal" class="modal-title">{{localELegido}}</h4>
           </div>
           <!-- Body -->
-	          <div class="modal-body">    
-	          HOLAAA!
+	          <div class="modal-body" style="color:black">    
+	          	DIRECCION: {{direccionLocal}}
 	          </div>
 	      <!-- Footer -->    
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-default" ui-sref="cliente.menu_local({localin:localSelect})" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           </div>
         </div>
       </div>

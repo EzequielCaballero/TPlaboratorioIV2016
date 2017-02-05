@@ -55,6 +55,15 @@ var app = angular.module('ABMangularAPI', [
                     }
                 }
             })
+    .state('cliente.menu_local', {
+            url: '/menu/{localin}?',
+            views: {
+                    'contenido_cliente': {
+                    templateUrl: 'views/Local/localOpciones.html',
+                    controller : 'controlLocalOpciones'
+                }
+            }
+        })
 
     //*************************************VISTA USUARIO*************************************//
     .state('usuario', {
@@ -126,15 +135,6 @@ var app = angular.module('ABMangularAPI', [
                 abstract:true,
                 templateUrl : 'views/Local/abstractoLocal.html',
                 controller : 'controlLocal'
-            })
-    .state('local.menu', {
-                url: '/menu',
-                views: {
-                        'contenido': {
-                        templateUrl: 'views/Local/localMenu.html',
-                        controller : 'controlLocalMenu'
-                    }
-                }
             })
     .state('local.grilla', {
                 url: '/grillaLocales',

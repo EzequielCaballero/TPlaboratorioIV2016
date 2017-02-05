@@ -30,7 +30,10 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	   carousel();
 	   /***SELECCION LOCAL********************************************/
 	   $scope.seleccionLocal = function(local, numero){
+			clearTimeout(timer);
 			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
+			$scope.direccionLocal = local.direccion;
+			$scope.localSelect = local;
 		}
 
 	}, 500);
@@ -62,7 +65,7 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	    slideIndex++;
 	    if (slideIndex > x.length) {slideIndex = 1}    
 	    x[slideIndex-1].style.display = "block";  
-	    timer = setTimeout(carousel, 3000); // Change image every 4 seconds
+	    timer = setTimeout(carousel, 4000); // Change image every 4 seconds
 	}
 
 });

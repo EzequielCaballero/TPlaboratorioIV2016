@@ -708,5 +708,11 @@ VISTA CLIENTE
     filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
+.localCliente{
+    position: relative;
+    padding-top: 50px;
+    float: left;
+}
+
 /*************************************************************************************/
 /*FIN DE ESTILOS*/
