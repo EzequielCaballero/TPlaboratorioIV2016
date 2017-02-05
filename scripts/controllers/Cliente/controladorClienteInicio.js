@@ -31,9 +31,9 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	   /***SELECCION LOCAL********************************************/
 	   $scope.seleccionLocal = function(local, numero){
 			clearTimeout(timer);
-			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
-			$scope.direccionLocal = local.direccion;
-			$scope.localSelect = local;
+			// $scope.localELegido = "Ha seleccionado el Local N°" + numero;
+			// $scope.direccionLocal = local.direccion;
+			$state.go('cliente.menu_local', {obj:local});
 		}
 
 	}, 500);

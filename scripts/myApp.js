@@ -56,13 +56,14 @@ var app = angular.module('ABMangularAPI', [
                 }
             })
     .state('cliente.menu_local', {
-            url: '/menu/{localin}?',
+            url: '/menu/',
             views: {
                     'contenido_cliente': {
                     templateUrl: 'views/Local/localOpciones.html',
                     controller : 'controlLocalOpciones'
                 }
-            }
+            },
+            params:{ obj: null}
         })
 
     //*************************************VISTA USUARIO*************************************//

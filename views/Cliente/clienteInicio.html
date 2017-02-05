@@ -2,7 +2,7 @@
 <!-- CARGA DE FOTOS LOCALES  -->
 <div class="w3-content">
     <div ng-repeat="local in lista_locales">	
-	    <img id="eleccionLocal" class="mySlides img-responsive" data-toggle="modal" data-target="#localSeleccionado" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)" style="width:100%">
+	    <img id="eleccionLocal" class="mySlides img-responsive" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)" style="width:100%">
     </div>
 	<div class="w3-row-padding w3-section">
 	  <div class="w3-col s2" ng-repeat="localito in lista_locales">
@@ -35,7 +35,7 @@
 	          </div>
 	      <!-- Footer -->    
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" ui-sref="cliente.menu_local({localin:localSelect})" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           </div>
         </div>

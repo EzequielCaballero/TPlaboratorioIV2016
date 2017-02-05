@@ -10,11 +10,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
        $state.go("inicio");
     }
 
-    console.info("Parametro datos: ", $stateParams.local);
-    if($stateParams.local != "")
-    {
-      $scope.numeroLocal = $stateParams.local.id_local;
-    }
+    console.info("Parametro datos: ", $stateParams);
 
     $scope.redirigir = function(accion){
       switch(accion)
