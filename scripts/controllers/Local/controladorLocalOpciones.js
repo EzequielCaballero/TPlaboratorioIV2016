@@ -10,22 +10,34 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
        $state.go("inicio");
     }
 
+    $scope.local = $stateParams.obj;
     console.info("Parametro datos: ", $stateParams);
+    $scope.direccionLocal = $scope.local.direccion;
+    console.info("Local traido: ", $scope.local);
 
-    $scope.redirigir = function(accion){
+    $scope.disabledProductos = false;
+    $scope.disabledOfertas = false;
+
+    $scope.visualizar = function(accion){
       switch(accion)
       {
         case "Productos":
-          $state.go("usuario.registro");
+          $scope.verProductos = true;
+          $scope.verOfertas = false;
+          $scope.disabledProductos = true;
+          $scope.disabledOfertas = false;
           break;
         case "Ofertas":
-            $state.go("usuario.perfil");
-          break;
-          
-        case "Logout":
-          $auth.logout();
-          $state.go("inicio");
+          $scope.verProductos = false;
+          $scope.verOfertas = true;
+          $scope.disabledProductos = false;
+          $scope.disabledOfertas = true;
           break;
       }
+    }
+
+    $scope.cerrarSesion = function(){
+        $auth.logout();
+        $state.go("inicio");
     }
 });

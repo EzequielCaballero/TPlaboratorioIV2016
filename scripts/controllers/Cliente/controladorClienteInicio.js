@@ -37,10 +37,10 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			$scope.confirmarLocal = local;
 		}
 		$scope.irLocalSeleccionado = function(){
-			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 200);
+			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
 		}
 
-	}, 500);
+	}, 400);
 
 	//FUNCIONES DE SLIDER
   	$scope.currentDiv = function(n) {
