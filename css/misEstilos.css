@@ -468,21 +468,21 @@ MENU ADMINISTRACION
 *************************************************************************************/
 .CajaMenuABM{
   position: relative;
-  width:750px;
+  max-width:700px;
   margin:0 auto;
   margin-top:8px;
   margin-bottom:2%;
   transition:opacity 1s;
   -webkit-transition:opacity 1s;
+  float: left;
 }
 
 .CajaMenuABM h1{
   background-color: #3B1212;
-  padding:20px 0;
-  font-size:200%;
-  font-weight:150;
-  margin-left: 180px;
-  width: 50%;
+  padding:20px;
+  margin:0 auto;
+  font-size:100%;
+  max-width: 100%;
   text-align:center;
   color:#fff;
   border-radius: 20px;
@@ -493,7 +493,6 @@ MENU ADMINISTRACION
     background-color: #9E2B2B;
     color: #fff;
     width: 200px;
-    font-size: 20px;
     display: inline-block;
     padding: 14px 15px;
     text-align: center;
