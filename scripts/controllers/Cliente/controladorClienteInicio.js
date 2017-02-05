@@ -24,6 +24,7 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	var timer;
 
 	$scope.localELegido;
+	$scope.confirmarLocal;
 	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
@@ -31,9 +32,12 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	   /***SELECCION LOCAL********************************************/
 	   $scope.seleccionLocal = function(local, numero){
 			clearTimeout(timer);
-			// $scope.localELegido = "Ha seleccionado el Local N°" + numero;
-			// $scope.direccionLocal = local.direccion;
-			$state.go('cliente.menu_local', {obj:local});
+			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
+			$scope.direccionLocal = local.direccion;
+			$scope.confirmarLocal = local;
+		}
+		$scope.irLocalSeleccionado = function(){
+			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 200);
 		}
 
 	}, 500);
@@ -43,7 +47,7 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
   	  showDivs(slideIndex = n);
   	  console.info("indice: ", n);
   	  clearTimeout(timer);
-  	  setTimeout(carousel, 4000);
+  	  //setTimeout(carousel, 4000);
 	}
 
 	function showDivs(n) {
