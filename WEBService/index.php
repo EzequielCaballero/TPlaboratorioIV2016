@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 require 'PHP/clases/Usuarios.php';
 require 'PHP/clases/Locales.php';
 require 'PHP/clases/Ofertas.php';
+require 'PHP/clases/Productos.php';
 
 $app = new Slim\App();
 
@@ -187,6 +188,13 @@ $app->delete('/locales/{id}', function ($request, $response, $args) {
 //**************************************************************OFERTAS**************************************************************//
 $app->get('/ofertas[/]', function ($request, $response, $args) {
     $datos = Oferta::TraerTodosLasOfertas();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+//*************************************************************PRODUCTOS*************************************************************//
+$app->get('/productos[/]', function ($request, $response, $args) {
+    $datos = Producto::TraerTodosLosProductos();
     $response->write(json_encode($datos));
     return $response;
 });
