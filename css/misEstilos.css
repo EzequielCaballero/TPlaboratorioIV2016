@@ -721,7 +721,27 @@ VISTA CLIENTE
 .cajaOperaciones{
     position: relative;
     padding-top: 50px;
+    max-width:1000px;
+    margin:0 auto;
+    margin-top:8px;
+    margin-bottom:2%;
+    display: inline-block;
+    font-size:0.875em;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
     float: right;
+}
+
+.cajaOperaciones h2{
+  background-color: #853333;
+  padding:20px;
+  margin:0 auto;
+  font-size:100%;
+  font-weight: bold;
+  width: 100%;
+  text-align:center;
+  color:#FFFFFF;
+  border-radius: 20px;
 }
 
 /*************************************************************************************/

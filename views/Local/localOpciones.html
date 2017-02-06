@@ -22,14 +22,34 @@
 </div>
 
 <div class="cajaOperaciones">
+	<!-- LISTADO DE PRODUCTOS -->
 	<div ng-show="verProductos" class="listaProductos">
-		PRODUCTOS<br>
+		<h2>PRODUCTOS</h2>
+		<table class='table table-striped table-responsive'>
+			<thead>
+				<tr>
+					<th>  CODIGO   </th>
+					<th>  Nombre   </th>
+					<th>  Precio   </th>
+					<th>  Fotos    </th>
+				</tr>
+			</thead>
+			<tr ng-repeat="producto in lista_productos | filter:buscador as resultado">
+				<td>{{producto.id_producto}}</td>
+				<td>{{producto.nombre}}</td>
+				<td>${{producto.precio}}</td>
+				<td><img id="fotoGrilla" class='fotoGrilla' ng-src="img/Productos/{{producto.foto1}}"/></td>
+			</tr>
+		</table><br>
 		<button>Comprar</button>
 		<button>Reservar</button>
 	</div>
+
+	<!-- LISTADO DE OFERTAS -->
 	<div ng-show="verOfertas" class="listaOfertas">
-		OFERTAS<br>
+		<h2>OFERTAS</h2>
 		<button>Comprar</button>
 		<button>Reservar</button>
+
 	</div>
 </div>
