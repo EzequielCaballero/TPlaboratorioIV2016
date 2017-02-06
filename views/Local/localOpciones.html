@@ -19,12 +19,14 @@
 	         	</a>
 		</form>
 	</div>
+<!-- FIN CAJA OPCIONES -->
 </div>
 
 <div class="cajaOperaciones">
 	<!-- LISTADO DE PRODUCTOS -->
 	<div ng-show="verProductos" class="listaProductos">
 		<h2>PRODUCTOS</h2>
+		<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
 		<table class='table table-striped table-responsive'>
 			<thead>
 				<tr>
@@ -41,15 +43,36 @@
 				<td><img id="fotoGrilla" class='fotoGrilla' ng-src="img/Productos/{{producto.foto1}}"/></td>
 			</tr>
 		</table><br>
-		<button>Comprar</button>
-		<button>Reservar</button>
+		<button class="btn">Comprar</button>
+		<button class="btn">Reservar</button>
 	</div>
 
 	<!-- LISTADO DE OFERTAS -->
 	<div ng-show="verOfertas" class="listaOfertas">
 		<h2>OFERTAS</h2>
-		<button>Comprar</button>
-		<button>Reservar</button>
+		<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar oferta">
+		<table class='table table-striped table-responsive'>
+			<thead>
+				<tr>
+					<th>  CODIGO    </th>
+					<th>  Titulo    </th>
+					<th>  Productos </th>
+					<th>  Precio    </th>
+					<th>  Fotos     </th>
+				</tr>
+			</thead>
+			<tr ng-repeat="oferta in lista_ofertas | filter:buscador as resultado">
+				<td>{{oferta.id_oferta}}</td>
+				<td>{{oferta.titulo}}</td>
+				<td>{{oferta.cant_productos}}</td>
+				<td>${{oferta.precio}}</td>
+				<!-- <td><img id="fotoGrilla" class='fotoGrilla' ng-src=""/></td> -->
+			</tr>
+		</table><br>
+		<button class="btn">Comprar</button>
+		<button class="btn">Reservar</button>
+	</div>
 
 	</div>
+<!-- FIN CAJA OPERACIONES -->
 </div>
