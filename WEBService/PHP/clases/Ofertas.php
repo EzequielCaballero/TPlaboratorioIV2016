@@ -30,6 +30,20 @@ class Oferta
 		return $arrOfertas;
 	}
 
+	public static function TraerOfertaSegunLocal($local)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			SELECT o.id_oferta, o.titulo, o.cant_productos, o.precio 
+			FROM ofertas as o, locales_ofertas as lo
+			WHERE lo.id_local =:local AND o.id_oferta = lo.id_oferta");
+
+		$consulta->bindValue(':local', $local, PDO::PARAM_INT);
+		$consulta->execute();
+		$arrOfertas= $consulta->fetchAll(PDO::FETCH_CLASS, "oferta");
+		return $arrOfertas;
+	}
+
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 

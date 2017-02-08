@@ -20,7 +20,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.disabledOfertas = false;
 
         //TRAER OFERTAS
-        servicioRetornoOfertas.traerTodo().then(function(respuesta){
+        servicioRetornoOfertas.traerCiertasOfertas($scope.local.id_local).then(function(respuesta){
           $scope.lista_ofertas = respuesta.data;
           console.info("Opciones de ofertas:", $scope.lista_ofertas);
 
@@ -37,6 +37,19 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
                 console.log("FALLO! ", response);
         });
 
+        //OPCIONES DE GRILLA OFERTAS
+        $scope.verProductosDeOferta = function(oferta){
+
+          servicioRetornoProductos.traerCiertosProductos(oferta).then(function(respuesta){
+          console.info("Productos asociados a oferta:", respuesta.data);
+
+          },function errorCallback(response) {
+                console.log("FALLO! ", response);
+          });
+
+        }
+
+        //OPCIONES DE MENU
         $scope.visualizar = function(accion){
           switch(accion)
           {

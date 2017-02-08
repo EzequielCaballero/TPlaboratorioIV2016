@@ -192,9 +192,23 @@ $app->get('/ofertas[/]', function ($request, $response, $args) {
     return $response;
 });
 
+$app->get('/ofertas/{parametro}', function ($request, $response, $args) {
+    $parametro = json_decode($args['parametro']);
+    $datos = Oferta::TraerOfertaSegunLocal($parametro);
+    $response->write(json_encode($datos));
+    return $response;
+});
+
 //*************************************************************PRODUCTOS*************************************************************//
 $app->get('/productos[/]', function ($request, $response, $args) {
     $datos = Producto::TraerTodosLosProductos();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/productos/{parametro}', function ($request, $response, $args) {
+    $parametro = json_decode($args['parametro']);
+    $datos = Producto::TraerProductosDeOferta($parametro);
     $response->write(json_encode($datos));
     return $response;
 });

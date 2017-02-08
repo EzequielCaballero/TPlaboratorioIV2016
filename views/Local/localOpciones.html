@@ -58,15 +58,13 @@
 					<th>  Titulo    </th>
 					<th>  Productos </th>
 					<th>  Precio    </th>
-					<th>  Fotos     </th>
 				</tr>
 			</thead>
 			<tr ng-repeat="oferta in lista_ofertas | filter:buscador as resultado">
 				<td>{{oferta.id_oferta}}</td>
 				<td>{{oferta.titulo}}</td>
-				<td>{{oferta.cant_productos}}</td>
+				<td><button class="btn" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos - {{oferta.cant_productos}}</button></td>
 				<td>${{oferta.precio}}</td>
-				<!-- <td><img id="fotoGrilla" class='fotoGrilla' ng-src=""/></td> -->
 			</tr>
 		</table><br>
 		<button class="btn">Comprar</button>

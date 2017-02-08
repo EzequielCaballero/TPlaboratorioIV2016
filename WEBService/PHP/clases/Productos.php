@@ -32,6 +32,19 @@ class Producto
 		return $arrProductos;
 	}
 
+	public static function TraerProductosDeOferta($oferta)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			SELECT p.id_producto, p.nombre, p.precio, p.foto1, p.foto2, p.foto3 
+			FROM productos as p, ofertas_productos as op
+			WHERE op.id_oferta =:oferta AND op.id_producto = p.id_producto");
+
+		$consulta->bindValue(':oferta', $oferta, PDO::PARAM_INT);
+		$consulta->execute();
+		$arrProducto= $consulta->fetchAll(PDO::FETCH_CLASS, "producto");
+		return $arrProducto;
+	}
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 
