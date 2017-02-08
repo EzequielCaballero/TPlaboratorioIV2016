@@ -650,7 +650,7 @@ NUEVO LOCAL
 }
 
 /************************************************************************************
-GRILLA PRODUCTOS
+GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
 *************************************************************************************/
 .CajaGrilla{
     width: 60%;
@@ -670,6 +670,17 @@ GRILLA PRODUCTOS
 .imgProducto{
     width: 50px;
     max-height: 60px;
+}
+
+.listaProductos, .listaOfertas input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  cursor: pointer;
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  padding: 2px;
 }
 
 /************************************************************************************

@@ -34,6 +34,7 @@
 					<th>  Nombre   </th>
 					<th>  Precio   </th>
 					<th>  Fotos    </th>
+					<th>  Elegir   </th>
 				</tr>
 			</thead>
 			<tr ng-repeat="producto in lista_productos | filter:buscador as resultado">
@@ -41,10 +42,9 @@
 				<td>{{producto.nombre}}</td>
 				<td>${{producto.precio}}</td>
 				<td><button class="btn" data-toggle="modal" data-target="#verProductos" ng-click="imagenProductos(producto, 'solo')"><img class="imgProducto img-responsive" ng-src="img/Productos/{{producto.foto1}}"></button></td>
+				<td id="opcionProducto" style="width:20%"><input type="checkbox" id="{{producto.id_producto}}" ng-model="itemProducto" value="" ng-change="EleccionProducto(producto.id_producto)"/></td>
 			</tr>
 		</table><br>
-		<button class="btn">Comprar</button>
-		<button class="btn">Reservar</button>
 	</div><!-- FIN LISTA PRODUCTOS -->
 
 	<!-- LISTADO DE OFERTAS -->
@@ -58,6 +58,7 @@
 					<th>  Titulo    </th>
 					<th>  Productos </th>
 					<th>  Precio    </th>
+					<th>  Elegir    </th>
 				</tr>
 			</thead>
 			<tr ng-repeat="oferta in lista_ofertas | filter:buscador as resultado">
@@ -65,10 +66,9 @@
 				<td>{{oferta.titulo}}</td>
 				<td><button class="btn" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos</button></td>
 				<td>${{oferta.precio}}</td>
+				<td id="opcionOferta" style="width:20%"><input type="checkbox" id="{{oferta.id_oferta}}" ng-model="itemProducto" value="" ng-change="EleccionOferta(oferta.id_oferta)"/></td>
 			</tr>
 		</table><br>
-		<button class="btn">Comprar</button>
-		<button class="btn">Reservar</button>
 	</div><!-- FIN LISTA OFERTAS -->
 
 	<!-- VENTANA MODAL PRODUCTOS -->

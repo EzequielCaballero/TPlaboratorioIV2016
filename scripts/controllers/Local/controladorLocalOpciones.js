@@ -1,7 +1,7 @@
 angular.module('ABMangularAPI.controladorLocalOpciones', [])  
   app.controller('controlLocalOpciones', function($scope, $http, $state, $auth, $stateParams, servicioRetornoOfertas, servicioRetornoProductos) {
 
-    $sesion = $auth.getPayload();
+    $sesion = $auth.getPayload();//SE ASUME HAY SESION ACTIVA
     console.info("SESION ACTIVA: ", $sesion);
 
     if(!$auth.isAuthenticated())
@@ -54,6 +54,35 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
                 console.log("FALLO! ", response);
           });
 
+        }
+
+        //DEFINO ARRAY GLOBAL DE SELECCION FUTURA DE CLIENTE
+        $scope.adquirir = {};
+        $scope.adquirir.productos = [];
+        $scope.adquirir.ofertas = [];
+
+        $scope.EleccionProducto = function(productoElegido){
+
+          console.info("Producto seleccionado: ", productoElegido);
+          var id = '#' + productoElegido;
+            if($(id).prop('checked'))
+              $scope.adquirir.productos.push(productoElegido);  
+            else
+              $scope.adquirir.productos.splice($scope.adquirir.productos.indexOf(productoElegido),1);
+
+          console.info("Productos a adquirir: ", $scope.adquirir.productos);
+        }
+
+        $scope.EleccionOferta = function(ofertaElegida){
+
+          console.info("Oferta seleccionada: ", ofertaElegida);
+          var id = '#' + ofertaElegida;
+            if($(id).prop('checked'))
+              $scope.adquirir.ofertas.push(ofertaElegida);  
+            else
+              $scope.adquirir.ofertas.splice($scope.adquirir.ofertas.indexOf(ofertaElegida),1);
+
+          console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas);
         }
 
           //FOTOS EN MODAL (PRODUCTOS)
