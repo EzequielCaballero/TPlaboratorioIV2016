@@ -70,11 +70,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             for (i = 0; i < x.length; i++) {
                x[i].style.display = "none";  
             }
-            for (i = 0; i < dots.length; i++) {
-               dots[i].className = dots[i].className.replace(" w3-white", "");
-            }
             x[slideIndex-1].style.display = "block";  
-            dots[slideIndex-1].className += " w3-white";
           }
 
           $scope.moverFoto = function(n) {
@@ -91,9 +87,9 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
               $scope.verProductosPorOferta = false;
               $scope.tituloGaleria = producto.nombre;
               console.info("Titulo", $scope.tituloGaleria);
-              $scope.fotoProducto_1 = "img/Productos/" + producto.foto1;
-              $scope.fotoProducto_2 = "img/Productos/" + producto.foto2;
-              $scope.fotoProducto_3 = "img/Productos/" + producto.foto3;
+              $scope.fotoProducto_1 = producto.foto1;
+              $scope.fotoProducto_2 = producto.foto2;
+              $scope.fotoProducto_3 = producto.foto3;
               console.info("Producto info: ", producto);
           }
           else
