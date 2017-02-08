@@ -1,4 +1,4 @@
-<div class="localCliente">	
+<div class="localCliente">
 	<div class="CajaMenuABM">
 
 	<h1>MENU LOCAL</h1>
@@ -6,14 +6,14 @@
 		<form class="formMenuABM animated fadeInUp">
 	         <br><br>
 	         <button class="buttonMenuABM" ng-click="visualizar('Productos')" ng-disabled="disabledProductos">
-	         		<span class="glyphicon glyphicon-user">&nbsp;</span>
+	         		<span class="glyphicon glyphicon-th-list">&nbsp;</span>
 	         		PRODUCTOS
 	         </button><br><br>
 	         <button  class="buttonMenuABM" ng-click="visualizar('Ofertas')" ng-disabled="disabledOfertas">
 	         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
 	         		OFERTAS
 	         </button><br><br>
-	         
+	         <button  class="btn btn-danger" ui-sref="cliente.inicio()">Volver</button>	<br><br>
 	         	<a id="buttonLogOFF" ng-click="cerrarSesion()">
 	         		<span class="glyphicon glyphicon-log-out" >&nbsp;</span>
 	         	</a>
@@ -40,12 +40,12 @@
 				<td>{{producto.id_producto}}</td>
 				<td>{{producto.nombre}}</td>
 				<td>${{producto.precio}}</td>
-				<td><img id="fotoGrilla" class='fotoGrilla' ng-src="img/Productos/{{producto.foto1}}"/></td>
+				<td><button class="btn" data-toggle="modal" data-target="#verProductos" ng-click="imagenProductos(producto, 'solo')"><img class="imgProducto img-responsive" ng-src="img/Productos/{{producto.foto1}}"></button></td>
 			</tr>
 		</table><br>
 		<button class="btn">Comprar</button>
 		<button class="btn">Reservar</button>
-	</div>
+	</div><!-- FIN LISTA PRODUCTOS -->
 
 	<!-- LISTADO DE OFERTAS -->
 	<div ng-show="verOfertas" class="listaOfertas">
@@ -63,14 +63,62 @@
 			<tr ng-repeat="oferta in lista_ofertas | filter:buscador as resultado">
 				<td>{{oferta.id_oferta}}</td>
 				<td>{{oferta.titulo}}</td>
-				<td><button class="btn" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos - {{oferta.cant_productos}}</button></td>
+				<td><button class="btn" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos</button></td>
 				<td>${{oferta.precio}}</td>
 			</tr>
 		</table><br>
 		<button class="btn">Comprar</button>
 		<button class="btn">Reservar</button>
-	</div>
+	</div><!-- FIN LISTA OFERTAS -->
 
-	</div>
+	<!-- VENTANA MODAL PRODUCTOS -->
+	<div class="container">
+	    <!-- Modal -->
+	    <div class="modal fade" id="verProductos" role="dialog">
+	      <div class="modal-dialog">
+	      
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	          <!-- Header -->
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            <h4 id="tituloVentanaModal" class="modal-title">{{tituloGaleria}}</h4>
+	          </div>
+	          <!-- Body -->
+		          <div class="modal-body" style="color:black">    
+		          	
+		          	<div ng-show="verSoloProductos" class="w3-content w3-display-container">
+		                <img class="mySlides img-responsive" src="{{fotoProducto_1}}" style="max-width:50%">
+		                <img class="mySlides img-responsive" src="{{fotoProducto_2}}" style="max-width:50%">
+		                <img class="mySlides img-responsive" src="{{fotoProducto_3}}" style="max-width:50%">
+		                <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(1)"></span>
+		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(2)"></span>
+		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(3)"></span>
+		                </div>
+		            </div>
+	                
+	                <div ng-show="verProductosPorOferta" class="w3-content w3-display-container">
+	                	HOLAAAAAAAAAAAAAAA
+	                	<div ng-repeat="product in lista_productos_oferta">
+		                	<img class="mySlides img-responsive" ng-src="img/Productos/{{product.foto1}}" style="max-width:50%">
+		                </div>
+		                <div class="w3-center w3-section w3-large w3-text-black" style="width:100%">
+		              	  <div class="w3-left  w3-padding-left w3-hover-text-khaki" ng-click="moverFoto(-1)">&#10094;</div>
+		                  <div class="w3-right w3-padding-right w3-hover-text-khaki" ng-click="moverFoto(1)">&#10095;</div>
+	               		</div>
+	                </div>
+	               </div>
+
+		          </div>
+		      <!-- Footer -->    
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	 </div>
+
 <!-- FIN CAJA OPERACIONES -->
 </div>

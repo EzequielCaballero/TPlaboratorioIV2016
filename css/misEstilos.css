@@ -662,8 +662,14 @@ GRILLA PRODUCTOS
     width: 45px;
 }
 
-.barraSearch{
+.barraSearch input{
+    background-color: #FF8181; 
     color:black;
+}
+
+.imgProducto{
+    width: 50px;
+    max-height: 60px;
 }
 
 /************************************************************************************
