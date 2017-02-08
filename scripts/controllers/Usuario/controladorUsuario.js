@@ -6,7 +6,5 @@ angular.module('ABMangularAPI.controladorUsuario', [])
 			$sesion = $auth.getPayload();
 			$scope.perfilUsuario = $sesion.perfil;
 		}
-		else
-			$state.go("usuario.login");
 
 	});

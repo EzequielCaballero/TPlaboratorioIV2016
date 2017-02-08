@@ -48,7 +48,7 @@
     /***OPCIONES DEL ELEMENTO SELECT LOCAL (creación de Options)***/
 
     //1- Declaración de variable "locales"  
-    var locales = Array();
+    var locales = [];
     servicioRetornoLocales.traerTodo().then(function(respuesta){
       console.info("Locales", respuesta.data);
 
