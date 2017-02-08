@@ -46,11 +46,10 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
   	$scope.currentDiv = function(n) {
   	  showDivs(slideIndex = n);
   	  console.info("indice: ", n);
-  	  clearTimeout(timer);
-  	  //setTimeout(carousel, 4000);
 	}
 
 	function showDivs(n) {
+		clearTimeout(timer);
 		var j;
 	    var k = document.getElementsByClassName("mySlides");
 		for (j = 0; j < k.length; j++) {
