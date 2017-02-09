@@ -19,15 +19,16 @@
 		<!-- CAJA CONFIRMAR OPERACION -->
 		<div ng-if="habilitarOperacion" class="cajaConfirmarOperacion">
 
-			<hr><p><strong>PRODUCTOS</strong></p>
+			<hr><p><strong>PRODUCTOS SELECCIONADOS</strong></p>
 			<div ng-repeat="eleccion in adquirir.productos">
-				<p>Código: {{eleccion}}</p>
+				<p>{{eleccion.nombre}}</p>
 			</div><hr>
 
-			<p><strong>OFERTAS</strong></p>
+			<p><strong>OFERTAS SELECCIONADAS</strong></p>
 			<div ng-repeat="eleccion in adquirir.ofertas">
-				<p>Código: {{eleccion}}</p>
+				<p>{{eleccion.titulo}}</p>
 			</div><hr>
+			<p><strong>TOTAL:</strong> ${{adquirir.precio_total}}</p>
 			<button class="btn btn-warning btn-lg" ng-click="comprar()">COMPRAR</button>&nbsp;
 			<button class="btn btn-warning btn-lg" ng-click="reservar()">RESERVAR</button><hr>
 		</div><!-- FIN CAJA CONFIRMAR OPERACION -->

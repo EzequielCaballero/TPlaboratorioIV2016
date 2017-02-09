@@ -60,6 +60,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.adquirir = {};
         $scope.adquirir.productos = [];
         $scope.adquirir.ofertas = [];
+        $scope.adquirir.precio_total= 0;
         $scope.habilitarOperacion = false;
 
         //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
@@ -75,10 +76,22 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
 
           console.info("Producto seleccionado: ", productoElegido);
           var id = '#' + productoElegido;
-            if($(id).prop('checked'))
-              $scope.adquirir.productos.push(productoElegido);  
-            else
-              $scope.adquirir.productos.splice($scope.adquirir.productos.indexOf(productoElegido),1);
+
+            for (var i = 0; i < $scope.lista_productos.length; i++) {
+                if($scope.lista_productos[i].id_producto == productoElegido)
+                  var indice = i;
+            }
+
+          if($(id).prop('checked'))
+          {
+            $scope.adquirir.productos.push($scope.lista_productos[indice]);
+            $scope.adquirir.precio_total+= $scope.lista_productos[indice].precio;
+          }
+          else
+          {
+            $scope.adquirir.productos.splice($scope.adquirir.productos.indexOf($scope.lista_productos[indice]),1);
+            $scope.adquirir.precio_total-= $scope.lista_productos[indice].precio;
+          }
 
           $scope.operacionHabilitada();
           console.info("Productos a adquirir: ", $scope.adquirir.productos);
@@ -88,10 +101,22 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
 
           console.info("Oferta seleccionada: ", ofertaElegida);
           var id = '#' + ofertaElegida;
-            if($(id).prop('checked'))
-              $scope.adquirir.ofertas.push(ofertaElegida);  
-            else
-              $scope.adquirir.ofertas.splice($scope.adquirir.ofertas.indexOf(ofertaElegida),1);
+
+            for (var i = 0; i < $scope.lista_ofertas.length; i++) {
+                if($scope.lista_ofertas[i].id_oferta == ofertaElegida)
+                  var indice = i;
+            }
+
+          if($(id).prop('checked'))
+          {
+            $scope.adquirir.ofertas.push($scope.lista_ofertas[indice]);
+            $scope.adquirir.precio_total+=$scope.lista_ofertas[indice].precio;
+          }
+          else
+          {
+            $scope.adquirir.ofertas.splice($scope.adquirir.ofertas.indexOf($scope.lista_ofertas[indice]),1);
+            $scope.adquirir.precio_total-=$scope.lista_ofertas[indice].precio;
+          }
 
           $scope.operacionHabilitada();
           console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas.length);

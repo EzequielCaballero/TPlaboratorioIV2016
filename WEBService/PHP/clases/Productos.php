@@ -19,8 +19,8 @@ class Producto
 		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from productos where id_producto =:id");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
 		$consulta->execute();
-		$ofertaBuscada= $consulta->fetchObject('producto');
-		return $ofertaBuscada;
+		$productoBuscado= $consulta->fetchObject('producto');
+		return $productoBuscado;
 	}
 
 	public static function TraerTodosLosProductos()
@@ -45,6 +45,7 @@ class Producto
 		$arrProducto= $consulta->fetchAll(PDO::FETCH_CLASS, "producto");
 		return $arrProducto;
 	}
+
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 
