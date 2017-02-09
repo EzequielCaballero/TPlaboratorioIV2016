@@ -7,6 +7,9 @@ require 'PHP/clases/Usuarios.php';
 require 'PHP/clases/Locales.php';
 require 'PHP/clases/Ofertas.php';
 require 'PHP/clases/Productos.php';
+require 'PHP/clases/Operaciones.php';
+require 'PHP/clases/Compras.php';
+require 'PHP/clases/Reservas.php';
 
 $app = new Slim\App();
 
@@ -209,6 +212,60 @@ $app->get('/productos[/]', function ($request, $response, $args) {
 $app->get('/productos/{parametro}', function ($request, $response, $args) {
     $parametro = json_decode($args['parametro']);
     $datos = Producto::TraerProductosDeOferta($parametro);
+    $response->write(json_encode($datos));
+    return $response;
+});
+//************************************************************OPERACIONES************************************************************//
+$app->get('/operaciones[/]', function ($request, $response, $args) {
+    $datos = Operacion::TraerTodasLasOperaciones();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/operaciones/{parametro}', function ($request, $response, $args) {
+    $parametro = json_decode($args['parametro']);
+    $datos = Operacion::TraerOperacionesPorUsuario($parametro);
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->post('/operaciones/{objeto}', function ($request, $response, $args) {
+    
+    $operacion = json_decode($args['objeto']);
+
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Operacion::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $operacion->id_operacion = $nuevaFila;
+    //AGREGAR NUEVA OPERACION
+    $datos = Operacion::AgregarOperacion($operacion);
+    $response->write($datos);
+    return $response;
+});
+
+//**************************************************************COMPRAS**************************************************************//
+$app->get('/compras[/]', function ($request, $response, $args) {
+    $datos = Compra::TraerTodasLasCompras();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/compras/{parametro}', function ($request, $response, $args) {
+    $parametro = json_decode($args['parametro']);
+    $datos = Compra::TraerCiertasCompras($parametro);
+    $response->write(json_encode($datos));
+    return $response;
+});
+//*************************************************************RESERVAS*************************************************************//
+$app->get('/reservas[/]', function ($request, $response, $args) {
+    $datos = Reserva::TraerTodasLasReservas();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->get('/reservas/{parametro}', function ($request, $response, $args) {
+    $parametro = json_decode($args['parametro']);
+    $datos = Reserva::TraerCiertasReservas($parametro);
     $response->write(json_encode($datos));
     return $response;
 });

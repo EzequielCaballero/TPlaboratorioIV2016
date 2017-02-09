@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorLocalOpciones', [])  
-  app.controller('controlLocalOpciones', function($scope, $http, $state, $auth, $stateParams, servicioRetornoOfertas, servicioRetornoProductos) {
+  app.controller('controlLocalOpciones', function($scope, $http, $state, $auth, $stateParams, servicioRetornoOfertas, servicioRetornoProductos, servicioRetornoOperaciones, servicioRetornoCompras, servicioRetornoReservas) {
 
     $sesion = $auth.getPayload();//SE ASUME HAY SESION ACTIVA
     console.info("SESION ACTIVA: ", $sesion);
@@ -122,12 +122,34 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas.length);
         }
 
-        $scope.comprar = function(){
+        //CONFIRMAR OPERACION (COMPRA o RESERVA)
+        $scope.Comprar = function(){
           alert("compra!");
+          $scope.agregarOperacion("compra");
+
         }
 
-        $scope.reservar = function(){
+        $scope.Reservar = function(){
           alert("reserva!");
+          $scope.agregarOperacion("reserva");
+        }
+
+        //FIN DE COMPRA/RESERVA (se agrega operación)
+        $scope.agregarOperacion = function(tipo){
+          $scope.operacion = {};
+          $scope.operacion.tipo_operacion = tipo;
+          var hoy = new Date();
+          $scope.operacion.fecha = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
+          $scope.operacion.id_local = $scope.local.id_local;
+          $scope.operacion.id_usuario = $sesion.usuario;
+          $scope.operacion.total = $scope.adquirir.precio_total;
+          console.info("OPERACION: ", $scope.operacion);
+
+          servicioRetornoOperaciones.ABM_Operacion($scope.operacion, "Agregar").then(function(respuesta){
+            console.info("Fila afectada: ", respuesta.data);
+          },function errorCallback(response) {
+                console.log("FALLO! ", response);
+          });
         }
 
           //FOTOS EN MODAL (PRODUCTOS)

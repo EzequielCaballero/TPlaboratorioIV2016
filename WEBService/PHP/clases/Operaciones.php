@@ -12,6 +12,16 @@ Class Operacion
 	public $total;
 //--------------------------------------------TRAER DATOS--------------------------------------------//
 
+	public static function traerUltimaFila()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT MAX(id_operacion) as ID from operaciones");
+		$consulta->execute();
+		$resultado = $consulta->fetchAll();
+
+		return $resultado[0]["ID"];
+	}
+
 	public static function TraerOperacionesPorUsuario($idParametro)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
@@ -32,7 +42,23 @@ Class Operacion
 	}
 
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
+	public static function AgregarOperacion($operacion)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			INSERT into operaciones 
+			(id_operacion,tipo_operacion,fecha,id_local,id_usuario,total)
+			values(:id_operacion,:tipo_operacion,:fecha,:id_local,:id_usuario,:total)");
 
+		$consulta->bindValue(':id_operacion',$operacion->id_operacion, PDO::PARAM_INT);
+		$consulta->bindValue(':tipo_operacion',$operacion->tipo_operacion, PDO::PARAM_STR);
+		$consulta->bindValue(':fecha',$operacion->fecha, PDO::PARAM_STR);
+		$consulta->bindValue(':id_local',$operacion->id_local, PDO::PARAM_INT);
+		$consulta->bindValue(':id_usuario',$operacion->id_usuario, PDO::PARAM_INT);
+		$consulta->bindValue(':total',$operacion->total, PDO::PARAM_INT);
+		$consulta->execute();
+		return $objetoAccesoDato->RetornarUltimoIdInsertado();
+	}	
 
 	//----------------CONSULTAS ESPECIALES----------------//
 
