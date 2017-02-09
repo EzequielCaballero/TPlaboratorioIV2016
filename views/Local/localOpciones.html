@@ -18,6 +18,21 @@
 	         		<span class="glyphicon glyphicon-log-out" >&nbsp;</span>
 	         	</a>
 		</form>
+		<!-- CAJA CONFIRMAR OPERACION -->
+		<div ng-if="habilitarOperacion" class="cajaConfirmarOperacion">
+			<p>PRODUCTOS:</p><br>
+			<div ng-repeat="eleccion in adquirir.productos">
+				<p>{{eleccion}}</p>
+			</div>
+			<p>OFERTAS:</p><br>
+			<div ng-repeat="eleccion in adquirir.ofertas">
+				<p>{{eleccion}}</p>
+			</div>
+		</div>
+		<div ng-if="habilitarOperacion">
+			<button class="btn btn-success">COMPRAR</button>&nbsp;
+			<button class="btn btn-success">RESERVAR</button>
+		</div>
 	</div>
 <!-- FIN CAJA OPCIONES -->
 </div>
@@ -120,11 +135,4 @@
 	    </div>
 	 </div>
 
-
 </div><!-- FIN CAJA OPERACIONES -->
-
-<!-- CAJA CONFIRMAR OPERACION -->
-<div class="cajaConfirmarOperacion">
-	<button class="btn">COMPRAR</button>
-	<button class="btn">RESERVAR</button>
-</div>

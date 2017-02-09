@@ -773,10 +773,14 @@ VISTA CLIENTE
 }
 
 .cajaConfirmarOperacion{
-    margin: 0 auto;
-    padding-top: 50px;
-    width: 40%;
-    background-color: #773C3C;
+  position: relative;
+  max-width: 500px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  background-color: #663D3D;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
 }
 
 /*************************************************************************************/

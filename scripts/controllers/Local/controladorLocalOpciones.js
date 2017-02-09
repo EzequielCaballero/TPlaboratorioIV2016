@@ -60,6 +60,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.adquirir = {};
         $scope.adquirir.productos = [];
         $scope.adquirir.ofertas = [];
+        $scope.habilitarOperacion = true;
 
         $scope.EleccionProducto = function(productoElegido){
 
@@ -82,8 +83,12 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             else
               $scope.adquirir.ofertas.splice($scope.adquirir.ofertas.indexOf(ofertaElegida),1);
 
-          console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas);
+          console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas.length);
         }
+
+          //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
+          if($scope.adquirir.productos.length > 0 || $scope.adquirir.ofertas.length > 0)
+            $scope.habilitarOperacion = true;
 
           //FOTOS EN MODAL (PRODUCTOS)
           $scope.imagenProductos = function(producto, criterio){
