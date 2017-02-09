@@ -65,8 +65,10 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
         $scope.operacionHabilitada = function(){
 
-          if($scope.adquirir.productos.length > 0 || $scope.adquirir.ofertas.length > 0)
+          if($scope.adquirir.productos.length != 0 || $scope.adquirir.ofertas.length != 0)
             $scope.habilitarOperacion = true;
+          else
+            $scope.habilitarOperacion = false;
         }
 
         $scope.EleccionProducto = function(productoElegido){
@@ -95,6 +97,14 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas.length);
         }
 
+        $scope.comprar = function(){
+          alert("compra!");
+        }
+
+        $scope.reservar = function(){
+          alert("reserva!");
+        }
+
           //FOTOS EN MODAL (PRODUCTOS)
           $scope.imagenProductos = function(producto, criterio){
         
@@ -109,7 +119,16 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             for (i = 0; i < x.length; i++) {
                x[i].style.display = "none";  
             }
-            x[slideIndex-1].style.display = "block";  
+            x[slideIndex-1].style.display = "block";
+
+            var productName = document.getElementsByClassName("productoEnvista");
+            if(productName.length != 0)
+            { 
+              for (var i = 0; i < productName.length; i++) {
+                productName[i].style.backgroundColor = "white";
+              }
+              productName[slideIndex-1].style.backgroundColor = "#EABF64";
+            }  
           }
 
           $scope.moverFoto = function(n) {

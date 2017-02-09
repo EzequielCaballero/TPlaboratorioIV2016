@@ -2,7 +2,7 @@
 	<div class="CajaMenuABM">
 
 	<h1>MENU LOCAL</h1>
-	<h3><strong>Direccion:</strong> {{direccionLocal}}</h3>
+	<h4><strong>Direccion:</strong> {{direccionLocal}}</h4>
 		<form class="formMenuABM animated fadeInUp">
 	         <br><br>
 	         <button class="buttonMenuABM" ng-click="visualizar('Productos')" ng-disabled="disabledProductos">
@@ -15,19 +15,21 @@
 	         </button><br><br>
 	         <button  class="btn btn-danger" ui-sref="cliente.inicio()">Volver</button>	<br><br>
 		</form>
+
 		<!-- CAJA CONFIRMAR OPERACION -->
 		<div ng-if="habilitarOperacion" class="cajaConfirmarOperacion">
+
 			<hr><p><strong>PRODUCTOS</strong></p>
 			<div ng-repeat="eleccion in adquirir.productos">
 				<p>Código: {{eleccion}}</p>
 			</div><hr>
+
 			<p><strong>OFERTAS</strong></p>
 			<div ng-repeat="eleccion in adquirir.ofertas">
 				<p>Código: {{eleccion}}</p>
 			</div><hr>
-			<button class="btn btn-warning btn-lg">COMPRAR</button>&nbsp;
-			<button class="btn btn-warning btn-lg">RESERVAR</button><hr>
-
+			<button class="btn btn-warning btn-lg" ng-click="comprar()">COMPRAR</button>&nbsp;
+			<button class="btn btn-warning btn-lg" ng-click="reservar()">RESERVAR</button><hr>
 		</div><!-- FIN CAJA CONFIRMAR OPERACION -->
 	
 	</div><!-- FIN CAJA MENU -->
@@ -62,7 +64,7 @@
 	<!-- LISTADO DE OFERTAS -->
 	<div ng-show="verOfertas" class="listaOfertas">
 		<h2>OFERTAS</h2>
-		<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar oferta">
+		<input style="background-color: white" class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar oferta">
 		<table class='table table-striped table-responsive'>
 			<thead>
 				<tr>
@@ -104,15 +106,15 @@
 		                <img class="mySlides img-responsive" ng-src="img/Productos/{{fotoProducto_2}}" style="max-width:50%">
 		                <img class="mySlides img-responsive" ng-src="img/Productos/{{fotoProducto_3}}" style="max-width:50%">
 		                <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(1)"></span>
-		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(2)"></span>
-		                  <span class="w3-badge demo w3-border w3-hover-black" ng-click="elegirFoto(3)"></span>
+		                  <span class="w3-badge demo w3-border w3-transparent w3-hover-black" ng-click="elegirFoto(1)"></span>
+		                  <span class="w3-badge demo w3-border w3-transparent w3-hover-black" ng-click="elegirFoto(2)"></span>
+		                  <span class="w3-badge demo w3-border w3-transparent w3-hover-black" ng-click="elegirFoto(3)"></span>
 		                </div>
 		            </div>
 	                
 	                <div ng-if="verProductosPorOferta" class="w3-content w3-display-container">
-	                	<div ng-repeat="product in lista_productos_oferta">
-	                		<p>{{product.nombre}}</p>
+	                	<div class="productoPorOferta" ng-repeat="product in lista_productos_oferta">
+	                		<p class="productoEnvista">{{product.nombre}}</p>
 		                	<img class="mySlides img-responsive" ng-src="img/Productos/{{product.foto1}}" style="max-width:50%">
 		                </div>
 		                <div class="w3-center w3-section w3-large w3-text-black w3-display-bottommiddle" style="width:100%">

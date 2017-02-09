@@ -662,9 +662,11 @@ GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
     width: 45px;
 }
 
-.barraSearch input{
-    background-color: #FF8181; 
+.barraSearch{
+    background-color: #FDE1BC !important;
     color:black;
+    float:left;
+    width: 100%;
 }
 
 .imgProducto{
@@ -692,6 +694,13 @@ GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
   -webkit-transform: scale(3); /* Safari and Chrome */
   -o-transform: scale(3); /* Opera */
   padding: 2px;
+}
+
+.productoPorOferta p{
+    font-weight: bold;
+    font-size:0.875em;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s; 
 }
 
 /************************************************************************************
@@ -746,7 +755,7 @@ VISTA CLIENTE
     float: left;
 }
 
-.localCliente h3{
+.localCliente h4{
     color: white;
 }
 
@@ -773,7 +782,6 @@ VISTA CLIENTE
   width: 100%;
   text-align:center;
   color:#FFFFFF;
-  border-radius: 20px;
 }
 
 .cajaConfirmarOperacion{
