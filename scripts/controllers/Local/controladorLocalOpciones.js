@@ -60,7 +60,14 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.adquirir = {};
         $scope.adquirir.productos = [];
         $scope.adquirir.ofertas = [];
-        $scope.habilitarOperacion = true;
+        $scope.habilitarOperacion = false;
+
+        //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
+        $scope.operacionHabilitada = function(){
+
+          if($scope.adquirir.productos.length > 0 || $scope.adquirir.ofertas.length > 0)
+            $scope.habilitarOperacion = true;
+        }
 
         $scope.EleccionProducto = function(productoElegido){
 
@@ -71,6 +78,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             else
               $scope.adquirir.productos.splice($scope.adquirir.productos.indexOf(productoElegido),1);
 
+          $scope.operacionHabilitada();
           console.info("Productos a adquirir: ", $scope.adquirir.productos);
         }
 
@@ -83,12 +91,9 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             else
               $scope.adquirir.ofertas.splice($scope.adquirir.ofertas.indexOf(ofertaElegida),1);
 
+          $scope.operacionHabilitada();
           console.info("Ofertas a adquirir: ", $scope.adquirir.ofertas.length);
         }
-
-          //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
-          if($scope.adquirir.productos.length > 0 || $scope.adquirir.ofertas.length > 0)
-            $scope.habilitarOperacion = true;
 
           //FOTOS EN MODAL (PRODUCTOS)
           $scope.imagenProductos = function(producto, criterio){
@@ -153,11 +158,6 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
               $scope.disabledOfertas = true;
               break;
           }
-        }
-
-        $scope.cerrarSesion = function(){
-            $auth.logout();
-            $state.go("inicio");
         }
 
     }//FIN DE LA CONDICION ELSE

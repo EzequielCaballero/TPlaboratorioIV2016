@@ -746,6 +746,10 @@ VISTA CLIENTE
     float: left;
 }
 
+.localCliente h3{
+    color: white;
+}
+
 .cajaOperaciones{
     position: relative;
     padding-top: 50px;
@@ -778,9 +782,13 @@ VISTA CLIENTE
   margin:0 auto;
   margin-top:8px;
   margin-bottom:2%;
-  background-color: #663D3D;
+  background-color: #3A2424;
   transition:opacity 1s;
   -webkit-transition:opacity 1s;
+}
+
+.cajaConfirmarOperacion p{
+    color: white;
 }
 
 /*************************************************************************************/

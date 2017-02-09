@@ -2,7 +2,7 @@
 	<div class="CajaMenuABM">
 
 	<h1>MENU LOCAL</h1>
-	<h3>Direccion: {{direccionLocal}}</h3>
+	<h3><strong>Direccion:</strong> {{direccionLocal}}</h3>
 		<form class="formMenuABM animated fadeInUp">
 	         <br><br>
 	         <button class="buttonMenuABM" ng-click="visualizar('Productos')" ng-disabled="disabledProductos">
@@ -14,28 +14,25 @@
 	         		OFERTAS
 	         </button><br><br>
 	         <button  class="btn btn-danger" ui-sref="cliente.inicio()">Volver</button>	<br><br>
-	         	<a id="buttonLogOFF" ng-click="cerrarSesion()">
-	         		<span class="glyphicon glyphicon-log-out" >&nbsp;</span>
-	         	</a>
 		</form>
 		<!-- CAJA CONFIRMAR OPERACION -->
 		<div ng-if="habilitarOperacion" class="cajaConfirmarOperacion">
-			<p>PRODUCTOS:</p><br>
+			<hr><p><strong>PRODUCTOS</strong></p>
 			<div ng-repeat="eleccion in adquirir.productos">
-				<p>{{eleccion}}</p>
-			</div>
-			<p>OFERTAS:</p><br>
+				<p>Código: {{eleccion}}</p>
+			</div><hr>
+			<p><strong>OFERTAS</strong></p>
 			<div ng-repeat="eleccion in adquirir.ofertas">
-				<p>{{eleccion}}</p>
-			</div>
-		</div>
-		<div ng-if="habilitarOperacion">
-			<button class="btn btn-success">COMPRAR</button>&nbsp;
-			<button class="btn btn-success">RESERVAR</button>
-		</div>
-	</div>
-<!-- FIN CAJA OPCIONES -->
-</div>
+				<p>Código: {{eleccion}}</p>
+			</div><hr>
+			<button class="btn btn-warning btn-lg">COMPRAR</button>&nbsp;
+			<button class="btn btn-warning btn-lg">RESERVAR</button><hr>
+
+		</div><!-- FIN CAJA CONFIRMAR OPERACION -->
+	
+	</div><!-- FIN CAJA MENU -->
+
+</div><!-- FIN CAJA LOCAL CLIENTE -->
 
 <div class="cajaOperaciones">
 	<!-- LISTADO DE PRODUCTOS -->
