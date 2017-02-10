@@ -41,7 +41,7 @@ Class Reserva
 
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
-	public static function AgregarReserva($reserva)
+	public static function AgregarReserva($reserva, $id_operacion)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("
@@ -53,12 +53,38 @@ Class Reserva
 		$consulta->bindValue(':fecha_entrega',$reserva->fecha_entrega, PDO::PARAM_STR);
 		$consulta->bindValue(':cantidad_prod',$reserva->cantidad_prod, PDO::PARAM_INT);
 		$consulta->bindValue(':precio_final',$reserva->precio_final, PDO::PARAM_INT);
-		$consulta->bindValue(':id_operacion',$reserva->id_operacion, PDO::PARAM_INT);
+		$consulta->bindValue(':id_operacion',$id_operacion, PDO::PARAM_INT);
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
+	
 	//----------------CONSULTAS ESPECIALES----------------//
-
+	public static function AsociarReservaAofertas($reserva, $ofertas)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		foreach($ofertas as $oferta)
+		{
+			$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into reservas_ofertas (id_reserva, id_oferta) values(:id_reserva,:id_oferta)");
+			$consulta->bindValue(':id_reserva', $reserva, PDO::PARAM_INT);
+			$consulta->bindValue(':id_oferta', $oferta->id_oferta, PDO::PARAM_INT);
+			$consulta->execute();
+			$ultimoID = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		}
+		return $ultimoID;
+	}
+	public static function AsociarReservaAproductos($reserva, $productos)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		foreach($productos as $producto)
+		{
+			$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into reservas_productos (id_reserva, id_producto) values(:id_reserva,:id_producto)");
+			$consulta->bindValue(':id_reserva', $reserva, PDO::PARAM_INT);
+			$consulta->bindValue(':id_producto', $producto->id_producto, PDO::PARAM_INT);
+			$consulta->execute();
+			$ultimoID = $objetoAccesoDato->RetornarUltimoIdInsertado();
+		}
+		return $ultimoID;
+	}
 }
 //--------------------------------------------------------------------------------//
 //--FIN DE LA CLASE "OPERACION"

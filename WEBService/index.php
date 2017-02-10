@@ -256,6 +256,30 @@ $app->get('/compras/{parametro}', function ($request, $response, $args) {
     $response->write(json_encode($datos));
     return $response;
 });
+
+$app->post('/compras/{objeto}', function ($request, $response, $args) {
+    
+    $compra = json_decode($args['objeto']);
+
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Compra::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $compra->id_compra = $nuevaFila;
+    //DEFINIR ID operacion asociada
+    $ultimoID_operacion = Operacion::traerUltimaFila();
+    $id_operacion = $ultimoID_operacion + 1;
+    //AGREGAR NUEVA COMPRA
+    $datos = Compra::AgregarCompra($compra, $id_operacion);
+    
+    //ASOCIAR COMPRA A OFERTAS/PRODUCTOS
+    if(count($compra->productosAsociados)!=0)
+        $c_ofertas = Compra::AsociarCompraAofertas($compra->id_compra, $compra->ofertasAsociadas);
+    if(count($compra->ofertasAsociadas)!=0)
+        $c_productos = Compra::AsociarCompraAproductos($compra->id_compra, $compra->productosAsociados);
+
+    $response->write($datos);
+    return $response;
+});
 //*************************************************************RESERVAS*************************************************************//
 $app->get('/reservas[/]', function ($request, $response, $args) {
     $datos = Reserva::TraerTodasLasReservas();
@@ -270,6 +294,22 @@ $app->get('/reservas/{parametro}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->post('/reservas/{objeto}', function ($request, $response, $args) {
+    
+    $reserva = json_decode($args['objeto']);
+
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Reserva::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $reserva->id_reserva = $nuevaFila;
+    //DEFINIR ID operacion asociada
+    $ultimoID_operacion = Operacion::traerUltimaFila();
+    $id_operacion = $ultimoID_operacion + 1;
+    //AGREGAR NUEVA RESERVA
+    $datos = Reserva::AgregarReserva($reserva, $id_operacion);
+    $response->write($datos);
+    return $response;
+});
 //****************************************************************************************************************************//
 //****************************************************************************************************************************//
 $app->run();
