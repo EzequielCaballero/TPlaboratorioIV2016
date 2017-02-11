@@ -817,8 +817,8 @@ ENCUESTA
 }
 
 .cajaEncuesta h3{
-  color: #FFFFFF;
-  background-color: #821C1C;
+  color: #F3EAEA;
+  background-color: #612C2C;
   padding: 10px;
   border-radius: 10px;
 }
@@ -828,9 +828,9 @@ ENCUESTA
 }
 
 .tituloPregunta{
-  color:#CA4545;
+  color:#ECDECA;
   width: 100%;
-  background-color: #452511;
+  background-color: #612C2C;
   border-radius: 10px;
 }
 
@@ -839,13 +839,37 @@ ENCUESTA
 }
 
 .encuestaForm select{
+  margin: 0 auto;
   max-width:500px;
+}
+
+.encuestaForm input{
+  color:black;
+}
+
+.encuestaForm span{
+  color:white;
+  font-size: 15px;
+  background-color: #260606;
+  padding: 10px;
+  border: 2px solid black;
+  font-weight: bold;
+}
+
+.encuestaForm textarea{
+  margin: 0 auto;
+  width: 400px;
 }
 
 .tablaOpciones{
   margin: 0 auto;
   border: 1px solid black;
-  background-color: #591E1E;
+  background-color: none;
+}
+
+#cajaPregunta{
+  margin: 0 auto;
+  background-color: #371919;
 }
 /*************************************************************************************/
 /*FIN DE ESTILOS*/
