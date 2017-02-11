@@ -153,16 +153,21 @@
 		          	<div ng-if="cajaFechaReserva">
 			          	<p>Seleccione una fecha válida para la reserva</p>
 			          	
-			          	<div class='col-sm-6'>
-				            <input type='text' class="form-control" id='datetimepicker4' />
-				        </div>
-				        <script type="text/javascript">
-				        	$(function () {
-				                $('#datetimepicker4').datetimepicker();
-				            });
-				        </script>
-			          	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="validarFechaReserva('encuesta')" style="float:left">Reservar</button>
-	            		<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Cancelar</button>
+				            <div class="form-group">
+				            	<label>Reserva válida (2 a 5 días)</label>
+				                <input type='text' class="form-control" id='datetimepicker' ng-model="fechaPorDefecto"/>
+				            </div>
+				            <label class="mensajeAlerta" ng-show="fechaErronea">Error. Por favor seleccione una fecha válida</label><br>
+		            		<script type="text/javascript">
+					        	$(function () {
+					                $('#datetimepicker').datetimepicker({
+					                	format:"YYYY-MM-DD"
+					                });
+					            });
+					        </script>
+				        <button type="button" class="btn btn-success" ng-click="validarFechaReserva('encuesta')">Reservar</button>
+		            	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button><br>
+
 			        </div>
 		          	<div ng-if="cajaIrEncuesta">
 			          	<p>¿Desea completar una encuesta a continuación?</p>
