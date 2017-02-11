@@ -67,7 +67,7 @@ var app = angular.module('ABMangularAPI', [
         })
 
     .state('cliente.encuesta', {
-                url : '/encuesta',
+                url : '/encuesta/{id_operacion}?',
                 views: {
                 'contenido_cliente':{
                     templateUrl : 'views/Cliente/clienteEncuesta.html',

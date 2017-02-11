@@ -3,6 +3,7 @@
 <div class="cajaEncuesta">
 	<div class="Frm">
 		<h3>ENCUESTA DE OPINIÓN Y SATISFACCIÓN DEL CLIENTE</h3><br><br>
+		<h3>NUMERO DE OPERACION {{numeroOperacion}}</h3>
 		<form class="encuestaForm" name="myForm" role="form">
 			
 			<div id="cajaPregunta" class="form-group">
@@ -160,7 +161,7 @@
 			</div>
 
 			<!-- BOTONES DE ACCION -->
-			<button class="btn btn-danger btn-block">Enviar</button>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-danger btn-block" ng-click="EnviarEncuesta()">Enviar</button>&nbsp;&nbsp;&nbsp;
 
 		</form>
 		<!-- FIN DEL FORMULARIO -->

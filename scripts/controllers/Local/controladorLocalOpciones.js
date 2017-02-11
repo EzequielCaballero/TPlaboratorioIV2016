@@ -138,31 +138,27 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         //EFECTUAR COMPRA
         $scope.Comprar = function(){
           
-          $scope.cajaIrEncuesta = true;
-          $scope.cajaFechaReserva = false;
-          $scope.tituloOperacion = "Operacion finalizada con éxito";
-          $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
-        //   $scope.bloquearCompra = true;
-        //   $scope.bloquearReserva = true;
-        //   $scope.compra = {};
-        //   var cantidad_productos = $scope.adquirir.productos.length;
-        //   for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
+          $scope.bloquearCompra = true;
+          $scope.bloquearReserva = true;
+          $scope.compra = {};
+          var cantidad_productos = $scope.adquirir.productos.length;
+          for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
              
-        //      cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
-        //   } 
-        //   console.info("cantidad productos comprados: ", cantidad_productos);
+             cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
+          } 
+          console.info("cantidad productos comprados: ", cantidad_productos);
           
-        //   $scope.compra.cantidad_prod = cantidad_productos;
-        //   $scope.compra.precio_final = $scope.adquirir.precio_total;
-        //   $scope.compra.ofertasAsociadas = $scope.adquirir.ofertas;
-        //   $scope.compra.productosAsociados = $scope.adquirir.productos;
+          $scope.compra.cantidad_prod = cantidad_productos;
+          $scope.compra.precio_final = $scope.adquirir.precio_total;
+          $scope.compra.ofertasAsociadas = $scope.adquirir.ofertas;
+          $scope.compra.productosAsociados = $scope.adquirir.productos;
 
-        //   servicioRetornoCompras.ABM_Compra($scope.compra, "Agregar").then(function(respuesta){
-        //     console.info("Nueva fila: ", respuesta.data);
-        //     $scope.agregarOperacion("compra");
-        //   },function errorCallback(response) {
-        //         console.log("FALLO! ", response);
-        //   });
+          servicioRetornoCompras.ABM_Compra($scope.compra, "Agregar").then(function(respuesta){
+            console.info("Nueva fila: ", respuesta.data);
+            $scope.agregarOperacion("compra");
+          },function errorCallback(response) {
+                console.log("FALLO! ", response);
+          });
         }
 
         //CAJA CONFIRMAR OPERACION (en proceso...)
@@ -211,31 +207,27 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           }
           else
           {
-            $scope.cajaIrEncuesta = true;
-            $scope.cajaFechaReserva = false;
-            $scope.tituloOperacion = "Operacion finalizada con éxito";
-            $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
-            // $scope.bloquearCompra = true;
-            // $scope.bloquearReserva = true;
-            // $scope.reserva = {};
-            // var cantidad_productos = $scope.adquirir.productos.length;
-            // for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
-            //    cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
-            //  } 
-            // console.info("cantidad productos reservados: ", cantidad_productos);
+            $scope.bloquearCompra = true;
+            $scope.bloquearReserva = true;
+            $scope.reserva = {};
+            var cantidad_productos = $scope.adquirir.productos.length;
+            for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
+               cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
+             } 
+            console.info("cantidad productos reservados: ", cantidad_productos);
 
-            // $scope.reserva.fecha_entrega = $scope.fechaFinal;
-            // $scope.reserva.cantidad_prod = cantidad_productos;
-            // $scope.reserva.precio_final = $scope.adquirir.precio_total;
-            // $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
-            // $scope.reserva.productosAsociados = $scope.adquirir.productos;
+            $scope.reserva.fecha_entrega = $scope.fechaFinal;
+            $scope.reserva.cantidad_prod = cantidad_productos;
+            $scope.reserva.precio_final = $scope.adquirir.precio_total;
+            $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
+            $scope.reserva.productosAsociados = $scope.adquirir.productos;
 
-            // servicioRetornoReservas.ABM_Reserva($scope.reserva, "Agregar").then(function(respuesta){
-            //   console.info("Nueva fila: ", respuesta.data);
-            //   $scope.agregarOperacion("reserva");
-            // },function errorCallback(response) {
-            //       console.log("FALLO! ", response);
-            // });
+            servicioRetornoReservas.ABM_Reserva($scope.reserva, "Agregar").then(function(respuesta){
+              console.info("Nueva fila: ", respuesta.data);
+              $scope.agregarOperacion("reserva");
+            },function errorCallback(response) {
+                  console.log("FALLO! ", response);
+            });
           }
 
         }
@@ -255,7 +247,12 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           servicioRetornoOperaciones.ABM_Operacion($scope.operacion, "Agregar").then(function(respuesta){
             
             console.info("Nueva fila: ", respuesta.data);
-            //$('#irEncuesta').modal('show');
+            $scope.operacion.id_operacion = respuesta.data;
+            
+            $scope.cajaIrEncuesta = true;
+            $scope.cajaFechaReserva = false;
+            $scope.tituloOperacion = "Operacion finalizada con éxito";
+            $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
           
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
@@ -267,7 +264,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
               switch(lugar)
               {
                 case "encuesta":
-                  setTimeout(function(){ $state.go('cliente.encuesta'); }, 300);
+                  setTimeout(function(){ $state.go('cliente.encuesta', {id_operacion:$scope.operacion.id_operacion}); }, 300);
                 break;
                 case "inicio":
                   setTimeout(function(){ $state.go('cliente.inicio'); }, 300);

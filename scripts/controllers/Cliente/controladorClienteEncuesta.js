@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
-	app.controller('controlClienteEncuesta', function($scope, $http, $state, $auth) {
+	app.controller('controlClienteEncuesta', function($scope, $http, $state, $auth, $stateParams) {
 
 	if(!$auth.isAuthenticated())
       $state.go("inicio");
@@ -83,6 +83,9 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 
 	  //ARMADO DE OBJETO ENCUESTA
 	  $scope.encuesta = {};
+	  $scope.numeroOperacion = $stateParams.id_operacion;
+	  $scope.encuesta.id_operacion = $stateParams.id_operacion;
+
 	  $scope.encuesta.pregunta_1;
 	  $scope.encuesta.pregunta_2;
 	  $scope.encuesta.pregunta_3;
@@ -111,5 +114,10 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  $scope.encuesta.pregunta_19;
 
 	  $scope.encuesta.pregunta_20;
+
+	  //ENVIAR FORMULARIO
+	  $scope.EnviarEncuesta = function(){
+	  	alert("enviando!");
+	  }
 
 });

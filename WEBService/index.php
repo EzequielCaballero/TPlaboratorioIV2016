@@ -10,6 +10,7 @@ require 'PHP/clases/Productos.php';
 require 'PHP/clases/Operaciones.php';
 require 'PHP/clases/Compras.php';
 require 'PHP/clases/Reservas.php';
+require 'PHP/clases/Encuestas.php';
 
 $app = new Slim\App();
 
