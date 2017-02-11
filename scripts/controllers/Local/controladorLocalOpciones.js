@@ -165,10 +165,6 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         //   });
         }
 
-        $(function () {
-                $('#datetimepicker1').data("datetimepicker()");
-            });
-
         $scope.Reservar = function(){
 
           //alert("reserva!");
@@ -177,15 +173,10 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           $scope.tituloOperacion = "Confirmar fecha de la reserva";
           $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
 
-          // $(function () {
-          //     $(".datepicker").datepicker({
-          //         format: "dd/mm/yyyy",
-          //         todayBtn: "linked",
-          //         autoclose: true, 
-          //         todayHighlight: true,
-          //         language: "en"
-          //     });
-          // });
+            $(function () {
+                $('#datetimepicker4').datetimepicker();
+            });
+
           // $scope.bloquearCompra = true;
           // $scope.bloquearReserva = true;
           // $scope.reserva = {};
