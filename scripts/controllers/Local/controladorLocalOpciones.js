@@ -62,14 +62,24 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.adquirir.ofertas = [];
         $scope.adquirir.precio_total= 0;
         $scope.habilitarOperacion = false;
+        $scope.bloquearCompra = true;
+        $scope.bloquearReserva = true;
 
         //DEFINIR VISIBILIDAD DE CONFIRMAR OPERACION
         $scope.operacionHabilitada = function(){
 
           if($scope.adquirir.productos.length != 0 || $scope.adquirir.ofertas.length != 0)
+          {
             $scope.habilitarOperacion = true;
+            $scope.bloquearCompra = false;
+            $scope.bloquearReserva = false;
+          }
           else
+          {
             $scope.habilitarOperacion = false;
+            $scope.bloquearCompra = true;
+            $scope.bloquearReserva = true;
+          }
         }
 
         //**********************************************OPCIONES DE COMPRA/RESERVA**********************************************//
@@ -127,55 +137,83 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         $scope.Comprar = function(){
           
           //alert("compra!");
-          $scope.compra = {};
-          var cantidad_productos = $scope.adquirir.productos.length;
-          for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
+          $scope.cajaIrEncuesta = true;
+          $scope.cajaFechaReserva = false;
+          $scope.tituloOperacion = "Operacion finalizada con éxito";
+          $scope.tituloOperacion = "Confirmar fecha de la reserva";
+          $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
+        //   $scope.bloquearCompra = true;
+        //   $scope.bloquearReserva = true;
+        //   $scope.compra = {};
+        //   var cantidad_productos = $scope.adquirir.productos.length;
+        //   for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
              
-             cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
-          } 
-          console.info("cantidad productos comprados: ", cantidad_productos);
+        //      cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
+        //   } 
+        //   console.info("cantidad productos comprados: ", cantidad_productos);
           
-          $scope.compra.cantidad_prod = cantidad_productos;
-          $scope.compra.precio_final = $scope.adquirir.precio_total;
-          $scope.compra.ofertasAsociadas = $scope.adquirir.ofertas;
-          $scope.compra.productosAsociados = $scope.adquirir.productos;
+        //   $scope.compra.cantidad_prod = cantidad_productos;
+        //   $scope.compra.precio_final = $scope.adquirir.precio_total;
+        //   $scope.compra.ofertasAsociadas = $scope.adquirir.ofertas;
+        //   $scope.compra.productosAsociados = $scope.adquirir.productos;
 
-          servicioRetornoCompras.ABM_Compra($scope.compra, "Agregar").then(function(respuesta){
-            console.info("Nueva fila: ", respuesta.data);
-            //$scope.agregarOperacion("compra");
-          },function errorCallback(response) {
-                console.log("FALLO! ", response);
-          });
+        //   servicioRetornoCompras.ABM_Compra($scope.compra, "Agregar").then(function(respuesta){
+        //     console.info("Nueva fila: ", respuesta.data);
+        //     $scope.agregarOperacion("compra");
+        //   },function errorCallback(response) {
+        //         console.log("FALLO! ", response);
+        //   });
         }
+
+        $(function () {
+                $('#datetimepicker1').data("datetimepicker()");
+            });
 
         $scope.Reservar = function(){
 
           //alert("reserva!");
-          $scope.reserva = {};
-          var cantidad_productos = $scope.adquirir.productos.length;
-          for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
-             cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
-           } 
-          console.info("cantidad productos reservados: ", cantidad_productos);
+          $scope.cajaIrEncuesta = false;
+          $scope.cajaFechaReserva = true;
+          $scope.tituloOperacion = "Confirmar fecha de la reserva";
+          $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
 
-          var hoy = new Date();
-          $scope.reserva.fecha_entrega = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
-          $scope.reserva.cantidad_prod = cantidad_productos;
-          $scope.reserva.precio_final = $scope.adquirir.precio_total;
-          $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
-          $scope.reserva.productosAsociados = $scope.adquirir.productos;
+          // $(function () {
+          //     $(".datepicker").datepicker({
+          //         format: "dd/mm/yyyy",
+          //         todayBtn: "linked",
+          //         autoclose: true, 
+          //         todayHighlight: true,
+          //         language: "en"
+          //     });
+          // });
+          // $scope.bloquearCompra = true;
+          // $scope.bloquearReserva = true;
+          // $scope.reserva = {};
+          // var cantidad_productos = $scope.adquirir.productos.length;
+          // for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
+          //    cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
+          //  } 
+          // console.info("cantidad productos reservados: ", cantidad_productos);
 
-          servicioRetornoReservas.ABM_Reserva($scope.reserva, "Agregar").then(function(respuesta){
-            console.info("Nueva fila: ", respuesta.data);
-            //$scope.agregarOperacion("reserva");
-          },function errorCallback(response) {
-                console.log("FALLO! ", response);
-          });
+          // var hoy = new Date();
+          // $scope.reserva.fecha_entrega = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
+          // $scope.reserva.cantidad_prod = cantidad_productos;
+          // $scope.reserva.precio_final = $scope.adquirir.precio_total;
+          // $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
+          // $scope.reserva.productosAsociados = $scope.adquirir.productos;
+
+          // servicioRetornoReservas.ABM_Reserva($scope.reserva, "Agregar").then(function(respuesta){
+          //   console.info("Nueva fila: ", respuesta.data);
+          //   $scope.agregarOperacion("reserva");
+          // },function errorCallback(response) {
+          //       console.log("FALLO! ", response);
+          // });
 
         }
 
         //FIN DE COMPRA/RESERVA (se agrega operación)
         $scope.agregarOperacion = function(tipo){
+
           $scope.operacion = {};
           $scope.operacion.tipo_operacion = tipo;
           var hoy = new Date();
@@ -186,11 +224,27 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           console.info("OPERACION: ", $scope.operacion);
 
           servicioRetornoOperaciones.ABM_Operacion($scope.operacion, "Agregar").then(function(respuesta){
+            
             console.info("Nueva fila: ", respuesta.data);
+            //$('#irEncuesta').modal('show');
+          
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
           });
         }
+
+          $scope.dondeIr = function(lugar){
+
+              switch(lugar)
+              {
+                case "encuesta":
+                  setTimeout(function(){ $state.go('cliente.perfil'); }, 300);
+                break;
+                case "inicio":
+                  setTimeout(function(){ $state.go('cliente.inicio'); }, 300);
+                break;
+              }
+          }
 
           //**********************************************FOTOS EN MODAL (PRODUCTOS)**********************************************//
 

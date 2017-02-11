@@ -28,10 +28,10 @@
 			<div ng-repeat="eleccion in adquirir.ofertas">
 				<p>{{eleccion.titulo}}</p>
 			</div><hr>
-			<p><strong>TOTAL:</strong> ${{adquirir.precio_total}}</p>
-			<button class="btn btn-warning btn-lg" ng-click="Comprar()">COMPRAR</button>&nbsp;
-			<button class="btn btn-warning btn-lg" ng-click="Reservar()">RESERVAR</button><hr>
+			<p><strong>TOTAL:</strong> ${{adquirir.precio_total}}</p><hr>
 		</div><!-- FIN CAJA CONFIRMAR OPERACION -->
+			<button class="btn btn-warning btn-lg" ng-click="Comprar()" ng-disabled="bloquearCompra">COMPRAR</button>&nbsp;
+			<button class="btn btn-warning btn-lg" ng-click="Reservar()" ng-disabled="bloquearReserva">RESERVAR</button>
 	
 	</div><!-- FIN CAJA MENU -->
 
@@ -131,6 +131,46 @@
 	            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	          </div>
 	        </div>
+	      </div>
+	    </div>
+	 </div>
+
+
+	 <!-- VENTANA MODAL FIN OPERACION -->
+	<div class="container">
+	    <!-- Modal -->
+	    <div class="modal fade" id="caminoAencuesta" role="dialog">
+	      <div class="modal-dialog">
+	      
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	          <!-- Header -->
+	          <div class="modal-header">
+	            <h4 id="tituloVentanaModal" class="modal-title">{{tituloOperacion}}</h4>
+	          </div>
+	          <!-- Body -->
+		          <div class="modal-body" style="color:black">    
+		          	<div ng-if="cajaFechaReserva">
+			          	<p>Seleccione una fecha válida para la reserva</p>
+			          	
+			          	<div class='input-group date' id='datetimepicker1'>
+		                    <input type='text' class="form-control" />
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div><br>
+
+			          	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="validarFechaReserva('encuesta')" style="float:left">Reservar</button>
+	            		<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Cancelar</button>
+			        </div>
+		          	<div ng-if="cajaIrEncuesta">
+			          	<p>¿Desea completar una encuesta a continuación?</p>
+			          	<p>...</p>
+			          	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="dondeIr('encuesta')" style="float:left">SI</button>
+	            		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="dondeIr('inicio')" style="float:right">NO</button>
+			        </div>
+		          </div>
+		      <!-- Footer -->    
 	      </div>
 	    </div>
 	 </div>
