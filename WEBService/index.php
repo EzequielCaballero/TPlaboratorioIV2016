@@ -272,9 +272,9 @@ $app->post('/compras/{objeto}', function ($request, $response, $args) {
     $datos = Compra::AgregarCompra($compra, $id_operacion);
     
     //ASOCIAR COMPRA A OFERTAS/PRODUCTOS
-    if(count($compra->productosAsociados)!=0)
-        $c_ofertas = Compra::AsociarCompraAofertas($compra->id_compra, $compra->ofertasAsociadas);
     if(count($compra->ofertasAsociadas)!=0)
+        $c_ofertas = Compra::AsociarCompraAofertas($compra->id_compra, $compra->ofertasAsociadas);
+    if(count($compra->productosAsociados)!=0)
         $c_productos = Compra::AsociarCompraAproductos($compra->id_compra, $compra->productosAsociados);
 
     $response->write($datos);
@@ -307,6 +307,13 @@ $app->post('/reservas/{objeto}', function ($request, $response, $args) {
     $id_operacion = $ultimoID_operacion + 1;
     //AGREGAR NUEVA RESERVA
     $datos = Reserva::AgregarReserva($reserva, $id_operacion);
+
+    //ASOCIAR RESERVA A OFERTAS/PRODUCTOS
+    if(count($reserva->ofertasAsociadas)!=0)
+        $r_ofertas = Reserva::AsociarReservaAofertas($reserva->id_reserva, $reserva->ofertasAsociadas);
+    if(count($reserva->productosAsociados)!=0)
+        $r_productos = Reserva::AsociarReservaAproductos($reserva->id_reserva, $reserva->productosAsociados);
+
     $response->write($datos);
     return $response;
 });

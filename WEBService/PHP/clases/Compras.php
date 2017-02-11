@@ -56,13 +56,13 @@ Class Compra
 		$consulta->execute();
 		return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
-	
+
 	//----------------CONSULTAS ESPECIALES----------------//
 	public static function AsociarCompraAofertas($compra, $ofertas)
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		foreach($ofertas as $oferta)
-		{
+		{	
 			$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into compras_ofertas (id_compra, id_oferta) values(:id_compra,:id_oferta)");
 			$consulta->bindValue(':id_compra', $compra, PDO::PARAM_INT);
 			$consulta->bindValue(':id_oferta', $oferta->id_oferta, PDO::PARAM_INT);
@@ -73,6 +73,7 @@ Class Compra
 	}
 	public static function AsociarCompraAproductos($compra, $productos)
 	{
+		echo "<br>PRODUCTOS: ";
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		foreach($productos as $producto)
 		{

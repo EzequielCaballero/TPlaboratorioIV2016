@@ -130,43 +130,44 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           $scope.compra = {};
           var cantidad_productos = $scope.adquirir.productos.length;
           for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
+             
              cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
-           } 
+          } 
           console.info("cantidad productos comprados: ", cantidad_productos);
-
+          
           $scope.compra.cantidad_prod = cantidad_productos;
           $scope.compra.precio_final = $scope.adquirir.precio_total;
-          $scope.compra.productosAsociados = $scope.adquirir.productos;
           $scope.compra.ofertasAsociadas = $scope.adquirir.ofertas;
+          $scope.compra.productosAsociados = $scope.adquirir.productos;
 
           servicioRetornoCompras.ABM_Compra($scope.compra, "Agregar").then(function(respuesta){
-            console.info("Fila afectada: ", respuesta.data);
-            $scope.agregarOperacion("compra");
+            console.info("Nueva fila: ", respuesta.data);
+            //$scope.agregarOperacion("compra");
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
           });
         }
 
         $scope.Reservar = function(){
-          
+
           //alert("reserva!");
           $scope.reserva = {};
           var cantidad_productos = $scope.adquirir.productos.length;
           for (var i = 0; i < $scope.adquirir.ofertas.length; i++) {
              cantidad_productos += $scope.adquirir.ofertas[i].cant_productos;
            } 
-          console.info("cantidad productos comprados: ", cantidad_productos);
+          console.info("cantidad productos reservados: ", cantidad_productos);
 
           var hoy = new Date();
           $scope.reserva.fecha_entrega = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
           $scope.reserva.cantidad_prod = cantidad_productos;
           $scope.reserva.precio_final = $scope.adquirir.precio_total;
-          $scope.reserva.productosAsociados = $scope.adquirir.productos;
           $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
+          $scope.reserva.productosAsociados = $scope.adquirir.productos;
 
           servicioRetornoReservas.ABM_Reserva($scope.reserva, "Agregar").then(function(respuesta){
-            console.info("Fila afectada: ", respuesta.data);
-            $scope.agregarOperacion("reserva");
+            console.info("Nueva fila: ", respuesta.data);
+            //$scope.agregarOperacion("reserva");
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
           });
@@ -185,7 +186,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           console.info("OPERACION: ", $scope.operacion);
 
           servicioRetornoOperaciones.ABM_Operacion($scope.operacion, "Agregar").then(function(respuesta){
-            console.info("Fila afectada: ", respuesta.data);
+            console.info("Nueva fila: ", respuesta.data);
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
           });
