@@ -134,6 +134,8 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         }
 
         //**********************************************CONFIRMAR OPERACION (COMPRA o RESERVA)**********************************************//
+        
+        //EFECTUAR COMPRA
         $scope.Comprar = function(){
           
           $scope.cajaIrEncuesta = true;
@@ -163,12 +165,20 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         //   });
         }
 
-        $scope.fechaErronea = false;
+        //CAJA CONFIRMAR OPERACION (en proceso...)
+        $scope.cajaConfirmarOperacion = false;
+        $scope.confirmarOperacion = function(){
+
+        }
+
+        //CAJA ELEGIR FECHA DE RESERVA
+        $scope.alertaFechaErronea = false;
         var hoy = new Date();
         var fechaActual = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
         $scope.fechaPorDefecto = fechaActual;
-        
+
         $scope.validarFechaReserva = function(){
+
           console.info("Fecha actual", fechaActual);
           console.info("Fecha cargada: ", $('#datetimepicker').val());
           if($('#datetimepicker').val() != fechaActual)
@@ -178,7 +188,10 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             var fechaAvalidar = fechaElegida.diff(fechaPresente, 'days') + 1;
             console.info("Diferencia de días: ", fechaAvalidar);
             if(fechaAvalidar >= 2 && fechaAvalidar <= 5)
+            {
+              $scope.fechaFinal = $('#datetimepicker').val();
               $scope.Reservar();
+            }
             else
               $scope.fechaErronea = true;
           }
@@ -186,6 +199,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             $scope.fechaErronea = true;
         }
 
+        //EFECTUAR RESERVA
         $scope.Reservar = function(){
 
           if($('#datetimepicker').val() == null)
@@ -210,8 +224,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             //  } 
             // console.info("cantidad productos reservados: ", cantidad_productos);
 
-            // var hoy = new Date();
-            // $scope.reserva.fecha_entrega = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
+            // $scope.reserva.fecha_entrega = $scope.fechaFinal;
             // $scope.reserva.cantidad_prod = cantidad_productos;
             // $scope.reserva.precio_final = $scope.adquirir.precio_total;
             // $scope.reserva.ofertasAsociadas = $scope.adquirir.ofertas;
@@ -254,7 +267,7 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
               switch(lugar)
               {
                 case "encuesta":
-                  setTimeout(function(){ $state.go('cliente.perfil'); }, 300);
+                  setTimeout(function(){ $state.go('cliente.encuesta'); }, 300);
                 break;
                 case "inicio":
                   setTimeout(function(){ $state.go('cliente.inicio'); }, 300);

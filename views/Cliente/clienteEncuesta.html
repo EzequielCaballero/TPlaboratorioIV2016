@@ -1,0 +1,116 @@
+<!-- MENU NAVEGACIÓN -->
+<a class="btn btn-danger" style="float:left" ui-sref="cliente.inicio()">Volver</a><span class="glyphicon glyphicon-home"></span>
+
+<div class="cajaEncuesta">
+	<div class="Frm">
+		<h3>ENCUESTA DE OPINIÓN Y SATISFACCIÓN DEL CLIENTE</h3>
+		<form class="encuestaForm" name="myForm" role="form">
+			
+			<div class="form-group">
+				<span>1</span><label for="opcionPizza" class="tituloPregunta">Variedad de pizza favorita</label><br>
+				<select id="opcionPizza" ng-model="encuesta.pregunta_1" ng-options="c.code as c.name for c in pizzaFavoritaOpciones">
+		          <option value="">--Pizza favorita--</option>
+		        </select><br>
+	        </div>
+
+	        <div class="form-group">
+		        <span>2</span><label class="tituloPregunta">Tipo de pizza preferida</label><br>
+		        <input id="tipo1" type="radio" ng-model="encuesta.pregunta_2" value="al molde"><label for="tipo1">Al molde</label>&nbsp;&nbsp;
+		        <input id="tipo2" type="radio" ng-model="encuesta.pregunta_2" value="a la piedra"><label for="tipo2">A la piedra</label><br>
+	        </div>
+
+	        <div class="form-group">
+				<span>3</span><label for="ingredientePizza" class="tituloPregunta">¿Qué ingredientes considera más importantes?</label><br>
+				<select id="ingredientePizza" ng-model="encuesta.pregunta_3" ng-options="c.code as c.name for c in ingredienteOpciones">
+		          <option value="">--Ingrediente principal--</option>
+		        </select><br>
+		    </div>
+
+		    <div class="form-group">
+			<span>4</span><label class="tituloPregunta">Frencuencia de consumo de pizzas</label><br><br>
+				<div class="form-group">
+					<table class="tablaOpciones">
+			        <tbody style="color:white">
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="2-3 por semana"></th><td>2-3 por semana</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1 vez por semana"></th><td>1 vez por semana</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1-2 por mes"></th><td>1-2 por mes</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="3-6 meses"></th><td>3-6 meses</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="nada frecuente"></th><td>nada frecuente</td></tr>
+					</tbody>
+			        </table>
+			    </div>
+			</div>
+
+			<div class="form-group">
+				<span>5</span><label class="tituloPregunta">¿Qué le ha parecido la variedad de productos que ofrecemos?</label><br>
+				<input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="buena"><label>Buena</label>&nbsp;&nbsp;
+		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="mala"><label>Mala</label>&nbsp;&nbsp;
+		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="intermedia"><label>Intermedia</label><br>
+		    </div>
+
+		    <div class="form-group">
+				<span>6</span><label class="tituloPregunta">¿Cuál fue el motivo por el cual eligió estos productos?</label><br>
+				
+			</div>
+
+			<div class="form-group">	
+				<span>7</span><label class="tituloPregunta">¿Recomendaría la página a un amigo?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>8</span><label class="tituloPregunta">¿Considera atractiva y/o correcta las imágenes de los productos?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>9</span><label class="tituloPregunta">¿Cuánto estaría dispuesto a pagar por uno de nuestros productos en el supermercado?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>10</span><label class="tituloPregunta">¿Considera que los precios son razonables?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>11</span><label class="tituloPregunta">En una escala del 1 al 10: ¿Cuál es su nivel de satisfacción con la compra/reserva realizada?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>12</span><label class="tituloPregunta">¿Conocía nuestra marca?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>13</span><label class="tituloPregunta">¿Cómo se enteró de la existencia de la página?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>14</span><label class="tituloPregunta">¿Está conforme con la ubicación de nuestros locales?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>15</span><label class="tituloPregunta">¿Considera necesario un servicio de delivery?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>16</span><label class="tituloPregunta">¿Cuánto tiempo estaría dispuesto a esperar para la entrega del producto?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>17</span><label class="tituloPregunta">¿Cuál es su opinión acerca de la página?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>18</span><label class="tituloPregunta">¿Tuvo inconvenientes en el uso de la página?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>19</span><label class="tituloPregunta">¿Qué considera que debe mejorarse en la página?</label><br>
+			</div>
+
+			<div class="form-group">
+				<span>20</span><label class="tituloPregunta">Ante futuras compras: ¿Acudiría personalmente al local o utilizaría la página?</label><br>
+			</div>
+			<button class="btn btn-default">Terminar</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-default">Cancelar</button>
+
+		</form>
+		<!-- FIN DEL FORMULARIO -->
+	</div>
+</div>

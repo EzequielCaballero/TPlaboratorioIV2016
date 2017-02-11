@@ -149,33 +149,45 @@
 	            <h4 id="tituloVentanaModal" class="modal-title">{{tituloOperacion}}</h4>
 	          </div>
 	          <!-- Body -->
-		          <div class="modal-body" style="color:black">    
-		          	<div ng-if="cajaFechaReserva">
-			          	<p>Seleccione una fecha válida para la reserva</p>
-			          	
-				            <div class="form-group">
-				            	<label>Reserva válida (2 a 5 días)</label>
-				                <input type='text' class="form-control" id='datetimepicker' ng-model="fechaPorDefecto"/>
-				            </div>
-				            <label class="mensajeAlerta" ng-show="fechaErronea">Error. Por favor seleccione una fecha válida</label><br>
-		            		<script type="text/javascript">
-					        	$(function () {
-					                $('#datetimepicker').datetimepicker({
-					                	format:"YYYY-MM-DD"
-					                });
-					            });
-					        </script>
-				        <button type="button" class="btn btn-success" ng-click="validarFechaReserva('encuesta')">Reservar</button>
-		            	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button><br>
+		          <div class="modal-body" style="color:black">
 
-			        </div>
-		          	<div ng-if="cajaIrEncuesta">
-			          	<p>¿Desea completar una encuesta a continuación?</p>
-			          	<p>...</p>
-			          	<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="dondeIr('encuesta')" style="float:left">SI</button>
-	            		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="dondeIr('inicio')" style="float:right">NO</button>
-			        </div>
-		          </div>
+			            <!-- CONFIRMAR OPERACION -->
+			            <div ng-if="cajaConfirmarOperacion">
+			            	<p>¿Confirmar operación?</p>
+			            	<button type="button" class="btn btn-success" ng-click="confirmarOperacion(tipoOperacion)" style="float:left">SI</button>
+		            		<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">NO</button>
+			            </div>
+
+			          	<!-- SELECCION DE FECHA DE LA RESERVA -->
+			          	<div ng-if="cajaFechaReserva">
+				          	<p>Seleccione una fecha válida para la reserva</p>
+				          	
+					            <div class="form-group">
+					            	<label>Reserva válida (2 a 5 días)</label>
+					                <input type='text' class="form-control" id='datetimepicker' ng-model="fechaPorDefecto"/>
+					            </div>
+					            <label class="mensajeAlerta" ng-show="alertaFechaErronea">Error. Por favor seleccione una fecha válida</label><br>
+			            		<script type="text/javascript">
+						        	$(function () {
+						                $('#datetimepicker').datetimepicker({
+						                	format:"YYYY-MM-DD"
+						                });
+						            });
+						        </script>
+					        <button type="button" class="btn btn-success" ng-click="validarFechaReserva('encuesta')">Reservar</button>
+			            	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button><br>
+				        </div>
+				        <!-- FINALIZACIÓN DE OPERACION/ IR A ENCUESTA -->
+			          	<div ng-if="cajaIrEncuesta">
+			          		<div>
+					          	<p>¿Desea completar una encuesta a continuación?</p>
+					          	<button type="button" class="btn btn-success btn-lg" data-dismiss="modal" ng-click="dondeIr('encuesta')">SI</button>
+			            		<button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" ng-click="dondeIr('inicio')">NO</button>
+			            	</div>
+				        </div>
+			      </div>
+
+		       </div>
 		      <!-- Footer -->    
 	      </div>
 	    </div>

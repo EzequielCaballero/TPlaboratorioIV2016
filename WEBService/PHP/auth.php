@@ -59,7 +59,7 @@ foreach($Array_usuarios as $usuarioReal)
 			}
 
 			$token["iat"]=time();
-			$token["exp"]=time()+3600; // segundos
+			$token["exp"]=time()+36000; // segundos (una hora)
 
 			$jwt = JWT::encode($token, $ClaveDeEncritacion); //genero el token con los datos que quiero
 			$ArrayConToken["usuario_PizzeriaARGenta"]=$jwt;//Guardo el token en un array (el nombre del token tiene que ser el mismo que en el js)!!

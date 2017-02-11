@@ -96,12 +96,10 @@ input[type=file], select {
 }
 
 th, td {
-      border: 1px solid #ddd;
+    border: 1px solid #ddd;
     text-align: left;
     padding: 8px;
 }
-
-tr:nth-child(even){background-color: white}
 
 th {
     background-color: #333;
@@ -803,5 +801,51 @@ VISTA CLIENTE
   font-size: 10px;
 }
 
+
+/************************************************************************************
+ENCUESTA
+*************************************************************************************/
+.cajaEncuesta{
+  position: relative;
+  max-width:800px;
+  padding-top: 50px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+}
+
+.cajaEncuesta h3{
+  color: #FFFFFF;
+  background-color: #821C1C;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.encuestaForm{
+  color:white;
+}
+
+.tituloPregunta{
+  color:#CA4545;
+  width: 100%;
+  background-color: #452511;
+  border-radius: 10px;
+}
+
+.encuestaForm{
+  color:#D0ADAD;
+}
+
+.encuestaForm select{
+  max-width:500px;
+}
+
+.tablaOpciones{
+  margin: 0 auto;
+  border: 1px solid black;
+  background-color: #591E1E;
+}
 /*************************************************************************************/
 /*FIN DE ESTILOS*/
