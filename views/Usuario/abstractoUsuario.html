@@ -4,9 +4,9 @@
 	         		 <span class="glyphicon glyphicon-home">&nbsp;</span>
 	         		 Inicio
 	         <li>
-	         	<h2 class="perfil">&nbsp;PERFIL: {{perfilUsuario}}</h2>
+	         	<h2 class="perfil">&nbsp;{{perfilUsuario}}</h2>
 	         </li>
-	         <li  style="float:right" id="botonInicio" class="btn btn-danger" ng-click="logOut()">
+	         <li  style="float:right" ng-show="botonDesloguearse" id="botonInicio" class="btn btn-danger" ng-click="logOut()">
 	         		 <span class="glyphicon glyphicon-log-out">&nbsp;</span>
 	         		 Logout
 	         <li>

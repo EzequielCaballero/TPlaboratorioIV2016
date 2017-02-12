@@ -11,6 +11,7 @@ require 'PHP/clases/Operaciones.php';
 require 'PHP/clases/Compras.php';
 require 'PHP/clases/Reservas.php';
 require 'PHP/clases/Encuestas.php';
+require 'PHP/clases/Registro_sesiones.php';
 
 $app = new Slim\App();
 
@@ -321,7 +322,6 @@ $app->post('/reservas/{objeto}', function ($request, $response, $args) {
 //*************************************************************ENCUESTAS*************************************************************//
 $app->get('/encuestas[/]', function ($request, $response, $args) {
     $datos = Encuesta::TraerTodasLasEncuestas();
-    var_dump($datos);
     $response->write(json_encode($datos));
     return $response;
 });
@@ -336,6 +336,28 @@ $app->post('/encuestas/{objeto}', function ($request, $response, $args) {
     $encuesta->id_encuesta = $nuevaFila;
     //AGREGAR NUEVA ENCUESTA
     $datos = Encuesta::AgregarEncuesta($encuesta);
+
+    $response->write($datos);
+    return $response;
+});
+
+//*************************************************************REGISTROS*************************************************************//
+$app->get('/registro_sesiones[/]', function ($request, $response, $args) {
+    $datos = Registro_sesiones::TraerTodosLosRegistros();
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->post('/registro_sesiones/{objeto}', function ($request, $response, $args) {
+    
+    $registro = json_decode($args['objeto']);
+
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Registro_sesiones::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $registro->id_encuesta = $nuevaFila;
+    //AGREGAR NUEVO REGISTRO DE SESION
+    $datos = Registro_sesiones::agregarNuevoRegistro($registro);
 
     $response->write($datos);
     return $response;

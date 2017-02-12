@@ -10,6 +10,7 @@ angular.module('ABMangularAPI.factoryOrigenDatos', [])
     objeto.Compras = "http://localhost/1A-TP_PIZZERIA/WEBService/compras/"; // ORIGEN datos = Compras
     objeto.Reservas = "http://localhost/1A-TP_PIZZERIA/WEBService/reservas/"; // ORIGEN datos = Reservas
     objeto.Encuestas = "http://localhost/1A-TP_PIZZERIA/WEBService/encuestas/"; // ORIGEN datos = Encuestas
+    objeto.Registro_sesiones = "http://localhost/1A-TP_PIZZERIA/WEBService/registro_sesiones/"; // ORIGEN datos = Registro de sesiones de usuario
     
     return objeto;
     

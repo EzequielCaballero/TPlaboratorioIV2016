@@ -1,45 +1,188 @@
-<div class="cajaEstadisticas"></div>	
+<div class="cajaEstadisticas"></div>
+	<!-- MENU ESTADISTICAS -->
 	<div class="CajaMenuEstadistica">
 	<h1>ESTADISTICAS</h1>
 		<form class="formMenuABM animated fadeInUp">
 
 		         <br><br>
-		         <button class="buttonMenuABM" ng-click="redirigir('ventas_local')">
+		         <button class="buttonMenuABM" ng-click="consultar('ventas_local')" ng-disabled="opcion_ventasLocal">
 		         		<span class="glyphicon glyphicon-th-list">&nbsp;</span>
 		         		Ventas - local
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="redirigir('ventas_empleado')">
+		         <button  class="buttonMenuABM" ng-click="consultar('ventas_empleado')" ng-disabled="opcion_ventasEmpleado">
 		         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
 		         		Ventas - empleado
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="redirigir('ventas_fechas')">
+		         <button class="buttonMenuABM" ng-click="consultar('ventas_fechas')" ng-disabled="opcion_ventasEntreFechas">
 		         		<span class="glyphicon glyphicon-calendar" >&nbsp;</span>
 		         		Ventas - producto e/ fechas
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="redirigir('ventas_dia')">
+		         <button  class="buttonMenuABM" ng-click="consultar('ventas_dia')" ng-disabled="opcion_importePordia">
 		         		<span class="glyphicon glyphicon-tasks" >&nbsp;</span>
 		         		Ventas - importe del día
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="redirigir('compras_cliente')">
+		         <button  class="buttonMenuABM" ng-click="consultar('compras_cliente')" ng-disabled="opcion_clienteOperaciones">
 		         		<span class="glyphicon glyphicon-shopping-cart" >&nbsp;</span>
 		         		Cliente - operaciones
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="redirigir('registro_sesiones')">
+		         <button class="buttonMenuABM" ng-click="consultar('registro_sesiones')" ng-disabled="opcion_registroSesiones">
 		         		<span class="glyphicon glyphicon-user" >&nbsp;</span>
 		         		Registro - inicios de sesión
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="redirigir('encuesta_estadistica')">
+		         <button class="buttonMenuABM" ng-click="consultar('encuesta_estadistica')" ng-disabled="opcion_encuestaEstadistica">
 		         		<span class="glyphicon glyphicon-check" >&nbsp;</span>
 		         		Encuesta - estadística
 		         </button><br><br>
 		         
 
-		         	<a id="buttonLogOFF" ng-click="redirigir('Logout')">
+		         	<a id="buttonLogOFF" ng-click="cerrarSesion()">
 		         		<span class="glyphicon glyphicon-log-out" >&nbsp;</span>
 		         	</a>
 		</form>
 	</div>
 	<!-- FIN CAJA MENU ESTADISTICAS -->
 
+	<!-- CAJA VISTAS TOTALES -->
+	<div class="cajaEstadisticaSeleccionada">
+
+		<!-- CAJA CONSULTA VENTAS -->
+		<div ng-show="verConsultaOperaciones" class="listaOperaciones">
+			<h2>DATOS CONSULTADOS</h2>
+			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
+			<table id="tablaOperaciones" class='table table-hover table-responsive'>
+				<thead>
+					<tr>
+						<th>  CODIGO  </th>
+						<th>  Tipo    </th>
+						<th>  Fecha   </th>
+						<th>  Local   </th>
+						<th>  Usuario </th>
+						<th>  Total   </th>
+						<th>  Detalle </th>
+					</tr>
+				</thead>
+				<tr ng-repeat="operacion in lista_operaciones | filter:buscador as resultado">
+					<td>{{operacion.id_operacion}}</td>
+					<td>{{operacion.tipo_operacion}}</td>
+					<td>{{operacion.fecha}}</td>
+					<td>{{operacion.id_local}}</td>
+					<td>{{operacion.id_usuario}}</td>
+					<td>${{operacion.total}}</td>
+					<td><button class="btn" data-toggle="modal" data-target="#verDetalleOperacion" ng-click=""></button></td>
+				</tr>
+			</table><br>
+		</div><!-- FIN LISTA OPERACIONES -->
+
+		<!-- CAJA CONSULTA REGISTRO SESIONES -->
+		<div ng-show="verConsultaRegistroSesiones" class="listaRegistroSesiones">
+			<h2>DATOS CONSULTADOS</h2>
+			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
+			<table id="tablaRegistro_sesiones" class='table table-hover table-responsive'>
+				<thead>
+					<tr>
+						<th>  REGISTRO  </th>
+						<th>  Usuario    </th>
+						<th>  Nombre   </th>
+						<th>  Fecha   </th>
+						<th>  Hora </th>
+					</tr>
+				</thead>
+				<tr ng-repeat="registro in lista_registros | filter:buscador as resultado">
+					<td>{{registro.id_registro}}</td>
+					<td>{{registro.id_usuario}}</td>
+					<td>{{registro.nombre}}</td>
+					<td>{{registro.fecha}}</td>
+					<td>{{registro.hora}}</td>
+				</tr>
+			</table><br>
+		</div><!-- FIN LISTA DE SESIONES -->
+
+		<!-- CAJA CONSULTA REGISTRO SESIONES -->
+		<div ng-show="verConsultaEncuestaEstadisticas" class="listaEncuestaEstadisticas">
+			<h2>ESTADISTICAS</h2>
+		</div><!-- FIN LISTA DE SESIONES -->
+	
+	<!-- FIN CAJA VISTAS TOTALES -->
+	</div>
+
+	<!-- MODAL ANTE OPCIONES EXTRA -->
+	<div class="container">
+	    <!-- Modal -->
+	    <div class="modal fade" id="opcionesConsulta" role="dialog">
+	      <div class="modal-dialog">
+	      
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	          <!-- Header -->
+	          <div class="modal-header">
+	            <h4 id="tituloVentanaModal" class="modal-title">{{tituloModalOpciones}}</h4>
+	          </div>
+	          <!-- Body -->
+		          <div class="modal-body" style="color:black">
+
+			            <!-- SELECCIONAR LOCAL -->
+			            <div ng-if="modalSeleccionarLocal">
+			            	<p>Seleccione local a consultar</p>
+			            	<button type="button" class="btn btn-success" ng-click="filtrar('venta_local')">Consultar</button>
+		            		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasLocal')">Cancelar</button>
+			            </div>
+
+			          	<!-- SELECCIONAR FECHAS PARA BUSQUEDA PRODUCTO/OFERTA MAS VENDIDO -->
+			          	<div ng-if="modalSeleccionarDosFechas">
+				          	<p>Seleccione fechas a consultar</p>
+				          	
+					            <div class="form-group">
+					                <input type='text' class="form-control" id='fecha_uno' ng-model="fechaPorDefecto"/>
+					                <input type='text' class="form-control" id='fecha_dos' ng-model="fechaPorDefecto"/>
+					            </div>
+			            		<script type="text/javascript">
+						        	$(function () {
+						                $('#fecha_uno').datetimepicker({
+						                	format:"YYYY-MM-DD"
+						                });
+						            });
+						            $(function () {
+						                $('#fecha_dos').datetimepicker({
+						                	format:"YYYY-MM-DD"
+						                });
+						            });
+						        </script>
+					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_entre_fechas')">Consultar</button>
+			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasEntreFechas')">Cancelar</button><br>
+				        </div>
+
+				        <!-- SELECCIONAR FECHA PARA IMPORTE DEL DIA -->
+			          	<div ng-if="modalSeleccionarUnicaFecha">
+				          	<p>Seleccione fecha a consultar</p>
+				          		<div class="form-group">
+					                <input type='text' class="form-control" id='fechaConsulta' ng-model="fechaPorDefecto"/>
+					            </div>
+			            		<script type="text/javascript">
+						        	$(function () {
+						                $('#fechaConsulta').datetimepicker({
+						                	format:"YYYY-MM-DD"
+						                });
+						            });
+						        </script>
+					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_por_fecha')">Consultar</button>
+			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_importePordia')">Cancelar</button><br>
+				        </div>
+
+				        <!-- SELECCIONAR ENCUESTA ESTADISTICA RESPUESTA -->
+			          	<div ng-if="modalSeleccionarRespuestaEncuesta">
+				          	<p>Seleccione estadística de encuesta</p>
+					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_por_fecha')">Consultar</button>
+			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>
+				        </div>
+
+			      </div> <!-- FIN CUERPO MODAL -->
+
+		       </div>
+		      <!-- Footer -->    
+	      </div>
+	    </div>
+	 </div>
+
+<!-- FIN VISTA GENERAL -->
 </div>
 

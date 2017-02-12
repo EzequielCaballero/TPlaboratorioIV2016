@@ -934,5 +934,25 @@ ESTADÍSTICA
   opacity: 0.5;
 }
 
+/******************LISTA OPERACIONES******************/
+
+.cajaEstadisticaSeleccionada{
+    position: relative;
+    padding-top: 50px;
+    max-width:1000px;
+    margin:0 auto;
+    margin-top:8px;
+    margin-bottom:2%;
+    display: inline-block;
+    font-size:0.875em;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
+    float: right;
+}
+
+.tablaOperaciones{
+  background-color: #5D2323;
+}
+
 /*************************************************************************************/
 /*FIN DE ESTILOS*/
