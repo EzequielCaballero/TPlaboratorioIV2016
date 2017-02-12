@@ -12,6 +12,7 @@ angular.module('ABMangularAPI.controladorInicio', [])
 
 	  //Ocultar o mostrar botones
 	  $scope.ABMusuarios = "true";
+	  $scope.Estadisticas = "true";
 	  $scope.Login = "false";
 	  $scope.logout = "true";
 
@@ -26,7 +27,10 @@ angular.module('ABMangularAPI.controladorInicio', [])
       	$scope.logout = "false";
 
       	if($sesion.perfil != "Cliente")
-      		$scope.ABMusuarios = "false";  
+      		$scope.ABMusuarios = "false";
+
+      	if($sesion.perfil == "Administrador")
+      		$scope.Estadisticas = "false";  
       }
 
 	  $scope.direccionar=function($direccion){
@@ -55,8 +59,8 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	      	$state.go("usuario.menu");
 	      	break;
 
-	      case "MenuEntidades":
-	      	$state.go("entidad.menu");
+	      case "MenuEstadisticas":
+	      	$state.go("usuario.estadisticas");
 	      	break;
 
 	      case "Inicio":

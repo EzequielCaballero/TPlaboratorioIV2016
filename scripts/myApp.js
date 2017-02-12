@@ -129,6 +129,15 @@ var app = angular.module('ABMangularAPI', [
                 }
               }
             })
+    .state('usuario.estadisticas', {
+      url : '/estadisticas',
+      views: {
+                'contenido': {
+                templateUrl : 'views/Usuario/usuarioEstadisticas.html',
+                controller : 'controlUsuarioEstadisticas'
+                }
+              }
+            })
 
     .state('usuario.directivaGrilla', {
       url : '/directivaGrilla',

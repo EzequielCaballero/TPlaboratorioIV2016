@@ -115,13 +115,7 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  		$scope.encuesta.pregunta_19 = $scope.otraRazon_pregunta_19;
 	  	console.info("ENCUESTA: ", $scope.encuesta);
 
-	  	// servicioRetornoEncuestas.traerTodo().then(function(respuesta){
-	  	// 	console.info("ENCUESTAS TOTALES: ", respuesta.data);
-	  	// },function errorCallback(response) {
-    //             console.log("FALLO! ", response);
-    //     });
-
-	  	servicioRetornoEncuestas.ABM_Encuesta($scope.encuesta, "Agregar").then(function(respuesta){
+		servicioRetornoEncuestas.ABM_Encuesta($scope.encuesta, "Agregar").then(function(respuesta){
 	  		
 	  		console.info("NUEVA FILA DE ENCUESTA: ", respuesta.data);
 

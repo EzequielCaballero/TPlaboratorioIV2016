@@ -758,7 +758,7 @@ VISTA CLIENTE
 }
 
 #tablaProductos, #tablaOfertas{
-  background-color: #76483C;
+  background-color: #5D2323;
 }
 
 .cajaOperaciones{
@@ -875,5 +875,64 @@ ENCUESTA
   margin: 0 auto;
   background-color: #371919;
 }
+
+/************************************************************************************
+ESTADÍSTICA
+*************************************************************************************/
+.CajaMenuEstadistica{
+  position: relative;
+  max-width:800px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+  float: left;
+}
+
+.CajaMenuEstadistica h1{
+  background-color: #3B1212;
+  padding:20px;
+  margin:0 auto;
+  font-size:100%;
+  font-weight: bold;
+  max-width: 100%;
+  text-align:center;
+  color:#fff;
+  border-radius: 20px;
+}
+
+.buttonMenuEstadistica, .formMenuEstadistica a{
+    border-radius: 15px;
+    background-color: #9E2B2B;
+    color: #fff;
+    width: 300px;
+    display: inline-block;
+    padding: 14px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size:0.875em;
+}
+.buttonMenuEstadistica:hover{
+    background-color: #681A1A;
+}
+
+.buttonMenuEstadistica:active {
+  background-color: #8E3E3E;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.buttonMenuEstadistica:disabled {
+  background-color: #8E3E3E;
+  box-shadow: 0 5px #666;
+  cursor: not-allowed;
+  transform: translateY(4px);
+  opacity: 0.5;
+}
+
 /*************************************************************************************/
 /*FIN DE ESTILOS*/

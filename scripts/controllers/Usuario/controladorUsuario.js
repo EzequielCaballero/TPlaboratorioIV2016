@@ -7,4 +7,9 @@ angular.module('ABMangularAPI.controladorUsuario', [])
 			$scope.perfilUsuario = $sesion.perfil;
 		}
 
-	});
+	$scope.logOut = function(){
+		$auth.logout();
+	    $state.go("inicio");
+	}
+
+});
