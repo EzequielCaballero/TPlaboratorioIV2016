@@ -173,6 +173,10 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
         var fechaActual = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
         $scope.fechaPorDefecto = fechaActual;
 
+        $scope.resetearFecha = function(){
+          $scope.fechaPorDefecto = fechaActual;
+        }
+
         $scope.validarFechaReserva = function(){
 
           console.info("Fecha actual", fechaActual);
@@ -189,16 +193,16 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
               $scope.Reservar();
             }
             else
-              $scope.fechaErronea = true;
+              $scope.alertaFechaErronea = true;
           }
           else
-            $scope.fechaErronea = true;
+            $scope.alertaFechaErronea = true;
         }
 
         //EFECTUAR RESERVA
         $scope.Reservar = function(){
 
-          if($('#datetimepicker').val() == null)
+          if($('#datetimepicker').val() == undefined || $('#datetimepicker').val() == fechaActual)
           {
             $scope.cajaIrEncuesta = false;
             $scope.cajaFechaReserva = true;
