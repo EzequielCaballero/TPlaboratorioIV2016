@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
-	app.controller('controlClienteEncuesta', function($scope, $http, $state, $auth, $stateParams) {
+	app.controller('controlClienteEncuesta', function($scope, $http, $state, $auth, $stateParams, servicioRetornoEncuestas) {
 
 	if(!$auth.isAuthenticated())
       $state.go("inicio");
@@ -85,17 +85,12 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  $scope.encuesta = {};
 	  $scope.numeroOperacion = $stateParams.id_operacion;
 	  $scope.encuesta.id_operacion = $stateParams.id_operacion;
-
 	  $scope.encuesta.pregunta_1;
 	  $scope.encuesta.pregunta_2;
 	  $scope.encuesta.pregunta_3;
 	  $scope.encuesta.pregunta_4;
 	  $scope.encuesta.pregunta_5;
-
-	  if($scope.otraRazon_pregunta_6 != "")
-	  	$scope.encuesta.pregunta_6 = $scope.otraRazon_pregunta_6;
 	  $scope.encuesta.pregunta_6;
-
 	  $scope.encuesta.pregunta_7;
 	  $scope.encuesta.pregunta_8;
 	  $scope.encuesta.pregunta_9;
@@ -108,16 +103,32 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  $scope.encuesta.pregunta_16;
 	  $scope.encuesta.pregunta_17;
 	  $scope.encuesta.pregunta_18;
-
-	  if($scope.otraRazon_pregunta_19 != "")
-	  	$scope.encuesta.pregunta_19 = $scope.otraRazon_pregunta_19;
 	  $scope.encuesta.pregunta_19;
-
 	  $scope.encuesta.pregunta_20;
 
 	  //ENVIAR FORMULARIO
 	  $scope.EnviarEncuesta = function(){
 	  	alert("enviando!");
+	  	if($scope.otraRazon_pregunta_6 != "")
+	  		$scope.encuesta.pregunta_6 = $scope.otraRazon_pregunta_6;
+	  	if($scope.otraRazon_pregunta_19 != "")
+	  		$scope.encuesta.pregunta_19 = $scope.otraRazon_pregunta_19;
+	  	console.info("ENCUESTA: ", $scope.encuesta);
+
+	  	// servicioRetornoEncuestas.traerTodo().then(function(respuesta){
+	  	// 	console.info("ENCUESTAS TOTALES: ", respuesta.data);
+	  	// },function errorCallback(response) {
+    //             console.log("FALLO! ", response);
+    //     });
+
+	  	servicioRetornoEncuestas.ABM_Encuesta($scope.encuesta, "Agregar").then(function(respuesta){
+	  		
+	  		console.info("NUEVA FILA DE ENCUESTA: ", respuesta.data);
+
+	  	},function errorCallback(response) {
+                console.log("FALLO! ", response);
+        });
+
 	  }
 
 });

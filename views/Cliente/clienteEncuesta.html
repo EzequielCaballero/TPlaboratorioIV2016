@@ -1,5 +1,6 @@
+<!doctype html>
 <!-- MENU NAVEGACIÓN -->
-<a class="btn btn-danger" style="float:left" ui-sref="cliente.inicio()">Volver</a><span class="glyphicon glyphicon-home"></span>
+<!-- <a class="btn btn-danger" style="float:left" ui-sref="cliente.inicio()">Volver</a><span class="glyphicon glyphicon-home"></span> -->
 <div class="cajaEncuesta">
 	<div class="Frm">
 		<h3>ENCUESTA DE OPINIÓN Y SATISFACCIÓN DEL CLIENTE</h3><br><br>
@@ -66,7 +67,7 @@
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">
-				<span>8</span><label class="tituloPregunta">¿Considera atractiva y/o correcta las imágenes de los productos?</label><br>
+				<span>8</span><label class="tituloPregunta">¿Considera atractiva y/o correcta las imágenes de los productos?</label><br><br>
 				<input id="considera1" type="radio" ng-model="encuesta.pregunta_8" value="si"><label for="considera1">Si</label>&nbsp;&nbsp;
 		        <input id="considera2" type="radio" ng-model="encuesta.pregunta_8" value="no"><label for="considera2">No</label>&nbsp;&nbsp;
 		        <input id="considera3" type="radio" ng-model="encuesta.pregunta_8" value="ni idea"><label for="considera3">Tal vez</label>
@@ -132,7 +133,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>17</span><label for="textoOpinion" class="tituloPregunta">¿Cuál es su opinión acerca de la página?</label><br>
-				<textarea id="textoOpinion" class="form-control" rows="4" ng-model="encuesta.pregunta_17" placeholder="Ingrese su opinión aquí">
+				<textarea id="textoOpinion" class="form-control" maxlength="300" rows="4" ng-model="encuesta.pregunta_17" placeholder="Ingrese su opinión aquí">
 				</textarea><br>
 			</div><br>
 

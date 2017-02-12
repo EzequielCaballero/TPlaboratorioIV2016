@@ -757,6 +757,10 @@ VISTA CLIENTE
     color: white;
 }
 
+#tablaProductos, #tablaOfertas{
+  background-color: #76483C;
+}
+
 .cajaOperaciones{
     position: relative;
     padding-top: 50px;

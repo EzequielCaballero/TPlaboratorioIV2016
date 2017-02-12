@@ -318,6 +318,29 @@ $app->post('/reservas/{objeto}', function ($request, $response, $args) {
     $response->write($datos);
     return $response;
 });
+//*************************************************************ENCUESTAS*************************************************************//
+$app->get('/encuestas[/]', function ($request, $response, $args) {
+    $datos = Encuesta::TraerTodasLasEncuestas();
+    var_dump($datos);
+    $response->write(json_encode($datos));
+    return $response;
+});
+
+$app->post('/encuestas/{objeto}', function ($request, $response, $args) {
+    
+    $encuesta = json_decode($args['objeto']);
+
+    //DEFINICION DE ID (Autoincremental)
+    $ultimoID = Encuesta::traerUltimaFila();
+    $nuevaFila = $ultimoID + 1;
+    $encuesta->id_encuesta = $nuevaFila;
+    //AGREGAR NUEVA ENCUESTA
+    $datos = Encuesta::AgregarEncuesta($encuesta);
+
+    $response->write($datos);
+    return $response;
+});
+
 //****************************************************************************************************************************//
 //****************************************************************************************************************************//
 $app->run();
