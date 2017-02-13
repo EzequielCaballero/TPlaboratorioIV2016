@@ -71,6 +71,7 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
             $scope.registro = {};
             $scope.registro.id_usuario = $sesion.usuario;
             $scope.registro.nombre = $sesion.nombre;
+            $scope.registro.tipo_usuario = $sesion.perfil;
             var hoy = new Date();
             $scope.registro.fecha = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
             $scope.registro.hora = hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
