@@ -651,8 +651,10 @@ NUEVO LOCAL
 GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
 *************************************************************************************/
 .CajaGrilla{
-    width: 60%;
     margin: 0 auto;
+    padding-right: 30px;
+    font-size:0.875em;
+    width: 60%;
 }
 
 .fotoGrilla{

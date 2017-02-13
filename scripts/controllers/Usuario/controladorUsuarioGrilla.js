@@ -16,7 +16,30 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
 
       $scope.tituloGrillaUsuarios = "GRILLA USUARIOS";
       // Objeto de configuracion de la grilla Usuarios.
-      $scope.gridOptionsUsuarios = {};
+      $scope.gridOptionsUsuarios = {
+               // Configuracion para exportar datos.
+            exporterCsvFilename: 'tablaUsuarios.csv',
+            exporterCsvColumnSeparator: ';',
+            exporterPdfDefaultStyle: {fontSize: 8},
+            exporterPdfTableStyle: {margin: [5, 5, 5, 5]},
+            exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
+            exporterPdfHeader: { text: "My Header", style: 'headerStyle' },
+            exporterPdfFooter: function ( currentPage, pageCount ) {
+              return { text: currentPage.toString() + ' of ' + pageCount.toString(), style: 'footerStyle' };
+            },
+            exporterPdfCustomFormatter: function ( docDefinition ) {
+              docDefinition.styles.headerStyle = { fontSize: 10, bold: true };
+              docDefinition.styles.footerStyle = { fontSize: 5, bold: true };
+              return docDefinition;
+            },
+            exporterPdfOrientation: 'landscape',
+            exporterPdfPageSize: 'A4',
+            exporterPdfMaxGridWidth: 900,
+            exporterCsvLinkElement: angular.element(document.querySelectorAll(".custom-csv-link-location")),
+            onRegisterApi: function(gridApi){
+              $scope.gridApi = gridApi;
+            }
+      };
       $scope.gridOptionsUsuarios.paginationPageSizes = [25, 50, 75];
       // Configuracion de la paginacion
       $scope.gridOptionsUsuarios.paginationPageSize = 25;
@@ -25,7 +48,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       // Activo la busqueda en todos los campos.
       $scope.gridOptionsUsuarios.enableFiltering = true;
       $scope.gridOptionsUsuarios.enableHiding = true;
-      $scope.gridOptionsUsuarios.enableGridMenu = false;
+      $scope.gridOptionsUsuarios.enableGridMenu = true;
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
