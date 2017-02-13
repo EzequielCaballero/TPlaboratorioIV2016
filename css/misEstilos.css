@@ -1,10 +1,10 @@
 
 /************************************************************************************PARA ERROR NG-ANGULAR
 *************************************************************************************/
-input.ng-invalid, select.ng-invalid {
-    background-color: #832424;
+input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+    background-color: #973838;
 }
-input.ng-valid, select.ng-valid {
+input.ng-valid, select.ng-valid, textarea.ng-valid {
     background-color: #DAF7D8;
 }
 
@@ -900,6 +900,10 @@ ESTADÍSTICA
   text-align:center;
   color:#fff;
   border-radius: 20px;
+}
+
+.cajaOpcionModal select{
+  color:black;
 }
 
 .buttonMenuEstadistica, .formMenuEstadistica a{

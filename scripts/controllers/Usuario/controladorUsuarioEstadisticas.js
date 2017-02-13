@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])  
-  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoOperaciones, servicioRetornoRegistroSesiones) {
+  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoLocales, servicioRetornoOperaciones, servicioRetornoRegistroSesiones) {
 
     //SI estoy en este menú quiere decir que ya hay una sesión activa, resta saber que usuario esta logueado.
     $sesion = $auth.getPayload();
@@ -10,32 +10,37 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
        $state.go("inicio");
     }
 
-    //HABILITACIONES DE BOTONES DE MENU (seteo inicial)
-    $scope.opcion_ventasLocal = false;
-    $scope.opcion_ventasEmpleado = false;
-    $scope.opcion_ventasEntreFechas = false;
-    $scope.opcion_importePordia = false;
-    $scope.opcion_clienteOperaciones = false;
-    $scope.opcion_registroSesiones = false;
-    $scope.opcion_encuestaEstadistica = false;
-    //HABILITACION DE OPCIONES DE VENTANA MODAL
-    $scope.modalSeleccionarLocal = false;
-    $scope.modalSeleccionarDosFechas = false;
-    $scope.modalSeleccionarUnicaFecha = false;
-    $scope.modalSeleccionarRespuestaEncuesta = false;
+    // //HABILITACIONES DE BOTONES DE MENU (seteo inicial)
+    // $scope.opcion_ventasLocal = false;
+    // $scope.opcion_ventasEmpleado = false;
+    // $scope.opcion_ventasEntreFechas = false;
+    // $scope.opcion_importePordia = false;
+    // $scope.opcion_clienteOperaciones = false;
+    // $scope.opcion_registroSesiones = false;
+    // $scope.opcion_encuestaEstadistica = false;
+    // //HABILITACION DE OPCIONES DE VENTANA MODAL
+    // $scope.modalSeleccionarLocal = false;
+    // $scope.modalSeleccionarDosFechas = false;
+    // $scope.modalSeleccionarUnicaFecha = false;
+    // $scope.modalSeleccionarRespuestaEncuesta = false;
 
-    //TRAER DATOS INICIALES
+    /************************************TRAER DATOS INICIALES************************************/
+
+    //FIJAR FECHA ACTUAL
     var hoy = new Date();
     var fechaActual = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
     $scope.fechaPorDefecto = fechaActual;
 
+    //TRAER OPERACIONES TOTALES
     servicioRetornoOperaciones.traerTodo().then(function(respuesta){
         $scope.lista_operaciones_totales = respuesta.data;
+        //console.info("Operaciones totales: ", $scope.lista_operaciones_totales);
 
       },function errorCallback(response) {
                 console.log("FALLO RETORNO OPERACIONES! ", response);
     });
 
+    //TRAER REGISTROS TOTALES
     servicioRetornoRegistroSesiones.traerTodo().then(function(respuesta){
         $scope.lista_registros_totales = respuesta.data;
         console.info("Registros: ", respuesta.data);
@@ -43,6 +48,32 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       },function errorCallback(response) {
                 console.log("FALLO RETORNO OPERACIONES! ", response);
     });
+
+    //TRAER LOCALES ACTUALES
+    //1- Declaración de variable "locales"  
+    var locales = [];
+    servicioRetornoLocales.traerTodo().then(function(respuesta){
+      console.info("Locales", respuesta.data);
+
+      //2- Rellenado de "locales" (array de objetos)
+      var cantidadDatos = respuesta.data.length;
+      for (var i = 0; i < cantidadDatos; i++) {
+        locales[i] = {code: respuesta.data[i].id_local, name: "Local N°"+(i+1) };
+      }
+      console.info("Opciones de locales:", locales);
+
+      // 3- Pasaje de Array a JSON (OPCIONAL)
+      // locales = JSON.stringify(locales);
+      // console.info("Locales: ", locales);
+
+      },function errorCallback(response) {
+            console.log("FALLO! ", response);
+    });
+    $scope.locales = locales;
+    $scope.localElegido = "";
+    console.info("Locales pasaje: ", $scope.locales);
+
+    /**************************************CONSULTAS**************************************/
 
     //DETERMINAR CONSULTAR
     $scope.consultar = function(consulta){
@@ -166,6 +197,18 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       switch(criterio)
       {
           case "venta_local":
+
+          var localElegido = $("#opcionLocal").val();
+          console.info("opcion elegida: ", localElegido);
+          $scope.operaciones_filtradas = [];
+          for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
+            if($scope.lista_operaciones_totales[i].id_local == $scope.localElegido)
+            {  
+               $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
+               console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
+            }
+          }
+
           break;
           case "venta_empleado":
           break;

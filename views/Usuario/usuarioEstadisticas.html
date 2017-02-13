@@ -61,7 +61,7 @@
 						<th>  Detalle </th>
 					</tr>
 				</thead>
-				<tr ng-repeat="operacion in lista_operaciones | filter:buscador as resultado">
+				<tr ng-repeat="operacion in operaciones_filtradas | filter:buscador as resultado">
 					<td>{{operacion.id_operacion}}</td>
 					<td>{{operacion.tipo_operacion}}</td>
 					<td>{{operacion.fecha}}</td>
@@ -121,14 +121,21 @@
 		          <div class="modal-body" style="color:black">
 
 			            <!-- SELECCIONAR LOCAL -->
-			            <div ng-if="modalSeleccionarLocal">
-			            	<p>Seleccione local a consultar</p>
-			            	<button type="button" class="btn btn-success" ng-click="filtrar('venta_local')">Consultar</button>
-		            		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasLocal')">Cancelar</button>
+			            <div class="cajaOpcionModal" ng-if="modalSeleccionarLocal">
+			            	<form name="frmSelectLocal" role="form">
+			            		<div class="form-group">
+			            		  <label for="opcionLocal">Seleccione un local para realizar la consulta</label>
+					            	<select class="form-control" id="opcionLocal" ng-model="localElegido" ng-options="c.code as c.name for c in locales" required>
+							          <option value="">--Seleccione Local--</option>
+							        </select>
+							    </div>
+							    <button type="button" class="btn btn-success" ng-click="filtrar('venta_local')" ng-disabled="frmSelectLocal.$invalid">Consultar</button>
+							    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasLocal')">Cancelar</button>
+						    </form>
 			            </div>
 
 			          	<!-- SELECCIONAR FECHAS PARA BUSQUEDA PRODUCTO/OFERTA MAS VENDIDO -->
-			          	<div ng-if="modalSeleccionarDosFechas">
+			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarDosFechas">
 				          	<p>Seleccione fechas a consultar</p>
 				          	
 					            <div class="form-group">
@@ -152,7 +159,7 @@
 				        </div>
 
 				        <!-- SELECCIONAR FECHA PARA IMPORTE DEL DIA -->
-			          	<div ng-if="modalSeleccionarUnicaFecha">
+			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarUnicaFecha">
 				          	<p>Seleccione fecha a consultar</p>
 				          		<div class="form-group">
 					                <input type='text' class="form-control" id='fechaConsulta' ng-model="fechaPorDefecto"/>
@@ -169,7 +176,7 @@
 				        </div>
 
 				        <!-- SELECCIONAR ENCUESTA ESTADISTICA RESPUESTA -->
-			          	<div ng-if="modalSeleccionarRespuestaEncuesta">
+			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarRespuestaEncuesta">
 				          	<p>Seleccione estadística de encuesta</p>
 					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_por_fecha')">Consultar</button>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>

@@ -64,8 +64,14 @@ $app->post('/usuarios/{objeto}', function ($request, $response, $args) {
     $usuario->id_usuario = $nuevaFila;
     echo "Nueva fila: " . $nuevaFila;
 
-    $cambioAnteriorEncargado = Usuario::CambioCategoriaPorLocal($usuario->id_local, "encargado", "empleado");
-    $cambioJefeEnLocal = Local::CambiarEncargadoLocal($usuario);
+    //CASO DE DAR DE ALTA UN ENCARGADO
+    if($usuario->tipo_user == "encargado")
+    {
+        //El anterior encargado pasa a ser empleado de dicho local
+        $cambioAnteriorEncargado = Usuario::CambioCategoriaPorLocal($usuario->id_local, "encargado", "empleado");
+        //El nuevo usuario queda como nuevo encargado
+        $cambioJefeEnLocal = Local::CambiarEncargadoLocal($usuario);
+    }
     $datos = Usuario::InsertarUsuario($usuario);
     $response->write($datos);
     return $response;
@@ -93,7 +99,7 @@ $app->delete('/usuarios/{id}', function ($request, $response, $args) {
     
     //$usuario = Usuario::TraerUnUsuario($args['id']);
     $datos = Usuario::BorrarUsuario($args['id']);
-    $response->write("borrar !: ");
+    $response->write($datos);
     //var_dump($args);
     return $response;
 });

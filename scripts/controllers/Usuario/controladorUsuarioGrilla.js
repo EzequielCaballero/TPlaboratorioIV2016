@@ -149,7 +149,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
         console.log("RETORNO: ", response.data);
 
           // Vuelvo a cargar los datos en la grilla.
-          servicioRetornoUsuarios.traerCiertosUsuarios($usuarioLogueado).then(function(respuesta){
+          servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
           $scope.gridOptionsUsuarios.data = respuesta.data;
           console.info(respuesta.data);
 
