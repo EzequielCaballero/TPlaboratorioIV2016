@@ -76,18 +76,18 @@
 		<!-- CAJA CONSULTA REGISTRO SESIONES -->
 		<div ng-show="verConsultaRegistroSesiones" class="listaRegistroSesiones">
 			<h2>REGISTRO DE SESIONES</h2>
-			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
+			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar usuario">
 			<table id="tablaRegistro_sesiones" class='table table-hover table-responsive'>
 				<thead>
 					<tr>
-						<th>  REGISTRO  </th>
+						<th>  REGISTRO N°  </th>
 						<th>  Usuario    </th>
 						<th>  Nombre   </th>
 						<th>  Fecha   </th>
 						<th>  Hora </th>
 					</tr>
 				</thead>
-				<tr ng-repeat="registro in lista_registros | filter:buscador as resultado">
+				<tr ng-repeat="registro in lista_registros_totales | filter:buscador as resultado">
 					<td>{{registro.id_registro}}</td>
 					<td>{{registro.id_usuario}}</td>
 					<td>{{registro.nombre}}</td>

@@ -231,16 +231,21 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           break;
 
           case "venta_empleado":
-          
           break;
+
           case "venta_entre_fechas":
           break;
+
           case "venta_por_fecha":
           break;
+
           case "operaciones_cliente":
           break;
+
           case "registro_sesiones":
+          $scope.mostrarTabla("tabla_registros");
           break;
+
           case "estadistica_encuesta":
           break;
       }
