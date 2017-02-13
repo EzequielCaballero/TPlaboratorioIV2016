@@ -5,31 +5,31 @@
 		<form class="formMenuABM animated fadeInUp">
 
 		         <br><br>
-		         <button class="buttonMenuABM" ng-click="consultar('ventas_local')" ng-disabled="opcion_ventasLocal">
+		         <button class="buttonMenuEstadistica" ng-click="consultar('ventas_local')" ng-disabled="opcion_ventasLocal">
 		         		<span class="glyphicon glyphicon-th-list">&nbsp;</span>
 		         		Ventas - local
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="consultar('ventas_empleado')" ng-disabled="opcion_ventasEmpleado">
+		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_empleado')" ng-disabled="opcion_ventasEmpleado">
 		         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
 		         		Ventas - empleado
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="consultar('ventas_fechas')" ng-disabled="opcion_ventasEntreFechas">
+		         <button class="buttonMenuEstadistica" ng-click="consultar('ventas_fechas')" ng-disabled="opcion_ventasEntreFechas">
 		         		<span class="glyphicon glyphicon-calendar" >&nbsp;</span>
 		         		Ventas - producto e/ fechas
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="consultar('ventas_dia')" ng-disabled="opcion_importePordia">
+		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_dia')" ng-disabled="opcion_importePordia">
 		         		<span class="glyphicon glyphicon-tasks" >&nbsp;</span>
 		         		Ventas - importe del día
 		         </button><br><br>
-		         <button  class="buttonMenuABM" ng-click="consultar('compras_cliente')" ng-disabled="opcion_clienteOperaciones">
+		         <button  class="buttonMenuEstadistica" ng-click="consultar('compras_cliente')" ng-disabled="opcion_clienteOperaciones">
 		         		<span class="glyphicon glyphicon-shopping-cart" >&nbsp;</span>
 		         		Cliente - operaciones
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="consultar('registro_sesiones')" ng-disabled="opcion_registroSesiones">
+		         <button class="buttonMenuEstadistica" ng-click="consultar('registro_sesiones')" ng-disabled="opcion_registroSesiones">
 		         		<span class="glyphicon glyphicon-user" >&nbsp;</span>
 		         		Registro - inicios de sesión
 		         </button><br><br>
-		         <button class="buttonMenuABM" ng-click="consultar('encuesta_estadistica')" ng-disabled="opcion_encuestaEstadistica">
+		         <button class="buttonMenuEstadistica" ng-click="consultar('encuesta_estadistica')" ng-disabled="opcion_encuestaEstadistica">
 		         		<span class="glyphicon glyphicon-check" >&nbsp;</span>
 		         		Encuesta - estadística
 		         </button><br><br>
@@ -47,8 +47,8 @@
 
 		<!-- CAJA CONSULTA VENTAS -->
 		<div ng-show="verConsultaOperaciones" class="listaOperaciones">
-			<h2>DATOS CONSULTADOS</h2>
-			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
+			<h2>OPERACIONES {{tipoOperacion}}</h2>
+			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar operacion">
 			<table id="tablaOperaciones" class='table table-hover table-responsive'>
 				<thead>
 					<tr>
@@ -75,7 +75,7 @@
 
 		<!-- CAJA CONSULTA REGISTRO SESIONES -->
 		<div ng-show="verConsultaRegistroSesiones" class="listaRegistroSesiones">
-			<h2>DATOS CONSULTADOS</h2>
+			<h2>REGISTRO DE SESIONES</h2>
 			<input class="barraSearch" type="search" ng-model="buscador" placeholder="Buscar producto">
 			<table id="tablaRegistro_sesiones" class='table table-hover table-responsive'>
 				<thead>
@@ -129,7 +129,7 @@
 							          <option value="">--Seleccione Local--</option>
 							        </select>
 							    </div>
-							    <button type="button" class="btn btn-success" ng-click="filtrar('venta_local')" ng-disabled="frmSelectLocal.$invalid">Consultar</button>
+							    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('venta_local')" ng-disabled="frmSelectLocal.$invalid">Consultar</button>
 							    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasLocal')">Cancelar</button>
 						    </form>
 			            </div>

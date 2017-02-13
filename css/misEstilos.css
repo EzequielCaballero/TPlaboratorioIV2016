@@ -490,7 +490,7 @@ MENU ADMINISTRACION
     border-radius: 15px;
     background-color: #9E2B2B;
     color: #fff;
-    width: 200px;
+    width: 300px;
     display: inline-block;
     padding: 14px 15px;
     text-align: center;
@@ -757,13 +757,29 @@ VISTA CLIENTE
     color: white;
 }
 
+#tablaProductos #tablaOfertas td:hover{
+  background-color: #C4B78E;
+}
 #tablaProductos, #tablaOfertas{
   background-color: #5D2323;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#tablaOfertas button{
+  color:black;
+  font-size: 0.7em;
+}
+
+#tablaProductos button{
+  color:black;
+  font-size: 0.7em;
 }
 
 .cajaOperaciones{
     position: relative;
     padding-top: 50px;
+    padding-right: 30px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;
@@ -784,6 +800,10 @@ VISTA CLIENTE
   width: 100%;
   text-align:center;
   color:#FFFFFF;
+}
+
+.cajaOperaciones table{
+  color:#E0CBCB;
 }
 
 .cajaConfirmarOperacion{
@@ -942,7 +962,8 @@ ESTADÍSTICA
 
 .cajaEstadisticaSeleccionada{
     position: relative;
-    padding-top: 50px;
+    padding-top: 20px;
+    padding-right: 50px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;
@@ -954,8 +975,15 @@ ESTADÍSTICA
     float: right;
 }
 
-.tablaOperaciones{
-  background-color: #5D2323;
+.cajaEstadisticaSeleccionada h2{
+  color: #CEB5B5;
+  font-weight: bold;
+  background-color: #441919;
+}
+
+.cajaEstadisticaSeleccionada table{
+  color: #CEB5B5;
+  background-color: #5F2626;
 }
 
 /*************************************************************************************/

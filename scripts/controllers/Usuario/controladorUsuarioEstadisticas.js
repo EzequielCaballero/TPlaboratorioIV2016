@@ -10,7 +10,13 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
        $state.go("inicio");
     }
 
-    // //HABILITACIONES DE BOTONES DE MENU (seteo inicial)
+    
+    //VER RESULTADOS DE CONSULTA
+    $scope.verConsultaOperaciones = false;
+    $scope.verConsultaRegistroSesiones = false;
+    $scope.verConsultaEncuestaEstadisticas = false;
+
+    // HABILITACIONES DE BOTONES DE MENU (seteo inicial)
     // $scope.opcion_ventasLocal = false;
     // $scope.opcion_ventasEmpleado = false;
     // $scope.opcion_ventasEntreFechas = false;
@@ -108,6 +114,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
           $scope.opcion_encuestaEstadistica = false;
+
+          //OPCION SIN MODAL
+          $scope.filtrar("venta_empleado");
           break;  
         
         case "ventas_fechas":
@@ -157,6 +166,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_clienteOperaciones = true;
           $scope.opcion_registroSesiones = false;
           $scope.opcion_encuestaEstadistica = false;
+
+          //OPCION SIN MODAL
+          $scope.filtrar("operaciones_cliente");
           break;
         
         case "registro_sesiones":
@@ -168,6 +180,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = true;
           $scope.opcion_encuestaEstadistica = false;
+
+          //OPCION SIN MODAL
+          $scope.filtrar("registro_sesiones");
           break;
         
         case "encuesta_estadistica":
@@ -198,19 +213,25 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       {
           case "venta_local":
 
-          var localElegido = $("#opcionLocal").val();
+          //Villereada
+          var cadena = String($("#opcionLocal").val());
+          var localy = cadena.split(":");
+          var localElegido = Number(localy[1]);
+
           console.info("opcion elegida: ", localElegido);
           $scope.operaciones_filtradas = [];
           for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
-            if($scope.lista_operaciones_totales[i].id_local == $scope.localElegido)
+            if($scope.lista_operaciones_totales[i].id_local == localElegido)
             {  
                $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
-               console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
             }
           }
-
+          console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
+          $scope.mostrarTabla("tabla_operaciones");
           break;
+
           case "venta_empleado":
+          
           break;
           case "venta_entre_fechas":
           break;
@@ -222,6 +243,31 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           break;
           case "estadistica_encuesta":
           break;
+      }
+
+    }
+
+    //MOSTRAR LA TABLA CON LA CONSULTA FILTRADA
+    $scope.mostrarTabla = function(mostrar){
+      switch(mostrar)
+      {
+         case "tabla_operaciones":
+         $scope.verConsultaOperaciones = true;
+         $scope.verConsultaRegistroSesiones = false;
+         $scope.verConsultaEncuestaEstadisticas = false;
+         break;
+
+         case "tabla_registros":
+         $scope.verConsultaOperaciones = false;
+         $scope.verConsultaRegistroSesiones = true;
+         $scope.verConsultaEncuestaEstadisticas = false;
+         break;
+
+         case "tabla_encuestas":
+         $scope.verConsultaOperaciones = false;
+         $scope.verConsultaRegistroSesiones = false;
+         $scope.verConsultaEncuestaEstadisticas = true;
+         break;
       }
 
     }
@@ -251,10 +297,5 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         $auth.logout();
         $state.go("inicio");
     }
-
-    //VER RESULTADOS DE CONSULTA
-    $scope.verConsultaOperaciones = false;
-    $scope.verConsultaRegistroSesiones = false;
-    $scope.verConsultaEncuestaEstadisticas = false;
 
   });
