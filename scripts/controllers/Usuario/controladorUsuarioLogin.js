@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorUsuarioLogin', [])
-  app.controller('controlUsuarioLogin', function($scope, $http, $state, $auth) {
+  app.controller('controlUsuarioLogin', function($scope, $http, $state, $auth, servicioRetornoRegistroSesiones) {
 
     $scope.usuarioCorrecto = true;
     $scope.Perfil = function(usuario){
@@ -68,10 +68,14 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
           {
             console.info("token", $auth.getPayload());
             $sesion = $auth.getPayload();
-              if($sesion.perfil != "Cliente")  
-                $state.go("inicio");
-              else
-                $state.go("cliente.inicio");
+            $scope.registro = {};
+            $scope.registro.id_usuario = $sesion.usuario;
+            $scope.registro.nombre = $sesion.nombre;
+            var hoy = new Date();
+            $scope.registro.fecha = hoy.getFullYear() + "-" + (hoy.getMonth() +1) + "-" + hoy.getDate();
+            $scope.registro.hora = hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
+            //console.info("Registro sesion: ", $scope.registro);
+            $scope.ingreso_registro($scope.registro);
           }
           else
           {
@@ -83,4 +87,22 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
           console.info("incorrecto", response);
       });
     }
+
+  $scope.ingreso_registro = function(registro){
+
+    servicioRetornoRegistroSesiones.ABM_Registro_sesiones(registro, "Agregar").then(function(respuesta){
+
+        console.info("Registro: ", respuesta.data);
+        if($sesion.perfil != "Cliente")  
+          $state.go("inicio");
+        else
+          $state.go("cliente.inicio");
+
+      },function errorCallback(response) {
+                console.log("FALLO RETORNO OPERACIONES! ", response);
+    });
+  }
+
+
+  /*FIN CONTROLLER LOGIN*/  
   });

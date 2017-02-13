@@ -9,7 +9,7 @@
 			
 			<div id="cajaPregunta" class="form-group">
 				<span>1</span><label for="opcionPizza" class="tituloPregunta">Variedad de pizza favorita</label><br>
-				<select class="form-control" id="opcionPizza" ng-model="encuesta.pregunta_1" ng-options="c.code as c.name for c in pizzaFavoritaOpciones">
+				<select class="form-control" id="opcionPizza" ng-model="encuesta.pregunta_1" ng-options="c.code as c.name for c in pizzaFavoritaOpciones" required>
 		          <option value="">--Pizza favorita--</option>
 		        </select>
 	        </div><br>
@@ -22,7 +22,7 @@
 
 	        <div id="cajaPregunta" class="form-group">
 				<span>3</span><label for="ingredientePizza" class="tituloPregunta">¿Qué ingredientes considera más importantes?</label><br>
-				<select class="form-control" id="ingredientePizza" ng-model="encuesta.pregunta_3" ng-options="c.code as c.name for c in ingredienteOpciones">
+				<select class="form-control" id="ingredientePizza" ng-model="encuesta.pregunta_3" ng-options="c.code as c.name for c in ingredienteOpciones" required>
 		          <option value="">--Ingrediente principal--</option>
 		        </select>
 		    </div><br>
@@ -94,7 +94,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>11</span><label class="tituloPregunta">En una escala del 1 al 10: ¿Cuál es su nivel de satisfacción con la compra/reserva realizada?</label>
-				<input class="form-control" ng-model="encuesta.pregunta_11" type="number" min=1 max=10 onkeydown="return false">
+				<input class="form-control" ng-model="encuesta.pregunta_11" type="number" min=1 max=10 onkeydown="return false" required>
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">
@@ -105,7 +105,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>13</span><label for="seEnteroPor" class="tituloPregunta">¿Cómo se enteró de la existencia de la página?</label><br>
-				<select class="form-control" id="seEnteroPor" ng-model="encuesta.pregunta_13" ng-options="c.code as c.name for c in seEnteroOpciones">
+				<select class="form-control" id="seEnteroPor" ng-model="encuesta.pregunta_13" ng-options="c.code as c.name for c in seEnteroOpciones" required>
 		          <option value="">--Medio por el que enteró--</option>
 		        </select>
 			</div><br>
@@ -126,7 +126,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>16</span><label for="esperaProducto" class="tituloPregunta">¿Cuánto tiempo estaría dispuesto a esperar para la entrega del producto?</label><br>
-				<select class="form-control" id="esperaProducto" ng-model="encuesta.pregunta_16" ng-options="c.code as c.name for c in esperaProductoOpciones">
+				<select class="form-control" id="esperaProducto" ng-model="encuesta.pregunta_16" ng-options="c.code as c.name for c in esperaProductoOpciones" required>
 		          <option value="">--Cuánto esperarías--</option>
 		        </select>
 			</div><br>
@@ -162,7 +162,7 @@
 			</div>
 
 			<!-- BOTONES DE ACCION -->
-			<button class="btn btn-danger btn-block" ng-click="EnviarEncuesta()">Enviar</button>&nbsp;&nbsp;&nbsp;
+			<button class="btn btn-danger btn-block" ng-click="EnviarEncuesta()" ng-disabled="myForm.$invalid">Enviar</button>&nbsp;&nbsp;&nbsp;
 
 		</form>
 		<!-- FIN DEL FORMULARIO -->

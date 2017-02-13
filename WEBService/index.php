@@ -357,11 +357,10 @@ $app->get('/registro_sesiones[/]', function ($request, $response, $args) {
 $app->post('/registro_sesiones/{objeto}', function ($request, $response, $args) {
     
     $registro = json_decode($args['objeto']);
-
     //DEFINICION DE ID (Autoincremental)
     $ultimoID = Registro_sesiones::traerUltimaFila();
     $nuevaFila = $ultimoID + 1;
-    $registro->id_encuesta = $nuevaFila;
+    $registro->id_registro = $nuevaFila;
     //AGREGAR NUEVO REGISTRO DE SESION
     $datos = Registro_sesiones::agregarNuevoRegistro($registro);
 

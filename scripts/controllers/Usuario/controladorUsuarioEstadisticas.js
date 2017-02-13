@@ -190,7 +190,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.modalSeleccionarDosFechas = false;
           $scope.modalSeleccionarUnicaFecha = false;
           $scope.modalSeleccionarRespuestaEncuesta = true;
-          $scope.tituloModalOpciones = "Estadística de respuesta de encuesta";
+          $scope.tituloModalOpciones = "Estadísticas según encuestas";
           $('#opcionesConsulta').modal({backdrop: 'static', keyboard: false});
           break;
       }
@@ -311,6 +311,8 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           break;
 
           case "estadistica_encuesta":
+          //$scope.tipoOperacion = "- compra/reserva Cliente";
+          //$scope.mostrarTabla("tabla_operaciones");
           break;
       }
 

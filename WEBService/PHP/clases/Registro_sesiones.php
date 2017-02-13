@@ -35,7 +35,7 @@ class Registro_sesiones
 	public static function TraerTodosLosRegistros()
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from Registro_sesiones");
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT * from registro_sesiones");
 		$consulta->execute();
 		$arrRegistros= $consulta->fetchAll(PDO::FETCH_CLASS, "Registro_sesiones");
 		return $arrRegistros;
@@ -47,10 +47,10 @@ class Registro_sesiones
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into registro_sesiones (id_registro, id_usuario, nombre, fecha, hora) values(:id_registro,:id_usuario,:nombre,:fecha,:hora)");
 		$consulta->bindValue(':id_registro', $registro->id_registro, PDO::PARAM_INT);
-		$consulta->bindValue(':id_usuario,', $registro->id_usuario, PDO::PARAM_INT);
-		$consulta->bindValue(':nombre,', $registro->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(':fecha,', $registro->fecha, PDO::PARAM_STR);
-		$consulta->bindValue(':hora,', $registro->hora, PDO::PARAM_SRT);
+		$consulta->bindValue(':id_usuario', $registro->id_usuario, PDO::PARAM_INT);
+		$consulta->bindValue(':nombre', $registro->nombre, PDO::PARAM_STR);
+		$consulta->bindValue(':fecha', $registro->fecha, PDO::PARAM_STR);
+		$consulta->bindValue(':hora', $registro->hora, PDO::PARAM_STR);
 		$consulta->execute();
 		$ultimoID = $objetoAccesoDato->RetornarUltimoIdInsertado();
 		return $ultimoID;
@@ -59,7 +59,7 @@ class Registro_sesiones
 	//----------------CONSULTAS ESPECIALES----------------//
 
 //--------------------------------------------------------------------------------//
-//--FIN DE LA CLASE "OFERTA"
+//--FIN DE LA CLASE "REGISTRO SESIONES"
 }
 
 ?>
