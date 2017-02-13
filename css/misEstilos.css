@@ -977,8 +977,10 @@ ESTADÍSTICA
 
 .cajaEstadisticaSeleccionada h2{
   color: #CEB5B5;
+  padding: 10px;
   font-weight: bold;
   background-color: #441919;
+  border-radius: 10px;
 }
 
 .cajaEstadisticaSeleccionada table{

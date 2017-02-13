@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])  
-  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoLocales, servicioRetornoOperaciones, servicioRetornoRegistroSesiones) {
+  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, servicioRetornoOperaciones, servicioRetornoRegistroSesiones) {
 
     //SI estoy en este menú quiere decir que ya hay una sesión activa, resta saber que usuario esta logueado.
     $sesion = $auth.getPayload();
@@ -9,26 +9,16 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     {
        $state.go("inicio");
     }
+    else
+    {
+        $sesion = $auth.getPayload();
+    }
 
     
     //VER RESULTADOS DE CONSULTA
     $scope.verConsultaOperaciones = false;
     $scope.verConsultaRegistroSesiones = false;
     $scope.verConsultaEncuestaEstadisticas = false;
-
-    // HABILITACIONES DE BOTONES DE MENU (seteo inicial)
-    // $scope.opcion_ventasLocal = false;
-    // $scope.opcion_ventasEmpleado = false;
-    // $scope.opcion_ventasEntreFechas = false;
-    // $scope.opcion_importePordia = false;
-    // $scope.opcion_clienteOperaciones = false;
-    // $scope.opcion_registroSesiones = false;
-    // $scope.opcion_encuestaEstadistica = false;
-    // //HABILITACION DE OPCIONES DE VENTANA MODAL
-    // $scope.modalSeleccionarLocal = false;
-    // $scope.modalSeleccionarDosFechas = false;
-    // $scope.modalSeleccionarUnicaFecha = false;
-    // $scope.modalSeleccionarRespuestaEncuesta = false;
 
     /************************************TRAER DATOS INICIALES************************************/
 
@@ -40,7 +30,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     //TRAER OPERACIONES TOTALES
     servicioRetornoOperaciones.traerTodo().then(function(respuesta){
         $scope.lista_operaciones_totales = respuesta.data;
-        //console.info("Operaciones totales: ", $scope.lista_operaciones_totales);
+        //console.info("Lista operaciones: ", $scope.lista_operaciones_totales);
 
       },function errorCallback(response) {
                 console.log("FALLO RETORNO OPERACIONES! ", response);
@@ -49,7 +39,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     //TRAER REGISTROS TOTALES
     servicioRetornoRegistroSesiones.traerTodo().then(function(respuesta){
         $scope.lista_registros_totales = respuesta.data;
-        console.info("Registros: ", respuesta.data);
+        console.info("Lista Registros: ", respuesta.data);
 
       },function errorCallback(response) {
                 console.log("FALLO RETORNO OPERACIONES! ", response);
@@ -68,16 +58,16 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       }
       console.info("Opciones de locales:", locales);
 
-      // 3- Pasaje de Array a JSON (OPCIONAL)
-      // locales = JSON.stringify(locales);
-      // console.info("Locales: ", locales);
-
       },function errorCallback(response) {
             console.log("FALLO! ", response);
     });
     $scope.locales = locales;
-    $scope.localElegido = "";
-    console.info("Locales pasaje: ", $scope.locales);
+
+    //TRAER USUARIOS TOTALES
+    servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
+        $scope.lista_usuarios_totales = respuesta.data;
+        console.info("Lista usuarios: ", $scope.lista_usuarios_totales);
+    });
 
     /**************************************CONSULTAS**************************************/
 
@@ -212,7 +202,6 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       switch(criterio)
       {
           case "venta_local":
-
           //Villereada
           var cadena = String($("#opcionLocal").val());
           var localy = cadena.split(":");
@@ -226,20 +215,95 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
                $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
             }
           }
-          console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
+          //console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
+          $scope.tipoOperacion = "- Ventas por local";
           $scope.mostrarTabla("tabla_operaciones");
+          $scope.desbloquearBoton("opcion_ventasLocal");
           break;
 
           case "venta_empleado":
+          $scope.empleados = [];
+          $scope.operaciones_filtradas = [];
+          console.info("operaciones totales: ", $scope.lista_operaciones_totales);
+          for (var i = 0; i < $scope.lista_usuarios_totales.length; i++) {
+            if($scope.lista_usuarios_totales[i].tipo_user == "empleado")
+              $scope.empleados.push($scope.lista_usuarios_totales[i].id_usuario);  
+          }
+          //console.info("Empleados: ", $scope.empleados);
+          for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
+            for (var j = 0; j < $scope.empleados.length; j++) {
+                if($scope.lista_operaciones_totales[i].id_usuario == $scope.empleados[j])
+                {  
+                   $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
+                }
+            }
+          }
+          //console.info("Operaciones coincidentes: ",$scope.operaciones_filtradas);
+          $scope.tipoOperacion = "- Ventas por Empleado";
+          $scope.mostrarTabla("tabla_operaciones");
           break;
 
           case "venta_entre_fechas":
+          $scope.operaciones_filtradas = [];
+          var fecha_1 = Date.parse($("#fecha_uno").val());
+          var fecha_2 = Date.parse($("#fecha_dos").val());
+            if(fecha_1 < fecha_2)
+            {
+              fecha_menor = fecha_1
+              fecha_mayor = fecha_2
+            }
+            else
+            {
+              fecha_menor = fecha_2
+              fecha_mayor = fecha_1
+            }
+
+          for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
+            fecha_operacion = Date.parse($scope.lista_operaciones_totales[i].fecha);
+
+            if(fecha_operacion >= fecha_menor && fecha_operacion <= fecha_mayor)
+            {  
+               $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
+            }
+          }
+
+          $scope.tipoOperacion = "- Ventas entre fechas";
+          $scope.mostrarTabla("tabla_operaciones");
+          $scope.desbloquearBoton("opcion_ventasEntreFechas");
           break;
 
           case "venta_por_fecha":
+          var fecha_consulta = $("#fecha_importeDelDia").val();
+          $scope.operaciones_filtradas = [];
+          for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
+            if($scope.lista_operaciones_totales[i].fecha == fecha_consulta)
+            {  
+               $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
+            }
+          }
+          $scope.tipoOperacion = "- Ventas del día";
+          $scope.mostrarTabla("tabla_operaciones");
+          $scope.desbloquearBoton("opcion_importePordia");
           break;
 
           case "operaciones_cliente":
+          $scope.clientes = [];
+          $scope.operaciones_filtradas = [];
+          for (var i = 0; i < $scope.lista_usuarios_totales.length; i++) {
+            if($scope.lista_usuarios_totales[i].tipo_user == "cliente")
+              $scope.clientes.push($scope.lista_usuarios_totales[i].id_usuario);  
+          }
+          //console.info("clientes: ", $scope.clientes);
+          for (var i = 0; i < $scope.lista_operaciones_totales.length; i++) {
+            for (var j = 0; j < $scope.clientes.length; j++) {
+                if($scope.lista_operaciones_totales[i].id_usuario == $scope.clientes[j])
+                {  
+                   $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
+                }
+            }
+          }
+          $scope.tipoOperacion = "- compra/reserva Cliente";
+          $scope.mostrarTabla("tabla_operaciones");
           break;
 
           case "registro_sesiones":
@@ -257,6 +321,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       switch(mostrar)
       {
          case "tabla_operaciones":
+         //$("#tablaOperaciones").load("usuario.estadisticas");
          $scope.verConsultaOperaciones = true;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = false;

@@ -139,7 +139,7 @@
 				          	<p>Seleccione fechas a consultar</p>
 				          	
 					            <div class="form-group">
-					                <input type='text' class="form-control" id='fecha_uno' ng-model="fechaPorDefecto"/>
+					                <input type='text' class="form-control" id='fecha_uno' ng-model="fechaPorDefecto"/>&nbsp;&nbsp;&nbsp;
 					                <input type='text' class="form-control" id='fecha_dos' ng-model="fechaPorDefecto"/>
 					            </div>
 			            		<script type="text/javascript">
@@ -154,7 +154,7 @@
 						                });
 						            });
 						        </script>
-					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_entre_fechas')">Consultar</button>
+					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('venta_entre_fechas')">Consultar</button>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasEntreFechas')">Cancelar</button><br>
 				        </div>
 
@@ -162,23 +162,23 @@
 			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarUnicaFecha">
 				          	<p>Seleccione fecha a consultar</p>
 				          		<div class="form-group">
-					                <input type='text' class="form-control" id='fechaConsulta' ng-model="fechaPorDefecto"/>
+					                <input type='text' class="form-control" id='fecha_importeDelDia' ng-model="fechaPorDefecto"/>
 					            </div>
 			            		<script type="text/javascript">
 						        	$(function () {
-						                $('#fechaConsulta').datetimepicker({
+						                $('#fecha_importeDelDia').datetimepicker({
 						                	format:"YYYY-MM-DD"
 						                });
 						            });
 						        </script>
-					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_por_fecha')">Consultar</button>
+					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('venta_por_fecha')">Consultar</button>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_importePordia')">Cancelar</button><br>
 				        </div>
 
 				        <!-- SELECCIONAR ENCUESTA ESTADISTICA RESPUESTA -->
 			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarRespuestaEncuesta">
 				          	<p>Seleccione estadística de encuesta</p>
-					        <button type="button" class="btn btn-success" ng-click="filtrar('venta_por_fecha')">Consultar</button>
+					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('venta_por_fecha')">Consultar</button>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>
 				        </div>
 
