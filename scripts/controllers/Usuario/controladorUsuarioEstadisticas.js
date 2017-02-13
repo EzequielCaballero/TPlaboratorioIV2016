@@ -1,5 +1,6 @@
 angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])  
-  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, servicioRetornoOperaciones, servicioRetornoRegistroSesiones) {
+  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, 
+    servicioRetornoOperaciones, servicioRetornoEncuestas, servicioRetornoRegistroSesiones) {
 
     //SI estoy en este menú quiere decir que ya hay una sesión activa, resta saber que usuario esta logueado.
     $sesion = $auth.getPayload();
@@ -36,13 +37,22 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
                 console.log("FALLO RETORNO OPERACIONES! ", response);
     });
 
+    //TRAER ENCUESTAS TOTALES
+    servicioRetornoEncuestas.traerTodo().then(function(respuesta){
+        $scope.lista_encuestas_totales = respuesta.data;
+        //console.info("Lista encuestas: ", $scope.lista_encuestas_totales);
+
+      },function errorCallback(response) {
+                console.log("FALLO RETORNO ENCUESTAS! ", response);
+    });
+
     //TRAER REGISTROS TOTALES
     servicioRetornoRegistroSesiones.traerTodo().then(function(respuesta){
         $scope.lista_registros_totales = respuesta.data;
         console.info("Lista Registros: ", respuesta.data);
 
       },function errorCallback(response) {
-                console.log("FALLO RETORNO OPERACIONES! ", response);
+                console.log("FALLO RETORNO REGISTROS! ", response);
     });
 
     //TRAER LOCALES ACTUALES

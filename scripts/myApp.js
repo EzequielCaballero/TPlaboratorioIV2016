@@ -9,6 +9,7 @@ var app = angular.module('ABMangularAPI', [
     'ui.grid.selection',
     'ui.grid.exporter',
     'ui.grid.edit',
+    'chart.js',
     'ngMap'
   ]);
   
