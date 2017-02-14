@@ -102,6 +102,9 @@
 		<!-- CAJA CONSULTA REGISTRO SESIONES -->
 		<div ng-show="verConsultaEncuestaEstadisticas" class="listaEncuestaEstadisticas">
 			<h2>ESTADISTICAS</h2>
+			<canvas id="doughnut" class="chart chart-doughnut"
+			  chart-data="datos_encuesta" chart-labels="etiquetasGrafico">
+			</canvas>
 		</div><!-- FIN LISTA DE SESIONES -->
 	
 	<!-- FIN CAJA VISTAS TOTALES -->
@@ -182,7 +185,7 @@
 				        <!-- SELECCIONAR ENCUESTA ESTADISTICA RESPUESTA -->
 			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarRespuestaEncuesta">
 				          	<p>Seleccione estadística de encuesta</p>
-					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('estadistica_encuesta')">Consultar</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_2')">Tipo de pizza favorita</button><br>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>
 				        </div>
 

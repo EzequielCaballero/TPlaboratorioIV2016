@@ -319,13 +319,21 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           case "registro_sesiones":
           $scope.mostrarTabla("tabla_registros");
           break;
-
-          case "estadistica_encuesta":
-          //$scope.tipoOperacion = "- compra/reserva Cliente";
-          //$scope.mostrarTabla("tabla_operaciones");
-          break;
       }
 
+    }
+
+    //GENERAR GRAFICO DE ENCUESTA
+    $scope.estadistica = function(pregunta){
+
+      switch(pregunta)
+      {
+          case "pregunta_2":
+          $scope.etiquetasGrafico = ["Al molde", "A la piedra", "Ambas"];
+          $scope.datos_encuesta = [300, 500, 100];
+          break;
+      }
+      $scope.mostrarTabla("estadistica_encuestas");
     }
 
     //MOSTRAR LA TABLA CON LA CONSULTA FILTRADA
@@ -345,7 +353,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
          $scope.verConsultaEncuestaEstadisticas = false;
          break;
 
-         case "tabla_encuestas":
+         case "estadistica_encuestas":
          $scope.verConsultaOperaciones = false;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = true;
