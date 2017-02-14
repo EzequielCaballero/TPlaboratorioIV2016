@@ -960,12 +960,26 @@ ESTADÍSTICA
   opacity: 0.5;
 }
 
-/******************LISTA OPERACIONES******************/
+/******************LISTAS ESTADISTICAS******************/
+
+#cajaEncuestaOpciones button{
+  color:black;
+  font-size:0.875em;
+  font-weight: bold;
+  border: 2px solid #301414;
+}
+
+#cajaEncuestaOpciones span{
+  color:white;
+  background-color: #773F1A;
+  padding: 4px;
+  border-radius: 100%;
+}
 
 .cajaEstadisticaSeleccionada{
     position: relative;
     padding-top: 20px;
-    padding-right: 50px;
+    padding-right: 100px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;

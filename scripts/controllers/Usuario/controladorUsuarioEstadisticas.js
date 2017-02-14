@@ -40,7 +40,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     //TRAER ENCUESTAS TOTALES
     servicioRetornoEncuestas.traerTodo().then(function(respuesta){
         $scope.lista_encuestas_totales = respuesta.data;
-        //console.info("Lista encuestas: ", $scope.lista_encuestas_totales);
+        console.info("Lista encuestas: ", $scope.lista_encuestas_totales);
 
       },function errorCallback(response) {
                 console.log("FALLO RETORNO ENCUESTAS! ", response);
@@ -326,14 +326,393 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     //GENERAR GRAFICO DE ENCUESTA
     $scope.estadistica = function(pregunta){
 
+      $scope.datos_encuesta = [];
       switch(pregunta)
       {
+          //*******************PREGUNTA N°1
+          case "pregunta_1":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          var opcion_6 = 0;
+          var opcion_7 = 0;
+          var opcion_8 = 0;
+          var opcion_9 = 0;
+          var opcion_10 = 0;
+          var opcion_11 = 0;
+          $scope.etiquetasGrafico = ["Muzzarella","Anchoas","Napolitana","Capresse","Calabresa","Americana","Roquefort","Fugazza","Fugazzeta","Provolone","Otra"];
+          
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_1)
+            {
+              case "Muzzarella": opcion_1++;  break;
+              case "Anchoas":    opcion_2++;  break;
+              case "Napolitana": opcion_3++;  break;
+              case "Capresse":   opcion_4++;  break;
+              case "Calabresa":  opcion_5++;  break;
+              case "Americana":  opcion_6++;  break;
+              case "Roquefort":  opcion_7++;  break;
+              case "Fugazza":    opcion_8++;  break;
+              case "Fugazzeta":  opcion_9++;  break;
+              case "Provolone":  opcion_10++; break;
+              default:           opcion_11++; break; 
+            }
+          }
+
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_5, opcion_6, opcion_7, opcion_8, opcion_9, opcion_10, opcion_11];
+          break;
+
+          //*******************PREGUNTA N°2
           case "pregunta_2":
-          $scope.etiquetasGrafico = ["Al molde", "A la piedra", "Ambas"];
-          $scope.datos_encuesta = [300, 500, 100];
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          $scope.etiquetasGrafico = ["Al molde", "A la piedra"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            if($scope.lista_encuestas_totales[i].pregunta_2 == "al molde")
+              opcion_1++;
+            else
+              opcion_2++;
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2];
+          break;
+
+          //*******************PREGUNTA N°3
+          case "pregunta_3":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          var opcion_6 = 0;
+          $scope.etiquetasGrafico = ["Salsa","Oregano","Queso","Masa","Fiambre","Otro"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_3)
+            {
+              case "salsa":    opcion_1++;  break;
+              case "oregano":  opcion_2++;  break;
+              case "queso":    opcion_3++;  break;
+              case "masa":     opcion_4++;  break;
+              case "fiambre":  opcion_5++;  break;
+              default:         opcion_6++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_5, opcion_6];
+          break;
+
+          //*******************PREGUNTA N°4
+          case "pregunta_4":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Frecuente","Poco frecuente","Nada frecuente"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_4)
+            {
+              case "2-3 por semana":  case "1 vez por semana": opcion_1++;  break;
+              case "1-2 por mes":  opcion_2++;  break;
+              case "3-6 meses":   case "nada frencuente": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°5
+          case "pregunta_5":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Buena", "Mala", "Intermedia"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_5)
+            {
+              case "buena":      opcion_1++;  break;
+              case "mala":       opcion_2++;  break;
+              case "intermedia": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°6
+          case "pregunta_6":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          $scope.etiquetasGrafico = ["Precio","Calidad","Sabor","Otro"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_6)
+            {
+              case "precio":  opcion_1++;  break;
+              case "calidad": opcion_2++;  break;
+              case "sabor":   opcion_3++;  break;
+              default:        opcion_4++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4];
+          break;
+
+          //*******************PREGUNTA N°7
+          case "pregunta_7":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          $scope.etiquetasGrafico = ["Si","No","Tal vez","Nunca"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_7)
+            {
+              case "si":        opcion_1++;  break;
+              case "no":        opcion_2++;  break;
+              case "tal vez":   opcion_3++;  break;
+              case "nunca":     opcion_4++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4];
+          break;
+
+          //*******************PREGUNTA N°8
+          case "pregunta_8":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Si","No","Ni idea"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_8)
+            {
+              case "si":      opcion_1++;  break;
+              case "no":      opcion_2++;  break;
+              case "ni idea": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°9
+          case "pregunta_9":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          $scope.etiquetasGrafico = ["$50-$100","$100-$150","$150-$300","Gratis"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_9)
+            {
+              case "de 50 a 100 $":  opcion_1++;  break;
+              case "de 100 a 150 $": opcion_2++;  break;
+              case "de 150 a 300 $": opcion_3++;  break;
+              default:               opcion_4++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4];
+          break;
+
+          //*******************PREGUNTA N°10
+          case "pregunta_10":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Si","No","No se"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_10)
+            {
+              case "si":    opcion_1++;  break;
+              case "no":    opcion_2++;  break;
+              case "no se": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°11
+          case "pregunta_11":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          $scope.etiquetasGrafico = ["Muy Alto", "Alto","Medio","Bajo","Muy Bajo"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_11)
+            {
+              case 10: case 9:  opcion_1++;  break;
+              case 8:  case 7:  opcion_2++;  break;
+              case 6:  case 5:  opcion_3++;  break;
+              case 4:  case 3:  opcion_4++;  break;
+              case 2:  case 1:  opcion_5++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_4];
+          break;
+
+          //*******************PREGUNTA N°12
+          case "pregunta_12":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          $scope.etiquetasGrafico = ["SI", "NO"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            if($scope.lista_encuestas_totales[i].pregunta_12 == "si")
+              opcion_1++;
+            else
+              opcion_2++;
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2];
+          break;
+
+          //*******************PREGUNTA N°13
+          case "pregunta_13":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          $scope.etiquetasGrafico = ["Amigo","Televisión","Radio","Diario", "Exámen"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_13)
+            {
+              case "amigo":      opcion_1++;  break;
+              case "television": opcion_2++;  break;
+              case "radio":      opcion_3++;  break;
+              case "diario":     opcion_4++;  break;
+              case "te corrijo": opcion_5++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_5];
+          break;
+
+          //*******************PREGUNTA N°14
+          case "pregunta_14":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Si","No","Me da igual"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_14)
+            {
+              case "si":          opcion_1++;  break;
+              case "no":          opcion_2++;  break;
+              case "me da igual": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°15
+          case "pregunta_15":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Si","No","Irrelevante"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_15)
+            {
+              case "si":          opcion_1++;  break;
+              case "no":          opcion_2++;  break;
+              case "irrelevante": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°16
+          case "pregunta_16":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          $scope.etiquetasGrafico = ["10 min","30 min","1 hora","2 horas", "Lo que de"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_16)
+            {
+              case "10 min":    opcion_1++;  break;
+              case "30 min":    opcion_2++;  break;
+              case "1 hora":    opcion_3++;  break;
+              case "2 horas":   opcion_4++;  break;
+              case "Lo que de": opcion_5++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_5];
+          break;
+
+          //*******************PREGUNTA N°18
+          case "pregunta_18":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Si","No","No lo recuerdo"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_18)
+            {
+              case "si":          opcion_1++;  break;
+              case "no":          opcion_2++;  break;
+              case "no lo recuerdo": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
+          break;
+
+          //*******************PREGUNTA N°19
+          case "pregunta_19":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          var opcion_4 = 0;
+          var opcion_5 = 0;
+          $scope.etiquetasGrafico = ["Estética","Funcionalidad","Información", "Variedad", "Otra causa"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_19)
+            {
+              case "estetica":    opcion_1++;  break;
+              case "funcional":   opcion_2++;  break;
+              case "informacion": opcion_3++;  break;
+              case "variedad":    opcion_4++;  break;
+              default:            opcion_5++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3, opcion_4, opcion_5];
+          break;
+
+          //*******************PREGUNTA N°20
+          case "pregunta_20":
+          var opcion_1 = 0;
+          var opcion_2 = 0;
+          var opcion_3 = 0;
+          $scope.etiquetasGrafico = ["Local","Página","No lo se"];
+
+          for (var i = 0; i < $scope.lista_encuestas_totales.length; i++) {
+            switch($scope.lista_encuestas_totales[i].pregunta_20)
+            {
+              case "local":    opcion_1++;  break;
+              case "pagina":   opcion_2++;  break;
+              case "no lo se": opcion_3++;  break;
+            }
+          }
+          $scope.datos_encuesta = [opcion_1, opcion_2, opcion_3];
           break;
       }
+
       $scope.mostrarTabla("estadistica_encuestas");
+      $scope.opcion_encuestaEstadistica = false;
     }
 
     //MOSTRAR LA TABLA CON LA CONSULTA FILTRADA

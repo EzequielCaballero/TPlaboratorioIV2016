@@ -104,6 +104,9 @@
 			<h2>ESTADISTICAS</h2>
 			<canvas id="doughnut" class="chart chart-doughnut"
 			  chart-data="datos_encuesta" chart-labels="etiquetasGrafico">
+			</canvas><br><br>
+			<canvas id="pie" class="chart chart-pie"
+			  chart-data="datos_encuesta" chart-labels="etiquetasGrafico" chart-options="options">
 			</canvas>
 		</div><!-- FIN LISTA DE SESIONES -->
 	
@@ -183,10 +186,29 @@
 				        </div>
 
 				        <!-- SELECCIONAR ENCUESTA ESTADISTICA RESPUESTA -->
-			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarRespuestaEncuesta">
-				          	<p>Seleccione estadística de encuesta</p>
-					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_2')">Tipo de pizza favorita</button><br>
-			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>
+			          	<div id="cajaEncuestaOpciones" class="cajaOpcionModal" ng-if="modalSeleccionarRespuestaEncuesta">
+				          	<p>Seleccione opción para ver las estadísticas</p>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_1')"><span>1</span>-Variedad de pizza favorita</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_2')"><span>2</span>-Tipo de pizza preferida</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_3')"><span>3</span>-Ingrediente principal</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_4')"><span>4</span>-Frecuencia de consumo</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_5')"><span>5</span>-Variedad del producto</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_6')"><span>6</span>-Motivo de elección del producto</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_7')"><span>7</span>-Recomendaría a un amigo</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_8')"><span>8</span>-Considera positiva imagen del producto</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_9')"><span>9</span>-Nivel de ratonez</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_10')"><span>10</span>-Precios razonables</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_11')"><span>11</span>-Nivel de satisfacción</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_12')"><span>12</span>-Conocimiento de la marca</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_13')"><span>13</span>-Medio por el que conoció la marca</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_14')"><span>14</span>-Conformidad con ubicación de locales</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_15')"><span>15</span>-Necesidad de servicio de delivery</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_16')"><span>16</span>-Tiempo de espera aceptado</button>
+<!-- 					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_17')">17-Opinion acerca de la página</button> -->
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_18')"><span>18</span>-Inconvenientes con la página</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_19')"><span>19</span>-Posibles mejoras a la página</button>
+					        <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" ng-click="estadistica('pregunta_20')"><span>20</span>-Futura elección de lugar para comprar</button>
+			            	<br><button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_encuestaEstadistica')">Cancelar</button><br>
 				        </div>
 
 			      </div> <!-- FIN CUERPO MODAL -->
