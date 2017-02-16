@@ -1,6 +1,6 @@
 angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])  
   app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, 
-    servicioRetornoOperaciones, servicioRetornoEncuestas, servicioRetornoRegistroSesiones) {
+    servicioRetornoOperaciones, servicioRetornoCompras, servicioRetornoReservas, servicioRetornoEncuestas, servicioRetornoRegistroSesiones) {
 
     //SI estoy en este menú quiere decir que ya hay una sesión activa, resta saber que usuario esta logueado.
     $sesion = $auth.getPayload();
@@ -760,6 +760,44 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_encuestaEstadistica = false;
           break;
       }
+    }
+
+    //MOSTRAR DETALLES DE LA OPERACION
+    $scope.detalleOperacion = function(id, tipo){
+      
+      if(tipo == "compra")
+      {
+          servicioRetornoCompras.traerCiertasCompras(id).then(function(respuesta){
+              $scope.operacionElegida = respuesta.data;
+              console.info("Compra seleccionada: ", $scope.operacionElegida);
+              $scope.tipo_Operacion = "Compra";
+              $scope.idDetalle = $scope.operacionElegida.id_compra;
+              $scope.productosAsociados = $scope.operacionElegida.cantidad_prod;
+              $scope.precioFinal = "$"+$scope.operacionElegida.precio_final;
+              $scope.esReserva = false;
+              $('#verDetalleOperacion').modal("show");
+            },function errorCallback(response) {
+                      console.log("FALLO RETORNO OPERACIONES! ", response);
+          });
+      }
+
+      if(tipo == "reserva")
+      {
+          servicioRetornoReservas.traerCiertasReservas(id).then(function(respuesta){
+              $scope.operacionElegida = respuesta.data;
+              console.info("Reserva seleccionada: ", $scope.operacionElegida);
+              $scope.tipo_Operacion = "Reserva";
+              $scope.idDetalle = $scope.operacionElegida.id_reserva;
+              $scope.productosAsociados = $scope.operacionElegida.cantidad_prod;
+              $scope.precioFinal = "$"+$scope.operacionElegida.precio_final;
+              $scope.fechaEntrega = $scope.operacionElegida.fecha_entrega;
+              $scope.esReserva = true;
+              $('#verDetalleOperacion').modal("show");
+            },function errorCallback(response) {
+                      console.log("FALLO RETORNO OPERACIONES! ", response);
+          });
+      }
+
     }
 
     $scope.cerrarSesion = function(){

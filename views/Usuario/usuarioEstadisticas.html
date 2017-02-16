@@ -68,7 +68,7 @@
 					<td>{{operacion.id_local}}</td>
 					<td>{{operacion.id_usuario}}</td>
 					<td>${{operacion.total}}</td>
-					<td><button class="btn" data-toggle="modal" data-target="#verDetalleOperacion" ng-click=""></button></td>
+					<td><button class="btn" ng-click="detalleOperacion(operacion.id_operacion, operacion.tipo_operacion)">Ver detalle</button></td>
 				</tr>
 			</table><br>
 		</div><!-- FIN LISTA OPERACIONES -->
@@ -218,6 +218,40 @@
 	      </div>
 	    </div>
 	 </div>
+	 <!-- FIN MODAL OPCIONES -->
+
+<!-- VENTANA MODAL DETALLE OPERACION -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="verDetalleOperacion" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">Detalles de la operación</h4>
+          </div>
+          <!-- Body -->
+	          <div class="modal-body" style="color:black">    
+	          	
+	          	<p><strong>OPERACION:</strong> *{{tipo_Operacion}}*</p>
+	          	<p><strong>N° detalle:</strong> {{idDetalle}}</p>
+	          	<p><strong>Productos (n°):</strong> {{productosAsociados}}</p>
+	          	<p><strong>Precio final:</strong> {{precioFinal}}</p>
+	          	<div ng-show="esReserva">
+	          		<p><strong>Entrega:</strong> {{fechaEntrega}}</p>
+	          	</div> 
+	          </div>
+	      <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 
 <!-- FIN VISTA GENERAL -->
 </div>
