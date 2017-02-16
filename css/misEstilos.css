@@ -727,10 +727,17 @@ MAPA
     height: 35px;
 }
 
-.etiquetaMapa{
-    font-size: 15px;
-    color:white;
-}
+.etiquetaMapa {
+   color: black;
+   background-color: white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 10px;
+   font-weight: bold;
+   text-align: center;
+   width: 60px;
+   border: 2px solid black;
+   white-space: nowrap;
+ }
 
 /************************************************************************************
 VISTA CLIENTE
