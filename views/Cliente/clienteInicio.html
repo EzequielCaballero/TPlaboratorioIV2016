@@ -31,7 +31,14 @@
           </div>
           <!-- Body -->
 	          <div class="modal-body" style="color:black">    
-	          	DIRECCION: {{direccionLocal}}
+	          	  <p>DIRECCION: {{direccionLocal}}</p>
+                  <ng-map center="[ubicacion]" ng-model="miMapa" id="mapa_local">
+                        <custom-marker position="[ubicacion]">
+                          <div>
+                            <img class="MarkerGM" src="img/GoogleMaps/marker_1.png">
+                          </div>
+                          </custom-marker>
+                  </ng-map>
 	          </div>
 	      <!-- Footer -->    
           <div class="modal-footer">

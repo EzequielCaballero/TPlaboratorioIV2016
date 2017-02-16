@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorClienteInicio', [])
-  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales) {
+  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap) {
 	  
   	  $("#imagenBase").attr("src","img/Backgrounds/Logo_1.png");
 
@@ -25,6 +25,9 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 
 	$scope.localELegido;
 	$scope.confirmarLocal;
+	$scope.marker = new google.maps.Marker({
+        title: 'default'
+      });
 	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
@@ -35,6 +38,37 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
 			$scope.direccionLocal = local.direccion;
 			$scope.confirmarLocal = local;
+			
+			/*MAPA*/
+			var arrayUbicacion = local.coordenadas.split(/,/);
+		    var latitud = arrayUbicacion[0];
+		    var longitud = arrayUbicacion[1].replace(" ","");
+			myLatLng = {lat: Number(latitud), lng: Number(longitud)};
+
+			NgMap.getMap("mapa_local").then(function(map) {
+		      //$scope.ubicacion = local.direccion;
+		      //elimino el marker anterior del mapa
+		      $scope.marker.setMap(null);
+
+		      $scope.marker = new google.maps.Marker({
+		        position: myLatLng,
+		        //icon: rowEntity.avatar,
+		        draggable: true,
+		        animation: google.maps.Animation.DROP,
+		        title: "Local",
+		        label: "Local N°"+numero
+		    });
+
+	        $scope.marker.setMap(map);
+
+	        $("#localSeleccionado").on("shown.bs.modal", function(e) {
+		      google.maps.event.trigger(map, "resize");
+		       map.setCenter(myLatLng);// Set here center map coordinates
+		       map.setZoom(14);
+		    });
+
+    });
+
 		}
 		$scope.irLocalSeleccionado = function(){
 			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
@@ -72,6 +106,51 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	}
 
 });
+
+/********************************************CARGA MAPA GOOGLE********************************************/
+// var map;        
+// var myCenter=new google.maps.LatLng(53, -1.33);
+// var marker=new google.maps.Marker({
+//     position:myCenter
+// });
+
+// function initialize() {
+//   var mapProp = {
+//       center:myCenter,
+//       zoom: 14,
+//       draggable: false,
+//   };
+  
+//   map=new google.maps.Map(document.getElementById("mapa-local"),mapProp);
+//   marker.setMap(map);
+    
+//   google.maps.event.addListener(marker, 'click', function() {
+      
+//     infowindow.setContent(contentString);
+//     infowindow.open(map, marker);
+    
+//   }); 
+// };
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+// google.maps.event.addDomListener(window, "resize", resizingMap());
+
+// $('#localSeleccionado').on('show.bs.modal', function() {
+//    //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+//    resizeMap();
+// })
+
+// function resizeMap() {
+//    if(typeof map =="undefined") return;
+//    setTimeout( function(){resizingMap();} , 400);
+// }
+
+// function resizingMap() {
+//    if(typeof map =="undefined") return;
+//    var center = map.getCenter();
+//    google.maps.event.trigger(map, "resize");
+//    map.setCenter(center); 
+// }
 
 /****************************************************************************************/
 
