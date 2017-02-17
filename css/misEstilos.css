@@ -739,6 +739,13 @@ MAPA
    white-space: nowrap;
  }
 
+ .labelMapa{
+   color:white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 15px;
+   font-weight: bold;
+ }
+
 /************************************************************************************
 VISTA CLIENTE
 *************************************************************************************/

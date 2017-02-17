@@ -14,10 +14,41 @@
               <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
               <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
               <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
-              <td colspan="2" ng-hide="botonActualizar"><button class="btn btn-danger" name="updateButton" id="updateButton" ng-click="Actualizar()">{{DatoSubmit}}</button></td>
+              <tr ng-show="verLocal"><th><strong>LOCAL</strong></th><td><strong>{{usuarioElegido.id_local}}</strong></td></tr>
+              <td colspan="2" ng-show="botonActualizar"><button class="btn btn-danger" name="updateButton" id="updateButton" ng-click="Actualizar('estado')">Cambiar estado</button></td>
+              <tr><td colspan="2" ng-show="botonNuevaLocacion"><button class="btn btn-warning" data-toggle="modal" data-target="#elegirNuevoLocal" name="updateButton" id="updateButton">Asignar nuevo local</button></td></tr>
         </tbody>
     </table>      
 
+<!-- VENTANA MODAL CAMBIAR LOCAL -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="elegirNuevoLocal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">SELECCIONE NUEVO LOCAL</h4>
+          </div>
+          <!-- Body -->
+            <div class="modal-body" style="color:black">
+                <form role="form">
+                  <div class="form-group" ng-repeat="local in lista_locales">
+                    <label for="{{local.id_local}}">Local N°{{$index+1}}</label><button class="btn btn-warning btn-block" ng-click="Actualizar(local.id_local)">Seleccionar local</button>
+                  </div>
+                </form>
+            </div>
+        <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="{{dondeVolver}}">
      Volver

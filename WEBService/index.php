@@ -82,14 +82,14 @@ $app->put('/usuarios/{objeto}', function ($request, $response, $args) {
     
     if(!isset($usuario->nombre))
     {
-        //echo "CAMBIAR ESTADO: " . $args['objeto'];
-        $datos = Usuario::CambiarEstadoUsuario($usuario);
+        if(isset($usuario->id_local))
+            $datos = Usuario::CambiarLocalUsuario($usuario);
+        else
+            $datos = Usuario::CambiarEstadoUsuario($usuario);
     }
     else
-    {
-        //echo "MODIFICAR USUARIO: " . $args['objeto'];
         $datos = Usuario::ModificarUsuario($usuario);
-    }
+    
     
     $response->write(json_encode($datos));
     return $response;

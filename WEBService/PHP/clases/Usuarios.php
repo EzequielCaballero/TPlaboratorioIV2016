@@ -253,6 +253,16 @@ class Usuario
 			return $consulta->execute();
 	}
 
+	public static function CambiarLocalUsuario($usuario)
+	{
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE usuarios SET id_local=:local WHERE id_usuario=:id_usuario");
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta->bindValue(':local',$usuario->id_local, PDO::PARAM_STR);
+			$consulta->bindValue(':id_usuario',$usuario->id, PDO::PARAM_INT);
+			return $consulta->execute();
+	}
+
 	public static function CambioCategoriaEmpleado($id, $id_local, $tipo)
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
