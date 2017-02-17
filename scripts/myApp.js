@@ -10,6 +10,7 @@ var app = angular.module('ABMangularAPI', [
     'ui.grid.exporter',
     'ui.grid.edit',
     'chart.js',
+    'cgBusy',
     'ngMap'
   ]);
   
