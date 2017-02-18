@@ -9,6 +9,10 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           $usuarioLogueado = $sesion.perfil;
       }
 
+      //DEFINIR LOADING
+      $scope.verUsuarios = false;
+      $scope.loadingData = true;
+
       $scope.marker = new google.maps.Marker({
         title: 'default'
       });
@@ -61,6 +65,9 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
         // Cargo los datos en la grilla.
         $scope.gridOptionsUsuarios.data = respuesta.data;
+        //DESACTIVAR LOADING
+        $scope.verUsuarios = true;
+        $scope.loadingData = false;
         console.info(respuesta.data);
       });
 

@@ -2,6 +2,7 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
   app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap, spinnerService) {
 	  
   	  // $("#imagenBase").attr("src","img/Backgrounds/Logo_1.png");
+  	  //DEFINIR LOADING
   	  $scope.verLocales = false;
   	  $scope.loadingData = true;
 

@@ -9,6 +9,10 @@
         $usuarioLogueado = $sesion.perfil;
     }
 
+    //DEFINIR LOADING
+    $scope.verPerfil = false;
+    $scope.loadingData = true;
+
     $scope.botonActualizar = true;
     console.info("Parametro: ", $stateParams);
 
@@ -63,8 +67,12 @@
         },function errorCallback(response) {
               console.log("FALLO traer locales: ", response);
         });
-      }
-    
+      }  
+      
+      //DESACTIVAR LOADING
+      $scope.verPerfil = true;
+      $scope.loadingData = false;
+
     },function errorCallback(response) {
               console.log("FALLO al traer usuario!: ", response);
     });

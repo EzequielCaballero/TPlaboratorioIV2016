@@ -9,6 +9,10 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           $usuarioLogueado = $sesion.perfil;
       }
 
+      //DEFINIR LOADING
+      $scope.verLocales = false;
+      $scope.loadingData = true;
+
       $scope.marker = new google.maps.Marker({
         title: 'default'
       });
@@ -47,6 +51,9 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
 
         // Cargo los datos en la grilla.
         $scope.gridOptionsLocales.data = respuesta.data;
+        //DESACTIVAR LOADING
+        $scope.verLocales = true;
+        $scope.loadingData = false;
         console.info(respuesta.data);
       });
 

@@ -15,7 +15,7 @@
 <button class="btn btn-success" style="float:right" ui-sref="local.alta" ng-hide="ABMLocal">Nuevo Local</button>
 
 <!-- PRESENTACION GRILLA -->
-<div class="container">
+<div class="container" ng-show="verLocales">
 		<div class="animated bounceInRight">		
 			<h3>{{tituloGrillaLocales}}</h3>
 			<div class="CajaGrilla">
@@ -24,6 +24,11 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div name="loading" ng-show="loadingData">
+  <img src="img/Gifs/loading_2.gif">
+  <h2>Loading...</h2>
 </div>
 
 <!-- VENTANA MODAL PRODUCTOS -->

@@ -1,7 +1,7 @@
 <!doctype html>
 <br><br>
     <h2>{{DatoRegistro}}</h2>
-    <table id="tablaPerfil" class="table table-hover animated flipInX">
+    <table id="tablaPerfil" class="table table-hover animated flipInX" ng-show="verPerfil">
         <tbody>
               <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
               <tr><th><strong>NOMBRE</strong></th><td>{{usuarioElegido.nombre}}</td></tr>
@@ -16,6 +16,10 @@
         </tbody>
     </table>      
 
+<div name="loading" ng-show="loadingData">
+  <img src="img/Gifs/loading_2.gif">
+  <h2>Loading...</h2>
+</div>
 
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="cliente.inicio">
      Volver

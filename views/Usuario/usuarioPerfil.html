@@ -1,7 +1,7 @@
 <!doctype html>
 <br><br>
     <h2>{{DatoRegistro}}</h2>
-    <table id="tablaPerfil" class="table table-hover animated flipInX">
+    <table id="tablaPerfil" class="table table-hover animated flipInX" ng-show="verPerfil">
         <tbody>
 
               <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
@@ -19,6 +19,11 @@
               <tr><td colspan="2" ng-show="botonNuevaLocacion"><button class="btn btn-warning" data-toggle="modal" data-target="#elegirNuevoLocal" name="updateButton" id="updateButton">Asignar nuevo local</button></td></tr>
         </tbody>
     </table>      
+
+<div name="loading" ng-show="loadingData">
+  <img src="img/Gifs/loading_2.gif">
+  <h2>Loading...</h2>
+</div>
 
 <!-- VENTANA MODAL CAMBIAR LOCAL -->
 <div class="container">

@@ -10,6 +10,10 @@
         $scope.traer = $sesion.usuario;
     }
 
+    //DEFINIR LOADING
+    $scope.verPerfil = false;
+    $scope.loadingData = true;
+
     $scope.botonActualizar = true;
     console.info("Parametro: ", $stateParams);
 
@@ -24,6 +28,10 @@
         $("#estadoUserTabla").attr("style","color:green");
       else
         $("#estadoUserTabla").attr("style","color:red");
+
+      //DESACTIVAR LOADING
+      $scope.verPerfil = true;
+      $scope.loadingData = false;
       //DATOS A ENVIAR
       console.info("Usuario traido: ", $scope.usuarioElegido);
     });

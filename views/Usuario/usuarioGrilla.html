@@ -15,7 +15,7 @@
 <button class="btn btn-success" style="float:right" ui-sref="usuario.registro">Crear usuario</button>
 
 <!-- PRESENTACION GRILLA -->
-<div class="container">
+<div class="container" ng-show="verUsuarios">
 		<div class="animated bounceInRight">		
 			<h3>{{tituloGrillaUsuarios}}</h3>
 			<div class="CajaGrilla">
@@ -30,6 +30,10 @@
 	</div>
 </div>
 
+<div name="loading" ng-show="loadingData">
+  <img src="img/Gifs/loading_2.gif">
+  <h2>Loading...</h2>
+</div>
 
 <li  id="botonVolver" class="btn" style="float:right" ui-sref="usuario.menu()">
 	Volver
