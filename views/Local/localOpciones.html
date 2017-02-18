@@ -31,7 +31,7 @@
 			<p><strong>TOTAL:</strong> ${{adquirir.precio_total}}</p><hr>
 		</div><!-- FIN CAJA CONFIRMAR OPERACION -->
 			<button class="btn btn-warning btn-lg" ng-click="Comprar()" ng-disabled="bloquearCompra">COMPRAR</button>&nbsp;
-			<button class="btn btn-warning btn-lg" ng-click="Reservar()" ng-disabled="bloquearReserva">RESERVAR</button>
+			<button class="btn btn-warning btn-lg" ng-click="elegirFechaReserva()" ng-disabled="bloquearReserva">RESERVAR</button>
 	
 	</div><!-- FIN CAJA MENU -->
 
@@ -164,6 +164,7 @@
 					            <div class="form-group">
 					            	<label>Reserva válida (2 a 5 días)</label>
 					                <input type='text' class="form-control" id='datetimepicker' ng-model="fechaPorDefecto"/>
+					                <button type="button" class="btn btn-warning" ng-click="validarFechaReserva()">Validar fecha</button>
 					            </div>
 					            <label class="mensajeAlerta" ng-show="alertaFechaErronea">Error. Por favor seleccione una fecha válida</label><br>
 			            		<script type="text/javascript">
@@ -173,8 +174,8 @@
 						                });
 						            });
 						        </script>
-					        <button type="button" class="btn btn-success" ng-click="validarFechaReserva('encuesta')">Reservar</button>
-			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="resetearFecha()">Cancelar</button><br>
+					        <button type="button" class="btn btn-success" ng-disabled="fechaInvalida" ng-click="Reservar()" style="float:right">Reservar</button>
+			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="resetearFecha()" style="float:left">Cancelar</button><br>
 				        </div>
 				        <!-- FINALIZACIÓN DE OPERACION/ IR A ENCUESTA -->
 			          	<div ng-if="cajaIrEncuesta">

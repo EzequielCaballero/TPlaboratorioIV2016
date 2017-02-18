@@ -5,6 +5,10 @@ angular.module('ABMangularAPI.controladorUsuario', [])
 		{
 			$sesion = $auth.getPayload();
 			$scope.perfilUsuario = $sesion.nombre;
+			if($sesion.perfil == "Cliente")
+				$scope.esCliente = true;
+			else
+				$scope.esCliente = false;
 		}
 		else
 			$state.go("inicio");

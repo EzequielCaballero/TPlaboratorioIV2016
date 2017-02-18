@@ -182,6 +182,17 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
           $scope.fechaPorDefecto = fechaActual;
         }
 
+        //ELEGIR FECHA DE LA RESERVA
+        $scope.elegirFechaReserva = function(){
+          $scope.cajaIrEncuesta = false;
+          $scope.cajaFechaReserva = true;
+          $scope.cajaOperacionFinalizada = false;
+          $scope.fechaInvalida = true;
+          $scope.tituloOperacion = "Seleccione una fecha de reserva";
+          $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
+        }
+
+        //VALIDAR FECHA DE RESERVA
         $scope.validarFechaReserva = function(){
 
           console.info("Fecha actual", fechaActual);
@@ -195,27 +206,25 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             if(fechaAvalidar >= 2 && fechaAvalidar <= 5)
             {
               $scope.fechaFinal = $('#datetimepicker').val();
-              $scope.Reservar();
+              $scope.alertaFechaErronea = false;
+              $scope.fechaInvalida = false;
             }
             else
+            {
               $scope.alertaFechaErronea = true;
+              $scope.fechaInvalida = true;
+            }
           }
           else
+          {
             $scope.alertaFechaErronea = true;
+            $scope.fechaInvalida = true;
+          }
         }
 
         //EFECTUAR RESERVA
         $scope.Reservar = function(){
 
-          if($('#datetimepicker').val() == undefined || $('#datetimepicker').val() == fechaActual)
-          {
-            $scope.cajaIrEncuesta = false;
-            $scope.cajaFechaReserva = true;
-            $scope.tituloOperacion = "Confirmar fecha de la reserva";
-            $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
-          }
-          else
-          {
             $scope.bloquearCompra = true;
             $scope.bloquearReserva = true;
             $scope.reserva = {};
@@ -237,8 +246,6 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             },function errorCallback(response) {
                   console.log("FALLO! ", response);
             });
-          }
-
         }
 
         //FIN DE COMPRA/RESERVA (se agrega operación)
