@@ -46,6 +46,22 @@ class Producto
 		return $arrProducto;
 	}
 
+	public static function TraerProductoMasVendido()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			SELECT p.id_producto, p.nombre, p.precio, COUNT(p.id_producto) as Vendidos
+			FROM productos p,reservas_productos rp, compras_productos cp
+			WHERE p.id_producto = rp.id_producto AND p.id_producto = cp.id_producto
+			GROUP BY p.id_producto
+			ORDER BY Vendidos DESC");
+
+		$consulta->execute();
+		
+		$arrProducto= $consulta->fetchAll();
+		return $arrProducto;
+	}
+
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 

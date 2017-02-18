@@ -15,11 +15,15 @@
 		         </button><br><br>
 		         <button class="buttonMenuEstadistica" ng-click="consultar('ventas_fechas')" ng-disabled="opcion_ventasEntreFechas">
 		         		<span class="glyphicon glyphicon-calendar" >&nbsp;</span>
-		         		Ventas - producto e/ fechas
+		         		Ventas - entre fechas
 		         </button><br><br>
 		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_dia')" ng-disabled="opcion_importePordia">
 		         		<span class="glyphicon glyphicon-tasks" >&nbsp;</span>
 		         		Ventas - importe del día
+		         </button><br><br>
+		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_mayores')" ng-disabled="opcion_ventasMayores">
+		         		<span class="glyphicon glyphicon-tasks" >&nbsp;</span>
+		         		Ventas - mayores ventas
 		         </button><br><br>
 		         <button  class="buttonMenuEstadistica" ng-click="consultar('compras_cliente')" ng-disabled="opcion_clienteOperaciones">
 		         		<span class="glyphicon glyphicon-shopping-cart" >&nbsp;</span>
@@ -72,6 +76,18 @@
 				</tr>
 			</table><br>
 		</div><!-- FIN LISTA OPERACIONES -->
+
+		<!-- CAJA PRODUCTO MAS VENDIDO -->
+		<div ng-show="verConsultaProductoMasVendido" class="listaVentasMayores">
+			<h2>OPERACIONES {{tipoOperacion}}</h2>
+			<table id="tablaPerfil" class="table table-hover animated flipInX">
+	        <tbody>
+	              <tr><th><strong>IDENTIFICADOR</strong></th><td>{{mayorVentas.id}}</td></tr>
+	              <tr><th><strong>NOMBRE</strong></th><td>{{mayorVentas.nombre}}</td></tr>
+	              <tr><th><strong>PRECIO</strong></th><td>{{mayorVentas.precio}}</td></tr>
+	              <tr><th><strong>VENTAS</strong></th><td>{{mayorVentas.ventas}}</td></tr>
+	        </tbody>
+		</div><!-- FIN PRODUCTO MAS VENDIDO -->
 
 		<!-- CAJA CONSULTA REGISTRO SESIONES -->
 		<div ng-show="verConsultaRegistroSesiones" class="listaRegistroSesiones">
@@ -142,7 +158,15 @@
 						    </form>
 			            </div>
 
-			          	<!-- SELECCIONAR FECHAS PARA BUSQUEDA PRODUCTO/OFERTA MAS VENDIDO -->
+			            <!-- SELECCIONAR VENTAS MAYORES -->
+			            <div class="cajaVentasMayores" ng-if="modalSeleccionarVentasMayores">
+			            	<p>Consultar ventas mayores de...</p>
+						    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="filtrar('oferta_mayorVenta')">Ofertas</button>&nbsp;&nbsp;&nbsp;
+						    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="filtrar('producto_mayorVenta')">Productos</button><br><br>
+						    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasMayores')">Cancelar</button>
+			            </div>
+
+			          	<!-- SELECCIONAR FECHAS PARA BUSQUEDA VENTAS / PRODUCTO -->
 			          	<div class="cajaOpcionModal" ng-if="modalSeleccionarDosFechas">
 				          	<p>Seleccione fechas a consultar</p>
 				          	
@@ -164,7 +188,7 @@
 						                });
 						            });
 						        </script>
-					        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="filtrar('venta_entre_fechas')">Consultar</button>
+					        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="filtrar('venta_entre_fechas')">Consultar ventas</button>
 			            	<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="desbloquearBoton('opcion_ventasEntreFechas')">Cancelar</button><br>
 				        </div>
 

@@ -1,6 +1,6 @@
 angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])  
-  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, 
-    servicioRetornoOperaciones, servicioRetornoCompras, servicioRetornoReservas, servicioRetornoEncuestas, servicioRetornoRegistroSesiones) {
+  app.controller('controlUsuarioEstadisticas', function($scope, $http, $state, $auth, servicioRetornoUsuarios, servicioRetornoLocales, servicioRetornoOperaciones, 
+    servicioRetornoProductos, servicioRetornoOfertas, servicioRetornoCompras, servicioRetornoReservas, servicioRetornoEncuestas, servicioRetornoRegistroSesiones) {
 
     //SI estoy en este menú quiere decir que ya hay una sesión activa, resta saber que usuario esta logueado.
     $sesion = $auth.getPayload();
@@ -18,6 +18,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     
     //VER RESULTADOS DE CONSULTA
     $scope.verConsultaOperaciones = false;
+    $scope.verConsultaProductoMasVendido = false;
     $scope.verConsultaRegistroSesiones = false;
     $scope.verConsultaEncuestaEstadisticas = false;
 
@@ -90,6 +91,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = true;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
@@ -98,6 +100,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           //OPCION MODAL
           $scope.modalSeleccionarLocal = true;
           $scope.modalSeleccionarDosFechas = false;
+          $scope.modalSeleccionarVentasMayores = false;
           $scope.modalSeleccionarUnicaFecha = false;
           $scope.modalSeleccionarRespuestaEncuesta = false;
           $scope.tituloModalOpciones = "Ventas por local";
@@ -110,6 +113,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = true;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
@@ -124,6 +128,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = true;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
@@ -132,17 +137,40 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           //OPCION MODAL
           $scope.modalSeleccionarLocal = false;
           $scope.modalSeleccionarDosFechas = true;
+          $scope.modalSeleccionarVentasMayores = false;
           $scope.modalSeleccionarUnicaFecha = false;
           $scope.modalSeleccionarRespuestaEncuesta = false;
           $scope.tituloModalOpciones = "Producto de mayor venta";
           $('#opcionesConsulta').modal({backdrop: 'static', keyboard: false});
           break;
         
+        case "ventas_mayores":
+          //MANEJADOR
+          $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasEmpleado = false;
+          $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = true;
+          $scope.opcion_importePordia = false;
+          $scope.opcion_clienteOperaciones = false;
+          $scope.opcion_registroSesiones = false;
+          $scope.opcion_encuestaEstadistica = false;
+
+          //OPCION MODAL
+          $scope.modalSeleccionarLocal = false;
+          $scope.modalSeleccionarDosFechas = false;
+          $scope.modalSeleccionarVentasMayores = true;
+          $scope.modalSeleccionarUnicaFecha = false;
+          $scope.modalSeleccionarRespuestaEncuesta = false;
+          $scope.tituloModalOpciones = "Ventas mayores";
+          $('#opcionesConsulta').modal({backdrop: 'static', keyboard: false});
+          break;
+
         case "ventas_dia":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = true;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
@@ -151,6 +179,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           //OPCION MODAL
           $scope.modalSeleccionarLocal = false;
           $scope.modalSeleccionarDosFechas = false;
+          $scope.modalSeleccionarVentasMayores = false;
           $scope.modalSeleccionarUnicaFecha = true;
           $scope.modalSeleccionarRespuestaEncuesta = false;
           $scope.tituloModalOpciones = "Ventas generales del día";
@@ -162,6 +191,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = true;
           $scope.opcion_registroSesiones = false;
@@ -176,6 +206,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = true;
@@ -190,6 +221,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.opcion_ventasLocal = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
           $scope.opcion_importePordia = false;
           $scope.opcion_clienteOperaciones = false;
           $scope.opcion_registroSesiones = false;
@@ -198,6 +230,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           //OPCION MODAL
           $scope.modalSeleccionarLocal = false;
           $scope.modalSeleccionarDosFechas = false;
+          $scope.modalSeleccionarVentasMayores = false;
           $scope.modalSeleccionarUnicaFecha = false;
           $scope.modalSeleccionarRespuestaEncuesta = true;
           $scope.tituloModalOpciones = "Estadísticas según encuestas";
@@ -280,6 +313,37 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.tipoOperacion = "- Ventas entre fechas";
           $scope.mostrarTabla("tabla_operaciones");
           $scope.desbloquearBoton("opcion_ventasEntreFechas");
+          break;
+
+          case "producto_mayorVenta":
+          servicioRetornoProductos.traerCiertosProductos("masVendido").then(function(respuesta){
+              $scope.respuesta = respuesta.data;
+              $scope.mayorVentas = {};
+              $scope.mayorVentas.id = $scope.respuesta[0][0];
+              $scope.mayorVentas.nombre = $scope.respuesta[0][1];
+              $scope.mayorVentas.precio = $scope.respuesta[0][2];
+              $scope.mayorVentas.ventas = $scope.respuesta[0][3];
+              console.info("Producto mas vendido: ", $scope.respuesta);
+          });
+
+          $scope.tipoOperacion = "- producto más vendido";
+          $scope.mostrarTabla("mayor_venta");
+          $scope.desbloquearBoton("opcion_ventasMayores");
+          break;
+
+          case "oferta_mayorVenta":
+          servicioRetornoOfertas.traerCiertasOfertas("masVendida").then(function(respuesta){
+              $scope.respuesta = respuesta.data;
+              $scope.mayorVentas = {};
+              $scope.mayorVentas.id = $scope.respuesta[0][0];
+              $scope.mayorVentas.nombre = $scope.respuesta[0][1];
+              $scope.mayorVentas.precio = $scope.respuesta[0][2];
+              $scope.mayorVentas.ventas = $scope.respuesta[0][3];
+              console.info("Oferta mas vendida: ", $scope.respuesta);
+          });
+          $scope.tipoOperacion = "- oferta más vendida";
+          $scope.mostrarTabla("mayor_venta");
+          $scope.desbloquearBoton("opcion_ventasMayores");
           break;
 
           case "venta_por_fecha":
@@ -722,18 +786,28 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
          case "tabla_operaciones":
          //$("#tablaOperaciones").load("usuario.estadisticas");
          $scope.verConsultaOperaciones = true;
+         $scope.verConsultaProductoMasVendido = false;
+         $scope.verConsultaRegistroSesiones = false;
+         $scope.verConsultaEncuestaEstadisticas = false;
+         break;
+
+         case "mayor_venta":
+         $scope.verConsultaOperaciones = false;
+         $scope.verConsultaProductoMasVendido = true;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = false;
          break;
 
          case "tabla_registros":
          $scope.verConsultaOperaciones = false;
+         $scope.verConsultaProductoMasVendido = false;
          $scope.verConsultaRegistroSesiones = true;
          $scope.verConsultaEncuestaEstadisticas = false;
          break;
 
          case "estadistica_encuestas":
          $scope.verConsultaOperaciones = false;
+         $scope.verConsultaProductoMasVendido = false;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = true;
          break;
@@ -751,6 +825,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           case "opcion_ventasEntreFechas":
           $scope.fechaPorDefecto = fechaActual;
           $scope.opcion_ventasEntreFechas = false;
+          break;
+          case "opcion_ventasMayores":
+          $scope.opcion_ventasMayores = false;
           break;
           case "opcion_importePordia":
           $scope.fechaPorDefecto = fechaActual;

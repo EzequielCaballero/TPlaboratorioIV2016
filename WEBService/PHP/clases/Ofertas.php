@@ -44,6 +44,25 @@ class Oferta
 		return $arrOfertas;
 	}
 
+	public static function TraerOfertaMasVendida()
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+		$consulta =$objetoAccesoDato->RetornarConsulta("
+			SELECT DISTINCT o.id_oferta, o.titulo, o.precio, COUNT(o.id_oferta) as Vendidas
+			FROM ofertas o, compras_ofertas co
+			WHERE o.id_oferta = co.id_oferta
+			UNION
+			SELECT DISTINCT o.id_oferta, o.titulo, o.precio, COUNT(o.id_oferta) as Vendidas
+			FROM ofertas o, reservas_ofertas ro
+			WHERE o.id_oferta = ro.id_oferta
+			GROUP BY o.id_oferta
+			ORDER BY Vendidas DESC");
+
+		$consulta->execute();
+		$arrOfertas= $consulta->fetchAll();
+		return $arrOfertas;
+	}
+
 //--------------------------------------------ALTA-BAJA-MODIFICACION--------------------------------------------//
 
 

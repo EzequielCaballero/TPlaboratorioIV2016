@@ -221,7 +221,10 @@ $app->get('/ofertas[/]', function ($request, $response, $args) {
 
 $app->get('/ofertas/{parametro}', function ($request, $response, $args) {
     $parametro = json_decode($args['parametro']);
-    $datos = Oferta::TraerOfertaSegunLocal($parametro);
+    if($parametro = "masVendida")
+        $datos = Oferta::TraerOfertaMasVendida();
+    else
+        $datos = Oferta::TraerOfertaSegunLocal($parametro);
     $response->write(json_encode($datos));
     return $response;
 });
@@ -235,7 +238,10 @@ $app->get('/productos[/]', function ($request, $response, $args) {
 
 $app->get('/productos/{parametro}', function ($request, $response, $args) {
     $parametro = json_decode($args['parametro']);
-    $datos = Producto::TraerProductosDeOferta($parametro);
+    if($parametro == "masVendido")
+        $datos = Producto::TraerProductoMasVendido();
+    else
+        $datos = Producto::TraerProductosDeOferta($parametro);
     $response->write(json_encode($datos));
     return $response;
 });
