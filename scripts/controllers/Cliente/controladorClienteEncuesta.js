@@ -108,7 +108,6 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 
 	  //ENVIAR FORMULARIO
 	  $scope.EnviarEncuesta = function(){
-	  	alert("enviando!");
 	  	if($scope.otraRazon_pregunta_6 != "")
 	  		$scope.encuesta.pregunta_6 = $scope.otraRazon_pregunta_6;
 	  	if($scope.otraRazon_pregunta_19 != "")
@@ -118,11 +117,16 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 		servicioRetornoEncuestas.ABM_Encuesta($scope.encuesta, "Agregar").then(function(respuesta){
 	  		
 	  		console.info("NUEVA FILA DE ENCUESTA: ", respuesta.data);
+	  		$('#encuestaFinalizada').modal({backdrop: 'static', keyboard: false});
 
 	  	},function errorCallback(response) {
                 console.log("FALLO! ", response);
         });
+	  }
 
+	  $scope.volver = function(){
+
+	  	setTimeout(function(){ $state.go('cliente.inicio'); }, 300);
 	  }
 
 });

@@ -139,37 +139,6 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 });
 
 /********************************************CARGA MAPA GOOGLE********************************************/
-// var map;        
-// var myCenter=new google.maps.LatLng(53, -1.33);
-// var marker=new google.maps.Marker({
-//     position:myCenter
-// });
-
-// function initialize() {
-//   var mapProp = {
-//       center:myCenter,
-//       zoom: 14,
-//       draggable: false,
-//   };
-  
-//   map=new google.maps.Map(document.getElementById("mapa-local"),mapProp);
-//   marker.setMap(map);
-    
-//   google.maps.event.addListener(marker, 'click', function() {
-      
-//     infowindow.setContent(contentString);
-//     infowindow.open(map, marker);
-    
-//   }); 
-// };
-// google.maps.event.addDomListener(window, 'load', initialize);
-
-// google.maps.event.addDomListener(window, "resize", resizingMap());
-
-// $('#localSeleccionado').on('show.bs.modal', function() {
-//    //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-//    resizeMap();
-// })
 
 // function resizeMap() {
 //    if(typeof map =="undefined") return;

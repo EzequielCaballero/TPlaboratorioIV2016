@@ -2,9 +2,11 @@
 /************************************************************************************PARA ERROR NG-ANGULAR
 *************************************************************************************/
 input.ng-invalid, select.ng-invalid, textarea.ng-invalid {
+    color:white;
     background-color: #973838;
 }
 input.ng-valid, select.ng-valid, textarea.ng-valid {
+    color:black;
     background-color: #DAF7D8;
 }
 

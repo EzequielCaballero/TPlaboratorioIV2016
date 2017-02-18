@@ -16,7 +16,7 @@
 
 	        <div id="cajaPregunta" class="form-group">
 		        <span>2</span><label class="tituloPregunta">Tipo de pizza preferida</label><br>
-		        <input id="tipo1" type="radio" ng-model="encuesta.pregunta_2" value="al molde"><label for="tipo1">Al molde</label>&nbsp;&nbsp;
+		        <input id="tipo1" type="radio" ng-model="encuesta.pregunta_2" value="al molde" required><label for="tipo1">Al molde</label>&nbsp;&nbsp;
 		        <input id="tipo2" type="radio" ng-model="encuesta.pregunta_2" value="a la piedra"><label for="tipo2">A la piedra</label>
 	        </div><br>
 
@@ -32,11 +32,11 @@
 				<div class="form-group">
 					<table class="tablaOpciones">
 			        <tbody style="color:white">
-			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="2-3 por semana"></th><td>2-3 por semana</td></tr>
-			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1 vez por semana"></th><td>1 vez por semana</td></tr>
-			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1-2 por mes"></th><td>1-2 por mes</td></tr>
-			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="3-6 meses"></th><td>3-6 meses</td></tr>
-			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="nada frecuente"></th><td>nada frecuente</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="2-3 por semana" required></th><td>2-3 por semana</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1 vez por semana" ></th><td>1 vez por semana</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="1-2 por mes" ></th><td>1-2 por mes</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="3-6 meses" ></th><td>3-6 meses</td></tr>
+			              <tr><th><input type="radio" ng-model="encuesta.pregunta_4" value="nada frecuente" ></th><td>nada frecuente</td></tr>
 					</tbody>
 			        </table>
 			    </div>
@@ -44,14 +44,14 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>5</span><label class="tituloPregunta">¿Qué le ha parecido la variedad de productos que ofrecemos?</label><br>
-				<input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="buena"><label>Buena</label>&nbsp;&nbsp;
-		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="mala"><label>Mala</label>&nbsp;&nbsp;
-		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="intermedia"><label>Intermedia</label>
+				<input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="buena" required><label>Buena</label>&nbsp;&nbsp;
+		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="mala" ><label>Mala</label>&nbsp;&nbsp;
+		        <input class="form-control" type="radio" ng-model="encuesta.pregunta_5" value="intermedia" ><label>Intermedia</label>
 		    </div><br>
 
 		    <div id="cajaPregunta" class="form-group">
 				<span>6</span><label class="tituloPregunta">¿Cuál fue el motivo por el cual eligió nuestros productos?</label><br><br>
-				<input id="razon1" type="radio" ng-model="encuesta.pregunta_6" value="precio" ng-change="otraOpcionPregunta_6(true)"><label for="razon1">Precio</label>&nbsp;&nbsp;
+				<input id="razon1" type="radio" ng-model="encuesta.pregunta_6" value="precio" ng-change="otraOpcionPregunta_6(true)" required><label for="razon1">Precio</label>&nbsp;&nbsp;
 		        <input id="razon2" type="radio" ng-model="encuesta.pregunta_6" value="calidad" ng-change="otraOpcionPregunta_6(true)"><label for="razon2">Calidad</label>&nbsp;&nbsp;
 		        <input id="razon3" type="radio" ng-model="encuesta.pregunta_6" value="sabor" ng-change="otraOpcionPregunta_6(true)"><label for="razon3">Sabor</label><br>
 		        <input id="razon4" type="checkbox" ng-model="encuesta.pregunta_6" value="otro" ng-change="otraOpcionPregunta_6()"><label for="razon4">Otro</label>&nbsp;&nbsp;
@@ -60,7 +60,7 @@
 
 			<div id="cajaPregunta" class="form-group">	
 				<span>7</span><label class="tituloPregunta">¿Recomendaría la página a un amigo?</label><br><br>
-				<input id="recomendaria1" type="radio" ng-model="encuesta.pregunta_7" value="si"><label for="recomendaria1">Si</label>&nbsp;&nbsp;
+				<input id="recomendaria1" type="radio" ng-model="encuesta.pregunta_7" value="si"><label for="recomendaria1" required>Si</label>&nbsp;&nbsp;
 		        <input id="recomendaria2" type="radio" ng-model="encuesta.pregunta_7" value="no"><label for="recomendaria2">No</label>&nbsp;&nbsp;
 		        <input id="recomendaria3" type="radio" ng-model="encuesta.pregunta_7" value="tal vez"><label for="recomendaria3">Tal vez</label>&nbsp;&nbsp;
 		        <input id="recomendaria4" type="radio" ng-model="encuesta.pregunta_7" value="nunca"><label for="recomendaria4">Nunca</label>
@@ -68,7 +68,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>8</span><label class="tituloPregunta">¿Considera atractiva y/o correcta las imágenes de los productos?</label><br><br>
-				<input id="considera1" type="radio" ng-model="encuesta.pregunta_8" value="si"><label for="considera1">Si</label>&nbsp;&nbsp;
+				<input id="considera1" type="radio" ng-model="encuesta.pregunta_8" value="si"><label for="considera1" required>Si</label>&nbsp;&nbsp;
 		        <input id="considera2" type="radio" ng-model="encuesta.pregunta_8" value="no"><label for="considera2">No</label>&nbsp;&nbsp;
 		        <input id="considera3" type="radio" ng-model="encuesta.pregunta_8" value="ni idea"><label for="considera3">Tal vez</label>
 			</div><br>
@@ -77,7 +77,7 @@
 				<span>9</span><label class="tituloPregunta">¿Cuánto estaría dispuesto a pagar por una de nuestras pizzas en el supermercado?</label><br>
 				<table class="tablaOpciones">
 		        <tbody style="color:white">
-		              <tr><th><input type="radio" ng-model="encuesta.pregunta_9" value="de 50 a 100 $"></th><td>de 500 a 100 $</td></tr>
+		              <tr><th><input type="radio" ng-model="encuesta.pregunta_9" value="de 50 a 100 $" required></th><td>de 500 a 100 $</td></tr>
 		              <tr><th><input type="radio" ng-model="encuesta.pregunta_9" value="de 100 a 150 $"></th><td>de 100 a 150 $</td></tr>
 		              <tr><th><input type="radio" ng-model="encuesta.pregunta_9" value="de 150 a 300 $"></th><td>de 150 a 300 $</td></tr>
 		              <tr><th><input type="radio" ng-model="encuesta.pregunta_9" value="que sea gratis"></th><td>que sea gratis</td></tr>
@@ -87,7 +87,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>10</span><label class="tituloPregunta">¿Considera que los precios son razonables?</label><br>
-				<input id="razonable1" type="radio" ng-model="encuesta.pregunta_10" value="si"><label for="razonable1">Si</label>&nbsp;&nbsp;
+				<input id="razonable1" type="radio" ng-model="encuesta.pregunta_10" value="si" required><label for="razonable1">Si</label>&nbsp;&nbsp;
 		        <input id="razonable2" type="radio" ng-model="encuesta.pregunta_10" value="no"><label for="razonable2">No</label>&nbsp;&nbsp;
 		        <input id="razonable3" type="radio" ng-model="encuesta.pregunta_10" value="no se"><label for="razonable3">Tal vez</label>
 			</div><br>
@@ -99,7 +99,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>12</span><label class="tituloPregunta">¿Conocía nuestra marca?</label><br><br>
-				<label for="recomendar1">SI</label>&nbsp;<input id="recomendar1" type="radio" ng-model="encuesta.pregunta_12" value="si">&nbsp;&nbsp;
+				<label for="recomendar1">SI</label>&nbsp;<input id="recomendar1" type="radio" ng-model="encuesta.pregunta_12" value="si" required>&nbsp;&nbsp;
 		        <label for="recomendar2">NO</label>&nbsp;<input id="recomendar2" type="radio" ng-model="encuesta.pregunta_12" value="no">
 			</div><br>
 
@@ -112,14 +112,14 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>14</span><label class="tituloPregunta">¿Está conforme con la ubicación de nuestros locales?</label><br><br>
-				<label for="locaciones1">Si</label>&nbsp;<input id="locaciones1" type="radio" ng-model="encuesta.pregunta_14" value="si">&nbsp;&nbsp;
+				<label for="locaciones1">Si</label>&nbsp;<input id="locaciones1" type="radio" ng-model="encuesta.pregunta_14" value="si" required>&nbsp;&nbsp;
 		        <label for="locaciones2">No</label>&nbsp;<input id="locaciones2" type="radio" ng-model="encuesta.pregunta_14" value="no">&nbsp;&nbsp;
 		        <label for="locaciones3">Me da igual</label>&nbsp;<input id="locaciones3" type="radio" ng-model="encuesta.pregunta_14" value="me da igual">
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">
 				<span>15</span><label class="tituloPregunta">¿Considera necesario un servicio de delivery?</label><br><br>
-				<input id="delivery1" type="radio" ng-model="encuesta.pregunta_15" value="si">&nbsp;<label for="delivery1">Si</label>&nbsp;&nbsp;
+				<input id="delivery1" type="radio" ng-model="encuesta.pregunta_15" value="si" required>&nbsp;<label for="delivery1">Si</label>&nbsp;&nbsp;
 		        <input id="delivery2" type="radio" ng-model="encuesta.pregunta_15" value="no">&nbsp;<label for="delivery2">No</label>&nbsp;&nbsp;
 		        <input id="delivery3" type="radio" ng-model="encuesta.pregunta_15" value="irrelevante">&nbsp;<label for="delivery3">Irrelevante</label>
 			</div><br>
@@ -133,20 +133,20 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>17</span><label for="textoOpinion" class="tituloPregunta">¿Cuál es su opinión acerca de la página?</label><br>
-				<textarea id="textoOpinion" class="form-control" maxlength="300" rows="4" ng-model="encuesta.pregunta_17" placeholder="Ingrese su opinión aquí">
+				<textarea id="textoOpinion" class="form-control" maxlength="300" rows="4" ng-model="encuesta.pregunta_17" placeholder="Ingrese su opinión aquí" required>
 				</textarea><br>
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">
 				<span>18</span><label class="tituloPregunta">¿Tuvo inconvenientes en el uso de la página?</label><br><br>
-				<input id="tuvoInconvenientes1" type="radio" ng-model="encuesta.pregunta_18" value="si">&nbsp;<label for="tuvoInconvenientes1">Si</label>&nbsp;&nbsp;
+				<input id="tuvoInconvenientes1" type="radio" ng-model="encuesta.pregunta_18" value="si" required>&nbsp;<label for="tuvoInconvenientes1">Si</label>&nbsp;&nbsp;
 		        <input id="tuvoInconvenientes2" type="radio" ng-model="encuesta.pregunta_18" value="no">&nbsp;<label for="tuvoInconvenientes2">No</label>&nbsp;&nbsp;
 		        <input id="tuvoInconvenientes3" type="radio" ng-model="encuesta.pregunta_18" value="no lo recuerdo">&nbsp;<label for="tuvoInconvenientes3">No lo recuerdo</label>
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">
 				<span>19</span><label class="tituloPregunta">¿Qué considera que debe mejorarse en la página?</label><br>
-				<input id="queMejorar1" type="radio" ng-model="encuesta.pregunta_19" value="estetica" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar1">Estética</label>&nbsp;&nbsp;
+				<input id="queMejorar1" type="radio" ng-model="encuesta.pregunta_19" value="estetica" ng-change="otraOpcionPregunta_19(true)" required><label for="queMejorar1">Estética</label>&nbsp;&nbsp;
 		        <input id="queMejorar2" type="radio" ng-model="encuesta.pregunta_19" value="funcional" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar2">Funcionalidad</label>&nbsp;&nbsp;<input id="queMejorar3" type="radio" ng-model="encuesta.pregunta_19" value="informacion" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar3">Información</label><br>
 		        <input id="queMejorar4" type="radio" ng-model="encuesta.pregunta_19" value="variedad" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar4">Variedad</label><br>
 		        <input id="queMejorar5" type="checkbox" ng-model="encuesta.pregunta_19" value="otro" ng-change="otraOpcionPregunta_19()"><label for="queMejorar5">Otro</label>&nbsp;&nbsp;
@@ -155,7 +155,7 @@
 
 			<div id="cajaPregunta" class="form-group">
 				<span>20</span><label class="tituloPregunta">Ante futuras compras: ¿Acudiría personalmente al local o utilizaría la página?</label><br>
-				<input id="acudiriaA1" type="radio" ng-model="encuesta.pregunta_20" value="local">&nbsp;<label for="acudiriaA1">Local</label>&nbsp;&nbsp;
+				<input id="acudiriaA1" type="radio" ng-model="encuesta.pregunta_20" value="local" required>&nbsp;<label for="acudiriaA1">Local</label>&nbsp;&nbsp;
 		        <input id="acudiriaA2" type="radio" ng-model="encuesta.pregunta_20" value="pagina">&nbsp;<label for="acudiriaA2">Página</label>&nbsp;&nbsp;
 		        <input id="acudiriaA3" type="radio" ng-model="encuesta.pregunta_20" value="no lo se">&nbsp;<label for="acudiriaA3">No lo sé</label>
 				<br><br>
@@ -167,4 +167,32 @@
 		</form>
 		<!-- FIN DEL FORMULARIO -->
 	</div>
+
+<!-- VENTANA MODAL DETALLE OPERACION -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="encuestaFinalizada" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">Encuesta enviada</h4>
+          </div>
+          <!-- Body -->
+	          <div class="modal-body" style="color:black">    
+	          	<p> Gracias por completar la encuesta</p>
+	          	<p> ¡Lo esperamos de nuevo!</p>
+	          </div>
+	      <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="volver()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+<!-- FIN DE VISTA -->
 </div>
