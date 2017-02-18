@@ -2,6 +2,7 @@ var app = angular.module('ABMangularAPI', [
     'ui.router',
     'satellizer',
     'angularFileUpload',
+    'angularSpinners',
     'ui.grid',
     'ui.grid.pagination',
     'ui.grid.resizeColumns',

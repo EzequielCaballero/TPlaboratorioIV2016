@@ -1,7 +1,9 @@
 angular.module('ABMangularAPI.controladorClienteInicio', [])
-  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap) {
+  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap, spinnerService) {
 	  
-  	  $("#imagenBase").attr("src","img/Backgrounds/Logo_1.png");
+  	  // $("#imagenBase").attr("src","img/Backgrounds/Logo_1.png");
+  	  $scope.verLocales = false;
+  	  $scope.loadingData = true;
 
 	  if($auth.isAuthenticated())
 	  {
@@ -15,8 +17,14 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 
       	$scope.lista_locales = respuesta.data;
       	total = respuesta.data.length;
+      	//DESACTIVACION DE LOADING
+	    $scope.loadingData = false;
+	    $scope.verLocales = true;
       	console.info("LOCALES: ", $scope.lista_locales);
-	  });
+	  },function errorCallback(response) {
+                console.log("FALLO al traer locales! ", response);
+      });
+
 
 
 /********************************************CARGA IMAGENES LOCALES********************************************/
@@ -31,7 +39,9 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
+	   //CARGA DE FOTOS
 	   carousel();
+
 	   /***SELECCION LOCAL********************************************/
 	   $scope.seleccionLocal = function(local, numero){
 			clearTimeout(timer);
@@ -94,7 +104,7 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
 		}
 
-	}, 400);
+	}, 500);
 
 	//FUNCIONES DE SLIDER
   	$scope.currentDiv = function(n) {
