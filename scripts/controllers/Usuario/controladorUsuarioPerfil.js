@@ -24,7 +24,6 @@
     if($stateParams.id != "")
     {
       $scope.traer = $stateParams.id;
-      $scope.dondeVolver = "usuario.grilla";
       if($stateParams.id == $sesion.usuario)
         $scope.botonActualizar = false;
     }
@@ -34,7 +33,6 @@
       {
           $scope.traer = $sesion.usuario;
           $scope.botonActualizar = false;
-          $scope.dondeVolver = "usuario.menu";
       }
 
     }
