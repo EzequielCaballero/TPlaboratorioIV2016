@@ -3,9 +3,10 @@
 <!-- <a class="btn btn-danger" style="float:left" ui-sref="cliente.inicio()">Volver</a><span class="glyphicon glyphicon-home"></span> -->
 <div class="cajaEncuesta">
 	<div class="Frm">
-		<h3>ENCUESTA DE OPINIÓN Y SATISFACCIÓN DEL CLIENTE</h3><br><br>
+		<h3>ENCUESTA DE OPINIÓN Y SATISFACCIÓN DEL CLIENTE</h3><br>
+		<button class="btn btn-warning" ng-click="volver()">Cancelar</button><br>
 		<h3>NUMERO DE OPERACION {{numeroOperacion}}</h3>
-		<form class="encuestaForm" name="myForm" role="form">
+		<form class="encuestaForm" name="myForm" role="form" novalidate>
 			
 			<div id="cajaPregunta" class="form-group">
 				<span>1</span><label for="opcionPizza" class="tituloPregunta">Variedad de pizza favorita</label><br>
@@ -55,7 +56,7 @@
 		        <input id="razon2" type="radio" ng-model="encuesta.pregunta_6" value="calidad" ng-change="otraOpcionPregunta_6(true)"><label for="razon2">Calidad</label>&nbsp;&nbsp;
 		        <input id="razon3" type="radio" ng-model="encuesta.pregunta_6" value="sabor" ng-change="otraOpcionPregunta_6(true)"><label for="razon3">Sabor</label><br>
 		        <input id="razon4" type="checkbox" ng-model="encuesta.pregunta_6" value="otro" ng-change="otraOpcionPregunta_6()"><label for="razon4">Otro</label>&nbsp;&nbsp;
-		        <input type="text" ng-show="otraRazon_p6" ng-model="otraRazon_pregunta_6" placeholder="Indique otra razón">
+		        <input type="text" ng-show="otraRazon_p6" ng-model="otraRazon_pregunta_6" placeholder="Indique otra razón" ng-required="razonRequerida_6">
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">	
@@ -150,7 +151,7 @@
 		        <input id="queMejorar2" type="radio" ng-model="encuesta.pregunta_19" value="funcional" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar2">Funcionalidad</label>&nbsp;&nbsp;<input id="queMejorar3" type="radio" ng-model="encuesta.pregunta_19" value="informacion" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar3">Información</label><br>
 		        <input id="queMejorar4" type="radio" ng-model="encuesta.pregunta_19" value="variedad" ng-change="otraOpcionPregunta_19(true)"><label for="queMejorar4">Variedad</label><br>
 		        <input id="queMejorar5" type="checkbox" ng-model="encuesta.pregunta_19" value="otro" ng-change="otraOpcionPregunta_19()"><label for="queMejorar5">Otro</label>&nbsp;&nbsp;
-		        <input type="text" ng-show="otraRazon_p19" ng-model="otraRazon_pregunta_19" placeholder="Indique otra posible mejora">
+		        <input type="text" ng-show="otraRazon_p19" ng-model="otraRazon_pregunta_19" placeholder="Indique otra posible mejora" ng-required="razonRequerida_19">
 			</div><br>
 
 			<div id="cajaPregunta" class="form-group">

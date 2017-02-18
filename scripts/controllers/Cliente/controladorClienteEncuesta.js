@@ -52,14 +52,19 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  	{
 	  		$("#razon4").prop('checked', '');
 	  		$scope.otraRazon_pregunta_6 = "";
+	  		$scope.razonRequerida_6 = false;
 	  	}
 
 	  	if($("#razon4").prop('checked'))
+	  	{
 	  		$scope.otraRazon_p6 = true;
+	  		$scope.razonRequerida_6 = true;
+	  	}
 	  	else
 	  	{
 	  		$scope.otraRazon_p6 = false;
 	  		$scope.otraRazon_pregunta_6 = "";
+	  		$scope.razonRequerida_6 = false;
 	  	}
 	  }
 
@@ -70,14 +75,19 @@ angular.module('ABMangularAPI.controladorUsuarioEncuesta', [])
 	  	{
 	  		$("#queMejorar5").prop('checked', '');
 	  		$scope.otraRazon_pregunta_19 = "";
+	  		$scope.razonRequerida_19 = false;
 	  	}
 
 	  	if($("#queMejorar5").prop('checked'))
+	  	{
 	  		$scope.otraRazon_p19 = true;
+	  		$scope.razonRequerida_19 = true;
+	  	}
 	  	else
 	  	{
 	  		$scope.otraRazon_p19 = false;
 	  		$scope.otraRazon_pregunta_19 = "";
+	  		$scope.razonRequerida_19 = false;
 	  	}
 	  }
 
