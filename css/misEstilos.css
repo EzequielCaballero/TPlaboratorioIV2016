@@ -633,6 +633,7 @@ NUEVO LOCAL
 
 #tablaOfertasAlta td#opcionOferta:hover{
     cursor: pointer;
+    color:black;
     background-color: #E0CFCF;
 }
 

@@ -8,7 +8,12 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
       $state.go("inicio");
 
     if($stateParams.obj == null)
-      $state.go("cliente.inicio");
+    {
+      if($sesion.perfil == "Cliente")
+        $state.go("cliente.inicio");
+      else
+        $state.go("inicio");
+    }
     else
     {
         $scope.local = $stateParams.obj;
@@ -256,13 +261,30 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
             $scope.cajaIrEncuesta = true;
             $scope.cajaFechaReserva = false;
             $scope.tituloOperacion = "Operacion finalizada con éxito";
-            $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
+
+            if($sesion.perfil == "Cliente")
+            {
+              $scope.cajaIrEncuesta = true;
+              $scope.cajaFechaReserva = false;
+              $scope.tituloOperacion = "Operacion finalizada con éxito";
+              $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
+            }
+            else
+            {
+              $scope.cajaIrEncuesta = false;
+              $scope.cajaFechaReserva = false;
+              $scope.cajaOperacionFinalizada = true;
+              $scope.tituloOperacion = "Operacion finalizada";
+              $('#caminoAencuesta').modal({backdrop: 'static', keyboard: false});
+            }
+
           
           },function errorCallback(response) {
                 console.log("FALLO! ", response);
           });
         }
 
+        //REDIRECCIONAR
           $scope.dondeIr = function(lugar){
 
               switch(lugar)
@@ -271,7 +293,10 @@ angular.module('ABMangularAPI.controladorLocalOpciones', [])
                   setTimeout(function(){ $state.go('cliente.encuesta', {id_operacion:$scope.operacion.id_operacion}); }, 300);
                 break;
                 case "inicio":
-                  setTimeout(function(){ $state.go('cliente.inicio'); }, 300);
+                  if($sesion.perfil == "Cliente")
+                    setTimeout(function(){ $state.go('cliente.inicio'); }, 300);
+                  else
+                    setTimeout(function(){ $state.go('inicio'); }, 300);
                 break;
               }
           }

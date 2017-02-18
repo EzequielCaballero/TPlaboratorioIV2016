@@ -1,6 +1,6 @@
 angular.module('ABMangularAPI.controladorInicio', [])
   
-  app.controller('controlInicio', function($scope, $auth, $state, $http) {
+  app.controller('controlInicio', function($scope, $auth, $state, $http, servicioRetornoLocales) {
 	  $scope.perfilActivo="**N/N**";
 	  $scope.titulo="Pizzeria ARGENTA S.R.L.";
 	  $scope.imagenLogueado = "img/backgrounds/Logo_4.png";
@@ -11,10 +11,11 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	  $("#imagenBase").attr("src",$scope.imagenPorDefecto);
 
 	  //Ocultar o mostrar botones
-	  $scope.ABMusuarios = "true";
-	  $scope.Estadisticas = "true";
-	  $scope.Login = "false";
-	  $scope.logout = "true";
+	  $scope.ABMusuarios = true;
+	  $scope.Estadisticas = true;
+	  $scope.EmpleadoOp = true;
+	  $scope.Login = false;
+	  $scope.logout = true;
 
 	  if($auth.isAuthenticated())
       {
@@ -30,7 +31,10 @@ angular.module('ABMangularAPI.controladorInicio', [])
       		$scope.ABMusuarios = "false";
 
       	if($sesion.perfil == "Administrador")
-      		$scope.Estadisticas = "false";  
+      		$scope.Estadisticas = "false"; 
+
+      	if($sesion.perfil == "Empleado")
+      		$scope.EmpleadoOp = false; 
       }
 
 	  $scope.direccionar=function($direccion){
@@ -61,6 +65,17 @@ angular.module('ABMangularAPI.controladorInicio', [])
 
 	      case "MenuEstadisticas":
 	      	$state.go("usuario.estadisticas");
+	      	break;
+
+	      case "MenuOperaciones":
+	      	servicioRetornoLocales.traerCiertosLocales($sesion.local).then(function(respuesta){
+
+            	$scope.local = respuesta.data;
+	            $state.go('cliente.menu_local', {obj:$scope.local});
+	        
+	        },function errorCallback(response) {
+	              console.log("FALLO traer locales: ", response);
+	        });
 	      	break;
 
 	      case "Inicio":

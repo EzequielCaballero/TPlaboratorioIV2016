@@ -13,7 +13,7 @@
 	         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
 	         		OFERTAS
 	         </button><br><br>
-	         <button  class="btn btn-danger" ui-sref="cliente.inicio()">Volver</button>	<br><br>
+	         <button  class="btn btn-danger" ng-click="dondeIr('inicio')">Volver</button> <br><br>
 		</form>
 
 		<!-- CAJA CONFIRMAR OPERACION -->
@@ -152,10 +152,9 @@
 		          <div class="modal-body" style="color:black">
 
 			            <!-- CONFIRMAR OPERACION -->
-			            <div ng-if="cajaConfirmarOperacion">
-			            	<p>¿Confirmar operación?</p>
-			            	<button type="button" class="btn btn-success" ng-click="confirmarOperacion(tipoOperacion)" style="float:left">SI</button>
-		            		<button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">NO</button>
+			            <div ng-if="cajaOperacionFinalizada">
+			            	<p>La operacion para el cliente a finalizado con éxito</p>
+		            		<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="dondeIr('inicio')" style="float:right">Aceptar</button>
 			            </div>
 
 			          	<!-- SELECCION DE FECHA DE LA RESERVA -->
