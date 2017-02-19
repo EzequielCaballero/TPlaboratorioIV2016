@@ -1,24 +1,31 @@
 <br><br>
-<!-- CARGA DE FOTOS LOCALES  -->
-<div class="w3-content" ng-show="verLocales">
-    <div ng-repeat="local in lista_locales">	
-	    <img id="eleccionLocal" class="mySlides img-responsive" data-toggle="modal" data-target="#localSeleccionado" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)" style="width:100%">
+<!-- CAJA INICIO CLIENTE  -->
+<div class="cajaClienteInicio">
+  <h2>Seleccione un local de su preferencia</h2>
+  <!-- Carga de imagenes -->
+  <div id="cajaLocalFotos" class="w3-content" ng-show="verLocales">
+    <div id="localFotoInicio" ng-repeat="local in lista_locales">	
+      <img id="eleccionLocal" class="mySlides img-responsive" data-toggle="modal" data-target="#localSeleccionado" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)" style="width:100%">
     </div>
-	<div class="w3-row-padding w3-section">
-	  <div class="w3-col s2" ng-repeat="localito in lista_locales">
-	      <span class="btn btn-danger btn-lg w3-opacity w3-hover-opacity-off" ng-click="currentDiv($index)">Local N°{{$index+1}}</span>
-	  </div>
-	</div>
+  	<div class="w3-row-padding w3-section">
+  	  <div class="w3" ng-repeat="localito in lista_locales">
+  	      <span class="buttonSelectLocal" ng-click="currentDiv($index)">Local N°{{$index+1}}</span>
+  	  </div>
+  	</div>
+  </div>
+
+  <!-- PERFIL LOGUEADO -->
+  <br>
+  <div class="cajaIntroCliente">
+      <span id="intro">{{nombrePerfil}}</span>
+  </div>
+
+<!-- FIN CAJA INICIO CLIENTE -->
 </div>
 
 <div name="loading" ng-show="loadingData">
   <img src="img/Gifs/loading_2.gif">
   <h2>Loading...</h2>
-</div>
-
-<!-- PERFIL LOGUEADO -->
-<br><div "cajaIntro">
-    <span id="intro" class="">{{nombrePerfil}}</span>
 </div>
 
 <!-- VENTANA MODAL LOCAL ELEGIDO -->
