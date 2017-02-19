@@ -1,27 +1,120 @@
 <!doctype html>
 <br><br>
-    <h2>{{DatoRegistro}}</h2>
-    <table id="tablaPerfil" class="table table-hover animated flipInX" ng-show="verPerfil">
-        <tbody>
-              <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
-              <tr><th><strong>NOMBRE</strong></th><td>{{usuarioElegido.nombre}}</td></tr>
-              <tr><th><strong>APELLIDO</strong></th><td>{{usuarioElegido.apellido}}</td></tr>
-              <tr><th><strong>EDAD</strong></th><td>{{usuarioElegido.edad}}</td></tr>
-              <tr><th><strong>SEXO</strong></th><td>{{usuarioElegido.sexo}}</td></tr>
-              <tr><th><strong>CORREO</strong></th><td>{{usuarioElegido.correo}}</td></tr>
-              <tr><th><strong>DIRECCION</strong></th><td>{{usuarioElegido.direccion}}</td></tr>
-              <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
-              <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
-              <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
-        </tbody>
-    </table>      
 
-<div name="loading" ng-show="loadingData">
-  <img src="img/Gifs/loading_2.gif">
-  <h2>Loading...</h2>
+  <div class="CajaMenuEstadistica">
+  <h1>MENU PERFIL</h1>
+    <form class="formMenuABM animated fadeInUp">
+
+             <br><br>
+             <button class="buttonMenuEstadistica" ng-click="consultar('miPerfil')" ng-disabled="opcion_miPerfil">
+                <span class="glyphicon glyphicon-th-list">&nbsp;</span>
+                Mis datos
+             </button><br><br>
+             <button class="buttonMenuEstadistica" ng-click="consultar('misCompras')" ng-disabled="opcion_misCompras">
+                <span class="glyphicon glyphicon-th-list">&nbsp;</span>
+                Compras
+             </button><br><br>
+             <button  class="buttonMenuEstadistica" ng-click="consultar('misReservas')" ng-disabled="opcion_misReservas">
+                <span class="glyphicon glyphicon-th-list" >&nbsp;</span>
+                Reservas
+             </button><br><br>
+
+             <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="cliente.inicio">
+                 Volver
+                 <span class="glyphicon glyphicon-home"></span>
+             </a><br>
+
+              <a id="buttonLogOFF" ng-click="cerrarSesion()">
+                <span class="glyphicon glyphicon-log-out" >&nbsp;</span>
+              </a>
+    </form>
+  </div>
+
+<div class="cajaVistasPerfil">
+<!-- INICIO CAJA DE VISTAS -->
+
+    <div class="cajaPerfilCliente" ng-show="verPerfil">
+        <h2>{{DatoRegistro}}</h2>
+        <table id="tablaPerfil" class="table table-hover animated flipInX">
+            <tbody>
+                  <tr><th><strong>ID</strong></th><td>{{usuarioElegido.id_usuario}}</td></tr>
+                  <tr><th><strong>NOMBRE</strong></th><td>{{usuarioElegido.nombre}}</td></tr>
+                  <tr><th><strong>APELLIDO</strong></th><td>{{usuarioElegido.apellido}}</td></tr>
+                  <tr><th><strong>EDAD</strong></th><td>{{usuarioElegido.edad}}</td></tr>
+                  <tr><th><strong>SEXO</strong></th><td>{{usuarioElegido.sexo}}</td></tr>
+                  <tr><th><strong>CORREO</strong></th><td>{{usuarioElegido.correo}}</td></tr>
+                  <tr><th><strong>DIRECCION</strong></th><td>{{usuarioElegido.direccion}}</td></tr>
+                  <tr><th><strong>CLAVE</strong></th><td>{{usuarioElegido.clave}}</td></tr>
+                  <tr><th><strong>TIPO</strong></th><td><strong>{{usuarioElegido.tipo_user}}</strong></td></tr>
+                  <tr><th><strong>ESTADO</strong></th><td id="estadoUserTabla"><strong>{{usuarioElegido.estado}}</strong></td></tr>
+            </tbody>
+        </table>
+    </div>      
+
+  <div name="loading" ng-show="loadingData">
+    <img src="img/Gifs/loading_2.gif">
+    <h2>Loading...</h2>
+  </div>
+
+    <div class="cajaOperacionesCliente" ng-show="verOperaciones">
+      <h2>{{DatoRegistro}}</h2>
+      <table id="tablaOperacionesCliente" class='table table-condensed table-responsive'>
+        <thead>
+          <tr>
+            <th>  CODIGO  </th>
+            <th>  Tipo    </th>
+            <th>  Fecha   </th>
+            <th>  Local   </th>
+            <th>  Usuario </th>
+            <th>  Total   </th>
+            <th>  Detalle </th>
+          </tr>
+        </thead>
+        <tr ng-repeat="operacion in operaciones_elegida | filter:buscador as resultado">
+          <td>{{operacion.id_operacion}}</td>
+          <td>{{operacion.tipo_operacion}}</td>
+          <td>{{operacion.fecha}}</td>
+          <td>{{operacion.id_local}}</td>
+          <td>{{operacion.id_usuario}}</td>
+          <td>${{operacion.total}}</td>
+          <td><button class="btn" ng-click="detalleOperacion(operacion.id_operacion, operacion.tipo_operacion)" style="color:black">Ver detalle</button></td>
+        </tr>
+      </table><br>
+    </div>
+
+<!-- VENTANA MODAL DETALLE OPERACION -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="verDetalleOperacion" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">Detalles de la operación</h4>
+          </div>
+          <!-- Body -->
+            <div class="modal-body" style="color:black">    
+              
+              <p><strong>OPERACION:</strong> *{{tipo_Operacion}}*</p>
+              <p><strong>N° detalle:</strong> {{idDetalle}}</p>
+              <p><strong>Productos (n°):</strong> {{productosAsociados}}</p>
+              <p><strong>Precio final:</strong> {{precioFinal}}</p>
+              <div ng-show="esReserva">
+                <p><strong>Entrega:</strong> {{fechaEntrega}}</p>
+              </div> 
+            </div>
+        <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+
+<!-- FIN CAJA DE VISTAS -->
 </div>
 
-<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="cliente.inicio">
-     Volver
-     <span class="glyphicon glyphicon-home"></span>
-<a>

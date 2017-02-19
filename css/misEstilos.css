@@ -815,6 +815,7 @@ VISTA CLIENTE
 }
 
 .cajaOperaciones h2{
+  margin:0 auto;
   background-color: #853333;
   padding:20px;
   margin:0 auto;
@@ -848,6 +849,23 @@ VISTA CLIENTE
   font-size: 10px;
 }
 
+.cajaVistasPerfil h2{
+  margin: 0 auto;
+  color: #CEB5B5;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 100%;
+  font-weight: bold;
+  border-bottom: 5px solid #B34444;
+  background-color: #441919;
+}
+
+#tablaOperacionesCliente{
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 550px;
+}
 
 /************************************************************************************
 ENCUESTA
@@ -1000,7 +1018,7 @@ ESTADÍSTICA
 .cajaEstadisticaSeleccionada{
     position: relative;
     padding-top: 20px;
-    padding-right: 100px;
+    padding-right: 25px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;
@@ -1013,6 +1031,16 @@ ESTADÍSTICA
 }
 
 .cajaEstadisticaSeleccionada h2{
+  margin: 0 auto;
+  color: #CEB5B5;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #441919;
+  border-radius: 10px;
+}
+
+.listaRegistroSesiones h2{
+  margin: 0 auto;
   color: #CEB5B5;
   padding: 10px;
   font-weight: bold;
@@ -1021,7 +1049,7 @@ ESTADÍSTICA
 }
 
 .cajaEstadisticaSeleccionada table{
-  color: #CEB5B5;
+  color: #CEC5B5;
   background-color: #5F2626;
 }
 
