@@ -127,9 +127,9 @@ BOTONES
     cursor: pointer;
 }
 
-.button-red {
+.button-orange {
     border-radius: 5px;
-    background-color: #AA2424;
+    background-color: #CF6024;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -140,6 +140,31 @@ BOTONES
     margin: 4px 2px;
     cursor: pointer;
     transition-duration: 0.4s;
+}
+
+.button-orange:hover{
+  color: black;
+  background-color: #ECA54A;
+}
+
+.button-red {
+    border-radius: 5px;
+    background-color: #A12D2D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button-red:hover{
+  color: black;
+  background-color: #F15454;
 }
 
 .button-blue {
@@ -157,9 +182,14 @@ BOTONES
     transition-duration: 0.4s;
 }
 
-.button-orange {
+.button-blue:hover{
+  color: black;
+  background-color: #4C8DEE;
+}
+
+.button-yellow {
     border-radius: 5px;
-    background-color: #CF6024;
+    background-color: #CAAE42;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -170,26 +200,16 @@ BOTONES
     margin: 4px 2px;
     cursor: pointer;
     transition-duration: 0.4s;
+}
+
+.button-yellow:hover{
+  color: black;
+  background-color: #EEE262;
 }
 
 .button-gray {
     border-radius: 5px;
     background-color: #8E9BA1;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-}
-
-.button-yellow {
-    border-radius: 5px;
-    background-color: #BC9E28;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -413,6 +433,26 @@ LOGIN & REGISTER PAGE
 }
 .loginForm input{
     color:black;
+}
+
+.loginForm h2{
+  background-color: #501414;
+  background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
+  background: -moz-linear-gradient(top,  #732424,  #000000);
+  background: linear-gradient(-90deg, #732424, #0D0D0D);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.loginForm label{
+  width: 100%;
+  color: #EBCAA3;
+  background-color: #501414;
+  font-family: "Georgia", Times, serif;
+  background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
+  background: -moz-linear-gradient(top,  #732424,  #000000);
+  background: linear-gradient(-90deg, #732424, #0D0D0D);
+  border-radius: 10px;
 }
 
 #limpiarLogin{

@@ -79,7 +79,7 @@
 			<tr ng-repeat="oferta in lista_ofertas | filter:buscador as resultado">
 				<td>{{oferta.id_oferta}}</td>
 				<td>{{oferta.titulo}}</td>
-				<td><button class="btn" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos</button></td>
+				<td><button class="btn btn-danger" ng-click="verProductosDeOferta(oferta.id_oferta)">Ver productos</button></td>
 				<td>${{oferta.precio}}</td>
 				<td id="opcionOferta" style="width:20%"><input type="checkbox" id="{{oferta.id_oferta}}" ng-model="itemProducto" value="" ng-change="EleccionOferta(oferta.id_oferta)"/></td>
 			</tr>

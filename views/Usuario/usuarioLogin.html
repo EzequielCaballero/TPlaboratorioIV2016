@@ -2,13 +2,25 @@
 <div class="container">
 	<div class="Frm animated bounceInLeft">
 
-	  <form class="loginForm" name="myForm">
-	    <label class="miEstilo">Login</label><br><br>
-	    <input type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
-	    <input type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
-	    <input type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
-	    <input type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br>
-	    <br><span class="mensajeAlerta" ng-hide="usuarioCorrecto">Error! Usuario inexistente o inactivo. Por favor, intente nuevamente"</span><br>
+	  <form class="loginForm" name="myForm" role="form">
+	    <h2>Login</h2><br><br>
+	    <div class="form-group">
+	    <label for="inputMail">Correo</label>
+	    <input id="inputMail" class="form-control" type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
+	    </div>
+	    <div class="form-group">
+	    <label for="inputName">Nombre</label>
+	    <input id="inputName" class="form-control" type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
+	    </div>
+	    <div class="form-group">
+	    <label for="inputLastName">Apellido</label>
+	    <input id="inputLastName" class="form-control" type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
+	    </div>
+	    <div class="form-group">
+	    <label for="inputPass">Password</label>
+	    <input id="inputPass" class="form-control" type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br>
+	    <br><span class="mensajeAlerta" ng-hide="usuarioCorrecto">Error! Usuario inexistente o inactivo. Por favor, intente nuevamente"</span>
+	    </div>
 
 	    <button class="button-green btn" id="login" ng-click="Login()" ng-disabled="myForm.$invalid"><span>Login</span></button><br>
 
