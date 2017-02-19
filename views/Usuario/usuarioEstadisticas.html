@@ -80,14 +80,16 @@
 		<!-- CAJA PRODUCTO MAS VENDIDO -->
 		<div ng-show="verConsultaProductoMasVendido" class="listaVentasMayores">
 			<h2>OPERACIONES {{tipoOperacion}}</h2>
-			<table id="tablaPerfil" class="table table-hover animated flipInX">
+			<table id="tablaMayoresVentas" class="table table-hover animated flipInX">
 	        <tbody>
 	              <tr><th><strong>IDENTIFICADOR</strong></th><td>{{mayorVentas.id}}</td></tr>
 	              <tr><th><strong>NOMBRE</strong></th><td>{{mayorVentas.nombre}}</td></tr>
 	              <tr><th><strong>PRECIO</strong></th><td>{{mayorVentas.precio}}</td></tr>
 	              <tr><th><strong>VENTAS</strong></th><td>{{mayorVentas.ventas}}</td></tr>
 	        </tbody>
-		</div><!-- FIN PRODUCTO MAS VENDIDO -->
+	        </table>
+		</div>
+		<!-- FIN PRODUCTO MAS VENDIDO -->
 
 		<!-- CAJA CONSULTA REGISTRO SESIONES -->
 		<div ng-show="verConsultaRegistroSesiones" class="listaRegistroSesiones">

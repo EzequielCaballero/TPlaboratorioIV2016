@@ -776,9 +776,13 @@ VISTA CLIENTE
     color: white;
 }
 
-#tablaProductos #tablaOfertas td:hover{
-  background-color: #C4B78E;
+#tablaOfertas tr:hover{
+  color: black;
 }
+#tablaProductos tr:hover{
+  color:black;
+}
+
 #tablaProductos, #tablaOfertas{
   background-color: #5D2323;
   font-size: 1em;
@@ -1019,6 +1023,25 @@ ESTADÍSTICA
 .cajaEstadisticaSeleccionada table{
   color: #CEB5B5;
   background-color: #5F2626;
+}
+
+#tablaMayoresVentas{
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    width: 500px;
+}
+
+#tablaMayoresVentas td{
+  color:black;
+}
+
+#tablaOperaciones tr:hover{
+  color:black;
+}
+
+#tablaRegistro_sesiones tr:hover{
+  color:black;
 }
 
 /*************************************************************************************/

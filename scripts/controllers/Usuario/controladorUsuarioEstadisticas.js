@@ -833,6 +833,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.fechaPorDefecto = fechaActual;
           $scope.opcion_importePordia = false;
           break;
+          case "opcion_registroSesiones":
+          $scope.opcion_registroSesiones = false;
+          break;
           case "opcion_encuestaEstadistica":
           $scope.opcion_encuestaEstadistica = false;
           break;
