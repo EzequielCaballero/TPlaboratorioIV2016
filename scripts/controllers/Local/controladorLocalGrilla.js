@@ -94,7 +94,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           enableHiding: false,
           visible: true
         },
-        { field:'borrar', name: '',
+        { name: 'Borrar',
           cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,

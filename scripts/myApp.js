@@ -177,5 +177,14 @@ var app = angular.module('ABMangularAPI', [
                     }
                 }
             })
+    .state('local.perfil', {
+                url: '/perfil/{id}?',
+                views: {
+                        'contenido': {
+                        templateUrl: 'views/Local/localPerfil.html',
+                        controller : 'controlLocalPerfil'
+                    }
+                }
+            })
 
 });

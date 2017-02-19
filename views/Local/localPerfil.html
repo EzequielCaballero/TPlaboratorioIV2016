@@ -1,0 +1,21 @@
+<div class="cajaPerfilLocal">
+<br><br>
+    <h2>{{DatoRegistro}}</h2>
+    <table id="tablaPerfil" class="table table-hover animated flipInX" ng-show="verPerfilLocal">
+        <tbody>
+
+              <tr><th><strong>IDENTIFICADOR</strong></th><td>{{localElegido.id_local}}</td></tr>
+              <tr><th><strong>DIRECCION</strong></th><td>{{localElegido.direccion}}</td></tr>
+              <tr><th><strong>ENCARGADO</strong></th><td>{{localElegido.encargado}}</td></tr>
+              <tr><td colspan="2" ng-show="botonActualizar"><button class="btn btn-danger btn-block" name="updateButton" id="updateButton" ng-click="Actualizar('direccion')">Cambiar direccion</button></td></tr>
+              <tr><td colspan="2" ng-show="botonActualizar"><button class="btn btn-warning btn-block" name="updateButton" id="updateButton" ng-click="Actualizar('encargado')">Cambiar encargado</button></td></tr>
+              <tr></tr><td colspan="2" ng-show="botonVerOfertas"><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#verOfertasLocal" name="updateButton" id="updateButton">Ver ofertas</button></td></tr>
+        </tbody>
+    </table>
+
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="local.grilla()">
+     Grilla
+     <span class="glyphicon glyphicon-home"></span>
+<a>
+
+</div>

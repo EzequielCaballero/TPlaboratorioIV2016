@@ -1,4 +1,5 @@
 <!doctype html>
+<div class="cajaPerfilUsuarios">
 <br><br>
     <h2>{{DatoRegistro}}</h2>
     <table id="tablaPerfil" class="table table-hover animated flipInX" ng-show="verPerfil">
@@ -17,6 +18,7 @@
               <tr ng-show="verLocal"><th><strong>LOCAL</strong></th><td><strong>{{usuarioElegido.id_local}}</strong></td></tr>
               <td colspan="2" ng-show="botonActualizar"><button class="btn btn-danger" name="updateButton" id="updateButton" ng-click="Actualizar('estado')">Cambiar estado</button></td>
               <tr><td colspan="2" ng-show="botonNuevaLocacion"><button class="btn btn-warning" data-toggle="modal" data-target="#elegirNuevoLocal" name="updateButton" id="updateButton">Asignar nuevo local</button></td></tr>
+              <tr><td colspan="2" ng-show="botonVerOperaciones"><button class="btn btn-primary" ng-click="verOperacionesCliente()" name="updateButton" id="updateButton">Ver operaciones</button></td></tr>
         </tbody>
     </table>      
 
@@ -24,6 +26,67 @@
   <img src="img/Gifs/loading_2.gif">
   <h2>Loading...</h2>
 </div>
+
+<!-- CAJA OPERACIONES DEL CLIENTE -->
+<div class="cajaOperacionesCliente" ng-show="verOperaciones">
+      <br><h2>Operaciones del cliente</h2>
+      <table id="tablaOperacionesCliente" class='table table-condensed table-responsive'>
+        <thead>
+          <tr>
+            <th>  CODIGO  </th>
+            <th>  Tipo    </th>
+            <th>  Fecha   </th>
+            <th>  Local   </th>
+            <th>  Usuario </th>
+            <th>  Total   </th>
+            <th>  Detalle </th>
+          </tr>
+        </thead>
+        <tr ng-repeat="operacion in operaciones_filtradas | filter:buscador as resultado">
+          <td>{{operacion.id_operacion}}</td>
+          <td>{{operacion.tipo_operacion}}</td>
+          <td>{{operacion.fecha}}</td>
+          <td>{{operacion.id_local}}</td>
+          <td>{{operacion.id_usuario}}</td>
+          <td>${{operacion.total}}</td>
+          <td><button class="btn" ng-click="detalleOperacion(operacion.id_operacion, operacion.tipo_operacion)" style="color:black">Ver detalle</button></td>
+        </tr>
+      </table><br>
+      <button class="btn btn-warning" ng-click="ocultarOperaciones()">Ocultar</button>
+    </div>
+
+<!-- VENTANA MODAL DETALLE OPERACION -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="verDetalleOperacion" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">Detalles de la operación</h4>
+          </div>
+          <!-- Body -->
+            <div class="modal-body" style="color:black">    
+              
+              <p><strong>OPERACION:</strong> *{{tipo_Operacion}}*</p>
+              <p><strong>N° detalle:</strong> {{idDetalle}}</p>
+              <p><strong>Productos (n°):</strong> {{productosAsociados}}</p>
+              <p><strong>Precio final:</strong> {{precioFinal}}</p>
+              <div ng-show="esReserva">
+                <p><strong>Entrega:</strong> {{fechaEntrega}}</p>
+              </div> 
+            </div>
+        <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 
 <!-- VENTANA MODAL CAMBIAR LOCAL -->
 <div class="container">
@@ -55,7 +118,8 @@
     </div>
  </div>
 
-<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="inicio()">
-     Volver
+<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="usuario.grilla()">
+     Grilla
      <span class="glyphicon glyphicon-home"></span>
 <a>
+</div>

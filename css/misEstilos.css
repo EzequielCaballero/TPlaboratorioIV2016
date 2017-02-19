@@ -495,6 +495,22 @@ a.volverIcon{
 }
 
 /************PERFIL************/
+.cajaPerfilUsuarios h2{
+  color:white;
+  background-color: #511414;
+  padding: 15px;
+  border-bottom: 2px solid #B33A3A;
+  border-radius: 10px;
+}
+
+.cajaPerfilLocal h2{
+  color:white;
+  background-color: #511414;
+  padding: 15px;
+  border-bottom: 2px solid #B33A3A;
+  border-radius: 10px;
+}
+
 #tablaPerfil{
     margin: 0 auto;
     background-color: white;

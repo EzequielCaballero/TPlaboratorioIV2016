@@ -4,17 +4,23 @@
 	<form class="formMenuEstadistica animated fadeInUp">
 
 	         <br><br>
-	         <button class="buttonMenuABM" ng-click="redirigir('Registrarse')">
+	         <button class="buttonMenuABM" ng-click="redirigir('Usuario_alta')">
 	         		<span class="glyphicon glyphicon-cloud-upload">&nbsp;</span>
 	         		Crear usuario
 	         </button><br><br>
+	         <div ng-if="esAdministrador">
+		         <button  class="buttonMenuABM" ng-click="redirigir('Local_alta')">
+		         		<span class="glyphicon glyphicon-cloud-upload" >&nbsp;</span>
+		         		Crear local
+		         </button><br><br>
+		     </div>
 	         <button  class="buttonMenuABM" ng-click="redirigir('Grilla_Usuarios')">
 	         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
-	         		ABM Usuarios
+	         		Ver Usuarios
 	         </button><br><br>
 	         <button  class="buttonMenuABM" ng-click="redirigir('Grilla_Locales')">
 	         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
-	         		ABM Locales
+	         		Ver Locales
 	         </button><br><br>
 	         <button class="buttonMenuABM" ng-click="redirigir('Grilla_Usuarios_Directiva')">
 	         		<span class="glyphicon glyphicon-info-sign" >&nbsp;</span>
