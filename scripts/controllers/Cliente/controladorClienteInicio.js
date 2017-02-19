@@ -32,6 +32,9 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	var slideIndex = 0;
 	var timer;
 
+	$scope.mostrarMapa = false;
+	$scope.loadingDataMapa = true;
+
 	$scope.localELegido;
 	$scope.confirmarLocal;
 	$scope.marker = new google.maps.Marker({
@@ -43,19 +46,20 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 	   //CARGA DE FOTOS
 	   carousel();
 
-	   /***SELECCION LOCAL********************************************/
-	   $scope.seleccionLocal = function(local, numero){
+	    /***SELECCION LOCAL********************************************/
+	    $scope.seleccionLocal = function(local, numero){
 			clearTimeout(timer);
 			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
 			$scope.direccionLocal = local.direccion;
+			console.info("Local seleccionado: ", local);
 			$scope.confirmarLocal = local;
 			
 			/*MAPA*/
-			var arrayUbicacion = local.coordenadas.split(/,/);
-		    var latitud = arrayUbicacion[0];
-		    var longitud = arrayUbicacion[1].replace(" ","");
-			myLatLng = {lat: Number(latitud), lng: Number(longitud)};
-			console.info("UBICACION-coordenadas: ", myLatLng);
+			// var arrayUbicacion = local.coordenadas.split(/,/);
+		    // var latitud = arrayUbicacion[0];
+		    // var longitud = arrayUbicacion[1].replace(" ","");
+			// myLatLng = {lat: Number(latitud), lng: Number(longitud)};
+			// console.info("UBICACION-coordenadas: ", myLatLng);
 
 			//Definición tamaño de icono
 			var marcador = {
@@ -66,41 +70,57 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			};
 
 			NgMap.getMap("mapa_local").then(function(map) {
-			      //$scope.ubicacion = local.direccion;
-			      //elimino el marker anterior del mapa
-			      $scope.marker.setMap(null);
 
-			    //   $scope.marker = new google.maps.Marker({
-			    //     position: myLatLng,
-			    //     icon: "img/GoogleMaps/marker_1.png",
-			    //     draggable: true,
-			    //     animation: google.maps.Animation.DROP,
-			    //     title: "Local",
-			    //     label: "Local N°"+numero
-			    // });
+			     $scope.ubicacion = local.direccion;
+			     //elimino el marker anterior del mapa
+			     $scope.marker.setMap(null);
 
-			    $scope.marker = new MarkerWithLabel({
-		          position: myLatLng,
-		          icon: marcador,
-		          draggable: true,
-		          //animation: google.maps.Animation.DROP,
-		          title: "Local",
-		          labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
-		          labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
-		          labelAnchor: new google.maps.Point(22, 0),
-		          labelStyle: {opacity: 0.75}
-		        });
+		            $("#localSeleccionado").on("shown.bs.modal", function(e) {
+				       //map.setCenter(myLatLng);// Set here center map coordinates
+				      //GEODECODER AND MODAL WINDOW
+		         	  var geocoder = null;
+		         	  geocoder = new google.maps.Geocoder();
+		         	  console.info("Geodecoder inicial: ", geocoder)
 
-		        $scope.marker.setMap(map);
+				      if (geocoder) {
+				      	geocoder.geocode( { 'address': local.direccion}, function(results, status) {
+				        if (status == google.maps.GeocoderStatus.OK) {
+				          if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+				          	google.maps.event.trigger(map, "resize");
+				            map.setCenter(results[0].geometry.location);
+				            map.setZoom(15);
+				            console.info("Geodecoder: ", results);
 
-		        $("#localSeleccionado").on("shown.bs.modal", function(e) {
-			      google.maps.event.trigger(map, "resize");
-			       map.setCenter(myLatLng);// Set here center map coordinates
-			       map.setZoom(15);
-			    });
-    		});
+				            $scope.marker = new MarkerWithLabel({
+					          position: results[0].geometry.location,
+					          icon: marcador,
+					          draggable: false,
+					          //animation: google.maps.Animation.DROP,
+					          title: "Local",
+					          labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
+					          labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
+					          labelAnchor: new google.maps.Point(22, 0),
+					          labelStyle: {opacity: 0.75}
+					        });
 
-		}
+				            $scope.marker.setMap(map);
+
+				          } else {
+				            console.info("Sin resultados");
+				          }
+				        } else {
+				          console.info("Geocode was not successful for the following reason: ", status);
+				        }
+
+				       });//FIN funcion geodecoder
+			          }//FIN if geodecoder
+			        });//FIN ventana modal
+			        $scope.mostrarMapa = true;
+				 	$scope.loadingDataMapa = false;
+    		});//FIN NgMAP
+
+		}//FIN FUNCION Seleccion Local
+
 		$scope.irLocalSeleccionado = function(){
 			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
 		}

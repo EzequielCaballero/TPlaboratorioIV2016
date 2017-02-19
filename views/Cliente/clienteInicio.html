@@ -43,14 +43,22 @@
           </div>
           <!-- Body -->
 	          <div class="modal-body" style="color:black">    
-	          	  <p>DIRECCION: {{direccionLocal}}</p>
-                  <ng-map center="[ubicacion]" ng-model="miMapa" id="mapa_local">
-                        <custom-marker position="[ubicacion]">
-                          <div>
-                            <img class="MarkerGM" src="img/GoogleMaps/marker_1.png">
-                          </div>
-                          </custom-marker>
-                  </ng-map>
+	          	    
+                  <div name="loading" ng-show="loadingDataMapa">
+                    <img src="img/Gifs/loading_2.gif">
+                    <h2>Cargando...</h2>
+                  </div>
+
+                  <div class="cajaMapa" ng-show="mostrarMapa">
+                  <p>DIRECCION: {{direccionLocal}}</p>
+                    <ng-map center="[ubicacion]" ng-model="miMapa" id="mapa_local">
+                          <custom-marker position="[ubicacion]">
+                            <div>
+                              <img class="MarkerGM" src="img/GoogleMaps/marker_1.png">
+                            </div>
+                            </custom-marker>
+                    </ng-map>
+                  </div>
 	          </div>
 	      <!-- Footer -->    
           <div class="modal-footer">

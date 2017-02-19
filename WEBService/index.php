@@ -221,7 +221,7 @@ $app->get('/ofertas[/]', function ($request, $response, $args) {
 
 $app->get('/ofertas/{parametro}', function ($request, $response, $args) {
     $parametro = json_decode($args['parametro']);
-    if($parametro = "masVendida")
+    if($parametro == "masVendida")
         $datos = Oferta::TraerOfertaMasVendida();
     else
         $datos = Oferta::TraerOfertaSegunLocal($parametro);
