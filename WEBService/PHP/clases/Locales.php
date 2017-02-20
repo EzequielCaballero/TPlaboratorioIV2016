@@ -6,7 +6,6 @@ class Local
 //--ATRIBUTOS
 	public $id_local;
 	public $direccion;
-	public $coordenadas;
 	public $id_encargado;
 	public $foto1;
 	public $foto2;
@@ -21,10 +20,6 @@ class Local
 	public function GetDireccion()
 	{
 		return $this->direccion;
-	}
-	public function GetCoordenadas()
-	{
-		return $this->coordenadas;
 	}
 	public function GetIdEncargado()
 	{
@@ -42,10 +37,6 @@ class Local
 	public function SetDireccion($valor)
 	{
 		$this->direccion = $valor;
-	}
-	public function SetCoordenadas($valor)
-	{
-		$this->coordenadas = $valor;
 	}
 	public function SetIdEncargado($valor)
 	{
@@ -72,7 +63,6 @@ class Local
 
 			//$this->id_local = $obj->id_local;
 			$this->direccion = $obj->direccion;
-			$this->coordenadas = $obj->coordenadas;
 			$this->id_encargado = $obj->id_encargado;
 			$this->foto1 = $obj->foto1;
 			$this->foto2 = $obj->foto2;
@@ -86,7 +76,7 @@ class Local
 
 	public function ToString()
 	{
-	  	return $this->id_local."-".$this->direccion."-".$this->coordenadas."-".$this->id_encargado."-".$this->foto1."-".$this->foto2."-".$this->foto3;
+	  	return $this->id_local."-".$this->direccion."-".$this->id_encargado."-".$this->foto1."-".$this->foto2."-".$this->foto3;
 	}
 
 	public static function traerUltimaFila()
@@ -103,7 +93,7 @@ class Local
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("
-			SELECT l.id_local, l.direccion, l.coordenadas, CONCAT(e.apellido,', ',e.nombre) as encargado, l.foto1, l.foto2, l.foto3 
+			SELECT l.id_local, l.direccion, CONCAT(e.apellido,', ',e.nombre) as encargado, l.foto1, l.foto2, l.foto3 
 			FROM locales as l, usuarios as e
 			WHERE l.id_local =:id AND l.id_encargado = e.id_usuario");
 		$consulta->bindValue(':id', $idParametro, PDO::PARAM_INT);
@@ -116,7 +106,7 @@ class Local
 	{
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("
-			SELECT l.id_local, l.direccion, l.coordenadas, CONCAT(e.apellido,', ',e.nombre) as encargado, l.foto1, l.foto2, l.foto3 
+			SELECT l.id_local, l.direccion, CONCAT(e.apellido,', ',e.nombre) as encargado, l.foto1, l.foto2, l.foto3 
 			FROM locales as l, usuarios as e
 			WHERE l.id_encargado = e.id_usuario");
 		$consulta->execute();
@@ -132,12 +122,11 @@ class Local
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
 		$consulta =$objetoAccesoDato->RetornarConsulta("
 			INSERT into locales 
-			(id_local,direccion,coordenadas,id_encargado,foto1,foto2,foto3)
-			values(:id_local,:direccion,:coordenadas,:id_encargado,:foto1,:foto2,:foto3)");
+			(id_local,direccion,id_encargado,foto1,foto2,foto3)
+			values(:id_local,:direccion,:id_encargado,:foto1,:foto2,:foto3)");
 
 		$consulta->bindValue(':id_local',$local->id_local, PDO::PARAM_INT);
 		$consulta->bindValue(':direccion',$local->direccion, PDO::PARAM_STR);
-		$consulta->bindValue(':coordenadas',$local->coordenadas, PDO::PARAM_STR);
 		$consulta->bindValue(':id_encargado',$local->id_encargado, PDO::PARAM_STR);
 		$consulta->bindValue(':foto1',$local->foto1, PDO::PARAM_STR);
 		$consulta->bindValue(':foto2',$local->foto2, PDO::PARAM_STR);
@@ -167,7 +156,6 @@ class Local
 				UPDATE locales
 				SET 
 				direccion=:direccion,
-				coordenadas=:coordenadas,
 				id_encargado=:id_encargado,
 				foto1=:foto1,
 				foto2=:foto2,
@@ -177,7 +165,6 @@ class Local
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta->bindValue(':id_local',$local->id_local, PDO::PARAM_INT);
 			$consulta->bindValue(':direccion',$local->direccion, PDO::PARAM_STR);
-			$consulta->bindValue(':coordenadas',$local->coordenadas, PDO::PARAM_STR);
 			$consulta->bindValue(':id_encargado',$local->id_encargado, PDO::PARAM_STR);
 			$consulta->bindValue(':foto1',$local->foto1, PDO::PARAM_STR);
 			$consulta->bindValue(':foto2',$local->foto2, PDO::PARAM_STR);
@@ -194,6 +181,24 @@ class Local
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 		$consulta->bindValue(':nuevoEncargado', $usuario->id_usuario, PDO::PARAM_INT);
 		$consulta->bindValue(':id_local', $usuario->id_local, PDO::PARAM_INT);
+		return $consulta->execute();
+	}
+	public static function ModificarDireccion($datos)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE locales SET direccion=:nuevaDireccion WHERE id_local=:id_local");
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta->bindValue(':nuevaDireccion', $datos->nuevaDireccion, PDO::PARAM_STR);
+		$consulta->bindValue(':id_local', $datos->id_local, PDO::PARAM_INT);
+		return $consulta->execute();
+	}
+	public static function ModificarEncargado($datos)
+	{
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE locales SET id_encargado=:nuevoEncargado WHERE id_local=:id_local");
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta->bindValue(':nuevoEncargado', $datos->nuevoEncargado, PDO::PARAM_INT);
+		$consulta->bindValue(':id_local', $datos->id_local, PDO::PARAM_INT);
 		return $consulta->execute();
 	}
 //--------------------------------------------------------------------------------//

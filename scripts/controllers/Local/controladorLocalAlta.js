@@ -53,8 +53,6 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
     $scope.calle = "Av. Calchaqui";
     $scope.altura = 2200;
     $scope.localidad = "Quilmes";
-
-    $scope.local.coordenadas = "0, 0";
     $scope.local.id_encargado = null;
     $scope.local.ofertas = [];
 

@@ -189,8 +189,22 @@ $app->post('/locales/{objeto}', function ($request, $response, $args) {
 
 $app->put('/locales/{objeto}', function ($request, $response, $args) {
     
-    $local = json_decode($args['objeto']);
-    $datos = Local::ModificarLocal($local); 
+    $parametro = json_decode($args['objeto']);
+    if(isset($parametro->cambio))
+    {    
+        if($parametro->cambio == "direccion")
+            $datos = Local::ModificarDireccion($parametro);
+        if($parametro->cambio == "encargado")
+        {
+            //El anterior encargado pasa a ser empleado de dicho local
+            $cambioAnteriorEncargado = Usuario::CambioCategoriaPorLocal($parametro->id_local, "encargado", "empleado");
+            $cambioActualEmpleado = Usuario::CambioCategoriaEmpleado($parametro->nuevoEncargado, $parametro->id_local, "encargado");
+            $datos = Local::ModificarEncargado($parametro);
+        }
+    }
+    else
+        $datos = Local::ModificarLocal($parametro); 
+
     $response->write(json_encode($datos));
     return $response;
 });

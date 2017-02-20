@@ -34,6 +34,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
 
       if($usuarioLogueado != "Administrador")
       {
+        $scope.ABMLocal = true;
         $scope.gridOptionsLocales.columnDefs.splice($scope.gridOptionsLocales.columnDefs.length-1, 1);
       }
 
@@ -64,10 +65,6 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           enableHiding: false
         },
         { field: 'direccion', name: 'Direccion',
-          enableFiltering: false,
-          enableHiding: false
-        },
-        { field: 'coordenadas', name: 'Coordenadas',
           enableFiltering: false,
           enableHiding: false
         },

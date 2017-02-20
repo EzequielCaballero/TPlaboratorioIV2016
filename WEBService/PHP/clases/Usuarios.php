@@ -156,7 +156,7 @@ class Usuario
 				break;
 
 			case "administrador":
-				$consulta = "SELECT * from usuarios";
+				$consulta = "SELECT * from usuarios WHERE tipo_user = 'cliente' OR tipo_user = 'empleado' OR tipo_user = 'encargado'";
 				break;
 		}
 

@@ -55,11 +55,6 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			$scope.confirmarLocal = local;
 			
 			/*MAPA*/
-			// var arrayUbicacion = local.coordenadas.split(/,/);
-		    // var latitud = arrayUbicacion[0];
-		    // var longitud = arrayUbicacion[1].replace(" ","");
-			// myLatLng = {lat: Number(latitud), lng: Number(longitud)};
-			// console.info("UBICACION-coordenadas: ", myLatLng);
 
 			//Definición tamaño de icono
 			var marcador = {

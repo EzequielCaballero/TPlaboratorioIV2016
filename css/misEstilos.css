@@ -488,6 +488,10 @@ LOGIN & REGISTER PAGE
     width: 235px;
 }
 
+#nuevaCalle{
+  width: 100%;
+}
+
 a.volverIcon{
     width: 40px;
     height: 40px;
@@ -662,6 +666,13 @@ GRILLA LOCALES
 }
 .w3-badge {
     height:13px;width:13px;padding:0
+}
+
+#tablaOfertasLocal{
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  width: 550px;
 }
 
 /************************************************************************************

@@ -5,9 +5,9 @@
     <form class="registerForm"  name="myForm" enctype="multipart/form-data">
         <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
 
-        <label>Ingreso de domicilio:</label><br>
-        <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese su calle" value="" required>
-        <input type="number" id="altura" name="altura" ng-model="altura" placeholder="altura" value="" min="01" max="9999" required><br>
+        <label>Ingreso domicilio:</label><br>
+        <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese calle" value="" required>
+        <input type="number" id="altura" name="altura" ng-model="altura" placeholder="Altura" value="" min="1" max="9999" required><br>
         <select ng-model="localidad" name="localidad" required>
             <option value="--Seleccione localidad--">--Seleccione localidad--</option>
             <option value="CABA">CABA</option>
@@ -201,4 +201,4 @@
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="local.grilla()">
      Volver
      <span class="glyphicon glyphicon-home"></span>
-<a>
+</a>
