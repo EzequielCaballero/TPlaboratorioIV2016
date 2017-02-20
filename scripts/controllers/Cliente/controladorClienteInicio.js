@@ -1,5 +1,5 @@
 angular.module('ABMangularAPI.controladorClienteInicio', [])
-  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap, spinnerService) {
+  app.controller('controlClienteInicio', function($scope, $auth, $state, $http, servicioRetornoLocales, NgMap) {
 	  
   	  // $("#imagenBase").attr("src","img/Backgrounds/Logo_1.png");
   	  //DEFINIR LOADING
@@ -37,9 +37,10 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 
 	$scope.localELegido;
 	$scope.confirmarLocal;
-	$scope.marker = new google.maps.Marker({
+	$scope.marker = new MarkerWithLabel({
         title: 'default'
-      });
+    });
+
 	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
 	setTimeout(function() 
 	{
@@ -56,65 +57,68 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
 			
 			/*MAPA*/
 
-			//Definición tamaño de icono
-			var marcador = {
-			    url: "img/GoogleMaps/marker_local_2.png", // url
-			    scaledSize: new google.maps.Size(40, 40), // scaled size
-			    origin: new google.maps.Point(0,0), // origin
-			    anchor: new google.maps.Point(0, 0) // anchor
-			};
+			//Definición tamaño de icono 
+		      var marcador = {
+		          url: "img/GoogleMaps/marker_local_2.png", // url
+		          scaledSize: new google.maps.Size(40, 40), // scaled size
+		          origin: new google.maps.Point(0,0), // origin
+		          anchor: new google.maps.Point(0, 0) // anchor
+		      };
 
-			NgMap.getMap("mapa_local").then(function(map) {
+		    NgMap.getMap("mapa_local").then(function(map) {
 
-			     $scope.ubicacion = local.direccion;
-			     //elimino el marker anterior del mapa
-			     $scope.marker.setMap(null);
+		           //GEODECODER AND MODAL WINDOW
+		           var geocoder = new google.maps.Geocoder();
+		           console.info("Geodecoder inicial: ", geocoder);
+		           //elimino el marker anterior del mapa
+		           $scope.marker.setMap(null);
+		           
+		           if (geocoder) {
+		                geocoder.geocode( { 'address': local.direccion}, function(results, status) {
+		                if (status == google.maps.GeocoderStatus.OK) {
+		                  if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+		                    google.maps.event.trigger(map, "resize");
+		                    map.setCenter(results[0].geometry.location);
+		                    map.setZoom(15);
+		                    console.info("Geodecoder: ", results);
+
+		                    $scope.location = results[0].geometry.location;
+
+		                    $scope.marker = new MarkerWithLabel({
+		                        position: results[0].geometry.location,
+		                        icon: marcador,
+		                        draggable: false,
+		                        //animation: google.maps.Animation.DROP,
+		                        title: "Local",
+		                        labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
+		                        labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
+		                        labelAnchor: new google.maps.Point(22, 0),
+		                        labelStyle: {opacity: 0.75}
+		                    });
+		                    $scope.marker.setMap(map);
+
+		                  } else {
+		                     console.info("Sin resultados");
+		                  }
+		                } else {
+		                   console.info("Geocode was not successful for the following reason: ", status);
+		                }
+		              });//FIN funcion geodecoder
+		            }//FIN if geodecoder
+		            $scope.mostrarMapa = true;
+					$scope.loadingDataMapa = false;
 
 		            $("#localSeleccionado").on("shown.bs.modal", function(e) {
-				       //map.setCenter(myLatLng);// Set here center map coordinates
-				      //GEODECODER AND MODAL WINDOW
-		         	  var geocoder = null;
-		         	  geocoder = new google.maps.Geocoder();
-		         	  console.info("Geodecoder inicial: ", geocoder)
+		           //map.setCenter(myLatLng);// Set here center map coordinates
+		                google.maps.event.trigger(map, "resize");
+		                map.setCenter($scope.location);
+		                map.setZoom(15);
 
-				      if (geocoder) {
-				      	geocoder.geocode( { 'address': local.direccion}, function(results, status) {
-				        if (status == google.maps.GeocoderStatus.OK) {
-				          if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-				          	google.maps.event.trigger(map, "resize");
-				            map.setCenter(results[0].geometry.location);
-				            map.setZoom(15);
-				            console.info("Geodecoder: ", results);
-
-				            $scope.marker = new MarkerWithLabel({
-					          position: results[0].geometry.location,
-					          icon: marcador,
-					          draggable: false,
-					          //animation: google.maps.Animation.DROP,
-					          title: "Local",
-					          labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
-					          labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
-					          labelAnchor: new google.maps.Point(22, 0),
-					          labelStyle: {opacity: 0.75}
-					        });
-
-				            $scope.marker.setMap(map);
-
-				          } else {
-				            console.info("Sin resultados");
-				          }
-				        } else {
-				          console.info("Geocode was not successful for the following reason: ", status);
-				        }
-
-				       });//FIN funcion geodecoder
-			          }//FIN if geodecoder
-			        });//FIN ventana modal
-			        $scope.mostrarMapa = true;
-				 	$scope.loadingDataMapa = false;
-    		});//FIN NgMAP
-
-		}//FIN FUNCION Seleccion Local
+		            });//FIN ventana modal
+		    });//FIN NgMAP
+      
+		//FIN FUNCION MOSTRAR MAPA 
+		}
 
 		$scope.irLocalSeleccionado = function(){
 			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);

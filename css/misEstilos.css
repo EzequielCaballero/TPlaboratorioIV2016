@@ -628,12 +628,22 @@ MENU ADMINISTRACION
 GRILLA USUARIOS
 *************************************************************************************/
 
+.CajaGrilla{
+
+}
+
 .gridUsuarios {
+    margin: 0 auto;
     color:black;
-    border: 2px solid #1D0505;
-    position: static;
-    width: 1300px;
-    height: 400px;
+    width: 100%;
+    float: right;
+}
+
+.gridLocales {
+    margin: 0 auto;
+    color:black;
+    width: 100%;
+    float: right;
 }
 
 #userABMboton{
@@ -675,6 +685,44 @@ GRILLA LOCALES
   width: 550px;
 }
 
+/************************************************************************************
+MAPA
+*************************************************************************************/
+.mapaUsuario{
+    position: fixed;
+    width: 350px;
+    height: 350px;
+}
+
+.mapaLocal{
+  margin: 0 auto;
+  position: relative;
+  width: 50%;
+}
+
+.MarkerGM{
+    width: 35px;
+    height: 35px;
+}
+
+.etiquetaMapa {
+   color: black;
+   background-color: white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 10px;
+   font-weight: bold;
+   text-align: center;
+   width: 60px;
+   border: 2px solid black;
+   white-space: nowrap;
+ }
+
+ .labelMapa{
+   color:white;
+   font-family: "Lucida Grande", "Arial", sans-serif;
+   font-size: 15px;
+   font-weight: bold;
+ }
 /************************************************************************************
 NUEVO LOCAL
 *************************************************************************************/
@@ -724,12 +772,6 @@ NUEVO LOCAL
 /************************************************************************************
 GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
 *************************************************************************************/
-.CajaGrilla{
-    margin: 0 auto;
-    padding-right: 30px;
-    font-size:0.875em;
-    width: 60%;
-}
 
 .fotoGrilla{
     height: 45px;
@@ -776,49 +818,6 @@ GRILLA PRODUCTOS Y OFERTAS (CLIENTE)
     transition:opacity 1s;
     -webkit-transition:opacity 1s; 
 }
-
-/************************************************************************************
-MAPA
-*************************************************************************************/
-.mapaUsuario{
-    position: fixed;
-    margin-top: 50px;
-    margin-left: 30px;
-    width: 550px;
-    height: 450px;
-}
-
-.mapaLocal{
-    position: fixed;
-    margin-top: 50px;
-    margin-left: 30px;
-    width: 550px;
-    height: 650px;
-}
-
-.MarkerGM{
-    width: 35px;
-    height: 35px;
-}
-
-.etiquetaMapa {
-   color: black;
-   background-color: white;
-   font-family: "Lucida Grande", "Arial", sans-serif;
-   font-size: 10px;
-   font-weight: bold;
-   text-align: center;
-   width: 60px;
-   border: 2px solid black;
-   white-space: nowrap;
- }
-
- .labelMapa{
-   color:white;
-   font-family: "Lucida Grande", "Arial", sans-serif;
-   font-size: 15px;
-   font-weight: bold;
- }
 
 /************************************************************************************
 VISTA CLIENTE

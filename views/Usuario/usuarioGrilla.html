@@ -1,40 +1,62 @@
-<!-- MAPA INTERACTIVO -->
-<div class="mapaUsuario" map-lazy-load="https://maps.google.com/maps/api/js"  map-lazy-load-params="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1yfspgHALVbgR-ws1QhQnRjTReRfrDJU">
-  <ng-map center="[{{ubicacion}}]" ng-model="miMapa" id="miMapaModal">
-  		  <custom-marker position="[{{ubicacion}}]">
-  		  	<div>
-  		  		<img class="MarkerGM" src="img/GoogleMaps/marker_1.png">
-  		  	</div>
-          </custom-marker>
-  </ng-map>
-  <span class="labelMapa">{{direccionEnMapa}}</span>
-</div>
+<div class="cajaUsuariosGrilla">	
+<!-- INICIO USUARIOS GRILLA -->
 
-<!-- MENU NAVEGACIÓN -->
-<button  class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</button>
-<button class="btn btn-success" style="float:right" ui-sref="usuario.registro">Crear usuario</button>
+	<!-- MENU NAVEGACIÓN -->
+	<button  class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</button><br>
 
-<!-- PRESENTACION GRILLA -->
-<div class="container" ng-show="verUsuarios">
-		<div class="animated bounceInRight">		
-			<h3>{{tituloGrillaUsuarios}}</h3>
-			<div class="CajaGrilla">
-			  <!--GRILLA UI-->
-			  <div ui-grid="gridOptionsUsuarios" class="gridUsuarios" 
-				    ui-grid-resize-columns
-				    ui-grid-selection
-				    ui-grid-exporter>
-			  	</div>
-			</div>
-		</div>
+	<!-- PRESENTACION GRILLA -->
+	<div ng-show="verUsuarios">
+			<div class="animated bounceInRight">		
+				<h3>{{tituloGrillaUsuarios}}</h3>
+				<div class="CajaGrilla">
+				  <!--GRILLA UI-->
+				  <button class="btn btn-success btn-block" ui-sref="usuario.registro">Crear usuario</button>
+				  <div ui-grid="gridOptionsUsuarios" class="gridUsuarios" 
+					    ui-grid-resize-columns
+					    ui-grid-selection
+					    ui-grid-exporter>
+				  	</div>
+				  	<li  id="botonVolver" class="btn btn-block" style="float:right" ui-sref="usuario.menu()">
+						Volver
+					</li>
+				</div>
+		    </div>
 	</div>
-</div>
 
-<div name="loading" ng-show="loadingData">
-  <img src="img/Gifs/loading_2.gif">
-  <h2>Loading...</h2>
-</div>
+	<div name="loading" ng-show="loadingData">
+	  <img src="img/Gifs/loading_2.gif">
+	  <h2>Loading...</h2>
+	</div>
 
-<li  id="botonVolver" class="btn" style="float:right" ui-sref="usuario.menu()">
-	Volver
-</li>
+<!-- VENTANA MODAL MAPA -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="usuarioSeleccionado" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">Dirección de usuario: {{ubicacion}}</h4>
+          </div>
+          <!-- Body -->
+	          <div class="modal-body" style="color:black">    
+
+                  <div class="cajaMapa">
+                  <p>USUARIO: {{usuario}}</p>
+                    <ng-map id="mapa_usuario"></ng-map>
+                  </div>
+	          </div>
+	      <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float:right" ng-click="reiniciarMapa()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+
+<!-- FIN USUARIOS GRILLA -->
+</div>

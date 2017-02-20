@@ -13,10 +13,9 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       $scope.verUsuarios = false;
       $scope.loadingData = true;
 
-      $scope.marker = new google.maps.Marker({
-        title: 'default'
-      });
-      $scope.markersArray = [];
+      $scope.marker = new MarkerWithLabel();
+      //ARRAY DE MARKERS
+      //$scope.markersArray = [];
 
       $scope.tituloGrillaUsuarios = "GRILLA USUARIOS";
       // Objeto de configuracion de la grilla Usuarios.
@@ -126,7 +125,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           enableHiding: false
         },
         { name: 'Ubicacion',
-          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="grid.appScope.mostrarMapa(row.entity)">Mapa</button>',
+          cellTemplate:'<button type="button" class="btn btn-info" data-toggle="modal" data-target="#usuarioSeleccionado" ng-click="grid.appScope.mostrarMapa(row.entity)">Mapa</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false
@@ -148,30 +147,72 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       ];
     }
 
+    //FUNCION MOSTRAR MAPA
     $scope.mostrarMapa = function(rowEntity){
-    $scope.ModalHeader = "Ubicación usuario";
-    console.info("Usuario", rowEntity);
+      console.info("Usuario", rowEntity);
 
-    var arrayUbicacion = rowEntity.coordenadas.split(/,/);
-    var latitud = arrayUbicacion[0];
-    var longitud = arrayUbicacion[1].replace(" ","");
-    //alert("UBICACION: latitud: "+latitud+" longitud: "+longitud);
+      //Definición tamaño de icono 
+      var marcador = {
+          url: "img/GoogleMaps/marker_1.png", // url
+          scaledSize: new google.maps.Size(40, 40), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+      };
 
-      NgMap.getMap("miMapaModal").then(function(map) {
-      $scope.marker.setMap(null);
-      $scope.ubicacion = rowEntity.direccion;
-      console.log('ubicacion', $scope.ubicacion);
+      NgMap.getMap("mapa_usuario").then(function(map) {
 
-      $scope.marker.setMap(map);
-      $scope.direccionEnMapa = "DIRECCIÓN: " + rowEntity.direccion;
-        // $("#myModal").on("shown.bs.modal", function(e) {
-        // google.maps.event.trigger(map, "resize");
-        //  map.setCenter(myLatLng);// Set here center map coordinates
-        //  map.setZoom(6);
-        // });
-    
-      });
-    }
+           //GEODECODER AND MODAL WINDOW
+           var geocoder = new google.maps.Geocoder();
+           console.info("Geodecoder inicial: ", geocoder);
+           //elimino el marker anterior del mapa
+           $scope.marker.setMap(null);
+           $scope.ubicacion = rowEntity.direccion;
+           $scope.usuario = rowEntity.apellido+", "+rowEntity.nombre;
+           
+           if (geocoder) {
+                geocoder.geocode( { 'address': rowEntity.direccion}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(results[0].geometry.location);
+                    map.setZoom(15);
+                    console.info("Geodecoder: ", results);
+
+                    $scope.location = results[0].geometry.location;
+
+                    $scope.marker = new MarkerWithLabel({
+                        position: results[0].geometry.location,
+                        icon: marcador,
+                        draggable: false,
+                        //animation: google.maps.Animation.DROP,
+                        title: "Usuario",
+                        labelContent: $scope.usuario, //Etiqueta agregada para el marker.
+                        labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
+                        labelAnchor: new google.maps.Point(22, 0),
+                        labelStyle: {opacity: 0.75}
+                    });
+                    $scope.marker.setMap(map);
+
+                  } else {
+                     console.info("Sin resultados");
+                  }
+                } else {
+                   console.info("Geocode was not successful for the following reason: ", status);
+                }
+              });//FIN funcion geodecoder
+            }//FIN if geodecoder
+
+            $("#usuarioSeleccionado").on("shown.bs.modal", function(e) {
+           //map.setCenter(myLatLng);// Set here center map coordinates
+                google.maps.event.trigger(map, "resize");
+                map.setCenter($scope.location);
+                map.setZoom(15);
+
+            });//FIN ventana modal
+        });//FIN NgMAP
+      
+      //FIN FUNCION MOSTRAR MAPA 
+     }
 
     $scope.Borrar = function(usuario){
 
@@ -188,6 +229,10 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
               console.log("FALLO! ", response);
         });
       });
+    }
+
+    $scope.reiniciarMapa = function(){
+      //setTimeout(function(){ location.reload(); }, 100);
     }
 
   });
