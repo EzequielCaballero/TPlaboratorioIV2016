@@ -12,7 +12,7 @@
     <div class="container" ng-show="verLocales">
 
     		<div class="animated bounceInRight">		
-    			<h3>{{tituloGrillaLocales}}</h3>
+    			<h3 id="tituloGrilla">{{tituloGrillaLocales}}</h3>
     			<div class="">
           <button class="btn btn-success btn-block" style="float:right" ui-sref="local.alta" ng-hide="ABMLocal">Nuevo Local</button>
     			  <!--GRILLA UI-->
@@ -80,6 +80,42 @@
           </div>
         </div>
      </div>
+
+<!-- VENTANA MODAL CONFIRMAR BORRADO -->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="confirmarBorrar" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 id="tituloVentanaModal" class="modal-title">ADVERTENCIA <span class="glyphicon glyphicon-warning-sign"></span></h4>
+          </div>
+          <!-- Body -->
+            <div class="modal-body" style="color:black">    
+            <p style="color:red"><strong>ALERTA! </strong>Esta por eliminar información sensible del sistema</p>
+                <form name="myForm" role="form">
+                  <div class="form-group">
+                    <label for="ingresoPass">Para confirmar por favor ingrese su contraseña a continuación...</label><br>
+                    <input type="password" class="form-control" id="ingresoPass" value="" ng-model="passIngresada" placeholder="contraseña" required />
+                  </div>
+                  <div class="form-group" ng-show="passErroneo">
+                    <br><label for="ingresoPass" style="color:red">Password incorrecto! por favor, ingrese nuevamente su clave</label>
+                  </div>
+                </form>
+            </div>
+        <!-- Footer -->    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" ng-disabled="myForm.$invalid" style="float:right" ng-click="confirmarBorrado()">Confirmar</button>
+            <button type="button" class="btn btn-warning" data-dismiss="modal" style="float:left">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 
 <!-- FIN VISTA GRILLA LOCALES -->
 </div>

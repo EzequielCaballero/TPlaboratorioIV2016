@@ -138,7 +138,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
           visible: true
         },
         { name: 'Borrar',
-          cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
+          cellTemplate:'<button class="btn btn-danger" data-toggle="modal" data-target="#confirmarBorrar" ng-click="grid.appScope.definirQueBorrar(row.entity.id_usuario)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
@@ -214,11 +214,27 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       //FIN FUNCION MOSTRAR MAPA 
      }
 
+    $scope.definirQueBorrar = function(usuario){
+      $scope.usuarioAeliminar = usuario;
+    }
+
+    $scope.confirmarBorrado = function(){
+
+      var passIngresado = $("#ingresoPass").val();
+      if(passIngresado == "utn_1234")
+      {
+        $scope.passErroneo = false;
+        $scope.Borrar($scope.usuarioAeliminar);
+      }
+      else
+        $scope.passErroneo = true;
+    } 
+
     $scope.Borrar = function(usuario){
 
-      servicioRetornoUsuarios.ABM_Usuario(usuario.id_usuario, "Borrar").then(function(response){
+      servicioRetornoUsuarios.ABM_Usuario(usuario, "Borrar").then(function(response){
         console.log("RETORNO: ", response.data);
-
+        $('#confirmarBorrar').modal("hide");  
           // Vuelvo a cargar los datos en la grilla.
           servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
           $scope.gridOptionsUsuarios.data = respuesta.data;

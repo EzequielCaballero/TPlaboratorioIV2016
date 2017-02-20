@@ -11,7 +11,7 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
             $scope.usuario.nombre = "Jonathan";
             $scope.usuario.apellido = "Robertson";
             $scope.usuario.correo = "jrobertson0@utexas.edu";
-            $scope.usuario.clave = "utn_apt33";
+            $scope.usuario.clave = "utn_1234";
             break;
 
         case "Encargado":

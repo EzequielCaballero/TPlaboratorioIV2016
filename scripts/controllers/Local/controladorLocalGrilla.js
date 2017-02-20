@@ -92,7 +92,7 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
           visible: true
         },
         { name: 'Borrar',
-          cellTemplate:'<button class="btn btn-danger" ng-click="grid.appScope.Borrar(row.entity)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
+          cellTemplate:'<button class="btn btn-danger" data-toggle="modal" data-target="#confirmarBorrar" ng-click="grid.appScope.definirQueBorrar(row.entity.id_local)"><span class="glyphicon glyphicon-remove-circle">&nbsp;</span>Borrar</button>',
           enableFiltering: false,
           enableSorting: false,
           enableHiding: false,
@@ -118,11 +118,27 @@ angular.module('ABMangularAPI.controladorLocalGrilla', [])
       });
     }
 
+    $scope.definirQueBorrar = function(local){
+      $scope.localAeliminar = local;
+    }
+
+    $scope.confirmarBorrado = function(){
+
+      var passIngresado = $("#ingresoPass").val();
+      if(passIngresado == "utn_1234")
+      {
+        $scope.passErroneo = false;
+        $scope.Borrar($scope.localAeliminar);
+      }
+      else
+        $scope.passErroneo = true;
+    }
+
     $scope.Borrar = function(local){
       console.info("Local: ", local);
-      servicioRetornoLocales.ABM_Local(local.id_local, "Borrar").then(function(response){
+      servicioRetornoLocales.ABM_Local(local, "Borrar").then(function(response){
         console.log("RETORNO: ", response.data);
-
+        $('#confirmarBorrar').modal("hide"); 
           // Vuelvo a cargar los datos en la grilla.
           servicioRetornoLocales.traerTodo().then(function(respuesta){        
             //Asignos funciones para cada row (control de permisos)
