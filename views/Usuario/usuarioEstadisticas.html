@@ -9,6 +9,10 @@
 		         		<span class="glyphicon glyphicon-th-list">&nbsp;</span>
 		         		Ventas - local
 		         </button><br><br>
+		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_totalLocales')" ng-disabled="opcion_ventasTotales">
+		         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
+		         		Ventas - totales
+		         </button><br><br>
 		         <button  class="buttonMenuEstadistica" ng-click="consultar('ventas_empleado')" ng-disabled="opcion_ventasEmpleado">
 		         		<span class="glyphicon glyphicon-th-list" >&nbsp;</span>
 		         		Ventas - empleado
@@ -74,8 +78,18 @@
 					<td>${{operacion.total}}</td>
 					<td><button class="btn" ng-click="detalleOperacion(operacion.id_operacion, operacion.tipo_operacion)" style="color:black">Ver detalle</button></td>
 				</tr>
-			</table><br>
+			</table>
+			<h3 ng-show="verImporte">IMPORTE DEL DIA: <strong style="color:white">${{gananciaDeldia}}</strong></h3>
 		</div><!-- FIN LISTA OPERACIONES -->
+
+		<!-- CAJA GRAFICO VENTA LOCALES -->
+		<div ng-show="verEstadisticaVentasLocales" class="listaVentasEstadistica">
+			<h2>VENTAS TOTALES</h2><br><br>
+			<canvas id="bar" class="chart chart-bar"
+			  chart-data="datos_ventasPorLocal" chart-labels="tagLocalesVentas" chart-series="series">
+			</canvas>
+			<br><h3>VENTAS TOTALES: <strong style="color:white">${{ventasTotales}}</strong></h3>
+		</div><!-- FIN CAJA GRAFICO VENTAS DE LOCALES -->
 
 		<!-- CAJA PRODUCTO MAS VENDIDO -->
 		<div ng-show="verConsultaProductoMasVendido" class="listaVentasMayores">
@@ -117,7 +131,7 @@
 			</table><br>
 		</div><!-- FIN LISTA DE SESIONES -->
 
-		<!-- CAJA CONSULTA REGISTRO SESIONES -->
+		<!-- CAJA GRAFICOS DE ENCUESTAS -->
 		<div ng-show="verConsultaEncuestaEstadisticas" class="listaEncuestaEstadisticas">
 			<h2>ESTADISTICAS</h2>
 			<canvas id="doughnut" class="chart chart-doughnut"
@@ -126,7 +140,7 @@
 			<canvas id="pie" class="chart chart-pie"
 			  chart-data="datos_encuesta" chart-labels="etiquetasGrafico" chart-options="options">
 			</canvas>
-		</div><!-- FIN LISTA DE SESIONES -->
+		</div><!-- FIN CAJA GRAFICOS DE ENCUESTAS -->
 	
 	<!-- FIN CAJA VISTAS TOTALES -->
 	</div>

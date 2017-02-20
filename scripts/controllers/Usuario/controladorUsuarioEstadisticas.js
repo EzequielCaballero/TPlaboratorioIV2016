@@ -18,6 +18,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     
     //VER RESULTADOS DE CONSULTA
     $scope.verConsultaOperaciones = false;
+    $scope.verEstadisticaVentasLocales = false;
     $scope.verConsultaProductoMasVendido = false;
     $scope.verConsultaRegistroSesiones = false;
     $scope.verConsultaEncuestaEstadisticas = false;
@@ -61,7 +62,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
     var locales = [];
     servicioRetornoLocales.traerTodo().then(function(respuesta){
       console.info("Locales", respuesta.data);
-
+      $scope.lista_locales = respuesta.data;
       //2- Rellenado de "locales" (array de objetos)
       var cantidadDatos = respuesta.data.length;
       for (var i = 0; i < cantidadDatos; i++) {
@@ -84,11 +85,13 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
 
     //DETERMINAR CONSULTAR
     $scope.consultar = function(consulta){
+      $scope.verImporte = false;
       switch(consulta)
       {
         case "ventas_local":
           //MANEJADOR
           $scope.opcion_ventasLocal = true;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -105,12 +108,28 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.modalSeleccionarRespuestaEncuesta = false;
           $scope.tituloModalOpciones = "Ventas por local";
           $('#opcionesConsulta').modal({backdrop: 'static', keyboard: false});
+          break;
 
+        case "ventas_totalLocales":
+          //MANEJADOR
+          $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = true;
+          $scope.opcion_ventasEmpleado = false;
+          $scope.opcion_ventasEntreFechas = false;
+          $scope.opcion_ventasMayores = false;
+          $scope.opcion_importePordia = false;
+          $scope.opcion_clienteOperaciones = false;
+          $scope.opcion_registroSesiones = false;
+          $scope.opcion_encuestaEstadistica = false;
+
+          //OPCION SIN MODAL
+          $scope.filtrar("ventas_deLocales");
           break;
         
         case "ventas_empleado":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = true;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -126,6 +145,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "ventas_fechas":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = true;
           $scope.opcion_ventasMayores = false;
@@ -147,6 +167,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "ventas_mayores":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = true;
@@ -168,6 +189,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "ventas_dia":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -189,6 +211,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "compras_cliente":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -204,6 +227,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "registro_sesiones":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -219,6 +243,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
         case "encuesta_estadistica":
           //MANEJADOR
           $scope.opcion_ventasLocal = false;
+          $scope.opcion_ventasTotales = false;
           $scope.opcion_ventasEmpleado = false;
           $scope.opcion_ventasEntreFechas = false;
           $scope.opcion_ventasMayores = false;
@@ -262,6 +287,35 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
           $scope.tipoOperacion = "- Ventas por local";
           $scope.mostrarTabla("tabla_operaciones");
           $scope.desbloquearBoton("opcion_ventasLocal");
+          break;
+
+          case "ventas_deLocales":
+          var arrayContador = [];
+          $scope.tagLocalesVentas = [];
+          $scope.datos_ventasPorLocal = [];
+          for (var i = 0; i < $scope.lista_locales.length; i++) {
+            arrayContador.push(0);
+            var tag = "Local N°" + (i+1);
+            $scope.tagLocalesVentas.push(tag);
+          }
+          //console.info("Array contador: ", arrayContador);
+          //console.info("Array tags: ", $scope.tagLocalesVentas);
+
+          var totalAcumulado = 0;
+          for (var i = 0; i < $scope.lista_locales.length; i++) {
+            for (var j = 0; j < $scope.lista_operaciones_totales.length; j++) {
+              if($scope.lista_locales[i].id_local == $scope.lista_operaciones_totales[j].id_local)
+                arrayContador[i]++;
+            }
+
+            totalAcumulado += arrayContador[i];
+          }
+
+          $scope.datos_ventasPorLocal = arrayContador;
+          $scope.ventasTotales = totalAcumulado;
+          //console.info("Array contador: ", arrayContador);
+          //console.info("Total: ", totalAcumulado);
+          $scope.mostrarTabla("estadistica_ventas_porLocal");
           break;
 
           case "venta_empleado":
@@ -355,6 +409,14 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
                $scope.operaciones_filtradas.push($scope.lista_operaciones_totales[i]); 
             }
           }
+
+          var gananciaTotal = 0;
+          for (var i = 0; i < $scope.operaciones_filtradas.length; i++) {
+            gananciaTotal += $scope.operaciones_filtradas[i].total;
+          }
+
+          $scope.gananciaDeldia = gananciaTotal;
+          $scope.verImporte = true;
           $scope.tipoOperacion = "- Ventas del día";
           $scope.mostrarTabla("tabla_operaciones");
           $scope.desbloquearBoton("opcion_importePordia");
@@ -786,6 +848,15 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
          case "tabla_operaciones":
          //$("#tablaOperaciones").load("usuario.estadisticas");
          $scope.verConsultaOperaciones = true;
+         $scope.verEstadisticaVentasLocales = false;
+         $scope.verConsultaProductoMasVendido = false;
+         $scope.verConsultaRegistroSesiones = false;
+         $scope.verConsultaEncuestaEstadisticas = false;
+         break;
+
+         case "estadistica_ventas_porLocal":
+         $scope.verConsultaOperaciones = false;
+         $scope.verEstadisticaVentasLocales = true;
          $scope.verConsultaProductoMasVendido = false;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = false;
@@ -793,6 +864,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
 
          case "mayor_venta":
          $scope.verConsultaOperaciones = false;
+         $scope.verEstadisticaVentasLocales = false;
          $scope.verConsultaProductoMasVendido = true;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = false;
@@ -800,6 +872,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
 
          case "tabla_registros":
          $scope.verConsultaOperaciones = false;
+         $scope.verEstadisticaVentasLocales = false;
          $scope.verConsultaProductoMasVendido = false;
          $scope.verConsultaRegistroSesiones = true;
          $scope.verConsultaEncuestaEstadisticas = false;
@@ -807,6 +880,7 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
 
          case "estadistica_encuestas":
          $scope.verConsultaOperaciones = false;
+         $scope.verEstadisticaVentasLocales = false;
          $scope.verConsultaProductoMasVendido = false;
          $scope.verConsultaRegistroSesiones = false;
          $scope.verConsultaEncuestaEstadisticas = true;
@@ -821,6 +895,9 @@ angular.module('ABMangularAPI.controladorUsuarioEstadisticas', [])
       {
           case "opcion_ventasLocal":
           $scope.opcion_ventasLocal = false;
+          break;
+          case "opcion_ventasTotales":
+          $scope.opcion_ventasTotales = false;
           break;
           case "opcion_ventasEntreFechas":
           $scope.fechaPorDefecto = fechaActual;

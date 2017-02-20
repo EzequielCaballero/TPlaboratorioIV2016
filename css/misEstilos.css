@@ -1149,7 +1149,6 @@ ESTADÍSTICA
     margin:0 auto;
     margin-top:8px;
     margin-bottom:2%;
-    display: inline-block;
     font-size:0.875em;
     transition:opacity 1s;
     -webkit-transition:opacity 1s;
@@ -1196,6 +1195,18 @@ ESTADÍSTICA
 
 #tablaRegistro_sesiones tr:hover{
   color:black;
+}
+
+.listaVentasEstadistica{
+  width: 100%;
+}
+
+.cajaEstadisticaSeleccionada h3{
+   background-color: #D4974E;
+   color: #382626;
+   padding: 10px;
+   border-radius: 10px;
+   width: 100%;
 }
 
 /*************************************************************************************/
