@@ -7,7 +7,7 @@ TP LaboratorioIV 2016
 ALUMNO: Caballero, Ezequiel A.
 ELECCIÓN: Pizzerías ARGenta SRL
 <br>
-[Página web - ARGenta Pizzería](http://argentapizzerias.esy.es "Página web - ARGenta Pizzería"){:target="_blank"}.
+[Página web - ARGenta Pizzería](http://argentapizzerias.esy.es "Página web - ARGenta Pizzería")
 
 <h4>Las siguientes empresas nos solicitan la creación de aplicaciones para administrar sus negocios:</h4>
 
