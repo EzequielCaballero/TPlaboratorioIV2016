@@ -202,5 +202,14 @@ var app = angular.module('ABMangularAPI', [
                     }
                 }
             })
+    .state('local.ofertas', {
+                url: '/ofertas',
+                views: {
+                        'contenido': {
+                        templateUrl: 'views/Local/localOfertas.html',
+                        controller : 'controlLocalOfertas'
+                    }
+                }
+            })
 
 });

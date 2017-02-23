@@ -32,6 +32,9 @@ angular.module('ABMangularAPI.controladorUsuarioMenu', [])
         case "Grilla_Productos":
           $state.go("local.productos");
           break;
+        case "Grilla_Ofertas":
+          $state.go("local.ofertas");
+          break;
         case "Grilla_Usuarios_Directiva":
           $state.go("usuario.directivaGrilla");
           break;

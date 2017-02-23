@@ -1,0 +1,71 @@
+<div class="cajaProductoGrilla">	
+<!-- INICIO USUARIOS GRILLA -->
+
+	<!-- MENU NAVEGACIÓN -->
+	<button  class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</button><br>
+
+	<!-- PRESENTACION GRILLA -->
+	<div class="container" ng-show="verOfertas">
+			<div class="animated bounceInRight">		
+				<h3 id="tituloGrilla">{{tituloGrillaProductos}}</h3>
+				  <!--GRILLA UI-->
+          <div class="">
+  				  <div ui-grid="gridOptionsOfertas" class="gridProductos" 
+  					    ui-grid-auto-resize
+                ui-grid-resize-columns
+  					    ui-grid-selection
+  					    ui-grid-exporter >
+  				  	</div>
+  				  	<li  id="botonVolver" class="btn btn-block" style="float:right" ui-sref="usuario.menu()">
+  						Volver
+  					</li>
+          </div>
+		  </div>
+	</div>
+
+	<div name="loading" ng-show="loadingData">
+	  <img src="img/Gifs/loading_2.gif">
+	  <h2>Cargando...</h2>
+	</div>
+
+<!-- VENTANA MODAL PRODUCTOS -->
+  <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="verOfertasModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 id="tituloVentanaModal" class="modal-title">{{tituloGaleria}}</h4>
+            </div>
+            <!-- Body -->
+              <div class="modal-body" style="color:black">    
+                
+                  <div class="w3-content w3-display-container">
+                    <div class="productoPorOferta" ng-repeat="product in lista_productos_oferta">
+                      <p class="productoEnvista">{{product.nombre}}</p>
+                      <img class="mySlides img-responsive" ng-src="img/Productos/{{product.foto1}}" style="max-width:50%">
+                    </div>
+                    <div class="w3-center w3-section w3-large w3-text-black w3-display-bottommiddle" style="width:100%">
+                      <div class="w3-left  w3-padding-left w3-hover-text-orange" ng-click="moverFoto(-1)">&#10094;</div>
+                      <div class="w3-right w3-padding-right w3-hover-text-orange" ng-click="moverFoto(1)">&#10095;</div>
+                    </div>
+                  </div>  
+              </div>
+              <!-- FIN BODY -->
+           </div>
+           <!-- FIN CONTENT -->
+             <!-- Footer -->    
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+             </div>
+          </div>
+        </div>
+      </div>
+   </div>
+
+<!-- FIN USUARIOS GRILLA -->
+</div>
