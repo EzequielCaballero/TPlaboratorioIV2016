@@ -83,6 +83,7 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
           {
             console.info("no token", $auth.getPayload());
             $scope.usuarioCorrecto = false;
+            $scope.loadingData = false;
           }
       })
       .catch(function(response) {

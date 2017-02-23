@@ -15,7 +15,7 @@ var app = angular.module('ABMangularAPI', [
   
   app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
   
-  $authProvider.loginUrl = 'http://argentapizzerias.esy.es/WEBService/PHP/auth.php'; //Ruta del archivo auth que esta en jwt y direcciona a PHP
+  $authProvider.loginUrl = 'http://localhost/1A-TP_PIZZERIA/WEBService/PHP/auth.php'; //Ruta del archivo auth que esta en jwt y direcciona a PHP
   $authProvider.tokenName = 'usuario_PizzeriaARGenta'; //nombre largo
   $authProvider.tokenPrefix = 'Aplicacion'; //sarasa
   $authProvider.authHeader = 'data';

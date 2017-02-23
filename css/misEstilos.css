@@ -14,7 +14,7 @@ input.ng-valid, select.ng-valid, textarea.ng-valid {
 CONFIGURACION BASE
 *************************************************************************************/
 body{
-    background: #231010 url("../../img/Backgrounds/Fondo_2.png") no-repeat center center fixed;
+    background: #231010 url("img/Backgrounds/Fondo_2.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
