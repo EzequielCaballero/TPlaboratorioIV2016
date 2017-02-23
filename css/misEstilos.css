@@ -14,20 +14,18 @@ input.ng-valid, select.ng-valid, textarea.ng-valid {
 CONFIGURACION BASE
 *************************************************************************************/
 body{
-    background: #231010;
-/*    background-image: url("../../img/backgrounds/Fondo_1.png");
-    background-repeat: round !important;
+    background: #231010 url("../../img/Backgrounds/Fondo_2.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+/*  background-repeat: round !important;
     background-color: #231010;*/
 }
 
 div {
     border-radius: 5px;
     text-align: center ;
-}
-
-label.miEstilo {
-    font-family: "Times New Roman";
-    font-size: 40px;
 }
 
 input[type=text], select {
@@ -130,6 +128,8 @@ BOTONES
 .button-orange {
     border-radius: 5px;
     background-color: #CF6024;
+    background: -webkit-gradient(linear, left top, left bottom, from(#583615), to(#CD923D));
+    background: -moz-linear-gradient(top,  #DBAA5E,  #694A13);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -137,6 +137,7 @@ BOTONES
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-weight: bold;
     margin: 4px 2px;
     cursor: pointer;
     transition-duration: 0.4s;
@@ -145,6 +146,8 @@ BOTONES
 .button-orange:hover{
   color: black;
   background-color: #ECA54A;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFD2AE), to(#F8A436));
+  background: -moz-linear-gradient(top,  #AA7440,  #FFAD5B);
 }
 
 .button-red {
@@ -347,8 +350,11 @@ BOTONES
 
 .mensajeAlerta{
     margin: 0 auto;
+    color: #F2E9E9;
+    background-color: #CE1B1B;
     font-size: 15px;
-    color: #EF1919;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 /************************************************************************************
@@ -358,33 +364,46 @@ INICIO PAGE
     color: white;
 }
 
+#opcionMenu{
+  border-left: 2px solid #783636;
+}
+
 #mainNav{
   border-bottom: 5px solid #1B0303;
 }
 
 #Titulo{
-    margin: 0;
-    color: #B9A0A0;
+    margin: 0 auto;
+    color: #EFDEDE;
     font-style: italic;
     font-family: "Georgia", Times, serif;
 }
 
 #imagenBase{
     margin: 0 auto;
-    width: 600px;
-    height: 680px;
-    padding-top: 80px;
+    width: 50%;
+    padding-top: 70px;
     padding-bottom: 15px;
-    border-color: black;
-    border-right: 15px;
 }
 
 #intro{
     text-align: center;
     text-decoration: none;
-    font-size: 35px;
+    font-size: 2em;
     font-family: "Georgia", Times, serif;
-    color:#F6E8E8;
+    color:#FFFFFF;
+}
+
+.iniciarSesion{
+  background-color: #531A1A;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2B0505), to(#6F1A1A));
+  background: -moz-linear-gradient(top,  #AC3131,  #691313);
+}
+
+.iniciarSesion:hover{
+  background-color: #EF5B5B;
+  background: -webkit-gradient(linear, left top, left bottom, from(#C64A4A), to(#450E0E));
+  background: -moz-linear-gradient(top,  #691313,  #E05959);
 }
 
 .fraseLogueado{
@@ -423,19 +442,14 @@ LOGIN & REGISTER PAGE
 *************************************************************************************/
 
 /**************LOGIN**************/
-.Frm{
-    margin: 0 auto;
-    position: relative;
-}
 
-.loginForm{
-    color: white;
-}
 .loginForm input{
     color:black;
 }
 
 .loginForm h2{
+  width: 100%;
+  color: #ECDFDF;
   background-color: #501414;
   background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
   background: -moz-linear-gradient(top,  #732424,  #000000);
@@ -444,26 +458,23 @@ LOGIN & REGISTER PAGE
   border-radius: 10px;
 }
 
-.loginForm label{
-  width: 100%;
-  color: #EBCAA3;
-  background-color: #501414;
-  font-family: "Georgia", Times, serif;
-  background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
-  background: -moz-linear-gradient(top,  #732424,  #000000);
-  background: linear-gradient(-90deg, #732424, #0D0D0D);
-  border-radius: 10px;
+.labelForm{
+  margin: 0 auto;
+  width: 50%;
+  border-radius: 15px;
+  background-color: #290B0B;
+  color: #DFAD6D;
+  padding: 10px;
 }
 
 #limpiarLogin{
     margin-top: 10px;
     padding: 10px;
+    color: #D3D3D3;
+    font-weight: bold;
     border-radius: 10px;
-    color: black;
-}
-
-.FormIngreso input{
-    color:black;
+    background: -webkit-gradient(linear, left top, left bottom, from(#272626), to(#A2A2A2));
+    background: -moz-linear-gradient(top,  #D2C9C9,  #4A4A4A); 
 }
 
 /************REGISTRO************/
@@ -477,15 +488,16 @@ LOGIN & REGISTER PAGE
 }
 
 .validacion{
-  color:red;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #C73232;
+  padding: 10px;
+  border-radius: 5px;
+  color:#E8E5E1;
 }
 
 .perfil{
     color:white;
-}
-
-.registerForm #calle, #altura{
-    width: 235px;
 }
 
 #nuevaCalle{
@@ -496,6 +508,13 @@ a.volverIcon{
     width: 40px;
     height: 40px;
     position: relative;
+}
+
+.tituloRegistro {
+    margin: 0 auto;
+    color: #DFD9D9;
+    font-family: "Times New Roman";
+    font-size: 40px;
 }
 
 /************PERFIL************/
@@ -585,9 +604,10 @@ MENU ADMINISTRACION
 }
 
 #buttonLogOFF {
+  border: 2px solid white;
   border-radius: 15px;
   position: static;
-  background-color: #4C1414;
+  background-color: #6E2626;
   border: none;
   color: #FFFFFF;
   text-align: center;
@@ -625,13 +645,8 @@ MENU ADMINISTRACION
 }
 
 /************************************************************************************
-GRILLA USUARIOS
+GRILLAS
 *************************************************************************************/
-
-.CajaGrilla{
-
-}
-
 .gridUsuarios {
     margin: 0 auto;
     color:black;
@@ -640,6 +655,13 @@ GRILLA USUARIOS
 }
 
 .gridLocales {
+    margin: 0 auto;
+    color:black;
+    width: 100%;
+    float: right;
+}
+
+.gridProductos {
     margin: 0 auto;
     color:black;
     width: 100%;
@@ -655,6 +677,16 @@ GRILLA USUARIOS
 
 .ui-grid, .ui-grid-viewport {
     height: auto !important;
+}
+
+#tablaDirectiva{
+    margin: 0 auto;
+    background-color: white;
+    max-width: 700px;
+}
+
+.imagenDER{
+  background: none;
 }
 
 /************************************************************************************
@@ -726,6 +758,16 @@ MAPA
 /************************************************************************************
 NUEVO LOCAL
 *************************************************************************************/
+.altaLocal{
+  width: 100%;
+  color: #ECDFDF;
+  background-color: #501414;
+  background: -webkit-gradient(linear, left top, left bottom, from(#732424), to(#803939));
+  background: -moz-linear-gradient(top,  #732424,  #000000);
+  background: linear-gradient(-90deg, #732424, #0D0D0D);
+  padding: 15px;
+  border-radius: 10px;
+}
 
 .cajaCargaFotos{
     margin: 0 auto;
@@ -824,13 +866,19 @@ VISTA CLIENTE
 *************************************************************************************/
 
 .clienteEtiqueta{
-    margin: 0 auto;
-    position: relative;
-    padding-top: 10px;
-    float: left;
+  margin: 0 auto;
+  position: relative;
+  color:#BA6565;
+  float: left;
 }
 
 /*PAGINA INICIO*/
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
 
 .cajaClienteInicio h2{
   margin: 0 auto;
@@ -841,13 +889,47 @@ VISTA CLIENTE
   border-bottom: 3px solid #D48938;
 }
 
-#cajaLocalFotos{
-
+#tituloLocal h3{
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #290B0B;
+  color: #DFAD6D;
+  padding: 10px;
 }
 
 #localFotoInicio{
   width: 100%;
   background-color: #E2D7CD;
+}
+
+.glyphicon-chevron-left,
+.glyphicon-chevron-right{
+  font-size: 3em;
+}
+
+#moverFoto{
+  border-left: 2em solid #8E1C1C;
+  border-right: 2em solid #8E1C1C;
+}
+
+#eleccionLocal{
+  max-height: 742.60px; 
+}
+
+#eleccionLocal:hover{
+    cursor: pointer;
+    opacity: 0.7;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.cajaIntroCliente span{
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #290B0B;
+  color: #DFAD6D;
+  padding: 10px;
 }
 
 .buttonSelectLocal{
@@ -882,12 +964,6 @@ VISTA CLIENTE
   cursor: not-allowed;
   transform: translateY(4px);
   opacity: 0.5;
-}
-
-#eleccionLocal:hover{
-    cursor: pointer;
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
 }
 
 /*FIN PAGINA INICIO*/
@@ -928,7 +1004,6 @@ VISTA CLIENTE
 .cajaOperaciones{
     position: relative;
     padding-top: 50px;
-    padding-right: 30px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;
@@ -1144,7 +1219,6 @@ ESTADÍSTICA
 .cajaEstadisticaSeleccionada{
     position: relative;
     padding-top: 20px;
-    padding-right: 25px;
     max-width:1000px;
     margin:0 auto;
     margin-top:8px;

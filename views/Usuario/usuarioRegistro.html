@@ -1,21 +1,28 @@
 <!-- MENU NAVEGACIÓN -->
 <a class="btn btn-danger" style="float:left" ui-sref="usuario.menu()">Volver</a><span class="glyphicon glyphicon-home"></span>
 
-<div class="Frm animated bounceInLeft">
-    <form class="registerForm"  name="myForm" enctype="multipart/form-data">
-        <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
-        <input type="text" id="nombre" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese su nombre" value="" required><br>
-        <input type="text" id="apellido" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese su apellido" value="" required><br>
-        <input type="number" id="edad" name="edad" ng-model="usuario.edad" placeholder="Ingrese su edad" value="" min="16" max="99" required><br>
-        <label>Sexo:</label>
-        <input type="radio" ng-model="usuario.sexo" value="M"><label>Masculino</label>
-        <input type="radio" ng-model="usuario.sexo" value="F"> <label>Femenino</label><br>
-        <input type="email" id="correo" name="correo" ng-model="usuario.correo" placeholder="Ingrese su correo" value="" required><br>
+<div class="animated bounceInLeft">
+    <form class="registerForm"  role="form" name="myForm" enctype="multipart/form-data">
+        <h2 class="tituloRegistro" id="tituloRegistro">{{DatoRegistro}}</h2><br>
+        <div class="form-group">
+        <label class="labelForm">Datos personales</label><br>
+        <input class="form-control" type="text" id="nombre" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese su nombre" value="" required><br>
+        <input class="form-control" type="text" id="apellido" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese su apellido" value="" required><br>
+        <input class="form-control" type="number" id="edad" name="edad" ng-model="usuario.edad" placeholder="Ingrese su edad" value="" min="16" max="99" required><br>
+        <label for="sexoM">Masculino</label><input id="sexoM" class="form-control" type="radio" ng-model="usuario.sexo" value="M">
+        <label for="sexoF">Femenino</label><input id="sexoF" class="form-control" type="radio" ng-model="usuario.sexo" value="F"><br>
+        </div>
 
-        <label>Ingrese domicilio:</label><br>
-        <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese su calle" value="" required>
-        <input type="number" id="altura" name="altura" ng-model="altura" placeholder="altura" value="" min="01" max="9999" required><br>
-        <select ng-model="localidad" required>
+        <div class="form-group">
+        <label class="labelForm" for="correo">Ingrese correo electrónico</label><br>
+        <input id="correo" class="form-control" type="email" name="correo" ng-model="usuario.correo" placeholder="Ingrese su correo" value="" required><br>
+        </div>
+
+        <div class="form-group">
+        <label class="labelForm">Ingrese domicilio (calle/altura/localidad)</label><br>
+        <input id="calle" class="form-control" class=""type="text" name="calle" ng-model="calle" placeholder="Ingrese su calle" value="" required><br>
+        <input id="altura" class="form-control" type="number" name="altura" ng-model="altura" placeholder="altura" value="" min="01" max="9999" required><br>
+        <select id="localidad" ng-model="localidad" required>
             <option value="--Seleccione localidad--">--Seleccione localidad--</option>
             <option value="CABA">CABA</option>
             <option value="25 de Mayo">25 de Mayo</option>
@@ -153,27 +160,46 @@
             <option value="Villarino">  Villarino </option>
             <option value="Zárate">  Zárate  </option>
         </select><br>
-        <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
+        </div>
+        <div ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">
+            <span class="validacion">Debe seleccionar una localidad</span><br><br>
+        </div>
 
-        <label>Ingrese contraseña:</label><br>
+        <div class="form-group">
+        <label class="labelForm">Ingrese contraseña</label><br>
         <input type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese su clave" value="" required><br>
         <input type="password" id="clave2" minlength="4" ng-model="usuario.clave2" placeholder="Repita su clave" value="" required><br>
-          <span class="validacion" ng-show="myForm.usuario.clave2.$invalid || usuario.clave!=usuario.clave2">¡Las contraseñas deben coincidir!</span><br><br>
-
+        </div>
+        <div ng-show="myForm.usuario.clave2.$invalid || usuario.clave!=usuario.clave2">
+            <span class="validacion">¡Las contraseñas deben coincidir!</span><br><br>
+        </div>
         <!--SELECT AUTOPOPULADOS-->
-        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-required="requiredTipoUser" ng-change="EleccionUser()" ng-hide="tiposUsers">
+        <div class="form-group" ng-hide="tiposUsers">
+        <label class="labelForm" for="opcionUser">Selección de tipo de usuario</label><br>
+        <select id="opcionUser" ng-model="usuario.tipo_user" ng-options="c.code as c.name for c in opciones" ng-required="requiredTipoUser" ng-change="EleccionUser()">
           <option value="">--Seleccione tipo de user--</option>
         </select><br>
-
-        <select id="opcionLocal" ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" ng-required="requiredLocal" ng-hide="tipoLocal">
+        </div>
+        
+        <div class="form-group" ng-hide="tipoLocal">
+        <label class="labelForm" for="opcionLocal">Selección de local</label><br>
+        <select id="opcionLocal" ng-model="usuario.id_local" ng-options="c.code as c.name for c in locales" ng-required="requiredLocal">
           <option value="">--Seleccione local del user--</option>
         </select><br>
+        </div>
 
-        <button  class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || usuario.clave!=usuario.clave2 || localidad == '--Seleccione localidad--'" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
+        <button  class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || usuario.clave!=usuario.clave2 || localidad == '--Seleccione localidad--' || guardarOcupado" ng-click="Guardar()"><span>{{DatoSubmit}}</span></button>
+        <div name="loading" ng-show="loadingData">
+          <img src="img/Gifs/loading_small_3.gif">
+          <br><br>
+        </div>
+        <div ng-show="yaExiste_usuario">
+            <span class="validacion">Error! el usuario ya existe en el sistema</span><br><br>
+        </div>
       </form>
 </div>
 
-    <h3>¿Listo para continuar?:{{myForm.$valid}}</h3>
+<!--     <h3>¿Listo para continuar?:{{myForm.$valid}}</h3> -->
 
 <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="usuario.menu()">
      Volver

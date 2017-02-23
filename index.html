@@ -1,24 +1,25 @@
-<!doctype html><!--IMPORTANTISIMO!! sino el size de los títulos de las columnas se encuentran desfazados en ui-grid -->
+<!DOCTYPE html><!--IMPORTANTISIMO!! sino el size de los títulos de las columnas se encuentran desfazados en ui-grid -->
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PIZZERIA ARGENTA SRL</title>
-    <link rel="icon" href="img/Backgrounds/icono_pizza.ico">
+    <link rel="icon" href="http://argentapizzerias.esy.es/img/Backgrounds/icono_pizza.ico">
  <!-- Bootstrap Core CSS -->
 <!--     <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">  -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 <!-- PopUP funtionality JQUERY + BOOTSTRAP-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
     <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Custom CSS -->
@@ -29,7 +30,8 @@
     <link rel="stylesheet" type="text/css" href="css/misEstilos.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/animacion.css">
- 		
+    
+
     <!-- Custom Fonts -->
       <link href="bower_components/components-font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
       <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -56,9 +58,9 @@
 <script src="http://hdeleon.net/tutoriales/scripts/MarkerWithLabel.js"></script> <!--Librería para editar markers-->
 
 <!-- MY JAVASCRIPT -->
- 	<script SRC="scripts/myApp.js" TYPE="text/javascript"></script>
+  <script SRC="scripts/myApp.js" TYPE="text/javascript"></script>
   <script SRC="scripts/ngThumb.js" TYPE="text/javascript"></script>
-	
+  
     <!-- DIRECTIVES -->
     <script src="scripts/directives/directivasUsuario.js"></script>
 
@@ -73,6 +75,7 @@
     <script src="scripts/controllers/Usuario/controladorUsuarioRegistro.js"></script>
     <script src="scripts/controllers/Usuario/controladorUsuarioEstadisticas.js"></script>
     <script src="scripts/controllers/Usuario/controladorDirectivaUsuario.js"></script>
+    <script src="scripts/controllers/Usuario/controladorDiagramaDER.js"></script>
     <!-- Clientes -->
     <script src="scripts/controllers/Cliente/controladorCliente.js"></script>
     <script src="scripts/controllers/Cliente/controladorClienteInicio.js"></script>
@@ -82,9 +85,9 @@
     <script src="scripts/controllers/Local/controladorLocal.js"></script>
     <script src="scripts/controllers/Local/controladorLocalAlta.js"></script>
     <script src="scripts/controllers/Local/controladorLocalGrilla.js"></script>
-    <script src="scripts/controllers/Local/controladorLocalModificar.js"></script>
     <script src="scripts/controllers/Local/controladorLocalOpciones.js"></script>
     <script src="scripts/controllers/Local/controladorLocalPerfil.js"></script>
+    <script src="scripts/controllers/Local/controladorLocalProductos.js"></script>
 
     <!-- FACTORIES AND SERVICES-->
     <script src="scripts/factories/factoryOrigenDatos.js"></script>
@@ -100,23 +103,47 @@
     <script src="scripts/services/servicioRetornoDatos_RegistroSesiones.js"></script>
     <script src="scripts/services/filtrosUsuarioGrilla.js"></script>
     
-    <!-- <script SRC="scripts/ngThumb.js" TYPE="text/javascript"></script> -->
+    <!-- PRECARGA DE PAGINA INICIO -->
+    <style>
+            
+        #pre-load-web {margin:0 auto;width:100%;position:absolute;background:#340C0C;background: -webkit-gradient(linear, left top, left bottom, from(#280E0E), to(#C63535));
+        background: -moz-linear-gradient(top,  #1B0909,  #9E2525);background: linear-gradient(-90deg, #1F0808, #9E1313);
+        left:0px;top:0px;color:white;z-index:100000}
+        /*aqui centramos la imagen si coloco margin left -30 es por que la imagen mide 60 */
+        #pre-load-web #imagen-load{margin:0 auto;position:relative}
+            
+    </style>
+    <script>
+        $(document).ready(function(){
+        //eliminamos el scroll de la pagina
+        $("body").css({"overflow-y":"hidden"});
+        //guardamos en una variable el alto del que tiene tu browser que no es lo mismo que del DOM
+        var alto=$(window).height();
+        //agregamos en el body un div que sera que ocupe toda la pantalla y se muestra encima de todo
+        $("body").append("<div id='pre-load-web'><div id='imagen-load'><img src='img/Gifs/loading_pizza_4.gif'/><br/><h2>Cargando...</h2></div>");
+        //le damos el alto
+        $("#pre-load-web").css({height:alto+"px"});
+        //esta sera la capa que esta dento de la capa que muestra un gif
+        $("#imagen-load").css({"margin-top":(alto/2)-30+"px"});
+        }) 
+
+        $(window).load(function(){
+           $("#pre-load-web").fadeOut(1000,function()
+           { 
+               //eliminamos la capa de precarga
+               $(this).remove();
+               //permitimos scroll
+               $("body").css({"overflow-y":"auto"}); 
+
+           });        
+        }) 
+    </script>
 
 </head>
 <body ng-app="ABMangularAPI">
-	 
+   
 <!-- CARGA DE VISTAS DINÁMICAS -->
      <div ui-view ></div>
-     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
 </body>
+
 </html>

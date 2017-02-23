@@ -78,6 +78,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
 
     $scope.crearLocal=function(){
       
+      $scope.loadingData = true;
       console.info($scope.subidorDeArchivos.queue);
       if($scope.subidorDeArchivos.queue[0]!=undefined && $scope.subidorDeArchivos.queue.length == 3)
       {
@@ -99,7 +100,8 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
         //Ejecutar consulta SQL
         servicioRetornoLocales.ABM_Local($scope.local, "Agregar").then(function(respuesta){
           console.log("RETORNO: ", respuesta.data);
-          $state.go("local.grilla");
+          $scope.loadingData = false;
+          setTimeout(function(){ $state.go('local.grilla'); }, 300);
           console.info(respuesta.data);
 
           },function errorCallback(response) {
@@ -109,6 +111,7 @@ angular.module('ABMangularAPI.controladorLocalAlta', [])
       }
       else
       {
+        $scope.loadingData = false;
         $scope.alertaCargaFotos = false;
       }
     }

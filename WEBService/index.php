@@ -1,35 +1,35 @@
 <?php
 
 //HABILITACION DE CORS EN EL SERVIDOR
-if (isset($_SERVER['HTTP_ORIGIN'])) {  
-    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");  
-    header('Access-Control-Allow-Credentials: true');  
-    header('Access-Control-Max-Age: 86400');   
-}  
-  
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {  
-  
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))  
-        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");  
-  
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))  
-        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");  
-}  
-
+use Slim\Http\Headers;
+header("Access-Control-Allow-Origin: *");
+header('Content-Type: image/jpeg');
 /*IMPORTANTE: actualizar la ruta si se cambia la carpeta que aloja al web service */
 
-require 'vendor/autoload.php';
-require 'PHP/clases/Usuarios.php';
-require 'PHP/clases/Locales.php';
-require 'PHP/clases/Ofertas.php';
-require 'PHP/clases/Productos.php';
-require 'PHP/clases/Operaciones.php';
-require 'PHP/clases/Compras.php';
-require 'PHP/clases/Reservas.php';
-require 'PHP/clases/Encuestas.php';
-require 'PHP/clases/Registro_sesiones.php';
+include_once 'PHP/clases/Usuarios.php';
+include_once 'PHP/clases/Locales.php';
+include_once 'PHP/clases/Ofertas.php';
+include_once 'PHP/clases/Productos.php';
+include_once 'PHP/clases/Operaciones.php';
+include_once 'PHP/clases/Compras.php';
+include_once 'PHP/clases/Reservas.php';
+include_once 'PHP/clases/Encuestas.php';
+include_once 'PHP/clases/Registro_sesiones.php';
 
-$app = new Slim\App();
+require 'vendor/autoload.php';
+
+$app = new Slim\App(['settings' => ['displayErrorDetails' => true]]);
+
+$app->options('/{routes:.+}', function ($request, $response, $args) {
+    return $response;
+});
+// $app->add(function ($req, $res, $next) {
+//     $response = $next($req, $res);
+//     return $response
+//             ->withHeader('Access-Control-Allow-Origin', 'http://argentapizzerias.esy.es')
+//             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+//             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+// });
 
 $app->get('/', function ($request, $response, $args) {
     $response->write("Welcome to Slim!");
@@ -114,7 +114,8 @@ $app->put('/usuarios/{objeto}', function ($request, $response, $args) {
 $app->delete('/usuarios/{id}', function ($request, $response, $args) {
     
     //$usuario = Usuario::TraerUnUsuario($args['id']);
-    $datos = Usuario::BorrarUsuario($args['id']);
+    $id_usuario = json_decode($args['id']);
+    $datos = Usuario::BorrarUsuario($id_usuario);
     $response->write($datos);
     //var_dump($args);
     return $response;
@@ -211,17 +212,20 @@ $app->put('/locales/{objeto}', function ($request, $response, $args) {
 
 $app->delete('/locales/{id}', function ($request, $response, $args) {
     
-    $id_local = $args['id'];
+    $id_local = json_decode($args['id']);
     $local = Local::TraerUnLocal($id_local);
 
-    unlink("../img/Locales/".$local->foto1);
-    unlink("../img/Locales/".$local->foto2);
-    unlink("../img/Locales/".$local->foto3);
+    // $foto_1 = "../img/Locales/".$local->foto1;
+    // $foto_2 = "../img/Locales/".$local->foto2;
+    // $foto_3 = "../img/Locales/".$local->foto3;
+    // unlink($foto_1);
+    // unlink($foto_2);
+    // unlink($foto_3);
 
-    $datos = Local::BorrarLocal($args['id']);
+    $datos = Local::BorrarLocal($id_local);
     $empleadosLibres = Usuario::LiberarUsuariosDeLocal($id_local);
     $ofertasLocal = Oferta::desvincularOfertasALocal($id_local);
-    $response->write("borrar !: ");
+    $response->write($local);
     //var_dump($args);
     return $response;
 });
@@ -344,11 +348,11 @@ $app->post('/reservas/{objeto}', function ($request, $response, $args) {
 
     //DEFINICION DE ID (Autoincremental)
     $ultimoID = Reserva::traerUltimaFila();
-    $nuevaFila = $ultimoID + 1;
+    $nuevaFila = (int)$ultimoID + 1;
     $reserva->id_reserva = $nuevaFila;
     //DEFINIR ID operacion asociada
     $ultimoID_operacion = Operacion::traerUltimaFila();
-    $id_operacion = $ultimoID_operacion + 1;
+    $id_operacion = (int)$ultimoID_operacion + 1;
     //AGREGAR NUEVA RESERVA
     $datos = Reserva::AgregarReserva($reserva, $id_operacion);
 

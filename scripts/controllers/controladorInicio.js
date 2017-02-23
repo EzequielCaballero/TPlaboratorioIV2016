@@ -1,11 +1,10 @@
 angular.module('ABMangularAPI.controladorInicio', [])
   
   app.controller('controlInicio', function($scope, $auth, $state, $http, servicioRetornoLocales) {
+	  
 	  $scope.perfilActivo="**N/N**";
 	  $scope.titulo="Pizzeria ARGENTA S.R.L.";
-	  $scope.imagenLogueado = "img/backgrounds/Logo_4.png";
-	  $scope.imagenPorDefecto = "img/backgrounds/Logo_4.png";
-	  $("#intro").attr("class","btn btn-danger animated flash");
+	  $("#intro").attr("class","iniciarSesion btn btn-danger btn-block animated flash");
 	  $scope.perfilActivo = "Por favor, inicie sesión";
 
 	  $("#imagenBase").attr("src",$scope.imagenPorDefecto);
@@ -19,7 +18,6 @@ angular.module('ABMangularAPI.controladorInicio', [])
 
 	  if($auth.isAuthenticated())
       {
-      	$("#imagenBase").attr("src",$scope.imagenLogueado);
       	$("#intro").attr("class","fraseLogueado");
       	$sesion = $auth.getPayload();    
 
@@ -51,8 +49,11 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	      	break;
 
 	      case "Logout":
+	      	$scope.loadingData = true;
 	      	$auth.logout();
-	      	location.reload(true);
+	      	$scope.cierreSesion();
+	      	$state.reload();
+	      	$scope.loadingData = false;
 	      	break;
 
 	      case "Perfil":
@@ -83,6 +84,15 @@ angular.module('ABMangularAPI.controladorInicio', [])
 	        $state.go("inicio");
 	        break;
 	    }
+	  }
+
+	  $scope.cierreSesion = function(){
+	  	//Visibilidad de botones por defecto (esconder)
+	  	$scope.ABMusuarios = true;
+	    $scope.EmpleadoOp = true;
+	    $scope.Estadisticas = true;
+	    $scope.logout = true;
+	    $scope.login = false;
 	  }
 
 	  $scope.ingreso=function($direccion){

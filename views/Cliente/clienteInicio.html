@@ -1,29 +1,44 @@
-<br><br>
 <!-- CAJA INICIO CLIENTE  -->
+<br><br>
 <div class="cajaClienteInicio">
-  <h2>Seleccione un local de su preferencia</h2>
-  <!-- Carga de imagenes -->
-  <div id="cajaLocalFotos" class="w3-content" ng-show="verLocales">
-    <div id="localFotoInicio" ng-repeat="local in lista_locales">	
-      <img id="eleccionLocal" class="mySlides img-responsive" data-toggle="modal" data-target="#localSeleccionado" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)" style="width:100%">
-    </div>
-  	<div class="w3-row-padding w3-section">
-  	  <div class="w3" ng-repeat="localito in lista_locales">
-  	      <span class="buttonSelectLocal" ng-click="currentDiv($index)">Local N°{{$index+1}}</span>
-  	  </div>
-  	</div>
-  </div>
 
-  <!-- PERFIL LOGUEADO -->
-  <br>
+  <div class="vistaLocalesCliente" ng-show="verLocales">
+    
+    <h2>Seleccione un local de su preferencia</h2>
+    <!-- Carga de imagenes -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" ng-repeat="local in lista_locales" ng-class="{active: ($index === 0)}" data-slide-to="{{$index}}"></li>
+      </ol>
+      <!-- Wrapper for slides -->
+      <div id="localFotoInicio" class="carousel-inner">
+        <div ng-class="{item: true, active: ($index === 0)}" ng-repeat="local in lista_locales">
+            <img id="eleccionLocal" class="img-responsive" data-toggle="modal" data-target="#localSeleccionado" ng-src="img/Locales/{{local.foto1}}" ng-click="seleccionLocal(local, $index+1)">
+            <div class="container">
+              <div id="tituloLocal" class="carousel-caption">  
+                <h3>Local N°{{$index+1}}</h3>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- Left and right controls -->
+      <a id="moverFoto" class="left carousel-control" href data-target="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a id="moverFoto" class="right carousel-control" href data-target="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+    <!-- FIN CAROUSEL Y FOTOS -->
+
+<!-- PERFIL LOGUEADO -->
   <div class="cajaIntroCliente">
       <span id="intro">{{nombrePerfil}}</span>
   </div>
-
-<div name="loading" ng-show="loadingData">
-  <img src="img/Gifs/loading_2.gif">
-  <h2>Loading...</h2>
 </div>
+
+  <div name="loading" ng-show="loadingData">
+    <img src="img/Gifs/loading_2.gif">
+    <h2>Loading...</h2>
+  </div>
+
 
 <!-- VENTANA MODAL LOCAL ELEGIDO -->
 <div class="container">
@@ -39,19 +54,14 @@
             <h4 id="tituloVentanaModal" class="modal-title">{{localELegido}}</h4>
           </div>
           <!-- Body -->
-	          <div class="modal-body" style="color:black">    
-	          	    
-                  <div name="loading" ng-show="loadingDataMapa">
-                    <img src="img/Gifs/loading_2.gif">
-                    <h2>Cargando...</h2>
-                  </div>
+            <div class="modal-body" style="color:black">    
 
                   <div class="cajaMapa" ng-show="mostrarMapa">
                   <p>DIRECCION: {{direccionLocal}}</p>
                     <ng-map id="mapa_local"></ng-map>
                   </div>
-	          </div>
-	      <!-- Footer -->    
+            </div>
+        <!-- Footer -->    
           <div class="modal-footer">
             <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="irLocalSeleccionado()" style="float:left">IR a local</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Cancelar</button>

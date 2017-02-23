@@ -1,6 +1,9 @@
-<div class="container">
-			<br>
-			<p>NOMBRE: {{miUsuario.apellido}}, {{miUsuario.nombre}} ||CORREO: {{miUsuario.correo}} || PERFIL:{{miUsuario.tipo_user}}</p>
-			</br>	
+<div class="directiva_Grillausuarios">
+<!-- 	<label>NOMBRE: {{miUsuario.apellido}}, {{miUsuario.nombre}} ||CORREO: {{miUsuario.correo}} || PERFIL:{{miUsuario.tipo_user}}</label><br> -->
+		<table id="tablaDirectiva" class="table table-hover animated flipInX">
+            <tbody>
+                  <tr><th></th><td><p><strong>||PERFIL:</strong> {{miUsuario.tipo_user}}</p><p><strong>||NOMBRE:</strong> {{miUsuario.apellido}}, {{miUsuario.nombre}}</p><p><strong>||CORREO:</strong> {{miUsuario.correo}}</p></td></tr>
+            </tbody>
+        </table>
 </div>
 

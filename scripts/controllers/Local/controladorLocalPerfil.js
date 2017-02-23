@@ -1,8 +1,8 @@
 angular.module('ABMangularAPI.controladorLocalPerfil', [])   
   app.controller('controlLocalPerfil', function($scope, $http, $state, $auth, $stateParams, servicioRetornoLocales, servicioRetornoUsuarios, 
-  	servicioRetornoOfertas, servicioRetornoProductos) {
+    servicioRetornoOfertas, servicioRetornoProductos) {
 
-  	if(!$auth.isAuthenticated())
+    if(!$auth.isAuthenticated())
         $state.go("inicio");
     else
         $sesion = $auth.getPayload();
@@ -20,20 +20,20 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     $scope.localElegido = {};
     servicioRetornoLocales.traerCiertosLocales($scope.id_local).then(function(respuesta){
 
-    	$scope.localElegido = respuesta.data;
-    	console.info("Local traído: ", respuesta.data);
-    	$scope.verPerfilLocal = true;
-    	$scope.botonVerOfertas = true;
+      $scope.localElegido = respuesta.data;
+      console.info("Local traído: ", respuesta.data);
+      $scope.verPerfilLocal = true;
+      $scope.botonVerOfertas = true;
 
-    	if($sesion.perfil == "Administrador" || $sesion.perfil == "Encargado" && $sesion.local == $scope.id_local)
-    	{
-    		$scope.botonActualizar = true;
-    	}
+      if($sesion.perfil == "Administrador" || $sesion.perfil == "Encargado" && $sesion.local == $scope.id_local)
+      {
+        $scope.botonActualizar = true;
+      }
 
       $scope.verPerfilLocal = true;
       $scope.loadingData = false;
 
-	  },function errorCallback(response) {
+    },function errorCallback(response) {
           console.log("FALLO traer locales: ", response);
     });
 
@@ -89,32 +89,32 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
 
     $scope.Actualizar = function(queActualizar){
 
-    	switch(queActualizar)
-    	{
-    		case "direccion":
-    		$scope.btn_cambioDireccion = true;
-    		$scope.btn_cambioEncargado = false;
-    		$scope.cambiarDireccion = true;
-    		$scope.cambiarEncargado = false;
-    		$scope.verOfertasLocal = false;
-    		break;
-    		
-    		case "encargado":
-    		$scope.btn_cambioDireccion = false;
-    		$scope.btn_cambioEncargado = true;
-    		$scope.cambiarDireccion = false;
-    		$scope.cambiarEncargado = true;
-    		$scope.verOfertasLocal = false;
-    		break;
+      switch(queActualizar)
+      {
+        case "direccion":
+        $scope.btn_cambioDireccion = true;
+        $scope.btn_cambioEncargado = false;
+        $scope.cambiarDireccion = true;
+        $scope.cambiarEncargado = false;
+        $scope.verOfertasLocal = false;
+        break;
+        
+        case "encargado":
+        $scope.btn_cambioDireccion = false;
+        $scope.btn_cambioEncargado = true;
+        $scope.cambiarDireccion = false;
+        $scope.cambiarEncargado = true;
+        $scope.verOfertasLocal = false;
+        break;
 
-    		case "ofertas":
-    		$scope.btn_cambioDireccion = false;
-    		$scope.btn_cambioEncargado = true;
-    		$scope.cambiarDireccion = false;
-    		$scope.cambiarEncargado = false;
-    		$scope.verOfertasLocal = true;
-    		break;
-    	}
+        case "ofertas":
+        $scope.btn_cambioDireccion = false;
+        $scope.btn_cambioEncargado = false;
+        $scope.cambiarDireccion = false;
+        $scope.cambiarEncargado = false;
+        $scope.verOfertasLocal = true;
+        break;
+      }
 
     }
 
@@ -123,50 +123,50 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     }
 
     $scope.efectuarLosCambios = function(queCambiar){
-    	
-    	$scope.btn_cambioDireccion = false;
-    	$scope.btn_cambioEncargado = false;
-    	
-    	switch(queCambiar)
-    	{
-    		case "direccion":
-    		var calle = $("#nuevaCalle").val();
-    		var altura = $("#nuevaAltura").val();
-    		var localidad = $("#nuevaLocalidad").val();
+      
+      $scope.btn_cambioDireccion = false;
+      $scope.btn_cambioEncargado = false;
+      
+      switch(queCambiar)
+      {
+        case "direccion":
+        var calle = $("#nuevaCalle").val();
+        var altura = $("#nuevaAltura").val();
+        var localidad = $("#nuevaLocalidad").val();
 
-    		if(localidad != "CABA")
-	        	$scope.nuevaDireccion = calle+" "+altura+", "+localidad+", "+"Buenos Aires";
-	        else
-	        	$scope.nuevaDireccion = calle+" "+altura+", "+localidad;
+        if(localidad != "CABA")
+            $scope.nuevaDireccion = calle+" "+altura+", "+localidad+", "+"Buenos Aires";
+          else
+            $scope.nuevaDireccion = calle+" "+altura+", "+localidad;
 
-	        $scope.localElegido.direccion = $scope.nuevaDireccion;
+          $scope.localElegido.direccion = $scope.nuevaDireccion;
 
-	        //REALIZAR CAMBIO
-	        $scope.actualizar = {};
+          //REALIZAR CAMBIO
+          $scope.actualizar = {};
             $scope.actualizar.cambio = "direccion";
             $scope.actualizar.id_local = $scope.localElegido.id_local;
             $scope.actualizar.nuevaDireccion = $scope.localElegido.direccion;
             servicioRetornoLocales.ABM_Local($scope.actualizar, "Modificar").then(function(respuesta){
-            	console.info("Modificacion: ", respuesta);
-            	setTimeout(function(){ $state.go('local.perfil'); }, 300);
-           	},function errorCallback(response) {
-		            console.log("FALLO al traer usuario! ", response);
-		    });
+              console.info("Modificacion: ", respuesta);
+              setTimeout(function(){ $state.go('local.perfil'); }, 300);
+            },function errorCallback(response) {
+                console.log("FALLO al traer usuario! ", response);
+        });
 
-    		//alert("Nueva direccion: " + $scope.nuevaDireccion);
-    		break;
+        //alert("Nueva direccion: " + $scope.nuevaDireccion);
+        break;
 
-    		case "encargado":
-    		//Villereada
+        case "encargado":
+        //Villereada
             var cadena = String($("#empleadoElegido").val());
             var employee = cadena.split(":");
             var id_empleado = Number(employee[1]);
 
             servicioRetornoUsuarios.traerCiertosUsuarios(id_empleado).then(function(respuesta){
-            	$scope.localElegido.encargado = respuesta.data.apellido + ", " + respuesta.data.nombre;
-           	},function errorCallback(response) {
-		            console.log("FALLO al traer usuario! ", response);
-		    }); 
+              $scope.localElegido.encargado = respuesta.data.apellido + ", " + respuesta.data.nombre;
+            },function errorCallback(response) {
+                console.log("FALLO al traer usuario! ", response);
+        }); 
 
             //REALIZAR CAMBIO
             $scope.actualizar = {};
@@ -174,15 +174,15 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
             $scope.actualizar.id_local = $scope.localElegido.id_local;
             $scope.actualizar.nuevoEncargado = id_empleado;
             servicioRetornoLocales.ABM_Local($scope.actualizar, "Modificar").then(function(respuesta){
-            	console.info("Modificacion: ", respuesta);
-            	setTimeout(function(){ $state.go('local.perfil'); }, 300);
-           	},function errorCallback(response) {
-		            console.log("FALLO al traer usuario! ", response);
-		    });
+              console.info("Modificacion: ", respuesta);
+              setTimeout(function(){ $state.go('local.perfil'); }, 300);
+            },function errorCallback(response) {
+                console.log("FALLO al traer usuario! ", response);
+        });
 
-    		//alert("Nuevo encargado: " + empleado);
-    		break;
-    	}
+        //alert("Nuevo encargado: " + empleado);
+        break;
+      }
     }
 
      $scope.imagenProductos = function(oferta, criterio){

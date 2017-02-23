@@ -6,7 +6,6 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       else
       {
           $sesion = $auth.getPayload();
-          $usuarioLogueado = $sesion.perfil;
       }
 
       //DEFINIR LOADING
@@ -55,15 +54,14 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       // Configuracion del idioma.
       i18nService.setCurrentLang('es');
 
-      if($usuarioLogueado != "Administrador")
-      {
-        $scope.gridOptionsUsuarios.columnDefs.splice($scope.gridOptionsUsuarios.columnDefs.length-1, 1);
-      }
-
       //UTILIZACIÓN DEL SERVICE
       servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
         // Cargo los datos en la grilla.
         $scope.gridOptionsUsuarios.data = respuesta.data;
+        if( $sesion.perfil == "Administrador")
+        {
+          $scope.gridOptionsUsuarios.columnDefs.splice($scope.gridOptionsUsuarios.columnDefs.length-1, 1);
+        }
         //DESACTIVAR LOADING
         $scope.verUsuarios = true;
         $scope.loadingData = false;
@@ -106,7 +104,6 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
             // term: '1',
             type: uiGridConstants.filter.SELECT,
             selectOptions: [
-              {value: 'administrador', label: 'Administrador'},
               {value: 'encargado', label: 'Encargado'},
               {value: 'empleado', label: 'Empleado'},
               {value: 'cliente', label: 'Cliente'}
@@ -227,27 +224,33 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
         $scope.Borrar($scope.usuarioAeliminar);
       }
       else
+      {
         $scope.passErroneo = true;
+        $scope.limpiarPassword();
+      }
     } 
 
     $scope.Borrar = function(usuario){
 
       servicioRetornoUsuarios.ABM_Usuario(usuario, "Borrar").then(function(response){
-        console.log("RETORNO: ", response.data);
-        $('#confirmarBorrar').modal("hide");  
+        console.log("RETORNO: ", response.data); 
           // Vuelvo a cargar los datos en la grilla.
           servicioRetornoUsuarios.traerCiertosUsuarios($sesion).then(function(respuesta){
           $scope.gridOptionsUsuarios.data = respuesta.data;
+          $scope.limpiarPassword();
+          setTimeout(function(){ $('#confirmarBorrar').modal("hide"); }, 300); 
           console.info(respuesta.data);
 
         },function errorCallback(response) {
+              $('#confirmarBorrar').modal("hide");
               $scope.gridOptionsUsuarios.data = [];
               console.log("FALLO! ", response);
         });
       });
     }
 
-    $scope.reiniciarMapa = function(){
+    $scope.limpiarPassword = function(){
+      $scope.passIngresada = "";
       //setTimeout(function(){ location.reload(); }, 100);
     }
 

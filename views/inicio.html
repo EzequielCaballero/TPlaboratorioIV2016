@@ -1,52 +1,52 @@
-
+<div class="cajaInicio">
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-light navbar-fixed-top navbar-custom">
-        <div class="container">
+        <div id="menuInicio" class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="page-scroll">
+                <ul id="listaOpciones" class="nav navbar-nav navbar-right">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{ABMusuarios}}" ng-click="direccionar('Perfil')" >Mi Perfil</a>
                     </li>
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{EmpleadoOp}}" ng-click="direccionar('MenuOperaciones')" >Operaciones</a>
                     </li>
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{Estadisticas}}" ng-click="direccionar('MenuEstadisticas')" >Estadísticas</a>
                     </li>             
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{ABMusuarios}}" ng-click="direccionar('MenuUsuarios')" >Administración</a>
                     </li>
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{login}}" ng-click="direccionar('Registrarse')">Registrarse</a>
                     </li>
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{login}}" ng-click="direccionar('Login')">Ingresar</a>
                     </li>
-                    <li class="page-scroll">
+                    <li id="opcionMenu" class="page-scroll">
                         <a class="btn" ng-hide="{{logout}}" ng-click="direccionar('Logout')">Cerrar Sesión</a>
                     </li> 
                 </ul>
+                <div name="loading" ng-show="loadingData" style="float:left">
+                  <img src="img/Gifs/loading_small_3.gif">
+                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
 
-    <!-- Header -->
-    <header>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img id="imagenBase" ng-src="" alt="">
+                    <img id="imagenBase" class="img-responsive" ng-src="http://argentapizzerias.esy.es/img/Backgrounds/Logo_5.png" alt="Imagen inicio">
                     <div class="intro-text">
                         <h1 id="Titulo">{{titulo}}</h1>
                         <hr class="star-light">
@@ -57,4 +57,5 @@
                 </div>
             </div>
         </div>
-    </header>
+
+</div>

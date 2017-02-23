@@ -17,142 +17,98 @@ angular.module('ABMangularAPI.controladorClienteInicio', [])
       servicioRetornoLocales.traerTodo().then(function(respuesta){        
 
       	$scope.lista_locales = respuesta.data;
-      	total = respuesta.data.length;
       	//DESACTIVACION DE LOADING
 	    $scope.loadingData = false;
 	    $scope.verLocales = true;
       	console.info("LOCALES: ", $scope.lista_locales);
-	  },function errorCallback(response) {
+	  	},function errorCallback(response) {
                 console.log("FALLO al traer locales! ", response);
       });
 
 
 
 /********************************************CARGA IMAGENES LOCALES********************************************/
-	var slideIndex = 0;
-	var timer;
-
 	$scope.mostrarMapa = false;
-	$scope.loadingDataMapa = true;
 
 	$scope.localELegido;
 	$scope.confirmarLocal;
 	$scope.marker = new MarkerWithLabel({
         title: 'default'
     });
+	
+	/***SELECCION LOCAL********************************************/
+    $scope.seleccionLocal = function(local, numero){
+		$scope.localELegido = "Ha seleccionado el Local N°" + numero;
+		$scope.direccionLocal = local.direccion;
+		console.info("Local seleccionado: ", local);
+		$scope.confirmarLocal = local;
+		
+		/*MAPA*/
 
-	//IMPORTANTE! generación de Wait dado el tiempo que demanda cargar el DOM.
-	setTimeout(function() 
-	{
-	   //CARGA DE FOTOS
-	   carousel();
+		//Definición tamaño de icono 
+	      var marcador = {
+	          url: "img/GoogleMaps/marker_local_2.png", // url
+	          scaledSize: new google.maps.Size(40, 40), // scaled size
+	          origin: new google.maps.Point(0,0), // origin
+	          anchor: new google.maps.Point(0, 0) // anchor
+	      };
 
-	    /***SELECCION LOCAL********************************************/
-	    $scope.seleccionLocal = function(local, numero){
-			clearTimeout(timer);
-			$scope.localELegido = "Ha seleccionado el Local N°" + numero;
-			$scope.direccionLocal = local.direccion;
-			console.info("Local seleccionado: ", local);
-			$scope.confirmarLocal = local;
-			
-			/*MAPA*/
+	    NgMap.getMap("mapa_local").then(function(map) {
 
-			//Definición tamaño de icono 
-		      var marcador = {
-		          url: "img/GoogleMaps/marker_local_2.png", // url
-		          scaledSize: new google.maps.Size(40, 40), // scaled size
-		          origin: new google.maps.Point(0,0), // origin
-		          anchor: new google.maps.Point(0, 0) // anchor
-		      };
+	           //GEODECODER AND MODAL WINDOW
+	           var geocoder = new google.maps.Geocoder();
+	           console.info("Geodecoder inicial: ", geocoder);
+	           //elimino el marker anterior del mapa
+	           $scope.marker.setMap(null);
+	           
+	           if (geocoder) {
+	                geocoder.geocode( { 'address': local.direccion}, function(results, status) {
+	                if (status == google.maps.GeocoderStatus.OK) {
+	                  if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+	                    google.maps.event.trigger(map, "resize");
+	                    map.setCenter(results[0].geometry.location);
+	                    map.setZoom(15);
+	                    console.info("Geodecoder: ", results);
 
-		    NgMap.getMap("mapa_local").then(function(map) {
+	                    $scope.location = results[0].geometry.location;
 
-		           //GEODECODER AND MODAL WINDOW
-		           var geocoder = new google.maps.Geocoder();
-		           console.info("Geodecoder inicial: ", geocoder);
-		           //elimino el marker anterior del mapa
-		           $scope.marker.setMap(null);
-		           
-		           if (geocoder) {
-		                geocoder.geocode( { 'address': local.direccion}, function(results, status) {
-		                if (status == google.maps.GeocoderStatus.OK) {
-		                  if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-		                    google.maps.event.trigger(map, "resize");
-		                    map.setCenter(results[0].geometry.location);
-		                    map.setZoom(15);
-		                    console.info("Geodecoder: ", results);
+	                    $scope.marker = new MarkerWithLabel({
+	                        position: results[0].geometry.location,
+	                        icon: marcador,
+	                        draggable: false,
+	                        //animation: google.maps.Animation.DROP,
+	                        title: "Local",
+	                        labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
+	                        labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
+	                        labelAnchor: new google.maps.Point(22, 0),
+	                        labelStyle: {opacity: 0.75}
+	                    });
+	                    $scope.marker.setMap(map);
 
-		                    $scope.location = results[0].geometry.location;
+	                  } else {
+	                     console.info("Sin resultados");
+	                  }
+	                } else {
+	                   console.info("Geocode was not successful for the following reason: ", status);
+	                }
+	              });//FIN funcion geodecoder
+	                $scope.mostrarMapa = true;
+	            }//FIN if geodecoder
 
-		                    $scope.marker = new MarkerWithLabel({
-		                        position: results[0].geometry.location,
-		                        icon: marcador,
-		                        draggable: false,
-		                        //animation: google.maps.Animation.DROP,
-		                        title: "Local",
-		                        labelContent: "Local N°"+numero, //Etiqueta agregada para el marker.
-		                        labelClass:"etiquetaMapa", // define la clase a la que pertence el label a fin de fijar su estilo en CSS.
-		                        labelAnchor: new google.maps.Point(22, 0),
-		                        labelStyle: {opacity: 0.75}
-		                    });
-		                    $scope.marker.setMap(map);
+	            $("#localSeleccionado").on("shown.bs.modal", function(e) {
+	           //map.setCenter(myLatLng);// Set here center map coordinates
+	                google.maps.event.trigger(map, "resize");
+	                map.setCenter($scope.location);
+	                map.setZoom(15);
 
-		                  } else {
-		                     console.info("Sin resultados");
-		                  }
-		                } else {
-		                   console.info("Geocode was not successful for the following reason: ", status);
-		                }
-		              });//FIN funcion geodecoder
-		            }//FIN if geodecoder
-		            $scope.mostrarMapa = true;
-					$scope.loadingDataMapa = false;
-
-		            $("#localSeleccionado").on("shown.bs.modal", function(e) {
-		           //map.setCenter(myLatLng);// Set here center map coordinates
-		                google.maps.event.trigger(map, "resize");
-		                map.setCenter($scope.location);
-		                map.setZoom(15);
-
-		            });//FIN ventana modal
-		    });//FIN NgMAP
-      
-		//FIN FUNCION MOSTRAR MAPA 
-		}
-
-		$scope.irLocalSeleccionado = function(){
-			setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
-		}
-
-	}, 500);
-
-	//FUNCIONES DE SLIDER
-  	$scope.currentDiv = function(n) {
-  	  showDivs(slideIndex = n);
-  	  console.info("indice: ", n);
+	            });//FIN ventana modal
+	    });//FIN NgMAP
+  
+	//FIN FUNCION MOSTRAR MAPA 
 	}
 
-	function showDivs(n) {
-		clearTimeout(timer);
-		var j;
-	    var k = document.getElementsByClassName("mySlides");
-		for (j = 0; j < k.length; j++) {
-	       k[j].style.display = "none";  
-	    }
-	   k[n].style.display = "block";
-	}
-
-	function carousel() {
-	    var i;
-	    var x = document.getElementsByClassName("mySlides");
-	    //console.info("CLASES: ", x);
-	    for (i = 0; i < x.length; i++) {
-	       x[i].style.display = "none";  
-	    }
-	    slideIndex++;
-	    if (slideIndex > x.length) {slideIndex = 1}    
-	    x[slideIndex-1].style.display = "block";  
-	    timer = setTimeout(carousel, 4000); // Change image every 4 seconds
+	$scope.irLocalSeleccionado = function(){
+		setTimeout(function(){ $state.go('cliente.menu_local', {obj:$scope.confirmarLocal}); }, 300);
 	}
 
 });

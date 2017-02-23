@@ -15,7 +15,7 @@ var app = angular.module('ABMangularAPI', [
   
   app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
   
-  $authProvider.loginUrl = '1A-TP_PIZZERIA/WEBservice/PHP/auth.php'; //Ruta del archivo auth que esta en jwt y direcciona a PHP
+  $authProvider.loginUrl = 'http://argentapizzerias.esy.es/WEBService/PHP/auth.php'; //Ruta del archivo auth que esta en jwt y direcciona a PHP
   $authProvider.tokenName = 'usuario_PizzeriaARGenta'; //nombre largo
   $authProvider.tokenPrefix = 'Aplicacion'; //sarasa
   $authProvider.authHeader = 'data';
@@ -149,6 +149,15 @@ var app = angular.module('ABMangularAPI', [
                 }
               }
             })
+    .state('usuario.diagrama', {
+      url : '/diagrama',
+      views: {
+                'contenido': {
+                templateUrl : 'views/Usuario/usuarioDERdiagrama.html',
+                controller : 'controlDiagramaRelacional'
+                }
+              }
+            })
 
     //*************************************VISTA LOCALES*************************************//
     .state('local', {
@@ -181,6 +190,15 @@ var app = angular.module('ABMangularAPI', [
                         'contenido': {
                         templateUrl: 'views/Local/localPerfil.html',
                         controller : 'controlLocalPerfil'
+                    }
+                }
+            })
+    .state('local.productos', {
+                url: '/productos',
+                views: {
+                        'contenido': {
+                        templateUrl: 'views/Local/localProductos.html',
+                        controller : 'controlLocalProductos'
                     }
                 }
             })

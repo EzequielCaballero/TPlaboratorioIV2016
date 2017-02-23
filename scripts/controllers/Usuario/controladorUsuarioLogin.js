@@ -58,7 +58,8 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
     // FUNCION PARA LOGUEARSE DENTRO DE LA PAGINA
     $scope.Login = function(){
 
-      //Esto es una llamada equivalente a $http
+      $scope.loadingData = true;
+
       $auth.login($scope.usuario)
       .then(function(response) {
           console.info("correcto", response);
@@ -94,10 +95,11 @@ angular.module('ABMangularAPI.controladorUsuarioLogin', [])
     servicioRetornoRegistroSesiones.ABM_Registro_sesiones(registro, "Agregar").then(function(respuesta){
 
         console.info("Registro: ", respuesta.data);
+        $scope.loadingData = false;
         if($sesion.perfil != "Cliente")  
           $state.go("inicio");
         else
-          $state.go("cliente.inicio");
+          $state.go("cliente.inicio");  
 
       },function errorCallback(response) {
                 console.log("FALLO RETORNO OPERACIONES! ", response);

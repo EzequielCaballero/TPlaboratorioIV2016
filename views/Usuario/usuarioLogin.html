@@ -1,38 +1,41 @@
-<!doctype html>
-<div class="container">
-	<div class="Frm animated bounceInLeft">
+<div class="animated bounceInLeft">
 
-	  <form class="loginForm" name="myForm" role="form">
-	    <h2>Login</h2><br><br>
-	    <div class="form-group">
-	    <label for="inputMail">Correo</label>
-	    <input id="inputMail" class="form-control" type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
-	    </div>
-	    <div class="form-group">
-	    <label for="inputName">Nombre</label>
-	    <input id="inputName" class="form-control" type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
-	    </div>
-	    <div class="form-group">
-	    <label for="inputLastName">Apellido</label>
-	    <input id="inputLastName" class="form-control" type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
-	    </div>
-	    <div class="form-group">
-	    <label for="inputPass">Password</label>
-	    <input id="inputPass" class="form-control" type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br>
-	    <br><span class="mensajeAlerta" ng-hide="usuarioCorrecto">Error! Usuario inexistente o inactivo. Por favor, intente nuevamente"</span>
-	    </div>
+		  <form class="loginForm" name="myForm" role="form">
+		    <h2>Login</h2><br><br>
+		    <div class="form-group">
+		    <label class="labelForm" for="inputMail">Correo</label><br>
+		    <input id="inputMail" class="form-control" type="email" id="correo" name="email" ng-model="usuario.correo" placeholder="Ingrese su correo electrónico" value="" required /><br>
+		    </div>
+		    <div class="form-group">
+		    <label class="labelForm" for="inputName">Nombre</label><br>
+		    <input id="inputName" class="form-control" type="text" name="nombre" ng-model="usuario.nombre" placeholder="Ingrese nombre" value="" required /><br>
+		    </div>
+		    <div class="form-group">
+		    <label class="labelForm" for="inputLastName">Apellido</label><br>
+		    <input id="inputLastName" class="form-control" type="text" name="apellido" ng-model="usuario.apellido" placeholder="Ingrese apellido" value="" required /><br>
+		    </div>
+		    <div class="form-group">
+		    <label class="labelForm" for="inputPass">Password</label><br>
+		    <input id="inputPass" class="form-control" type="password" id="clave" minlength="4" ng-model="usuario.clave" placeholder="Ingrese clave" value="" required /><br><br>
+		    </div>
+		    <div ng-hide="usuarioCorrecto">
+		    	<span class="mensajeAlerta" >Error! Usuario inexistente o inactivo. Por favor, intente nuevamente</span><br>
+		    </div>
 
-	    <button class="button-green btn" id="login" ng-click="Login()" ng-disabled="myForm.$invalid"><span>Login</span></button><br>
+		    <button class="button-green btn" id="login" ng-click="Login()" ng-disabled="myForm.$invalid"><span>Login</span></button><br><br>
+		        <div name="loading" ng-show="loadingData">
+			      <img src="img/Gifs/loading_small_3.gif">
+			      <br><br>
+			    </div>
+		  </form>
+		<div>
+		<!-- 	<h3>¿Listo para continuar? = {{myForm.$valid}}</h3> -->
+			<button class="button-orange" id="login" ng-click="Perfil('Administrador')"><span>Administrador </span></button>
+			<button class="button-red" id="login" ng-click="Perfil('Encargado')"><span>Encargado</span></button>
+			<button class="button-blue" id="login" ng-click="Perfil('Empleado')"><span>Empleado</span></button>
+			<button class="button-yellow" id="login" ng-click="Perfil('Cliente')"><span>Cliente</span></button><br>
+			<button class="glyphicon glyphicon-trash" id="limpiarLogin" ng-click="Perfil()"><span>Limpiar</span></button>
+		</div>
 
-	  </form>
-	 </div>
-</div>
-	
-	<h3>¿Listo para continuar? = {{myForm.$valid}}</h3>
-
-	<button class="button-orange" id="login" ng-click="Perfil('Administrador')"><span>Administrador </span></button>
-	<button class="button-red" id="login" ng-click="Perfil('Encargado')"><span>Encargado</span></button>
-	<button class="button-blue" id="login" ng-click="Perfil('Empleado')"><span>Empleado</span></button>
-	<button class="button-yellow" id="login" ng-click="Perfil('Cliente')"><span>Cliente</span></button><br>
-	<button class="glyphicon glyphicon-trash" id="limpiarLogin" ng-click="Perfil()"><span>Limpiar</span></button>
+<!-- FIN CAJA LOGIN -->
 </div>

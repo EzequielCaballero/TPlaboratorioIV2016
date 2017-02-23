@@ -1,14 +1,16 @@
-<!-- MENU NAVEGACIÓN -->
-<button class="btn btn-danger" style="float:left" ui-sref="local.grilla()">Volver</button><span class="glyphicon glyphicon-home"></span>
+<div class="cajaLocalAlta">
+    <div class="animated bounceInLeft">
+    <!-- MENU NAVEGACIÓN -->
+    <button class="btn btn-danger" style="float:left" ui-sref="local.grilla()">Volver</button>
 
-<div class="Frm animated bounceInLeft">
-    <form class="registerForm"  name="myForm" enctype="multipart/form-data">
-        <label class="miEstilo" id="titulo">{{DatoRegistro}}</label><br>
+    <form class="registerForm"  role="form" name="myForm" enctype="multipart/form-data">
+        <label class="altaLocal">NUEVO LOCAL</label><br>
 
-        <label>Ingreso domicilio:</label><br>
-        <input type="text" id="calle" name="calle" ng-model="calle" placeholder="Ingrese calle" value="" required>
-        <input type="number" id="altura" name="altura" ng-model="altura" placeholder="Altura" value="" min="1" max="9999" required><br>
-        <select ng-model="localidad" name="localidad" required>
+        <div class="form-group">
+        <label for="calle">Ingreso domicilio</label><br>
+        <input id="calle" class="form-control" type="text" name="calle" ng-model="calle" placeholder="Ingrese calle" value="" required><br>
+        <input id="altura" class="form-control" type="number" name="altura" ng-model="altura" placeholder="Altura" value="" min="1" max="9999" required><br>
+        <select id="localidad" ng-model="localidad" name="localidad" required>
             <option value="--Seleccione localidad--">--Seleccione localidad--</option>
             <option value="CABA">CABA</option>
             <option value="25 de Mayo">25 de Mayo</option>
@@ -146,13 +148,19 @@
             <option value="Villarino">  Villarino </option>
             <option value="Zárate">  Zárate  </option>
         </select><br>
-        <span class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">Debe seleccionar una localidad</span><br>
+        </div>
+        <div class="validacion" ng-show="myForm.localidad.$invalid || localidad == '--Seleccione localidad--' ">
+            <span>Debe seleccionar una localidad</span><br>
+        </div>
 
-        <label>Selección de encargado</label><br>
-        <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" required>
-          <option value="">--Seleccione empleado como Encargado--</option>
-        </select><br>
+        <div class="form-group">
+            <label>Selección de encargado</label><br>
+            <select id="opcionUser" ng-model="local.id_encargado" ng-options="c.code as c.name for c in usuarios" required>
+              <option value="">--Seleccione empleado como Encargado--</option>
+            </select><br>
+        </div>
 
+        <div class="form-group">
         <br><label>Selección de ofertas</label><br>
         <div class="tablaOfertas table-responsive">
             <table id="tablaOfertasAlta" class='table table-hover'>
@@ -168,37 +176,40 @@
                 </tr>
             </table>
         </div>
+        </div>
 
+        <div class="form-group">
         <br><label>Seleccione 3 imágenes</label><br>
         <input id="botonFoto" type="file" nv-file-select uploader="subidorDeArchivos" name="foto" style="display:none;" multiple/>
-        <input type="button" class="btn" value="Elegir imagenes para local" id="foton" onclick="document.getElementById('botonFoto').click();" style=""><br><br>
-			<ul class="cajaCargaFotos" ng-show="subidorDeArchivos.queue.length">	
+        <input type="button" class="btn btn-danger" value="Elegir imagenes para local" id="foton" onclick="document.getElementById('botonFoto').click();" style=""><br><br>
+            <ul class="cajaCargaFotos" ng-show="subidorDeArchivos.queue.length">    
                 <div ng-repeat="item in subidorDeArchivos.queue">
-					<!-- nombre del archivo -->
-					Archivo: <span ng-bind="item.file.name"></span>
-					<!-- imagen del archivo -->
-					<div class="img-responsive" ng-show="subidorDeArchivos.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-					<!-- BOTONES POR IMAGEN -->
-					<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-						<span class="glyphicon glyphicon-trash"></span> Eliminar
-					</button>
-				</div><br>
+                    <!-- nombre del archivo -->
+                    Archivo: <span ng-bind="item.file.name"></span>
+                    <!-- imagen del archivo -->
+                    <div class="img-responsive" ng-show="subidorDeArchivos.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    <!-- BOTONES POR IMAGEN -->
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> Eliminar
+                    </button>
+                </div><br>
             </ul>
-				<!-- BOTONES GENERALES DE CARGA -->
-				<button type="button" class="btn btn-success btn-s" ng-click="subidorDeArchivos.uploadAll()" ng-show="subidorDeArchivos.queue.length" ng-disabled="!subidorDeArchivos.getNotUploadedItems().length" class="glyphicon glyphicon-upload"></span> Subir fotos
-				</button>
-				<button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Limpiar </button>
-        <br><span class="mensajeAlerta" ng-hide="alertaCargaFotos">Error! por favor, cargue 3 imágenes para continuar</span>
+                <!-- BOTONES GENERALES DE CARGA -->
+                <button type="button" class="btn btn-success btn-s" ng-click="subidorDeArchivos.uploadAll()" ng-show="subidorDeArchivos.queue.length" ng-disabled="!subidorDeArchivos.getNotUploadedItems().length" class="glyphicon glyphicon-upload"></span> Subir fotos
+                </button>
+                <button type="button" class="btn btn-danger btn-s" ng-show="subidorDeArchivos.queue.length" ng-click="subidorDeArchivos.clearQueue()" ng-disabled="!subidorDeArchivos.queue.length"><span class="glyphicon glyphicon-trash"></span> Limpiar </button>
 
+                <div class="mensajeAlerta" ng-hide="alertaCargaFotos">
+                    <br><label>Error! por favor, cargue 3 imágenes para continuar</label><br>
+                </div>
+        </div>
         <br><button class="button-green btn" name="register" id="register" ng-disabled="myForm.$invalid || localidad == '--Seleccione localidad--' || !subidorDeArchivos.queue.length || subidorDeArchivos.getNotUploadedItems().length" ng-click="crearLocal()"><span>{{DatoSubmit}}</span></button>
+        <div name="loading" ng-show="loadingData">
+            <img src="img/Gifs/loading_small_3.gif">
+        </div>
     </form>
 </div>
 
-
-
-<h3>¿Listo para continuar?:{{myForm.$valid}}</h3>
-
-<a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="local.grilla()">
-     Volver
-     <span class="glyphicon glyphicon-home"></span>
-</a>
+<!-- <h3>¿Listo para continuar?:{{myForm.$valid}}</h3> -->
+    <a  id="botonVolver" class="btn animated bounceInLeft" style="float:right" ui-sref="local.grilla()">Volver<span class="glyphicon glyphicon-home"></span></a>
+</div>
