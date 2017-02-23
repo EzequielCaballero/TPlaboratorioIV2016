@@ -47,7 +47,7 @@ angular.module('ABMangularAPI.controladorUsuarioGrilla', [])
       // Configuracion de la paginacion
       $scope.gridOptionsUsuarios.paginationPageSize = 25;
       $scope.gridOptionsUsuarios.columnDefs = columnDefsUsuarios();
-      $scope.gridOptionsUsuarios.rowHeight = 70;
+      $scope.gridOptionsUsuarios.rowHeight = 40;
       // Activo la busqueda en todos los campos.
       $scope.gridOptionsUsuarios.enableFiltering = true;
       $scope.gridOptionsUsuarios.enableHiding = true;

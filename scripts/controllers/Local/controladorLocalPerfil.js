@@ -13,6 +13,9 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
 
     //**************************TRAER DATOS**************************//
 
+    $scope.verPerfilLocal = false;
+    $scope.loadingData = true;
+
     //TRAER LOCAL ELEGIDO
     $scope.localElegido = {};
     servicioRetornoLocales.traerCiertosLocales($scope.id_local).then(function(respuesta){
@@ -27,7 +30,10 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     		$scope.botonActualizar = true;
     	}
 
-	},function errorCallback(response) {
+      $scope.verPerfilLocal = true;
+      $scope.loadingData = false;
+
+	  },function errorCallback(response) {
           console.log("FALLO traer locales: ", response);
     });
 
@@ -90,7 +96,7 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     		$scope.btn_cambioEncargado = false;
     		$scope.cambiarDireccion = true;
     		$scope.cambiarEncargado = false;
-    		$scope.verOfertasCliente = false;
+    		$scope.verOfertasLocal = false;
     		break;
     		
     		case "encargado":
@@ -98,7 +104,7 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     		$scope.btn_cambioEncargado = true;
     		$scope.cambiarDireccion = false;
     		$scope.cambiarEncargado = true;
-    		$scope.verOfertasCliente = false;
+    		$scope.verOfertasLocal = false;
     		break;
 
     		case "ofertas":
@@ -106,10 +112,14 @@ angular.module('ABMangularAPI.controladorLocalPerfil', [])
     		$scope.btn_cambioEncargado = true;
     		$scope.cambiarDireccion = false;
     		$scope.cambiarEncargado = false;
-    		$scope.verOfertasCliente = true;
+    		$scope.verOfertasLocal = true;
     		break;
     	}
 
+    }
+
+    $scope.ocultarOfertas = function(){
+      $scope.verOfertasLocal = false;
     }
 
     $scope.efectuarLosCambios = function(queCambiar){
